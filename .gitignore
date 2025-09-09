@@ -1,0 +1,15 @@
+cycles
+wandb
+tables
+figures
+agents
+
+notebooks/.ipynb_checkpoints
+.idea
+.ipynb_checkpoints
+__pycache__/
+*egg-info
+.DS_Store
+expert_trajectories/
+
+
