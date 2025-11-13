@@ -1,14 +1,14 @@
-import gym
+from cyclesgym.utils.gym_compat import gym, spaces, GYMNASIUM
 from copy import copy, deepcopy
 import stat
 import subprocess
 from datetime import date
 import os
 import numpy as np
-from gym import spaces
+from cyclesgym.utils.gym_compat import spaces
 
 from cyclesgym.managers import *
-from cyclesgym.utils.paths import CYCLES_PATH
+from cyclesgym.utils.paths import CYCLES_PATH, CYCLES_EXE
 from cyclesgym.envs.utils import *
 
 
@@ -256,8 +256,13 @@ class CyclesEnv(gym.Env):
         generate all the simulation specific files in the dedicated directory,
         and run cycles (which saves all the outputs in the dedicated directory).
         """
-        # Make sure cycles is executable
-        CYCLES_PATH.joinpath('Cycles').chmod(stat.S_IEXEC)
+        # Make sure cycles is executable (Unix). Skip on Windows
+        try:
+            import sys
+            if sys.platform != 'win32':
+                CYCLES_PATH.joinpath('Cycles').chmod(stat.S_IEXEC)
+        except Exception:
+            pass
 
         # Init date
         self.date = date(
@@ -277,7 +282,7 @@ class CyclesEnv(gym.Env):
         self._init_input_managers()
         self._init_output_managers()
 
-    def reset(self):
+    def reset(self, *, seed=None, options=None):
         """
         Reset an episode.
 
@@ -311,7 +316,9 @@ class CyclesEnv(gym.Env):
 
         strings.append(input_file)
 
-        subprocess.run(['./Cycles', *strings], cwd=CYCLES_PATH, stdout=stdout)
+        import sys
+        exe_full = str(CYCLES_PATH.joinpath(CYCLES_EXE))
+        subprocess.run([exe_full, *strings], cwd=CYCLES_PATH, stdout=stdout)
 
     def _call_cycles(self, debug=False, reinit=False, doy=None):
         self._call_cycles_raw(debug=debug, reinit=reinit, doy=doy)
@@ -341,11 +348,21 @@ class PartialObsEnv(gym.ObservationWrapper):
             dtype=self.env.observation_space.dtype)
 
     def reset(self, **kwargs):
-        obs = super().reset(**kwargs)
+        result = super().reset(**kwargs)
+        if isinstance(result, tuple):
+            obs, info = result
+        else:
+            obs, info = result, {}
         if len(self.env.observer.obs_names) > np.count_nonzero(self.mask):
             obs_names = np.asarray(self.env.observer.obs_names)[self.mask]
             self.env.observer.obs_names = list(obs_names)
-        return obs
+        masked = obs[self.mask]
+        # Cast to declared dtype to satisfy Gymnasium checks
+        try:
+            masked = masked.astype(self.observation_space.dtype, copy=False)
+        except Exception:
+            pass
+        return (masked, info) if GYMNASIUM else masked
 
     def observation(self, obs):
         return obs[self.mask]

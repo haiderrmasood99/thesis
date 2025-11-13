@@ -6,7 +6,7 @@ from cyclesgym.managers import WeatherManager, CropManager, SeasonManager, Opera
 from cyclesgym.utils.paths import CYCLES_PATH
 from cyclesgym.envs.weather_generator import WeatherShuffler, FixedWeatherGenerator
 
-from gym import spaces
+from cyclesgym.utils.gym_compat import spaces, GYMNASIUM
 from typing import Tuple
 import numpy as np
 from datetime import date
@@ -110,7 +110,7 @@ class CropPlanning(CyclesEnv):
         self.rewarder = compound_rewarder([CropRewarder(self.season_manager, name)
                                            for name in self.rotation_crops])
 
-    def step(self, action) -> Tuple[np.ndarray, float, bool, dict]:
+    def step(self, action):
         rerun_cycles = self.implementer.implement_action(self.date, *action)
 
         if rerun_cycles:
@@ -124,11 +124,15 @@ class CropPlanning(CyclesEnv):
 
         # Compute state
         obs = self.observer.compute_obs(self.date, action=action)
+        obs = np.asarray(obs, dtype=np.float32)
 
         # Compute
         done = self.date.year > self.ctrl_base_manager.ctrl_dict['SIMULATION_END_YEAR']
-
-        return obs, r, done, {}
+        if GYMNASIUM:
+            terminated, truncated = done, False
+            return obs, r, terminated, truncated, {}
+        else:
+            return obs, r, done, {}
 
     def _create_operation_file(self):
         # deleting all the content of the operation file found.
@@ -138,7 +142,7 @@ class CropPlanning(CyclesEnv):
         self.op_manager = OperationManager(self.op_file)
         self.op_base_manager = OperationManager(self.op_file)
 
-    def reset(self) -> np.ndarray:
+    def reset(self, *, seed=None, options=None):
         # Set up dirs and files and run first simulation
         self._common_reset()
 
@@ -150,8 +154,9 @@ class CropPlanning(CyclesEnv):
         # Set to zero all pre-existing fertilization for N
         self.implementer.reset()
         obs = self.observer.compute_obs(self.date, action=[-1, 0])
+        obs = np.asarray(obs, dtype=np.float32)
         self.observer.reset()
-        return obs
+        return (obs, {}) if GYMNASIUM else obs
 
 
 class CropPlanningFixedPlanting(CropPlanning):

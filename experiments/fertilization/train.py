@@ -1,5 +1,5 @@
 import numpy as np
-from stable_baselines3.common.vec_env import SubprocVecEnv, VecNormalize
+from stable_baselines3.common.vec_env import SubprocVecEnv, DummyVecEnv, VecNormalize
 from stable_baselines3.common.vec_env import VecMonitor
 from stable_baselines3 import PPO, A2C, DQN
 from stable_baselines3.common.evaluation import evaluate_policy
@@ -7,7 +7,7 @@ from stable_baselines3.common.utils import set_random_seed
 from cyclesgym.envs.corn import Corn
 from cyclesgym.utils.utils import EvalCallbackCustom, _evaluate_policy
 from cyclesgym.utils.wandb_utils import WANDB_ENTITY, FERTILIZATION_EXPERIMENT
-import gym
+import gymnasium as gym
 from corn_soil_refined import CornSoilRefined, NonAdaptiveCorn
 import wandb
 from wandb.integration.sb3 import WandbCallback
@@ -83,7 +83,11 @@ class Train:
                 return env
             return _f
 
-        env = SubprocVecEnv([make_env() for i in range(n_procs)], start_method='fork')
+        # Windows-safe vector env: use 'spawn' or DummyVecEnv when n_procs=1
+        if n_procs and n_procs > 1:
+            env = SubprocVecEnv([make_env() for _ in range(n_procs)], start_method='spawn')
+        else:
+            env = DummyVecEnv([make_env])
 
         env = VecMonitor(env, 'runs')
 

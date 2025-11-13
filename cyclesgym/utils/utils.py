@@ -6,7 +6,7 @@ import os
 from stable_baselines3.common.evaluation import evaluate_policy
 import warnings
 from typing import Any, Callable, Dict, List, Optional, Tuple, Union
-import gym
+from cyclesgym.utils.gym_compat import gym
 import numpy as np
 from numpy import ndarray
 from stable_baselines3.common import base_class

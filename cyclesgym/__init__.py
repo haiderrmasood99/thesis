@@ -1,4 +1,4 @@
-from gym.envs.registration import register
+from cyclesgym.utils.gym_compat import register
 from cyclesgym.envs.weather_generator import FixedWeatherGenerator, WeatherShuffler
 from cyclesgym.utils.paths import CYCLES_PATH
 import numpy as np

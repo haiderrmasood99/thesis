@@ -16,7 +16,7 @@ import shutil
 from typing import Tuple
 
 import numpy as np
-from gym import spaces
+from cyclesgym.utils.gym_compat import spaces, GYMNASIUM
 
 
 from cyclesgym.managers import *
@@ -144,7 +144,7 @@ class Corn(CyclesEnv):
     def _action2mass(self, action: int) -> float:
         return self.maxN * action / (self.n_actions - 1)
 
-    def step(self, action: int) -> Tuple[np.ndarray, float, bool, dict]:
+    def step(self, action: int):
         assert self.action_space.contains(action), f'{action} is not contained in the action space'
         action = self._action2mass(action)
         rerun_cycles = self.implementer.implement_action(
@@ -188,10 +188,16 @@ class Corn(CyclesEnv):
 
         # Compute
         obs = self.observer.compute_obs(self.date, N=action)
+        # Ensure dtype matches observation_space (Gymnasium strict check)
+        obs = np.asarray(obs, dtype=np.float32)
 
-        return obs, r, done, info
+        if GYMNASIUM:
+            terminated, truncated = done, False
+            return obs, r, terminated, truncated, info
+        else:
+            return obs, r, done, info
 
-    def reset(self) -> np.ndarray:
+    def reset(self, *, seed=None, options=None):
         # Set up dirs and files and run first simulation
         self._common_reset()
 
@@ -205,7 +211,9 @@ class Corn(CyclesEnv):
         rerun_cycles = self.implementer.reset()
         if rerun_cycles:
             self._call_cycles(debug=False, reinit=False, doy=None)
-        return self.observer.compute_obs(self.date, N=0)
+        obs = self.observer.compute_obs(self.date, N=0)
+        obs = np.asarray(obs, dtype=np.float32)
+        return (obs, {}) if GYMNASIUM else obs
 
     def _create_operation_file(self):
         """Create operation file by copying the base one."""

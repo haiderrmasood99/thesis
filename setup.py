@@ -1,3 +1,4 @@
+import os
 import setuptools
 from setuptools.command.install import install
 
@@ -6,13 +7,13 @@ install_requires = [
     'numpy',
     'pandas',
     'matplotlib',
-    'gym',
+    'gymnasium',
     'ipykernel',
     'pyglet',
 ]
 
 solve_requires = [
-    'torch >= 1.8.1+cpu',
+    'torch>=1.8.1',
     'stable-baselines3',
     'tensorboard',
     'wandb',
@@ -21,12 +22,17 @@ solve_requires = [
 
 class NewInstall(install):
     """Post-installation for installation mode."""
-    def __init__(self, *args, **kwargs):
-        super(NewInstall, self).__init__(*args, **kwargs)
-        print('POST INSTALL')
-        from install_cycles import install_cycles
-
-        install_cycles()
+    def run(self):
+        super().run()
+        try:
+            if os.environ.get('CYCLESGYM_SKIP_CYCLES', '').lower() in ('1', 'true', 'yes'):
+                print('POST INSTALL: skipping Cycles install per CYCLESGYM_SKIP_CYCLES')
+                return
+            print('POST INSTALL: installing Cycles binary')
+            from install_cycles import install_cycles
+            install_cycles()
+        except Exception as e:
+            print(f'Warning: Cycles post-install failed: {e}')
 
 
 setuptools.setup(

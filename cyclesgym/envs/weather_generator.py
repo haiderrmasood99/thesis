@@ -6,6 +6,7 @@ import numpy as np
 from pathlib import Path
 from abc import ABC, abstractmethod
 import os
+import shutil
 from cyclesgym.managers import WeatherManager
 from cyclesgym.envs.utils import MyTemporaryDirectory, create_sim_id
 from cyclesgym.utils.paths import CYCLES_PATH
@@ -129,7 +130,12 @@ class FixedWeatherGenerator(WeatherGenerator):
 
     def generate_weather(self):
         weather_fname = self.base_weather_file.name
-        os.symlink(self.base_weather_file, self._get_weather_dir().joinpath(weather_fname))
+        dst = self._get_weather_dir().joinpath(weather_fname)
+        try:
+            os.symlink(self.base_weather_file, dst)
+        except (OSError, NotImplementedError):
+            # On Windows, symlink may require admin/Developer Mode; fall back to copy
+            shutil.copy2(self.base_weather_file, dst)
         self.weather_list.append(weather_fname)
 
 

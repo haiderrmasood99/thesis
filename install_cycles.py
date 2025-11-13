@@ -2,14 +2,15 @@ import requests
 from sys import platform
 import pathlib
 import zipfile
-from cyclesgym.utils.paths import CYCLES_PATH
+from cyclesgym.utils.paths import CYCLES_PATH, CYCLES_EXE
 import stat
 import subprocess
 
 
 def test_cycles_installation():
-    if pathlib.Path.joinpath(CYCLES_PATH, pathlib.Path('Cycles')).is_file():
-        proc = subprocess.run(['./Cycles', '-b', 'ContinuousCorn'], cwd=CYCLES_PATH)
+    exe_path = pathlib.Path.joinpath(CYCLES_PATH, pathlib.Path(CYCLES_EXE))
+    if exe_path.is_file():
+        proc = subprocess.run([str(exe_path), '-b', 'ContinuousCorn'], cwd=CYCLES_PATH)
         out = pathlib.Path.joinpath(CYCLES_PATH, pathlib.Path('output/ContinuousCorn'))
         files = [x for x in out.iterdir() if x.is_file()]
         if len(files) >= 5 and proc.returncode == 0:
@@ -56,7 +57,9 @@ def install_cycles():
 
         # Remove zip
         pathlib.Path.cwd().joinpath(fname).unlink()
-        CYCLES_PATH.joinpath('Cycles').chmod(stat.S_IEXEC)
+        if platform != 'win32':
+            # Ensure executable bit on Unix-like systems
+            CYCLES_PATH.joinpath('Cycles').chmod(stat.S_IEXEC)
 
     test_cycles_installation()
 

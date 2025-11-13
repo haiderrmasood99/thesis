@@ -1,5 +1,5 @@
 import numpy as np
-from stable_baselines3.common.vec_env import SubprocVecEnv, VecNormalize
+from stable_baselines3.common.vec_env import SubprocVecEnv, DummyVecEnv, VecNormalize
 from stable_baselines3.common.vec_env import VecMonitor
 from stable_baselines3 import PPO, A2C, DQN
 from stable_baselines3.common.utils import set_random_seed
@@ -7,7 +7,7 @@ from cyclesgym.utils.utils import EvalCallbackCustom, _evaluate_policy
 from cyclesgym.utils.wandb_utils import WANDB_ENTITY, CROP_PLANNING_EXPERIMENT
 from cyclesgym.utils.paths import PROJECT_PATH, CYCLES_PATH
 from pathlib import Path
-import gym
+import gymnasium as gym
 from cyclesgym.envs.corn import Corn
 from cyclesgym.envs.crop_planning import CropPlanning, CropPlanningFixedPlanting
 from cyclesgym.envs.crop_planning import CropPlanningFixedPlantingRotationObserver
@@ -95,7 +95,10 @@ class Train:
 
             return _f
 
-        env = SubprocVecEnv([make_env() for i in range(n_procs)], start_method='fork')
+        if n_procs and n_procs > 1:
+            env = SubprocVecEnv([make_env() for _ in range(n_procs)], start_method='spawn')
+        else:
+            env = DummyVecEnv([make_env])
         env = VecMonitor(env)
         norm_reward = (training and self.config['norm_reward'])
         env = VecNormalize(env, norm_obs=True, norm_reward=norm_reward, clip_obs=5000., clip_reward=5000.)
