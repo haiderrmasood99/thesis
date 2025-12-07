@@ -42,7 +42,15 @@ class WeatherManager(InputFileManager):
                     columns = l.split()
                     lines_to_skip.append(i)
                 else:
-                    values[i, :] = [float(j) if i >= 2 else int(j) for i, j in enumerate(l.split())]
+                    if not l.strip():
+                        lines_to_skip.append(i)
+                        continue
+                    tokens = l.split()
+                    if len(tokens) != len(columns):
+                        lines_to_skip.append(i)
+                        continue
+                    values[i, :] = [float(j) if idx >= 2 else int(j)
+                                    for idx, j in enumerate(tokens)]
             values = np.delete(values, lines_to_skip, 0)
 
         self.mutables = pd.DataFrame(data=values, index=None, columns=columns)
@@ -51,7 +59,7 @@ class WeatherManager(InputFileManager):
 
     def _to_str_immutables(self):
         s = ''
-        for (name, data) in self.immutables.iteritems():
+        for (name, data) in self.immutables.items():
             s += f'{name:<20}{data.values[0]}\n'
         return s
 

@@ -4,6 +4,8 @@ import stat
 import subprocess
 from datetime import date
 import os
+import shutil
+import errno
 import numpy as np
 from cyclesgym.utils.gym_compat import spaces
 
@@ -160,6 +162,18 @@ class CyclesEnv(gym.Env):
             'operation.operation')
         self.op_manager.save(self.op_file)
 
+    def _symlink_or_copy(self, src, dest):
+        try:
+            os.symlink(src, dest)
+        except (OSError, NotImplementedError) as exc:
+            winerror = getattr(exc, 'winerror', None)
+            err_no = getattr(exc, 'errno', None)
+            if winerror in (1314, 1312) or err_no in (errno.EPERM, errno.EACCES) \
+                    or isinstance(exc, NotImplementedError):
+                shutil.copy2(src, dest)
+            else:
+                raise
+
     def _create_crop_input_file(self):
         """Creat crop file by simlinking the one indicated in the base ctrl."""
         crop_file = self.ctrl_base_manager.ctrl_dict['CROP_FILE']
@@ -169,7 +183,7 @@ class CyclesEnv(gym.Env):
                              f'{CYCLES_PATH.joinpath("input")}')
         dest = self.input_dir.name.joinpath('crop.crop')
         self.crop_input_file = dest
-        os.symlink(src, dest)
+        self._symlink_or_copy(src, dest)
 
     def _create_soil_input_file(self):
         """Creat soil file by simlinking the one indicated in the base ctrl."""
@@ -180,7 +194,7 @@ class CyclesEnv(gym.Env):
                              f'{CYCLES_PATH.joinpath("input")}')
         dest = self.input_dir.name.joinpath('soil.soil')
         self.soil_input_file = dest
-        os.symlink(src, dest)
+        self._symlink_or_copy(src, dest)
 
     def _create_weather_input_file(self):
         """Creat weather file by simlinking the one given by the generator."""
@@ -188,7 +202,7 @@ class CyclesEnv(gym.Env):
         src = self.weather_generator.sample_weather_path()
         dest = self.input_dir.name.joinpath('weather.weather')
         self.weather_input_file = dest
-        os.symlink(src, dest)
+        self._symlink_or_copy(src, dest)
 
     def _create_control_file(self):
         """Create control file pointing to right input files."""
@@ -348,7 +362,7 @@ class PartialObsEnv(gym.ObservationWrapper):
             dtype=self.env.observation_space.dtype)
 
     def reset(self, **kwargs):
-        result = super().reset(**kwargs)
+        result = self.env.reset(**kwargs)
         if isinstance(result, tuple):
             obs, info = result
         else:
@@ -356,7 +370,7 @@ class PartialObsEnv(gym.ObservationWrapper):
         if len(self.env.observer.obs_names) > np.count_nonzero(self.mask):
             obs_names = np.asarray(self.env.observer.obs_names)[self.mask]
             self.env.observer.obs_names = list(obs_names)
-        masked = obs[self.mask]
+        masked = self.observation(obs)
         # Cast to declared dtype to satisfy Gymnasium checks
         try:
             masked = masked.astype(self.observation_space.dtype, copy=False)

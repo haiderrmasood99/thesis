@@ -52,9 +52,9 @@ def date2ydoy(date):
 def ydoy2date(y, doy):
     def ydoy2date_single(y: int, doy: int):
         # Timedelta does not work with np.int64
-        if isinstance(y, np.int64):
+        if isinstance(y, np.integer):
             y = int(y)
-        if isinstance(doy, np.int64):
+        if isinstance(doy, np.integer):
             doy = int(doy)
         return datetime.date(y, 1, 1) + datetime.timedelta(doy - 1)
 

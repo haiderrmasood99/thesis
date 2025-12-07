@@ -58,6 +58,23 @@ class DailyOutputObserver(Observer):
         self.columns_to_process = None
         self.processing_maps = None
 
+    def _infer_obs_names(self, data):
+        # Try to infer column names from the available data
+        try:
+            if data is not None and hasattr(data, 'columns') and len(data.columns) > 0:
+                return list(pd.Index(data.columns)[self.observed_columns])
+        except Exception:
+            pass
+
+        if self.obs_names is not None:
+            return list(self.obs_names)
+
+        return [f'{self.__class__.__name__}_{i}' for i in range(self.Nobs)]
+
+    def _empty_observation(self, data):
+        obs_names = self._infer_obs_names(data)
+        return pd.Series(np.zeros(len(obs_names), dtype=float), index=obs_names)
+
     def _process_raw_data(self, data, column_list=None, map_list=None):
         """
         Data processing to handle non-numeric values.
@@ -79,18 +96,24 @@ class DailyOutputObserver(Observer):
         year, doy = date2ydoy(date)
 
         data = self.manager.get_day(year, doy)
-        if not data.empty:
-            data = data.iloc[0, self.observed_columns]
+        if data.empty:
+            obs = self._empty_observation(data)
+        else:
+            obs = data.iloc[0, self.observed_columns].copy()
 
-        # Handle non-numeric values
-        data = self._process_raw_data(data,
-                                      column_list=self.columns_to_process,
-                                      map_list=self.processing_maps)
+        obs = self._process_raw_data(obs,
+                                     column_list=self.columns_to_process,
+                                     map_list=self.processing_maps)
 
-        obs = data
+        if not isinstance(obs, pd.Series):
+            obs = pd.Series(obs)
+
         if self.obs_names is None:
             self.obs_names = list(obs.index)
+        else:
+            obs = obs.reindex(self.obs_names, fill_value=0.0)
 
+        obs = obs.astype(float, copy=False)
         self.Nobs = obs.size
         return obs.to_numpy(dtype=float)
 

@@ -236,8 +236,18 @@ class EvalCallbackCustom(EvalCallback):
 def predict_proba(model, obs):
     obs = obs_as_tensor(obs, model.policy.device)
     dis = model.policy.get_distribution(obs)
-    probs = [d.probs.detach().numpy() for d in dis.distribution]
-    return probs
+    dist = dis.distribution
+    # Discrete policies return a single Categorical with .probs tensor
+    if hasattr(dist, 'probs'):
+        probs = dist.probs.detach().cpu().numpy()
+        if probs.ndim == 1:
+            probs = probs[None, :]
+        return [p for p in probs]
+    # Fallback for iterable distributions (e.g., multi-discrete)
+    try:
+        return [d.probs.detach().cpu().numpy() for d in dist]
+    except TypeError:
+        return [np.array([])]
 
 
 def _evaluate_policy(

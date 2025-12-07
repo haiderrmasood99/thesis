@@ -87,7 +87,7 @@ class Train:
         if n_procs and n_procs > 1:
             env = SubprocVecEnv([make_env() for _ in range(n_procs)], start_method='spawn')
         else:
-            env = DummyVecEnv([make_env])
+            env = DummyVecEnv([make_env()])
 
         env = VecMonitor(env, 'runs')
 
@@ -224,9 +224,11 @@ class Train:
 
         callback = self.get_eval_callbacks()
         
-        model.learn(total_timesteps=total_timesteps, callback=callback, eval_freq=eval_freq)
+        model.learn(total_timesteps=total_timesteps, callback=callback)
         model.save(str(self.config['run_id'])+'.zip')
-        train_env.save(self.config['stats_path'])
+        stats_path = Path(self.config['stats_path'])
+        stats_path.parent.mkdir(parents=True, exist_ok=True)
+        train_env.save(stats_path)
         return model
 
     def evaluate_log(self, model, eval_env):
@@ -245,15 +247,15 @@ class Train:
 
         """
         #list, list, numpy array, list
-        mean_r_det, _, actions_det, episode_rewards_det = _evaluate_policy(model,
-                                                                           env=eval_env,
-                                                                           n_eval_episodes=1,
-                                                                           deterministic=True)
+        mean_r_det, std_r_det, actions_det, episode_rewards_det, _, _ = _evaluate_policy(model,
+                                                                                         env=eval_env,
+                                                                                         n_eval_episodes=1,
+                                                                                         deterministic=True)
 
-        mean_r_stoc, std_r_stoc, actions_stoc, episode_rewards_stoc = _evaluate_policy(model,
-                                                                                       env=eval_env,
-                                                                                       n_eval_episodes=5,
-                                                                                       deterministic=False)
+        mean_r_stoc, std_r_stoc, actions_stoc, episode_rewards_stoc, _, _ = _evaluate_policy(model,
+                                                                                            env=eval_env,
+                                                                                            n_eval_episodes=5,
+                                                                                            deterministic=False)
 
         T = actions_stoc.shape[1]
         wandb.log({'deterministic_return': mean_r_det,
@@ -402,12 +404,18 @@ if __name__ == '__main__':
     torch.manual_seed(RANDOM_SEED)
     env.seed(RANDOM_SEED)
     """
-    config = dict(total_years = 3000, eval_freq = 1000, run_id = 0,
-                norm_reward = True,
-                method = "PPO", n_actions = 11, soil_env=True, start_year = 1980,
-                sampling_start_year=1980, sampling_end_year=2005,
-                n_weather_samples=100, 
-                n_steps = 2048, with_obs_year = True)
+    config = dict(total_years = 25, 
+                  eval_freq = 1000, run_id = 0,
+                  norm_reward = True,
+                  method = "PPO", 
+                  n_actions = 11, 
+                  soil_env=True, 
+                  start_year = 1980,
+                  sampling_start_year=1980, 
+                  sampling_end_year=2005,
+                  n_weather_samples=100, 
+                  n_steps = 16, 
+                  with_obs_year = True)
     wandb.init(
     config=config,
     sync_tensorboard=True,
