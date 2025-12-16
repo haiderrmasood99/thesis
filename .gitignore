@@ -1,15 +1,82 @@
-cycles
-wandb
-tables
-figures
-agents
-
-notebooks/.ipynb_checkpoints
-.idea
-.ipynb_checkpoints
-__pycache__/
-*egg-info
-.DS_Store
+############################
+# Project-specific folders
+############################
+cycles/
+agents/
+tables/
+figures/
 expert_trajectories/
 
+############################
+# Weights & Biases
+############################
+wandb/
 
+############################
+# Python cache & build
+############################
+__pycache__/
+*.py[cod]
+*$py.class
+
+############################
+# Python packaging
+############################
+*.egg-info/
+dist/
+build/
+
+############################
+# Virtual environments
+############################
+env/
+venv/
+.venv/
+
+############################
+# Jupyter
+############################
+.ipynb_checkpoints/
+notebooks/.ipynb_checkpoints/
+
+############################
+# IDEs / Editors
+############################
+.idea/
+.vscode/
+
+############################
+# Logs & outputs
+############################
+*.log
+*.out
+*.err
+
+############################
+# OS files
+############################
+.DS_Store
+Thumbs.db
+
+############################
+# Temporary / artifacts
+############################
+*.tmp
+*.cache
+*.pt
+*.pth
+*.ckpt
+*.npz
+*.npy
+
+############################
+# Experiment outputs
+############################
+results/
+checkpoints/
+models/
+
+############################
+# Optional: data (if large)
+############################
+data/
