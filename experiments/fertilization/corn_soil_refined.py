@@ -132,7 +132,7 @@ def generate_partially_observable_env(target_obs, delta, n_actions, maxN, start_
         if new_holland:
             weather_generator_kwargs = {'base_weather_file': CYCLES_PATH.joinpath('input', 'RockSprings.weather')}
         else:
-            weather_generator_kwargs = {'base_weather_file': CYCLES_PATH.joinpath('input', 'NewHolland.weather')}
+            weather_generator_kwargs = {'base_weather_file': CYCLES_PATH.joinpath('input', 'Pakistan_Site.weather')}
     else:
         weather_generator_class = WeatherShuffler
         target_year_range = np.arange(start_year, end_year + 1)

@@ -28,11 +28,11 @@ class Corn(CyclesEnv):
     def __init__(self, delta,
                  n_actions,
                  maxN,
-                 operation_file='ContinuousCorn.operation',
-                 soil_file='GenericHagerstown.soil',
+                 operation_file='Pakistan_Corn.operation',
+                 soil_file='Pakistan_Soil.soil',
                  weather_generator_class=FixedWeatherGenerator,
                  weather_generator_kwargs={
-                     'base_weather_file': CYCLES_PATH.joinpath('input', 'RockSprings.weather')},
+                     'base_weather_file': CYCLES_PATH.joinpath('input', 'Pakistan_Site.weather')},
                  start_year=1980,
                  end_year=1980,
                  use_reinit=True
