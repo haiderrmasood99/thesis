@@ -1,7 +1,8 @@
 ############################
 # Project-specific folders
 ############################
-cycles/
+# cycles/*
+# !cycles/input/
 agents/
 tables/
 figures/

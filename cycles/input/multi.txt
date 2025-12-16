@@ -1,0 +1,3 @@
+SIM_CODE            ROTATION_YEARS  START_YEAR  END_YEAR    USE_REINIT  CROP_FILE           OPERATION_FILE                  SOIL_FILE               WEATHER_FILE        REINIT_FILE HOURLY_INFILTRATION AUTOMATIC_NITROGEN
+CornSoyWheatPasture 6               1980        2016        0           GenericCrops.crop   CornSoyWheatPasture.operation   GenericHagerstown.soil  RockSprings.weather N/A         1                   0
+ContinuousCorn      1               1980        2016        0           GenericCrops.crop   ContinuousCorn.operation        GenericHagerstown.soil  RockSprings.weather N/A         1                   0
