@@ -450,7 +450,7 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    wandb.config.update(args)
+    wandb.config.update(args, allow_val_change=True)
 
     
     if wandb.config['posthoc']:
