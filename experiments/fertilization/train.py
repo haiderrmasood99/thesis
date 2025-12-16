@@ -442,6 +442,8 @@ if __name__ == '__main__':
                          help='The random seed used for all number generators')
     parser.add_argument('-b','--baseline', default=False, action='store_true',
         help='Use to only run the baselines')
+    parser.add_argument('-ty', '--total-years', type=int, default=25, metavar='N',
+                        help='Total years of training (default: 25)')
 
     parser.add_argument('-p','--posthoc', default=False, action='store_true',
         help='Parse to read in a set of weights that are evaluated')
