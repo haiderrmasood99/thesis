@@ -212,11 +212,11 @@ class Train:
         total_timesteps = self.config["total_years"] * 53
         n_steps = int(self.config['n_steps'] / self.config['n_process'])
 
-        if config["method"] == "A2C":
+        if self.config["method"] == "A2C":
             model = A2C('MlpPolicy', train_env, verbose=0, tensorboard_log=self.dir)
-        elif config["method"] == "PPO":
+        elif self.config["method"] == "PPO":
             model = PPO('MlpPolicy', train_env, verbose=0, n_steps= n_steps, tensorboard_log=self.dir)
-        elif config["method"] == "DQN":
+        elif self.config["method"] == "DQN":
             model = DQN('MlpPolicy', train_env, verbose=0, tensorboard_log=self.dir)
         else:
             raise Exception("Not an RL method that has been implemented")
@@ -297,7 +297,7 @@ class Train:
         """
         for long_len in [2, 5]:
             #env = long_env(long_len)
-            env, _  = trainer.get_envs(n_procs = 1, plus_horizon=long_len-1)
+            env, _  = self.get_envs(n_procs = 1, plus_horizon=long_len-1)
             env = VecNormalize.load(self.config['stats_path'], env)
             env.training = False
             env.norm_reward = False
@@ -325,38 +325,38 @@ class Train:
 
         agro_exact_sequence = expert.create_action_sequence(doy=[110, 155], weight=[35, 120],
                                              maxN=150,
-                                             n_actions=config['n_actions'],
+                                             n_actions=self.config['n_actions'],
                                              delta_t=7)
 
         nonsense_exact_sequence = expert.create_action_sequence(doy=[110, 155, 300], weight=[35, 120, 50],
                                              maxN=150,
-                                             n_actions=config['n_actions'],
+                                             n_actions=self.config['n_actions'],
                                              delta_t=7)
 
         cycles_exact_sequence = expert.create_action_sequence(doy=110, weight=150,
                                              maxN=150,
-                                             n_actions=config['n_actions'],
+                                             n_actions=self.config['n_actions'],
                                              delta_t=7)
 
         organic_exact_sequence = expert.create_action_sequence(doy=110, weight=0,
                                              maxN=150,
-                                             n_actions=config['n_actions'],
+                                             n_actions=self.config['n_actions'],
                                              delta_t=7)
         
-        n = config['end_year'] - config['start_year']
+        n = self.config['end_year'] - self.config['start_year']
         agro_exact_sequence = make_multi_year(agro_exact_sequence, n)
         nonsense_exact_sequence = make_multi_year(nonsense_exact_sequence, n)
         cycles_exact_sequence = make_multi_year(cycles_exact_sequence, n)
         organic_exact_sequence = make_multi_year(organic_exact_sequence, n)
-        trainer.eval_openloop(organic_exact_sequence, eval_env_train, "organic-train")
-        trainer.eval_openloop(agro_exact_sequence, eval_env_train, "agro-train")
-        trainer.eval_openloop(cycles_exact_sequence, eval_env_train, "cycles-train")
-        trainer.eval_openloop(nonsense_exact_sequence, eval_env_train, "nonsense-train")
+        self.eval_openloop(organic_exact_sequence, eval_env_train, "organic-train")
+        self.eval_openloop(agro_exact_sequence, eval_env_train, "agro-train")
+        self.eval_openloop(cycles_exact_sequence, eval_env_train, "cycles-train")
+        self.eval_openloop(nonsense_exact_sequence, eval_env_train, "nonsense-train")
 
-        trainer.eval_openloop(organic_exact_sequence, eval_env_test, "organic-test")
-        trainer.eval_openloop(agro_exact_sequence, eval_env_test, "agro-test")
-        trainer.eval_openloop(cycles_exact_sequence, eval_env_test, "cycles-test")
-        trainer.eval_openloop(nonsense_exact_sequence, eval_env_test, "nonsense-test")
+        self.eval_openloop(organic_exact_sequence, eval_env_test, "organic-test")
+        self.eval_openloop(agro_exact_sequence, eval_env_test, "agro-test")
+        self.eval_openloop(cycles_exact_sequence, eval_env_test, "cycles-test")
+        self.eval_openloop(nonsense_exact_sequence, eval_env_test, "nonsense-test")
 
         nh_env = self.env_maker(training = False, n_procs=1,
             soil_env = self.config['soil_env'],
@@ -369,10 +369,10 @@ class Train:
             nonadaptive=self.config['nonadaptive'],
             new_holland=True)
 
-        trainer.eval_openloop(organic_exact_sequence, nh_env, "organic-NH")
-        trainer.eval_openloop(agro_exact_sequence, nh_env, "agro-NH")
-        trainer.eval_openloop(cycles_exact_sequence, nh_env, "cycles-NH")
-        trainer.eval_openloop(nonsense_exact_sequence, nh_env, "nonsense-NH")
+        self.eval_openloop(organic_exact_sequence, nh_env, "organic-NH")
+        self.eval_openloop(agro_exact_sequence, nh_env, "agro-NH")
+        self.eval_openloop(cycles_exact_sequence, nh_env, "cycles-NH")
+        self.eval_openloop(nonsense_exact_sequence, nh_env, "nonsense-NH")
 
         return
 
@@ -380,7 +380,7 @@ class Train:
         """
         evaluate the model on new holland training years
         """
-        nh_env, _  = trainer.get_envs(n_procs = 1, new_holland=True)
+        nh_env, _  = self.get_envs(n_procs = 1, new_holland=True)
         nh_env = VecNormalize.load(self.config['stats_path'], nh_env)
         nh_env.training = False
         nh_env.norm_reward = False
@@ -460,7 +460,8 @@ if __name__ == '__main__':
     
     wandb.config.update({'stats_path': stats_path})
 
-    config = wandb.config
+    # make a plain dict copy so it can be safely pickled by SubprocVecEnv
+    config = dict(wandb.config)
 
     set_random_seed(config['seed'])
     np.random.seed(config['seed'])
@@ -504,4 +505,3 @@ if __name__ == '__main__':
 
     
     
-
