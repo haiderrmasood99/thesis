@@ -11,19 +11,19 @@ The system is designed as a bridge between a standard Python AI agent and the ex
 ```mermaid
 graph TD
     subgraph Python World
-        Agent[AI Agent]
-        Gym[CyclesGym Environment]
-        Imp[Implementer]
-        Obs[Observer]
+        Agent["AI Agent"]
+        Gym["CyclesGym Environment"]
+        Imp["Implementer"]
+        Obs["Observer"]
     end
 
     subgraph File System
-        InFiles[Input Files .ctrl, .operation]
-        OutFiles[Output Files .dat, .txt]
+        InFiles["Input Files .ctrl, .operation"]
+        OutFiles["Output Files .dat, .txt"]
     end
 
     subgraph External Process
-        Sim[Cycles Simulator Executable]
+        Sim["Cycles Simulator Executable"]
     end
 
     Agent -- "1. Action (Fertilizer Amount)" --> Gym

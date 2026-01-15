@@ -11,13 +11,13 @@ Understanding how the system behaves during **Training** (Learning) versus **Inf
 ```mermaid
 graph TD
     subgraph Training Loop
-        Reset[Reset Env (Year 1980)] --> Obs[Observe State]
-        Obs --> Policy[Agent Policy (Epsilon-Greedy)]
-        Policy -- "Exploration (Try Random Action)" --> Act[Action: 150kg N]
-        Act --> Env[Cycles Simulator]
-        Env --> NextObs[New State]
-        Env --> Reward[Reward: $$$]
-        Reward --> Update[Update Neural Network / Table]
+        Reset["Reset Env (Year 1980)"] --> Obs["Observe State"]
+        Obs --> Policy["Agent Policy (Epsilon-Greedy)"]
+        Policy -- "Exploration (Try Random Action)" --> Act["Action: 150kg N"]
+        Act --> Env["Cycles Simulator"]
+        Env --> NextObs["New State"]
+        Env --> Reward["Reward: $$$"]
+        Reward --> Update["Update Neural Network / Table"]
         Update --> Obs
     end
 ```
@@ -29,13 +29,13 @@ graph TD
 ```mermaid
 graph TD
     subgraph Inference Loop
-        ResetI[Reset Env (Year 2015)] --> ObsI[Observe State]
-        ObsI --> PolicyI[Agent Policy (Greedy)]
-        PolicyI -- "Exploitation (Use Best Strategy)" --> ActI[Action: 40kg N]
-        ActI --> EnvI[Cycles Simulator]
-        EnvI --> NextObsI[New State]
-        EnvI --> RewardI[Calculated Profit]
-        RewardI --> Log[Log Results (No Update)]
+        ResetI["Reset Env (Year 2015)"] --> ObsI["Observe State"]
+        ObsI --> PolicyI["Agent Policy (Greedy)"]
+        PolicyI -- "Exploitation (Use Best Strategy)" --> ActI["Action: 40kg N"]
+        ActI --> EnvI["Cycles Simulator"]
+        EnvI --> NextObsI["New State"]
+        EnvI --> RewardI["Calculated Profit"]
+        RewardI --> Log["Log Results (No Update)"]
         Log --> ObsI
     end
 ```
