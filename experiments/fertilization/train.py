@@ -273,8 +273,11 @@ class Train:
             table = wandb.Table(data=data, columns=['Week', 'N added'])
             fertilizer_table.add_data(
                 *[episode_actions_names[i], np.sum(acts), *acts])
-            wandb.log({f'train/actions/{episode_actions_names[i]}': wandb.plot.bar(table, 'Week', 'N added',
-                                                                                   title=f'Training action sequence {episode_actions_names[i]}')})
+            try:
+                wandb.log({f'train/actions/{episode_actions_names[i]}': wandb.plot.bar(table, 'Week', 'N added',
+                                                                                       title=f'Training action sequence {episode_actions_names[i]}')})
+            except FileNotFoundError as e:
+                print(f"Warning: Failed to log action sequence {episode_actions_names[i]} due to FileNotFoundError: {e}")
         wandb.log({'train/fertilizer': fertilizer_table})
 
         ## create a plot of the reward in each year
@@ -404,7 +407,7 @@ if __name__ == '__main__':
     torch.manual_seed(RANDOM_SEED)
     env.seed(RANDOM_SEED)
     """
-    config = dict(total_years = 25, 
+    config = dict(total_years = 3000, 
                   eval_freq = 1000, run_id = 0,
                   norm_reward = True,
                   method = "PPO", 
@@ -414,7 +417,7 @@ if __name__ == '__main__':
                   sampling_start_year=1980, 
                   sampling_end_year=2005,
                   n_weather_samples=100, 
-                  n_steps = 16, 
+                  n_steps = 2048, 
                   with_obs_year = True)
     wandb.init(
     config=config,
