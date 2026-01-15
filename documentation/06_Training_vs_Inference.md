@@ -25,7 +25,6 @@ graph TD
 ### 2. Inference Cycle (The "Professional" Phase)
 **Goal**: Maximize profit using the learned policy.
 **Key Characteristic**: No Exploration (Greedy). The agent always chooses the action it believes is best. Weights are frozen.
-
 ```mermaid
 graph TD
     subgraph Inference Loop
