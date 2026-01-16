@@ -54,6 +54,57 @@ flowchart TB
     end
 ```
 
+## Prices: what they affect (and what they do not)
+Short answer: prices affect rewards only, not the simulator physics.
+
+- Crop price is used by `CropRewarder` to convert yield into dollars.
+- Fertilizer (N) price is used by `NProfitabilityRewarder` to convert N use into cost.
+- These prices do not change crop growth, soil, or weather in Cycles.
+- Crop planning uses crop prices (harvest revenue). Fertilization uses crop prices and N prices.
+
+If you want prices to affect anything else (e.g., action constraints or behavior),
+you must code it explicitly in rewarders or constrainers.
+
+## Parallel streams vs combined pipeline
+Current repo usage is parallel and separate:
+```mermaid
+flowchart LR
+    subgraph StreamA[Fertilization Stream]
+        A1[Train fertilization policy] --> A2[Infer weekly N actions]
+    end
+    subgraph StreamB[Crop Planning Stream]
+        B1[Train crop planning policy] --> B2[Infer yearly crop choices]
+    end
+```
+
+There is no built-in pipeline that runs crop planning first and then fertilization.
+If you want a combined decision process, you can build a two-level workflow:
+
+```mermaid
+flowchart TD
+    H1[Year-level planner] --> H2[Crop choice for year]
+    H2 --> L1[Season-level controller]
+    L1 --> L2[Weekly N actions]
+    L2 --> S1[Cycles simulation outputs]
+    S1 --> H1
+```
+
+This requires custom glue code and likely a custom environment.
+
+## How to run each stream today
+Fertilization (weekly N):
+- Train: `experiments/fertilization/train.py`
+- Infer: load the trained model and step the `Corn` env.
+
+Crop planning (yearly crop choice):
+- Train: `experiments/crop_planning/train.py`
+- Infer: load the trained model and step the `CropPlanning` env.
+
+If you want both in sequence:
+1) Run crop planning inference to select a rotation.
+2) For each year, run a fertilization policy inside a `Corn`-style env for that crop.
+This is not provided out of the box and needs an integration script.
+
 ## Where to look in code
 - Fertilization env: `cyclesgym/envs/corn.py`
 - Crop planning env: `cyclesgym/envs/crop_planning.py`
