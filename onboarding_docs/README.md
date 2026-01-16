@@ -15,6 +15,7 @@ Suggested reading order:
 10) `onboarding_docs/09_Training_vs_Inference_Flows.md`
 11) `onboarding_docs/10_Rewards_and_Economics.md`
 12) `onboarding_docs/11_Farmer_Usage_Guide.md`
+13) `onboarding_docs/12_Resource_Allocation_Scope.md`
 
 If you prefer code-first exploration, start with:
 - `cyclesgym/envs/common.py`
