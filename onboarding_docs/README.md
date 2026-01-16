@@ -12,6 +12,9 @@ Suggested reading order:
 7) `onboarding_docs/06_Weather_Generation_Flow.md`
 8) `onboarding_docs/07_Data_Files_IO.md`
 9) `onboarding_docs/08_Training_Pipeline.md`
+10) `onboarding_docs/09_Training_vs_Inference_Flows.md`
+11) `onboarding_docs/10_Rewards_and_Economics.md`
+12) `onboarding_docs/11_Farmer_Usage_Guide.md`
 
 If you prefer code-first exploration, start with:
 - `cyclesgym/envs/common.py`
