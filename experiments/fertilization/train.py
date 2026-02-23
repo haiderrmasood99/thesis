@@ -1,11 +1,13 @@
 import numpy as np
+import warnings
+warnings.filterwarnings("ignore")
 from stable_baselines3.common.vec_env import SubprocVecEnv, DummyVecEnv, VecNormalize
 from stable_baselines3.common.vec_env import VecMonitor
 from stable_baselines3 import PPO, A2C, DQN
 from stable_baselines3.common.evaluation import evaluate_policy
 from stable_baselines3.common.utils import set_random_seed
 from cyclesgym.envs.corn import Corn
-from cyclesgym.utils.utils import EvalCallbackCustom, _evaluate_policy
+from cyclesgym.utils.utils import EvalCallbackCustom, _evaluate_policy, JsonlTrainLoggerCallback
 from cyclesgym.utils.wandb_utils import WANDB_ENTITY, FERTILIZATION_EXPERIMENT
 import gymnasium as gym
 from corn_soil_refined import CornSoilRefined, NonAdaptiveCorn
@@ -15,6 +17,7 @@ from pathlib import Path
 from cyclesgym.utils.paths import PROJECT_PATH, CYCLES_PATH
 from cyclesgym.envs.weather_generator import WeatherShuffler
 import sys
+from datetime import datetime
 
 
 from cyclesgym.policies.dummy_policies import OpenLoopPolicy
@@ -171,7 +174,7 @@ class Train:
         eval_freq = int(self.config['eval_freq'] / self.config['n_process'])
         eval_env_train, eval_env_test = self.get_envs(n_procs=self.config['n_process'])
 
-        eval_callback_test_det = EvalCallbackCustom(eval_env_test, best_model_save_path=None,
+        eval_callback_test_det = EvalCallbackCustom(eval_env_test, best_model_save_path=str(self.model_dir.joinpath('best_eval_test_det')),
             log_path=str(self.model_dir.joinpath('eval_test_det')),
             eval_freq=eval_freq, deterministic=True, render=False,
             eval_prefix='eval_test_det')
@@ -213,9 +216,9 @@ class Train:
         n_steps = int(self.config['n_steps'] / self.config['n_process'])
 
         if self.config["method"] == "A2C":
-            model = A2C('MlpPolicy', train_env, verbose=0, tensorboard_log=self.dir)
+            model = A2C('MlpPolicy', train_env, verbose=0, ent_coef=self.config.get('ent_coef', 0.0), tensorboard_log=self.dir)
         elif self.config["method"] == "PPO":
-            model = PPO('MlpPolicy', train_env, verbose=0, n_steps= n_steps, tensorboard_log=self.dir)
+            model = PPO('MlpPolicy', train_env, verbose=0, n_steps= n_steps, ent_coef=self.config.get('ent_coef', 0.0), tensorboard_log=self.dir)
         elif self.config["method"] == "DQN":
             model = DQN('MlpPolicy', train_env, verbose=0, tensorboard_log=self.dir)
         else:
@@ -223,8 +226,20 @@ class Train:
 
 
         callback = self.get_eval_callbacks()
+        log_path = self.config.get('log_json_path')
+        if not log_path:
+            ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+            log_path = str(PROJECT_PATH.joinpath('runs', 'train_logs', f'fertilization_{ts}.jsonl'))
+        callback.append(JsonlTrainLoggerCallback(
+            log_path=log_path,
+            log_every_steps=int(self.config.get('log_every_steps', 1)),
+            log_step_actions=bool(self.config.get('log_step_actions', True)),
+            log_step_rewards=bool(self.config.get('log_step_rewards', True)),
+            log_rollout=True
+        ))
         
-        model.learn(total_timesteps=total_timesteps, callback=callback)
+        print("Initialization complete. Starting training... Progress bar should appear shortly.")
+        model.learn(total_timesteps=total_timesteps, callback=callback, progress_bar=True)
         model.save(str(self.config['run_id'])+'.zip')
         stats_path = Path(self.config['stats_path'])
         stats_path.parent.mkdir(parents=True, exist_ok=True)
@@ -278,7 +293,10 @@ class Train:
                                                                                        title=f'Training action sequence {episode_actions_names[i]}')})
             except FileNotFoundError as e:
                 print(f"Warning: Failed to log action sequence {episode_actions_names[i]} due to FileNotFoundError: {e}")
-        wandb.log({'train/fertilizer': fertilizer_table})
+        try:
+            wandb.log({'train/fertilizer': fertilizer_table})
+        except FileNotFoundError as e:
+             print(f"Warning: Failed to log fertilizer table due to FileNotFoundError: {e}")
 
         ## create a plot of the reward in each year
         ## create a plot of fertilizer cost in each year
@@ -411,6 +429,7 @@ if __name__ == '__main__':
                   eval_freq = 1000, run_id = 0,
                   norm_reward = True,
                   method = "PPO", 
+                  ent_coef = 0.0,
                   n_actions = 11, 
                   soil_env=True, 
                   start_year = 1980,
@@ -418,7 +437,10 @@ if __name__ == '__main__':
                   sampling_end_year=2005,
                   n_weather_samples=100, 
                   n_steps = 2048, 
-                  with_obs_year = True)
+                  with_obs_year = True,
+                  log_every_steps = 1,
+                  log_step_actions = True,
+                  log_step_rewards = True)
     wandb.init(
     config=config,
     sync_tensorboard=True,
@@ -443,19 +465,21 @@ if __name__ == '__main__':
         help='Whether to use a fixed weather')
     parser.add_argument('-s', '--seed', type=int, default=0, metavar='N',
                          help='The random seed used for all number generators')
-    parser.add_argument('-b','--baseline', default=False, action='store_true',
-        help='Use to only run the baselines')
     parser.add_argument('-ty', '--total-years', type=int, default=25, metavar='N',
                         help='Total years of training (default: 25)')
-
+    parser.add_argument('-b','--baseline', default=False, action='store_true',
+        help='Use to only run the baselines')
     parser.add_argument('-p','--posthoc', default=False, action='store_true',
         help='Parse to read in a set of weights that are evaluated')
+    parser.add_argument('-ef', '--eval-freq', type=int, default=1000, metavar='N',
+                        help='Evaluation frequency in steps (default: 1000)')
+    parser.add_argument('-ec', '--ent-coef', type=float, default=0.0, metavar='N',
+                        help='Entropy coefficient for the loss calculation (default: 0.0)')
 
     args = parser.parse_args()
 
     wandb.config.update(args, allow_val_change=True)
 
-    
     if wandb.config['posthoc']:
         stats_path = 'data/vec_norms/vec_normalize_1xw45c9p.pkl'
     else:

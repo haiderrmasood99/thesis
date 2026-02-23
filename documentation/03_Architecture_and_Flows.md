@@ -85,7 +85,7 @@ sequenceDiagram
     
     E->>R: compute_reward(date=T)
     R-->>E: Reward Value (Float)
-    
+
     E-->>A: return obs, reward, done, info
 ```
 

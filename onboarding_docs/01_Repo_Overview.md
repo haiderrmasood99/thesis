@@ -15,11 +15,11 @@ Key folders:
 Architecture map (system context):
 ```mermaid
 flowchart LR
-    Agent[RL agent\n(Python)] -->|action| Env[cyclesgym env]
-    Env -->|write input files| CyclesInput[cycles/input/<simID>/]
+    Agent["RL agent\n(Python)"] -->|action| Env[cyclesgym env]
+    Env -->|write input files| CyclesInput["cycles/input/<simID>/"]
     Env -->|run| CyclesExe[Cycles.exe]
-    CyclesExe -->|write outputs| CyclesOutput[cycles/output/<simID>/control/]
-    Env -->|read outputs via managers| Managers[managers/*.py]
+    CyclesExe -->|write outputs| CyclesOutput["cycles/output/<simID>/control/"]
+    Env -->|read outputs via managers| Managers["managers/*.py"]
     Managers -->|observations + reward| Env
     Env -->|obs, reward, done| Agent
 ```

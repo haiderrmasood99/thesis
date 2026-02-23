@@ -12,6 +12,8 @@ from numpy import ndarray
 from stable_baselines3.common import base_class
 from stable_baselines3.common.vec_env import DummyVecEnv, VecEnv, VecMonitor, is_vecenv_wrapped, sync_envs_normalization
 from stable_baselines3.common.policies import obs_as_tensor
+import json
+from datetime import datetime
 
 eps = 1e-8
 
@@ -397,3 +399,107 @@ def _evaluate_policy(
     if return_episode_rewards:
         return episode_rewards, episode_lengths, episode_actions, episode_rewards
     return mean_reward, std_reward, episode_actions, episode_rewards, episode_probs, episode_action_rewards
+
+
+class JsonlTrainLoggerCallback(BaseCallback):
+    """
+    Write training signals to a JSONL log file with timestamps.
+
+    Logs two types of entries:
+    - step: per-step rewards/actions (optional, can be large)
+    - rollout: aggregated PPO metrics (losses, KL, entropy, ep_rew_mean, etc.)
+    """
+
+    def __init__(self,
+                 log_path: str,
+                 log_every_steps: int = 1,
+                 log_step_actions: bool = True,
+                 log_step_rewards: bool = True,
+                 log_rollout: bool = True,
+                 verbose: int = 0):
+        super().__init__(verbose=verbose)
+        self.log_path = log_path
+        self.log_every_steps = max(1, int(log_every_steps))
+        self.log_step_actions = log_step_actions
+        self.log_step_rewards = log_step_rewards
+        self.log_rollout = log_rollout
+        self._fh = None
+
+    def _ensure_open(self):
+        if self._fh is None:
+            os.makedirs(os.path.dirname(self.log_path), exist_ok=True)
+            self._fh = open(self.log_path, "a", encoding="utf-8")
+
+    def _write(self, payload: dict):
+        self._ensure_open()
+        self._fh.write(json.dumps(payload, default=str) + "\n")
+        self._fh.flush()
+
+    def _to_builtin(self, x):
+        if isinstance(x, (np.ndarray,)):
+            return x.tolist()
+        if isinstance(x, (np.floating, np.integer)):
+            return x.item()
+        return x
+
+    def _on_training_start(self) -> None:
+        self._ensure_open()
+        self._write({
+            "type": "start",
+            "timestamp": datetime.now().isoformat(),
+            "total_timesteps": 0
+        })
+
+    def _on_step(self) -> bool:
+        if self.n_calls % self.log_every_steps != 0:
+            return True
+
+        payload = {
+            "type": "step",
+            "timestamp": datetime.now().isoformat(),
+            "num_timesteps": int(self.num_timesteps),
+        }
+
+        if self.log_step_rewards:
+            rewards = self.locals.get("rewards", None)
+            if rewards is not None:
+                payload["rewards"] = self._to_builtin(rewards)
+
+        if self.log_step_actions:
+            actions = self.locals.get("actions", None)
+            if actions is not None:
+                payload["actions"] = self._to_builtin(actions)
+
+        self._write(payload)
+        return True
+
+    def _on_rollout_end(self) -> None:
+        if not self.log_rollout:
+            return
+
+        # SB3 logger values contain PPO metrics if available.
+        logger_values = {}
+        try:
+            for k, v in self.logger.name_to_value.items():
+                if k.startswith(("rollout/", "train/", "time/")):
+                    logger_values[k] = self._to_builtin(v)
+        except Exception:
+            logger_values = {}
+
+        payload = {
+            "type": "rollout",
+            "timestamp": datetime.now().isoformat(),
+            "num_timesteps": int(self.num_timesteps),
+            "logger": logger_values,
+        }
+        self._write(payload)
+
+    def _on_training_end(self) -> None:
+        if self._fh is not None:
+            self._write({
+                "type": "end",
+                "timestamp": datetime.now().isoformat(),
+                "total_timesteps": int(self.num_timesteps)
+            })
+            self._fh.close()
+            self._fh = None
