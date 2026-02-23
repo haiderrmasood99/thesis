@@ -85,7 +85,14 @@ class DailyOutputObserver(Observer):
         if len(column_list) != len(map_list):
             raise ValueError('Column list and map list should be of the same length')
         for c, m in zip(column_list, map_list):
-            data[c] = m[data[c]]
+            # Safe mapping for newer pandas versions where integer fallback is removed
+            val = data.iloc[c] if isinstance(c, int) else data[c]
+            mapped_val = m.get(val, val) if isinstance(m, dict) else m[val]
+            
+            if isinstance(c, int):
+                data.iloc[c] = mapped_val
+            else:
+                data[c] = mapped_val
         return data
 
     def compute_obs(self,
