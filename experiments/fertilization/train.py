@@ -44,7 +44,7 @@ class Train:
     def env_maker(self, training = True, n_procs = 1, soil_env = False, start_year = PAK_WEATHER_START_YEAR, end_year = PAK_WEATHER_START_YEAR,
         sampling_start_year=PAK_WEATHER_START_YEAR, sampling_end_year=PAK_DEFAULT_SAMPLING_END_YEAR,
         n_weather_samples=100, fixed_weather = True, with_obs_year=False,
-        nonadaptive=False, new_holland=False):
+        nonadaptive=False):
 
         def make_env():
             # creates a function returning the basic env. Used by SubprocVecEnv later to create a
@@ -57,8 +57,7 @@ class Train:
                             sampling_end_year=sampling_end_year,
                             n_weather_samples=n_weather_samples,
                             fixed_weather=fixed_weather,
-                            with_obs_year=with_obs_year,
-                            new_holland=new_holland)
+                            with_obs_year=with_obs_year)
                 else:
                     if soil_env:
                         env = CornSoilRefined(delta=7, maxN=150, n_actions=self.config['n_actions'],
@@ -67,8 +66,7 @@ class Train:
                             sampling_end_year=sampling_end_year,
                             n_weather_samples=n_weather_samples,
                             fixed_weather=fixed_weather,
-                            with_obs_year=with_obs_year,
-                            new_holland=new_holland)
+                            with_obs_year=with_obs_year)
                     else:
                         if fixed_weather:
                             env = Corn(delta=7, maxN=150, n_actions=self.config['n_actions'],
@@ -124,44 +122,51 @@ class Train:
                         nonadaptive=self.config['nonadaptive'])
         return f
 
-    def get_envs(self, n_procs, new_holland=False, plus_horizon=0):
+    def get_envs(self, n_procs, plus_horizon=0):
         """
         Returns some environments given n_procs. Used because I often want the same settings
         but a different n_procs for policy visualization and baseline evaluations
         """
-        hold_out_sampling_start_year = min(self.config['sampling_end_year'] + 1, PAK_WEATHER_END_YEAR)
-        hold_out_sampling_end_year = PAK_WEATHER_END_YEAR
-        duration = self.config['end_year'] - self.config['start_year'] 
+        weather_min_year, weather_max_year = PAK_WEATHER_START_YEAR, PAK_WEATHER_END_YEAR
+
+        sim_start_year = min(max(self.config['start_year'], weather_min_year), weather_max_year)
+        sim_end_year = min(max(self.config['end_year'], sim_start_year), weather_max_year)
+        sim_end_year_with_horizon = min(sim_end_year + plus_horizon, weather_max_year)
+
+        train_sampling_start_year = min(max(self.config['sampling_start_year'], weather_min_year), weather_max_year)
+        train_sampling_end_year = min(max(self.config['sampling_end_year'], train_sampling_start_year), weather_max_year)
+
+        hold_out_sampling_start_year = min(train_sampling_end_year + 1, weather_max_year)
+        hold_out_sampling_end_year = weather_max_year
+        duration = sim_end_year - sim_start_year 
 
         # The test environment will automatically have the same observation normalization applied to it by 
         # EvalCallBack
         eval_env_train = self.env_maker(training = False, n_procs=n_procs,
             soil_env = self.config['soil_env'],
-            start_year = self.config['start_year'], end_year = self.config['end_year']+plus_horizon,
-            sampling_start_year=self.config['sampling_start_year'],
-            sampling_end_year=self.config['sampling_end_year'],
+            start_year = sim_start_year, end_year = sim_end_year_with_horizon,
+            sampling_start_year=train_sampling_start_year,
+            sampling_end_year=train_sampling_end_year,
             n_weather_samples=self.config['n_weather_samples'],
             fixed_weather = self.config['fixed_weather'],
             with_obs_year=self.with_obs_year,
-            nonadaptive=self.config['nonadaptive'],
-            new_holland=new_holland)
+            nonadaptive=self.config['nonadaptive'])
 
         #the out of sample weather env
         start_year = hold_out_sampling_start_year
         end_year = min(hold_out_sampling_start_year + duration, hold_out_sampling_end_year)
         if self.config['fixed_weather']:
-            end_year = min(self.config['sampling_end_year'], PAK_WEATHER_END_YEAR)
-            start_year = max(PAK_WEATHER_START_YEAR, end_year-duration)
+            end_year = train_sampling_end_year
+            start_year = max(weather_min_year, end_year-duration)
         eval_env_test = self.env_maker(training = False, n_procs=n_procs,
             soil_env = self.config['soil_env'],
-            start_year = start_year, end_year = end_year+plus_horizon,
+            start_year = start_year, end_year = min(end_year + plus_horizon, weather_max_year),
             sampling_start_year=hold_out_sampling_start_year,
             sampling_end_year=hold_out_sampling_end_year,
             n_weather_samples=self.config['n_weather_samples'],
             fixed_weather = False,
             with_obs_year=self.with_obs_year,
-            nonadaptive=self.config['nonadaptive'],
-            new_holland=new_holland)
+            nonadaptive=self.config['nonadaptive'])
 
         eval_env_train.training = False
         eval_env_train.norm_reward = False
@@ -383,38 +388,22 @@ class Train:
         self.eval_openloop(cycles_exact_sequence, eval_env_test, "cycles-test")
         self.eval_openloop(nonsense_exact_sequence, eval_env_test, "nonsense-test")
 
-        nh_env = self.env_maker(training = False, n_procs=1,
-            soil_env = self.config['soil_env'],
-            start_year = self.config['start_year'], end_year = self.config['end_year'],
-            sampling_start_year=self.config['sampling_start_year'],
-            sampling_end_year=self.config['sampling_end_year'],
-            n_weather_samples=self.config['n_weather_samples'],
-            fixed_weather = self.config['fixed_weather'],
-            with_obs_year=self.with_obs_year,
-            nonadaptive=self.config['nonadaptive'],
-            new_holland=True)
-
-        self.eval_openloop(organic_exact_sequence, nh_env, "organic-NH")
-        self.eval_openloop(agro_exact_sequence, nh_env, "agro-NH")
-        self.eval_openloop(cycles_exact_sequence, nh_env, "cycles-NH")
-        self.eval_openloop(nonsense_exact_sequence, nh_env, "nonsense-NH")
-
         return
 
     def eval_nh(self,model):
         """
-        evaluate the model on new holland training years
+        evaluate the model on Pakistan holdout years
         """
-        nh_env, _  = self.get_envs(n_procs = 1, new_holland=True)
-        nh_env = VecNormalize.load(self.config['stats_path'], nh_env)
-        nh_env.training = False
-        nh_env.norm_reward = False
+        eval_env, _  = self.get_envs(n_procs = 1)
+        eval_env = VecNormalize.load(self.config['stats_path'], eval_env)
+        eval_env.training = False
+        eval_env.norm_reward = False
         
         mean_r, _  = evaluate_policy(model,
-           env=nh_env,
+           env=eval_env,
            n_eval_episodes=20,
            deterministic=False)
-        wandb.log({'NH_return': mean_r})
+        wandb.log({'pak_holdout_return': mean_r})
         return
 
 

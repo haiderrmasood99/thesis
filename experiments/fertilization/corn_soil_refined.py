@@ -88,7 +88,7 @@ class CornSoilCropWeatherObs(Corn):
 
 
 def CornSoilRefined(delta, n_actions, maxN, start_year, end_year, sampling_start_year, sampling_end_year,
-     n_weather_samples, fixed_weather, with_obs_year, new_holland=False):
+     n_weather_samples, fixed_weather, with_obs_year):
     target_obs = ['PP', # Precipitation
                   'TX', # Max temperature
                   'TN', # Min temperature
@@ -108,31 +108,26 @@ def CornSoilRefined(delta, n_actions, maxN, start_year, end_year, sampling_start
 
     return generate_partially_observable_env(target_obs, delta, n_actions, maxN, start_year, end_year,
                                              sampling_start_year,
-                                             sampling_end_year, n_weather_samples, fixed_weather, with_obs_year,
-                                             new_holland=new_holland)
+                                             sampling_end_year, n_weather_samples, fixed_weather, with_obs_year)
 
 
 def NonAdaptiveCorn(delta, n_actions, maxN, start_year, end_year, sampling_start_year, sampling_end_year,
-     n_weather_samples, fixed_weather, with_obs_year, new_holland=False):
+     n_weather_samples, fixed_weather, with_obs_year):
     target_obs = ['Y', # Years left
                   'DOY', # Day of the year
                   'N TO DATE'
                  ]
     return generate_partially_observable_env(target_obs, delta, n_actions, maxN, start_year, end_year, sampling_start_year,
-                                      sampling_end_year, n_weather_samples, fixed_weather, with_obs_year,
-                                      new_holland=new_holland)
+                                      sampling_end_year, n_weather_samples, fixed_weather, with_obs_year)
 
 
 def generate_partially_observable_env(target_obs, delta, n_actions, maxN, start_year, end_year, sampling_start_year,
                                       sampling_end_year, n_weather_samples, fixed_weather, with_obs_year,
-                                      new_holland=False):
+                                      ):
     # Weather generator
     if fixed_weather:
         weather_generator_class = FixedWeatherGenerator
-        if new_holland:
-            weather_generator_kwargs = {'base_weather_file': CYCLES_PATH.joinpath('input', 'RockSprings.weather')}
-        else:
-            weather_generator_kwargs = {'base_weather_file': CYCLES_PATH.joinpath('input', 'Pakistan_Site_final.weather')}
+        weather_generator_kwargs = {'base_weather_file': CYCLES_PATH.joinpath('input', 'Pakistan_Site_final.weather')}
     else:
         weather_generator_class = WeatherShuffler
         target_year_range = np.arange(start_year, end_year + 1)
@@ -140,10 +135,7 @@ def generate_partially_observable_env(target_obs, delta, n_actions, maxN, start_
                                         sampling_start_year=sampling_start_year,
                                         sampling_end_year=sampling_end_year,
                                         target_year_range=target_year_range)
-        if new_holland:
-            weather_generator_kwargs.update({'base_weather_file': CYCLES_PATH.joinpath('input', 'RockSprings.weather')})
-        else:
-            weather_generator_kwargs.update({'base_weather_file': CYCLES_PATH.joinpath('input', 'Pakistan_Site_final.weather')})
+        weather_generator_kwargs.update({'base_weather_file': CYCLES_PATH.joinpath('input', 'Pakistan_Site_final.weather')})
 
     # Fully observable environment
     fully_observable_env = CornSoilCropWeatherObs(delta=delta,
