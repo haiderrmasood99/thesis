@@ -12,7 +12,7 @@ def env_name(location: str, random_weather: bool, exp_type: str, duration: str =
         return f'CropPlanning{location}{weather}-v1'
 
 
-def get_weather(start_year, end_year, random=False, location='RockSprings',
+def get_weather(start_year, end_year, random=False, location='Pakistan_Site',
                 sampling_start_year=1980, sampling_end_year=2005):
     if random:
         target_year_range = np.arange(start_year, end_year + 1)
@@ -33,7 +33,7 @@ def get_weather(start_year, end_year, random=False, location='RockSprings',
 def register_fertilization_envs():
     common_kwargs = {'delta': 7, 'n_actions': 11, 'maxN': 150, 'start_year': 1980}
     durations = [(1, 'Short'), (2, 'Middle'), (5, 'Long')]
-    locations = ['RockSprings', 'NewHolland']
+    locations = ['Pakistan_Site']
 
     # Loop through duration, random vs fixed weather, location
     for rw in [True, False]:
@@ -66,7 +66,7 @@ def register_crop_planning_envs():
     end_year = 1998
     common_kwargs = dict(start_year=start_year, end_year=end_year,
                          rotation_crops=['CornSilageRM.90', 'SoybeanMG.3'])
-    locations = ['RockSprings', 'NewHolland']
+    locations = ['Pakistan_Site']
 
     # Loop through random vs fixed weather, location
     for rw in [True, False]:

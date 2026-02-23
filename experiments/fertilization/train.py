@@ -75,7 +75,7 @@ class Train:
                                 sampling_start_year=sampling_start_year,
                                 sampling_end_year=sampling_end_year,
                                 target_year_range=target_year_range,
-                                base_weather_file=CYCLES_PATH.joinpath('input', 'RockSprings.weather'))
+                                base_weather_file=CYCLES_PATH.joinpath('input', 'Pakistan_Site.weather'))
                             env = Corn(delta=7, maxN=150, n_actions=self.config['n_actions'],
                                        start_year=start_year, end_year=end_year,
                                        weather_generator_class=WeatherShuffler,
@@ -475,6 +475,9 @@ if __name__ == '__main__':
                         help='Evaluation frequency in steps (default: 1000)')
     parser.add_argument('-ec', '--ent-coef', type=float, default=0.0, metavar='N',
                         help='Entropy coefficient for the loss calculation (default: 0.0)')
+    parser.add_argument('-m', '--method', type=str.upper, default='PPO',
+                        choices=['PPO', 'A2C', 'DQN'],
+                        help='RL method to train (default: PPO)')
 
     args = parser.parse_args()
 

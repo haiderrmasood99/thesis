@@ -19,10 +19,10 @@ class CropPlanning(CyclesEnv):
                  start_year,
                  end_year,
                  rotation_crops,
-                 soil_file='GenericHagerstown.soil',
+                 soil_file='Pakistan_Soil.soil',
                  weather_generator_class=FixedWeatherGenerator,
                  weather_generator_kwargs={
-                     'base_weather_file': CYCLES_PATH.joinpath('input', 'RockSprings.weather')}
+                     'base_weather_file': CYCLES_PATH.joinpath('input', 'Pakistan_Site.weather')}
                  ):
 
         super().__init__(SIMULATION_START_YEAR=start_year,
@@ -45,7 +45,7 @@ class CropPlanning(CyclesEnv):
                          ANNUAL_PROFILE_OUT=0,
                          ANNUAL_NFLUX_OUT=0,
                          CROP_FILE='GenericCrops.crop',
-                         OPERATION_FILE='CornSilageSoyWheat.operation',
+                         OPERATION_FILE='Pakistan_Corn.operation',
                          #TODO: right now the operation file is totally ignored
                          SOIL_FILE=soil_file,
                          WEATHER_GENERATOR_CLASS=weather_generator_class,
@@ -188,8 +188,8 @@ if __name__ == '__main__':
     start_year = 1980
     end_year = 1990
     rotation_crops = ['CornSilageRM.90', 'SoybeanMG.3']
-    soil_file = 'GenericHagerstown.soil'
-    weather_file = 'RockSprings.weather'
+    soil_file = 'Pakistan_Soil.soil'
+    weather_file = 'Pakistan_Site.weather'
 
     # Weather generator
     sampling_start_year = 1980

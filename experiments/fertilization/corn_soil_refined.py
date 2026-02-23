@@ -143,7 +143,7 @@ def generate_partially_observable_env(target_obs, delta, n_actions, maxN, start_
         if new_holland:
             weather_generator_kwargs.update({'base_weather_file': CYCLES_PATH.joinpath('input', 'RockSprings.weather')})
         else:
-            weather_generator_kwargs.update({'base_weather_file': CYCLES_PATH.joinpath('input', 'NewHolland.weather')})
+            weather_generator_kwargs.update({'base_weather_file': CYCLES_PATH.joinpath('input', 'Pakistan_Site.weather')})
 
     # Fully observable environment
     fully_observable_env = CornSoilCropWeatherObs(delta=delta,

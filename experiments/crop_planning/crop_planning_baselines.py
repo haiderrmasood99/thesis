@@ -63,8 +63,8 @@ if __name__ == '__main__':
     train_end_year = 1998
     test_end_year = 2016
 
-    weather_train_file = 'RockSprings.weather'
-    weather_test_file = 'NewHolland.weather'
+    weather_train_file = 'Pakistan_Site.weather'
+    weather_test_file = 'Pakistan_Site.weather'
 
     CropPlanningBaselines().test_equal(1980, 1998, weather_train_file)
     CropPlanningBaselines().test_equal(1998, 2016, weather_train_file)

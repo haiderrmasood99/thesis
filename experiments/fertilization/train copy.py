@@ -73,7 +73,7 @@ class Train:
                                 sampling_start_year=sampling_start_year,
                                 sampling_end_year=sampling_end_year,
                                 target_year_range=target_year_range,
-                                base_weather_file=CYCLES_PATH.joinpath('input', 'RockSprings.weather'))
+                                base_weather_file=CYCLES_PATH.joinpath('input', 'Pakistan_Site.weather'))
                             env = Corn(delta=7, maxN=150, n_actions=self.config['n_actions'],
                                        start_year=start_year, end_year=end_year,
                                        weather_generator_class=WeatherShuffler,

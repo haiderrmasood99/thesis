@@ -286,7 +286,7 @@ if __name__ == '__main__':
     import time
 
     # Load base weather data
-    fname = CYCLES_PATH.joinpath('input', 'RockSprings.weather')
+    fname = CYCLES_PATH.joinpath('input', 'Pakistan_Site.weather')
     manager = WeatherManager(fname)
 
     t = time.time()

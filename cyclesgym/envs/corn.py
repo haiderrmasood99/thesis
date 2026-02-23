@@ -292,7 +292,7 @@ if __name__ == '__main__':
     weather_generator_kwargs = dict(n_weather_samples=100,
                                     sampling_start_year=1980,
                                     sampling_end_year=2013,
-                                    base_weather_file=CYCLES_PATH.joinpath('input', 'RockSprings.weather'),
+                                    base_weather_file=CYCLES_PATH.joinpath('input', 'Pakistan_Site.weather'),
                                     target_year_range=target_year_range)
     env_kwargs.update(dict(weather_generator_class=WeatherShuffler,
                            weather_generator_kwargs=weather_generator_kwargs))
