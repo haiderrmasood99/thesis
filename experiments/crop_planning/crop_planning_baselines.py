@@ -1,5 +1,6 @@
 from cyclesgym.envs.crop_planning import CropPlanningFixedPlanting
 from cyclesgym.utils.paths import CYCLES_PATH, TEST_PATH
+from cyclesgym.envs.weather_generator import FixedWeatherGenerator
 
 import shutil
 import subprocess
@@ -22,8 +23,14 @@ class CropPlanningBaselines(object):
         self.custom_sim_id = lambda: '1'  # This way the output does not depend on time and can be deleted by teardown
 
     def _test_policy(self, policy, start, end, weather_file):
-        env = CropPlanningFixedPlanting(start_year=start, end_year=end, weather_file=weather_file,
-                                        rotation_crops=['CornRM.100', 'SoybeanMG.3'])
+        env = CropPlanningFixedPlanting(
+            start_year=start,
+            end_year=end,
+            rotation_crops=['CornRM.100', 'SoybeanMG.3'],
+            soil_file='Pakistan_Soil_final.soil',
+            weather_generator_class=FixedWeatherGenerator,
+            weather_generator_kwargs={'base_weather_file': CYCLES_PATH.joinpath('input', weather_file)}
+        )
         env.reset()
         year = 0
 
@@ -59,14 +66,14 @@ class CropPlanningBaselines(object):
 
 
 if __name__ == '__main__':
-    train_start_year = 1980
-    train_end_year = 1998
-    test_end_year = 2016
+    train_start_year = 2005
+    train_end_year = 2018
+    test_end_year = 2024
 
-    weather_train_file = 'Pakistan_Site.weather'
-    weather_test_file = 'Pakistan_Site.weather'
+    weather_train_file = 'Pakistan_Site_final.weather'
+    weather_test_file = 'Pakistan_Site_final.weather'
 
-    CropPlanningBaselines().test_equal(1980, 1998, weather_train_file)
-    CropPlanningBaselines().test_equal(1998, 2016, weather_train_file)
-    CropPlanningBaselines().test_equal(1980, 1998, weather_test_file)
-    CropPlanningBaselines().test_equal(1980, 2015, weather_test_file)
+    CropPlanningBaselines().test_equal(2005, 2018, weather_train_file)
+    CropPlanningBaselines().test_equal(2019, 2024, weather_train_file)
+    CropPlanningBaselines().test_equal(2005, 2018, weather_test_file)
+    CropPlanningBaselines().test_equal(2005, 2024, weather_test_file)

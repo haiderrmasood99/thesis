@@ -19,10 +19,10 @@ class CropPlanning(CyclesEnv):
                  start_year,
                  end_year,
                  rotation_crops,
-                 soil_file='Pakistan_Soil.soil',
+                 soil_file='Pakistan_Soil_final.soil',
                  weather_generator_class=FixedWeatherGenerator,
                  weather_generator_kwargs={
-                     'base_weather_file': CYCLES_PATH.joinpath('input', 'Pakistan_Site.weather')}
+                     'base_weather_file': CYCLES_PATH.joinpath('input', 'Pakistan_Site_final.weather')}
                  ):
 
         super().__init__(SIMULATION_START_YEAR=start_year,
@@ -44,8 +44,8 @@ class CropPlanning(CyclesEnv):
                          ANNUAL_SOIL_OUT=0,
                          ANNUAL_PROFILE_OUT=0,
                          ANNUAL_NFLUX_OUT=0,
-                         CROP_FILE='GenericCrops.crop',
-                         OPERATION_FILE='Pakistan_Corn.operation',
+                         CROP_FILE='GenericCrops_final.crop',
+                         OPERATION_FILE='Pakistan_Corn_final.operation',
                          #TODO: right now the operation file is totally ignored
                          SOIL_FILE=soil_file,
                          WEATHER_GENERATOR_CLASS=weather_generator_class,
@@ -185,15 +185,15 @@ if __name__ == '__main__':
     # Example for crop plannign with random weather
 
     # Env kwargs
-    start_year = 1980
-    end_year = 1990
+    start_year = 2005
+    end_year = 2010
     rotation_crops = ['CornSilageRM.90', 'SoybeanMG.3']
-    soil_file = 'Pakistan_Soil.soil'
-    weather_file = 'Pakistan_Site.weather'
+    soil_file = 'Pakistan_Soil_final.soil'
+    weather_file = 'Pakistan_Site_final.weather'
 
     # Weather generator
-    sampling_start_year = 1980
-    sampling_end_year = 2015
+    sampling_start_year = 2005
+    sampling_end_year = 2024
     n_weather_samples = 10
     target_year_range = np.arange(start_year, end_year + 1)
     weather_generator_kwargs = dict(n_weather_samples=n_weather_samples,

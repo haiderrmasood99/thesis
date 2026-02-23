@@ -93,12 +93,12 @@ def build_commands(py_exec: str) -> list[tuple[str, list[str]]]:
             ],
         ),
         (
-            "Fertilization | Baseline only end-year 19160",
+            "Fertilization | Baseline only end-year 2005",
             [
                 py_exec,
                 "experiments/fertilization/train.py",
                 "--end-year",
-                "19160",
+                "2005",
                 "--baseline",
             ],
         ),

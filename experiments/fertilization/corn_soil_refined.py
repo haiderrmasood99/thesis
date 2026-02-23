@@ -15,13 +15,13 @@ class CornSoilCropWeatherObs(Corn):
                  delta,
                  n_actions,
                  maxN,
-                 operation_file='ContinuousCorn.operation',
-                 soil_file='GenericHagerstown.soil',
+                 operation_file='Pakistan_Corn_final.operation',
+                 soil_file='Pakistan_Soil_final.soil',
                  weather_generator_class=FixedWeatherGenerator,
                  weather_generator_kwargs={
-                     'base_weather_file': CYCLES_PATH.joinpath('input', 'RockSprings.weather')},
-                 start_year=1980,
-                 end_year=1980,
+                     'base_weather_file': CYCLES_PATH.joinpath('input', 'Pakistan_Site_final.weather')},
+                 start_year=2005,
+                 end_year=2005,
                  use_reinit=True,
                  with_obs_year=False,
                  ):
@@ -48,7 +48,7 @@ class CornSoilCropWeatherObs(Corn):
                          ANNUAL_SOIL_OUT=0,
                          ANNUAL_PROFILE_OUT=0,
                          ANNUAL_NFLUX_OUT=0,
-                         CROP_FILE='GenericCrops.crop',
+                         CROP_FILE='GenericCrops_final.crop',
                          OPERATION_FILE=operation_file,
                          SOIL_FILE=soil_file,
                          WEATHER_GENERATOR_CLASS=weather_generator_class,
@@ -132,7 +132,7 @@ def generate_partially_observable_env(target_obs, delta, n_actions, maxN, start_
         if new_holland:
             weather_generator_kwargs = {'base_weather_file': CYCLES_PATH.joinpath('input', 'RockSprings.weather')}
         else:
-            weather_generator_kwargs = {'base_weather_file': CYCLES_PATH.joinpath('input', 'Pakistan_Site.weather')}
+            weather_generator_kwargs = {'base_weather_file': CYCLES_PATH.joinpath('input', 'Pakistan_Site_final.weather')}
     else:
         weather_generator_class = WeatherShuffler
         target_year_range = np.arange(start_year, end_year + 1)
@@ -143,7 +143,7 @@ def generate_partially_observable_env(target_obs, delta, n_actions, maxN, start_
         if new_holland:
             weather_generator_kwargs.update({'base_weather_file': CYCLES_PATH.joinpath('input', 'RockSprings.weather')})
         else:
-            weather_generator_kwargs.update({'base_weather_file': CYCLES_PATH.joinpath('input', 'Pakistan_Site.weather')})
+            weather_generator_kwargs.update({'base_weather_file': CYCLES_PATH.joinpath('input', 'Pakistan_Site_final.weather')})
 
     # Fully observable environment
     fully_observable_env = CornSoilCropWeatherObs(delta=delta,
@@ -189,7 +189,7 @@ def compute_mask(target_obs,
                                         sampling_start_year=sampling_start_year,
                                         sampling_end_year=sampling_end_year,
                                         target_year_range=np.arange(start_year, end_year + 1),
-                                        base_weather_file=CYCLES_PATH.joinpath('input', 'RockSprings.weather'))
+                                        base_weather_file=CYCLES_PATH.joinpath('input', 'Pakistan_Site_final.weather'))
         large_obs_corn_env = CornSoilCropWeatherObs(delta=delta,
                                                     n_actions=n_actions,
                                                     maxN=maxN, start_year=start_year,

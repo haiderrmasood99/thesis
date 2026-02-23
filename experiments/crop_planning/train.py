@@ -34,7 +34,7 @@ class Train:
                                         weather_generator_class=FixedWeatherGenerator,
                                         weather_generator_kwargs={
                                             'base_weather_file': CYCLES_PATH.joinpath('input',
-                                                                                      'Pakistan_Site.weather')})
+                                                                                      'Pakistan_Site_final.weather')})
 
         eval_env_new_years = self.env_maker(start_year=self.config['eval_start_year'],
                                             end_year=self.config['eval_end_year'],
@@ -43,7 +43,7 @@ class Train:
                                             weather_generator_class=FixedWeatherGenerator,
                                             weather_generator_kwargs={
                                                 'base_weather_file': CYCLES_PATH.joinpath('input',
-                                                                                          'Pakistan_Site.weather')})
+                                                                                          'Pakistan_Site_final.weather')})
 
 
         eval_env_other_loc = self.env_maker(start_year=self.config['train_start_year'],
@@ -53,7 +53,7 @@ class Train:
                                             weather_generator_class=FixedWeatherGenerator,
                                             weather_generator_kwargs={
                                                 'base_weather_file': CYCLES_PATH.joinpath('input',
-                                                                                          'Pakistan_Site.weather')})
+                                                                                          'Pakistan_Site_final.weather')})
 
         eval_env_other_loc_long = self.env_maker(start_year=self.config['train_start_year'],
                                                  end_year=self.config['eval_end_year'] - 1,
@@ -61,14 +61,14 @@ class Train:
                                                  weather_generator_class=FixedWeatherGenerator,
                                                  weather_generator_kwargs={
                                                      'base_weather_file': CYCLES_PATH.joinpath('input',
-                                                                                               'Pakistan_Site.weather')},
+                                                                                               'Pakistan_Site_final.weather')},
                                                  training=False)
 
         return [eval_env_train, eval_env_new_years, eval_env_other_loc, eval_env_other_loc_long]
 
     def env_maker(self, env_class=CropPlanningFixedPlanting, weather_generator_class=FixedWeatherGenerator,
-                  weather_generator_kwargs={'base_weather_file': CYCLES_PATH.joinpath('input', 'Pakistan_Site.weather')},
-                  training=True, n_procs=4, start_year=1980, end_year=2000, soil_file='Pakistan_Soil.soil'):
+                  weather_generator_kwargs={'base_weather_file': CYCLES_PATH.joinpath('input', 'Pakistan_Site_final.weather')},
+                  training=True, n_procs=4, start_year=2005, end_year=2018, soil_file='Pakistan_Soil_final.soil'):
         if not training:
             n_procs = 1
 
@@ -99,7 +99,7 @@ class Train:
         if n_procs and n_procs > 1:
             env = SubprocVecEnv([make_env() for _ in range(n_procs)], start_method='spawn')
         else:
-            env = DummyVecEnv([make_env])
+            env = DummyVecEnv([make_env()])
         env = VecMonitor(env)
         norm_reward = (training and self.config['norm_reward'])
         env = VecNormalize(env, norm_obs=True, norm_reward=norm_reward, clip_obs=5000., clip_reward=5000.)
@@ -253,21 +253,21 @@ if __name__ == '__main__':
         env_class = 'CropPlanningFixedPlanting'
         eval_env_class = 'CropPlanningFixedPlanting'
 
-    train_start_year = 1980
-    train_end_year = 1998
-    eval_start_year = 1998
-    eval_end_year = 2016
+    train_start_year = 2005
+    train_end_year = 2018
+    eval_start_year = 2019
+    eval_end_year = 2024
 
     if args['fixed_weather'] == 'True':
         weather_generator_class = 'FixedWeatherGenerator'
         weather_generator_kwargs = {
-            'base_weather_file': CYCLES_PATH.joinpath('input', 'Pakistan_Site.weather')}
+            'base_weather_file': CYCLES_PATH.joinpath('input', 'Pakistan_Site_final.weather')}
     else:
         weather_generator_class = 'WeatherShuffler'
         weather_generator_kwargs = dict(n_weather_samples=2,
                                         sampling_start_year=train_start_year,
                                         sampling_end_year=train_end_year,
-                                        base_weather_file=CYCLES_PATH.joinpath('input', 'Pakistan_Site.weather'),
+                                        base_weather_file=CYCLES_PATH.joinpath('input', 'Pakistan_Site_final.weather'),
                                         target_year_range=np.arange(train_start_year, train_end_year + 1))
 
     config = dict(train_start_year=train_start_year, train_end_year=train_end_year, eval_start_year=eval_start_year, eval_end_year=eval_end_year,

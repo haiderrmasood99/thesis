@@ -28,13 +28,13 @@ class Corn(CyclesEnv):
     def __init__(self, delta,
                  n_actions,
                  maxN,
-                 operation_file='Pakistan_Corn.operation',
-                 soil_file='Pakistan_Soil.soil',
+                 operation_file='Pakistan_Corn_final.operation',
+                 soil_file='Pakistan_Soil_final.soil',
                  weather_generator_class=FixedWeatherGenerator,
                  weather_generator_kwargs={
-                     'base_weather_file': CYCLES_PATH.joinpath('input', 'Pakistan_Site.weather')},
-                 start_year=1980,
-                 end_year=1980,
+                     'base_weather_file': CYCLES_PATH.joinpath('input', 'Pakistan_Site_final.weather')},
+                 start_year=2005,
+                 end_year=2005,
                  use_reinit=True
                  ):
         self.rotation_size = end_year - start_year + 1
@@ -58,7 +58,7 @@ class Corn(CyclesEnv):
                          ANNUAL_SOIL_OUT=0,
                          ANNUAL_PROFILE_OUT=0,
                          ANNUAL_NFLUX_OUT=0,
-                         CROP_FILE='GenericCrops.crop',
+                         CROP_FILE='GenericCrops_final.crop',
                          OPERATION_FILE=operation_file,
                          SOIL_FILE=soil_file,
                          WEATHER_GENERATOR_CLASS=weather_generator_class,
@@ -285,14 +285,14 @@ if __name__ == '__main__':
     np.random.seed(0)
 
     # Base argument
-    env_kwargs = dict(delta=7, n_actions=11, maxN=150, start_year=1980, end_year=1980)
+    env_kwargs = dict(delta=7, n_actions=11, maxN=150, start_year=2005, end_year=2005)
 
     # Weather shuffling
     target_year_range = np.arange(env_kwargs['start_year'], env_kwargs['end_year'] + 1)
     weather_generator_kwargs = dict(n_weather_samples=100,
-                                    sampling_start_year=1980,
-                                    sampling_end_year=2013,
-                                    base_weather_file=CYCLES_PATH.joinpath('input', 'Pakistan_Site.weather'),
+                                    sampling_start_year=2005,
+                                    sampling_end_year=2024,
+                                    base_weather_file=CYCLES_PATH.joinpath('input', 'Pakistan_Site_final.weather'),
                                     target_year_range=target_year_range)
     env_kwargs.update(dict(weather_generator_class=WeatherShuffler,
                            weather_generator_kwargs=weather_generator_kwargs))

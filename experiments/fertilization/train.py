@@ -25,6 +25,11 @@ import expert
 import argparse
 import random
 
+PAK_WEATHER_FILE = CYCLES_PATH.joinpath('input', 'Pakistan_Site_final.weather')
+PAK_WEATHER_START_YEAR = 2005
+PAK_WEATHER_END_YEAR = 2024
+PAK_DEFAULT_SAMPLING_END_YEAR = 2018
+
 
 class Train:
     """ Trainer object to wrap model training and handle environment creation, evaluation """
@@ -36,8 +41,8 @@ class Train:
         self.model_dir = Path(self.dir).joinpath('models')
         # rl config is configured from wandb config
 
-    def env_maker(self, training = True, n_procs = 1, soil_env = False, start_year = 1980, end_year = 1980,
-        sampling_start_year=1980, sampling_end_year=2013,
+    def env_maker(self, training = True, n_procs = 1, soil_env = False, start_year = PAK_WEATHER_START_YEAR, end_year = PAK_WEATHER_START_YEAR,
+        sampling_start_year=PAK_WEATHER_START_YEAR, sampling_end_year=PAK_DEFAULT_SAMPLING_END_YEAR,
         n_weather_samples=100, fixed_weather = True, with_obs_year=False,
         nonadaptive=False, new_holland=False):
 
@@ -75,7 +80,7 @@ class Train:
                                 sampling_start_year=sampling_start_year,
                                 sampling_end_year=sampling_end_year,
                                 target_year_range=target_year_range,
-                                base_weather_file=CYCLES_PATH.joinpath('input', 'Pakistan_Site.weather'))
+                                base_weather_file=PAK_WEATHER_FILE)
                             env = Corn(delta=7, maxN=150, n_actions=self.config['n_actions'],
                                        start_year=start_year, end_year=end_year,
                                        weather_generator_class=WeatherShuffler,
@@ -102,8 +107,8 @@ class Train:
 
         return env
 
-    def long_env_maker(self, training = True, n_procs = 1, soil_env = False, start_year = 1980, end_year = 1980,
-        sampling_start_year=1980, sampling_end_year=2013,
+    def long_env_maker(self, training = True, n_procs = 1, soil_env = False, start_year = PAK_WEATHER_START_YEAR, end_year = PAK_WEATHER_START_YEAR,
+        sampling_start_year=PAK_WEATHER_START_YEAR, sampling_end_year=PAK_DEFAULT_SAMPLING_END_YEAR,
         n_weather_samples=100, fixed_weather = True, with_obs_year=False, nonadaptive=False):
         """
         for single year testing we want to have an env that is identical to others but just a longer time horizon
@@ -124,9 +129,8 @@ class Train:
         Returns some environments given n_procs. Used because I often want the same settings
         but a different n_procs for policy visualization and baseline evaluations
         """
-        hold_out_sampling_start_year = self.config['sampling_end_year'] + 1
-        assert (hold_out_sampling_start_year <= 2015)
-        hold_out_sampling_end_year = 2015 #just last year in the weather data
+        hold_out_sampling_start_year = min(self.config['sampling_end_year'] + 1, PAK_WEATHER_END_YEAR)
+        hold_out_sampling_end_year = PAK_WEATHER_END_YEAR
         duration = self.config['end_year'] - self.config['start_year'] 
 
         # The test environment will automatically have the same observation normalization applied to it by 
@@ -144,10 +148,10 @@ class Train:
 
         #the out of sample weather env
         start_year = hold_out_sampling_start_year
-        end_year = hold_out_sampling_start_year+duration
+        end_year = min(hold_out_sampling_start_year + duration, hold_out_sampling_end_year)
         if self.config['fixed_weather']:
-            end_year = self.config['sampling_end_year']
-            start_year = end_year-duration
+            end_year = min(self.config['sampling_end_year'], PAK_WEATHER_END_YEAR)
+            start_year = max(PAK_WEATHER_START_YEAR, end_year-duration)
         eval_env_test = self.env_maker(training = False, n_procs=n_procs,
             soil_env = self.config['soil_env'],
             start_year = start_year, end_year = end_year+plus_horizon,
@@ -432,9 +436,9 @@ if __name__ == '__main__':
                   ent_coef = 0.0,
                   n_actions = 11, 
                   soil_env=True, 
-                  start_year = 1980,
-                  sampling_start_year=1980, 
-                  sampling_end_year=2005,
+                  start_year = PAK_WEATHER_START_YEAR,
+                  sampling_start_year=PAK_WEATHER_START_YEAR, 
+                  sampling_end_year=PAK_DEFAULT_SAMPLING_END_YEAR,
                   n_weather_samples=100, 
                   n_steps = 2048, 
                   with_obs_year = True,
@@ -457,8 +461,8 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-np', '--n-process', type=int, default=1, metavar='N',
                          help='input number of processes for training (default: 1)')
-    parser.add_argument('-ey', '--end-year', type=int, default=1980, metavar='N',
-                         help='The final year of simulation (default: 1980)')
+    parser.add_argument('-ey', '--end-year', type=int, default=PAK_WEATHER_START_YEAR, metavar='N',
+                         help='The final year of simulation (default: 2005)')
     parser.add_argument('-na','--nonadaptive', default=False, action='store_true',
         help='Whether to learn a nonadaptive policy')
     parser.add_argument('-fw','--fixed-weather', default=False, action='store_true',
@@ -492,6 +496,22 @@ if __name__ == '__main__':
 
     # make a plain dict copy so it can be safely pickled by SubprocVecEnv
     config = dict(wandb.config)
+
+    # Keep all years within the available Pakistan weather range.
+    if config['start_year'] < PAK_WEATHER_START_YEAR:
+        config['start_year'] = PAK_WEATHER_START_YEAR
+    if config['end_year'] < PAK_WEATHER_START_YEAR:
+        config['end_year'] = PAK_WEATHER_START_YEAR
+    if config['end_year'] > PAK_WEATHER_END_YEAR:
+        config['end_year'] = PAK_WEATHER_END_YEAR
+    if config['end_year'] < config['start_year']:
+        config['end_year'] = config['start_year']
+    if config['sampling_start_year'] < PAK_WEATHER_START_YEAR:
+        config['sampling_start_year'] = PAK_WEATHER_START_YEAR
+    if config['sampling_end_year'] > PAK_WEATHER_END_YEAR:
+        config['sampling_end_year'] = PAK_WEATHER_END_YEAR
+    if config['sampling_end_year'] < config['sampling_start_year']:
+        config['sampling_end_year'] = config['sampling_start_year']
 
     set_random_seed(config['seed'])
     np.random.seed(config['seed'])

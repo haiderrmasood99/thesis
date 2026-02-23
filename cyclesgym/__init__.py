@@ -12,8 +12,8 @@ def env_name(location: str, random_weather: bool, exp_type: str, duration: str =
         return f'CropPlanning{location}{weather}-v1'
 
 
-def get_weather(start_year, end_year, random=False, location='Pakistan_Site',
-                sampling_start_year=1980, sampling_end_year=2005):
+def get_weather(start_year, end_year, random=False, location='Pakistan_Site_final',
+                sampling_start_year=2005, sampling_end_year=2018):
     if random:
         target_year_range = np.arange(start_year, end_year + 1)
         weather_generator_class = WeatherShuffler
@@ -31,9 +31,9 @@ def get_weather(start_year, end_year, random=False, location='Pakistan_Site',
 
 
 def register_fertilization_envs():
-    common_kwargs = {'delta': 7, 'n_actions': 11, 'maxN': 150, 'start_year': 1980}
+    common_kwargs = {'delta': 7, 'n_actions': 11, 'maxN': 150, 'start_year': 2005}
     durations = [(1, 'Short'), (2, 'Middle'), (5, 'Long')]
-    locations = ['Pakistan_Site']
+    locations = ['Pakistan_Site_final']
 
     # Loop through duration, random vs fixed weather, location
     for rw in [True, False]:
@@ -62,11 +62,11 @@ def register_fertilization_envs():
 
 
 def register_crop_planning_envs():
-    start_year = 1980
-    end_year = 1998
+    start_year = 2005
+    end_year = 2018
     common_kwargs = dict(start_year=start_year, end_year=end_year,
                          rotation_crops=['CornSilageRM.90', 'SoybeanMG.3'])
-    locations = ['Pakistan_Site']
+    locations = ['Pakistan_Site_final']
 
     # Loop through random vs fixed weather, location
     for rw in [True, False]:

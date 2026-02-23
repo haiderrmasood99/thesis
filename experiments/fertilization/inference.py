@@ -13,7 +13,7 @@ from cyclesgym.envs.corn import Corn
 from cyclesgym.envs.weather_generator import WeatherShuffler
 from cyclesgym.utils.paths import CYCLES_PATH
 
-def make_env(start_year=1980, end_year=1980):
+def make_env(start_year=2005, end_year=2005):
     env = Corn(delta=7, maxN=150, n_actions=11,
             start_year=start_year, end_year=end_year)
     return env
@@ -21,7 +21,7 @@ def make_env(start_year=1980, end_year=1980):
 def main():
     # 1. Load the Environment
     # We use a DummyVecEnv because the model expects a vectorized environment
-    env = DummyVecEnv([lambda: make_env(start_year=1980, end_year=1980)])
+    env = DummyVecEnv([lambda: make_env(start_year=2005, end_year=2005)])
 
     # 2. Load Normalization Statistics
     # IMPORTANT: We must load the running averages (mean/std) from training

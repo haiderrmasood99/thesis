@@ -286,7 +286,7 @@ if __name__ == '__main__':
     import time
 
     # Load base weather data
-    fname = CYCLES_PATH.joinpath('input', 'Pakistan_Site.weather')
+    fname = CYCLES_PATH.joinpath('input', 'Pakistan_Site_final.weather')
     manager = WeatherManager(fname)
 
     t = time.time()
@@ -294,7 +294,7 @@ if __name__ == '__main__':
     # Create weather
     new_weather = generate_random_weather(weather_manager=manager,
                                           duration=10,
-                                          target_year_range=np.arange(1980, 1990),
+                                          target_year_range=np.arange(2005, 2015),
                                           n_samples=50)
 
     directory = MyTemporaryDirectory(Path().cwd().joinpath('tmp'))

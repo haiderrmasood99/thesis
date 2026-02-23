@@ -33,7 +33,7 @@ def plot_crop_planning_policy_prob(episode_probs):
     plt.show()
 
 
-def plot_crop_planning_policy_det(episode_actions, episode_rewards, run, eval_env_class, eval_test):
+def plot_crop_planning_policy_det(episode_actions, episode_rewards, run, eval_env_class, eval_test, start_year=2005):
     color = get_cmap('Accent').colors
 
     if 'Rotation' in eval_env_class:
@@ -47,7 +47,7 @@ def plot_crop_planning_policy_det(episode_actions, episode_rewards, run, eval_en
     crop = episode_actions[:, 0]
     fig, ax = plt.subplots(2, 1, sharex=True)
 
-    x = 1980 + np.arange(planting_date.size)
+    x = start_year + np.arange(planting_date.size)
 
     ax[0].bar(x, np.array(episode_rewards)/1000.,
               color=[color[c] for c in crop])
@@ -71,7 +71,7 @@ def plot_crop_planning_policy_det(episode_actions, episode_rewards, run, eval_en
 
 if __name__ == '__main__':
 
-    config = dict(train_start_year=1980, train_end_year=1998, eval_start_year=1998, eval_end_year=2016,
+    config = dict(train_start_year=2005, train_end_year=2018, eval_start_year=2019, eval_end_year=2024,
                   total_timesteps=1000000, eval_freq=1000, n_steps=80, batch_size=64, n_epochs=10, run_id=0,
                   norm_reward=True, method="PPO", verbose=1, n_process=8, device='auto')
     api = wandb.Api()
@@ -102,7 +102,10 @@ if __name__ == '__main__':
             def get_plot(model, env, run, eval_env_class, eval_test, deterministic=True):
                 mean_reward, std_reward, episode_actions, episode_rewards, episode_probs, episode_action_rewards = \
                     _evaluate_policy(model, env,  n_eval_episodes=1, deterministic=deterministic)
-                plot_crop_planning_policy_det(episode_actions, episode_action_rewards, run, eval_env_class, eval_test)
+                plot_crop_planning_policy_det(
+                    episode_actions, episode_action_rewards, run, eval_env_class, eval_test,
+                    start_year=config['train_start_year']
+                )
 
             for env, eval_test in zip(envs, ['train', 'rs98', 'nh98', 'nh15']):
                 get_plot(model, env, run, eval_env_class, eval_test)
