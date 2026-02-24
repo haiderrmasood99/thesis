@@ -3,6 +3,7 @@ import time
 import pandas as pd
 from stable_baselines3.common.callbacks import EvalCallback, BaseCallback
 import os
+import torch as th
 from stable_baselines3.common.evaluation import evaluate_policy
 import warnings
 from typing import Any, Callable, Dict, List, Optional, Tuple, Union
@@ -237,19 +238,36 @@ class EvalCallbackCustom(EvalCallback):
 
 def predict_proba(model, obs):
     obs = obs_as_tensor(obs, model.policy.device)
-    dis = model.policy.get_distribution(obs)
-    dist = dis.distribution
-    # Discrete policies return a single Categorical with .probs tensor
-    if hasattr(dist, 'probs'):
-        probs = dist.probs.detach().cpu().numpy()
-        if probs.ndim == 1:
-            probs = probs[None, :]
+    # On-policy methods (PPO/A2C) expose an action distribution.
+    if hasattr(model.policy, "get_distribution"):
+        dis = model.policy.get_distribution(obs)
+        dist = dis.distribution
+        # Discrete policies return a single Categorical with .probs tensor
+        if hasattr(dist, 'probs'):
+            probs = dist.probs.detach().cpu().numpy()
+            if probs.ndim == 1:
+                probs = probs[None, :]
+            return [p for p in probs]
+        # Fallback for iterable distributions (e.g., multi-discrete)
+        try:
+            return [d.probs.detach().cpu().numpy() for d in dist]
+        except TypeError:
+            return [np.array([])]
+
+    # Off-policy value-based methods (e.g., DQN) have no distribution.
+    # Build a pseudo-probability vector from Q-values for logging only.
+    q_net = getattr(model, "q_net", None) or getattr(model.policy, "q_net", None)
+    if q_net is not None:
+        with th.no_grad():
+            q_values = q_net(obs).detach().cpu().numpy()
+        if q_values.ndim == 1:
+            q_values = q_values[None, :]
+        shifted = q_values - np.max(q_values, axis=1, keepdims=True)
+        exp_q = np.exp(shifted)
+        probs = exp_q / (np.sum(exp_q, axis=1, keepdims=True) + eps)
         return [p for p in probs]
-    # Fallback for iterable distributions (e.g., multi-discrete)
-    try:
-        return [d.probs.detach().cpu().numpy() for d in dist]
-    except TypeError:
-        return [np.array([])]
+
+    return [np.array([])]
 
 
 def _evaluate_policy(
