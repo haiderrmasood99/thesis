@@ -193,7 +193,7 @@ if __name__ == '__main__':
 
     # Weather generator
     sampling_start_year = 2005
-    sampling_end_year = 2024
+    sampling_end_year = 2019
     n_weather_samples = 10
     target_year_range = np.arange(start_year, end_year + 1)
     weather_generator_kwargs = dict(n_weather_samples=n_weather_samples,

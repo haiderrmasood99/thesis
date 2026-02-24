@@ -291,7 +291,7 @@ if __name__ == '__main__':
     target_year_range = np.arange(env_kwargs['start_year'], env_kwargs['end_year'] + 1)
     weather_generator_kwargs = dict(n_weather_samples=100,
                                     sampling_start_year=2005,
-                                    sampling_end_year=2024,
+                                    sampling_end_year=2019,
                                     base_weather_file=CYCLES_PATH.joinpath('input', 'Pakistan_Site_final.weather'),
                                     target_year_range=target_year_range)
     env_kwargs.update(dict(weather_generator_class=WeatherShuffler,

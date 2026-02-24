@@ -256,7 +256,7 @@ if __name__ == '__main__':
     train_start_year = 2005
     train_end_year = 2018
     eval_start_year = 2019
-    eval_end_year = 2024
+    eval_end_year = 2019
 
     if args['fixed_weather'] == 'True':
         weather_generator_class = 'FixedWeatherGenerator'
