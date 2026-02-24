@@ -2,8 +2,22 @@ from datetime import timedelta
 from cyclesgym.envs.utils import date2ydoy, ydoy2date
 from cyclesgym.utils.pricing_utils import crop_prices, N_price_dollars_per_kg, crop_type
 import datetime
+from bisect import bisect_right
 
 __all__ = ['CropRewarder']
+
+
+def _lookup_year_value(year_to_value: dict, year: int):
+    """Return value for year, falling back to nearest available historical year."""
+    if year in year_to_value:
+        return year_to_value[year]
+    years = sorted(year_to_value.keys())
+    if not years:
+        raise KeyError("Price dictionary is empty")
+    idx = bisect_right(years, year) - 1
+    if idx < 0:
+        return year_to_value[years[0]]
+    return year_to_value[years[idx]]
 
 
 class CropRewarder(object):
@@ -31,7 +45,7 @@ class CropRewarder(object):
 
             if previous_date < harvest_date <= date:
                 # Compute harvest profit
-                dollars_per_tonne = self.dollars_per_tonne[y_prev]
+                dollars_per_tonne = _lookup_year_value(self.dollars_per_tonne, y_prev)
                 harvest = harverst_df[self.yield_column].sum()
                 # Metric tonne per hectare
                 harvest_dollars_per_hectare = harvest * dollars_per_tonne
@@ -47,7 +61,7 @@ class NProfitabilityRewarder(object):
         Nkg_per_heactare = action
         assert Nkg_per_heactare >= 0, f'We cannot have negative fertilization'
         y, doy = date2ydoy(date)
-        N_dollars_per_hectare = Nkg_per_heactare * N_price_dollars_per_kg[y]
+        N_dollars_per_hectare = Nkg_per_heactare * _lookup_year_value(N_price_dollars_per_kg, y)
         return -N_dollars_per_hectare
 
 

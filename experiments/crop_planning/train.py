@@ -19,6 +19,25 @@ import argparse
 from datetime import datetime
 
 
+class MultiDiscreteToDiscreteActionWrapper(gym.ActionWrapper):
+    """Wrap MultiDiscrete action spaces so SB3 DQN can be used."""
+
+    def __init__(self, env):
+        super().__init__(env)
+        if not isinstance(env.action_space, gym.spaces.MultiDiscrete):
+            raise TypeError(f"Expected MultiDiscrete action space, got {type(env.action_space)}")
+        self._nvec = np.array(env.action_space.nvec, dtype=np.int64)
+        self.action_space = gym.spaces.Discrete(int(np.prod(self._nvec)))
+
+    def action(self, action):
+        x = int(action)
+        out = np.zeros_like(self._nvec)
+        for i in range(len(self._nvec) - 1, -1, -1):
+            out[i] = x % self._nvec[i]
+            x //= self._nvec[i]
+        return out
+
+
 class Train:
     """ Trainer object to wrap model training and handle environment creation, evaluation """
 
@@ -90,6 +109,8 @@ class Train:
                                 weather_generator_kwargs=weather_generator_kwargs,
                                 rotation_crops=['CornRM.100', 'SoybeanMG.3'])
                 env = env_class(**env_conf)
+                if str(self.config.get("method", "PPO")).upper() == "DQN" and isinstance(env.action_space, gym.spaces.MultiDiscrete):
+                    env = MultiDiscreteToDiscreteActionWrapper(env)
 
                 env = gym.wrappers.RecordEpisodeStatistics(env)
                 return env
