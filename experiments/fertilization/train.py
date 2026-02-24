@@ -152,19 +152,28 @@ class Train:
             with_obs_year=self.with_obs_year,
             nonadaptive=self.config['nonadaptive'])
 
-        #the out of sample weather env
+        # the out-of-sample weather env
         start_year = hold_out_sampling_start_year
         end_year = min(hold_out_sampling_start_year + duration, hold_out_sampling_end_year)
+        test_sampling_start_year = hold_out_sampling_start_year
+        test_sampling_end_year = hold_out_sampling_end_year
+        test_fixed_weather = False
         if self.config['fixed_weather']:
+            # For fixed-weather runs, keep test env fixed as well.
+            # Otherwise we force weather shuffling on a 1-year holdout window (2019),
+            # which can fail for multi-year one_year_eval horizons.
             end_year = train_sampling_end_year
             start_year = max(weather_min_year, end_year-duration)
+            test_sampling_start_year = train_sampling_start_year
+            test_sampling_end_year = train_sampling_end_year
+            test_fixed_weather = True
         eval_env_test = self.env_maker(training = False, n_procs=n_procs,
             soil_env = self.config['soil_env'],
             start_year = start_year, end_year = min(end_year + plus_horizon, weather_max_year),
-            sampling_start_year=hold_out_sampling_start_year,
-            sampling_end_year=hold_out_sampling_end_year,
+            sampling_start_year=test_sampling_start_year,
+            sampling_end_year=test_sampling_end_year,
             n_weather_samples=self.config['n_weather_samples'],
-            fixed_weather = False,
+            fixed_weather = test_fixed_weather,
             with_obs_year=self.with_obs_year,
             nonadaptive=self.config['nonadaptive'])
 
