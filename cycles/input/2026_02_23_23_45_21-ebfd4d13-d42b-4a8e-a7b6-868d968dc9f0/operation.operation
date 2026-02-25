@@ -1,0 +1,196 @@
+PLANTING
+YEAR                          	1
+DOY                           	104
+END_DOY                       	-999
+MAX_SMC                       	-999
+MIN_SMC                       	0.0
+MIN_SOIL_TEMP                 	0.0
+CROP                          	CornRM.100
+USE_AUTO_IRR                  	0
+USE_AUTO_FERT                 	0
+FRACTION                      	1.0
+CLIPPING_START                	1
+CLIPPING_END                  	366
+
+PLANTING
+YEAR                          	2
+DOY                           	174
+END_DOY                       	-999
+MAX_SMC                       	-999
+MIN_SMC                       	0.0
+MIN_SOIL_TEMP                 	0.0
+CROP                          	CornRM.100
+USE_AUTO_IRR                  	0
+USE_AUTO_FERT                 	0
+FRACTION                      	1.0
+CLIPPING_START                	1
+CLIPPING_END                  	366
+
+PLANTING
+YEAR                          	3
+DOY                           	125
+END_DOY                       	-999
+MAX_SMC                       	-999
+MIN_SMC                       	0.0
+MIN_SOIL_TEMP                 	0.0
+CROP                          	CornRM.100
+USE_AUTO_IRR                  	0
+USE_AUTO_FERT                 	0
+FRACTION                      	1.0
+CLIPPING_START                	1
+CLIPPING_END                  	366
+
+PLANTING
+YEAR                          	4
+DOY                           	104
+END_DOY                       	-999
+MAX_SMC                       	-999
+MIN_SMC                       	0.0
+MIN_SOIL_TEMP                 	0.0
+CROP                          	SoybeanMG.3
+USE_AUTO_IRR                  	0
+USE_AUTO_FERT                 	0
+FRACTION                      	1.0
+CLIPPING_START                	1
+CLIPPING_END                  	366
+
+PLANTING
+YEAR                          	5
+DOY                           	132
+END_DOY                       	-999
+MAX_SMC                       	-999
+MIN_SMC                       	0.0
+MIN_SOIL_TEMP                 	0.0
+CROP                          	SoybeanMG.3
+USE_AUTO_IRR                  	0
+USE_AUTO_FERT                 	0
+FRACTION                      	1.0
+CLIPPING_START                	1
+CLIPPING_END                  	366
+
+PLANTING
+YEAR                          	6
+DOY                           	132
+END_DOY                       	-999
+MAX_SMC                       	-999
+MIN_SMC                       	0.0
+MIN_SOIL_TEMP                 	0.0
+CROP                          	SoybeanMG.3
+USE_AUTO_IRR                  	0
+USE_AUTO_FERT                 	0
+FRACTION                      	1.0
+CLIPPING_START                	1
+CLIPPING_END                  	366
+
+PLANTING
+YEAR                          	7
+DOY                           	97
+END_DOY                       	-999
+MAX_SMC                       	-999
+MIN_SMC                       	0.0
+MIN_SOIL_TEMP                 	0.0
+CROP                          	CornRM.100
+USE_AUTO_IRR                  	0
+USE_AUTO_FERT                 	0
+FRACTION                      	1.0
+CLIPPING_START                	1
+CLIPPING_END                  	366
+
+PLANTING
+YEAR                          	8
+DOY                           	153
+END_DOY                       	-999
+MAX_SMC                       	-999
+MIN_SMC                       	0.0
+MIN_SOIL_TEMP                 	0.0
+CROP                          	SoybeanMG.3
+USE_AUTO_IRR                  	0
+USE_AUTO_FERT                 	0
+FRACTION                      	1.0
+CLIPPING_START                	1
+CLIPPING_END                  	366
+
+PLANTING
+YEAR                          	9
+DOY                           	146
+END_DOY                       	-999
+MAX_SMC                       	-999
+MIN_SMC                       	0.0
+MIN_SOIL_TEMP                 	0.0
+CROP                          	CornRM.100
+USE_AUTO_IRR                  	0
+USE_AUTO_FERT                 	0
+FRACTION                      	1.0
+CLIPPING_START                	1
+CLIPPING_END                  	366
+
+PLANTING
+YEAR                          	10
+DOY                           	132
+END_DOY                       	-999
+MAX_SMC                       	-999
+MIN_SMC                       	0.0
+MIN_SOIL_TEMP                 	0.0
+CROP                          	CornRM.100
+USE_AUTO_IRR                  	0
+USE_AUTO_FERT                 	0
+FRACTION                      	1.0
+CLIPPING_START                	1
+CLIPPING_END                  	366
+
+PLANTING
+YEAR                          	11
+DOY                           	167
+END_DOY                       	-999
+MAX_SMC                       	-999
+MIN_SMC                       	0.0
+MIN_SOIL_TEMP                 	0.0
+CROP                          	SoybeanMG.3
+USE_AUTO_IRR                  	0
+USE_AUTO_FERT                 	0
+FRACTION                      	1.0
+CLIPPING_START                	1
+CLIPPING_END                  	366
+
+PLANTING
+YEAR                          	12
+DOY                           	97
+END_DOY                       	-999
+MAX_SMC                       	-999
+MIN_SMC                       	0.0
+MIN_SOIL_TEMP                 	0.0
+CROP                          	SoybeanMG.3
+USE_AUTO_IRR                  	0
+USE_AUTO_FERT                 	0
+FRACTION                      	1.0
+CLIPPING_START                	1
+CLIPPING_END                  	366
+
+PLANTING
+YEAR                          	13
+DOY                           	90
+END_DOY                       	-999
+MAX_SMC                       	-999
+MIN_SMC                       	0.0
+MIN_SOIL_TEMP                 	0.0
+CROP                          	SoybeanMG.3
+USE_AUTO_IRR                  	0
+USE_AUTO_FERT                 	0
+FRACTION                      	1.0
+CLIPPING_START                	1
+CLIPPING_END                  	366
+
+PLANTING
+YEAR                          	14
+DOY                           	118
+END_DOY                       	-999
+MAX_SMC                       	-999
+MIN_SMC                       	0.0
+MIN_SOIL_TEMP                 	0.0
+CROP                          	SoybeanMG.3
+USE_AUTO_IRR                  	0
+USE_AUTO_FERT                 	0
+FRACTION                      	1.0
+CLIPPING_START                	1
+CLIPPING_END                  	366
+

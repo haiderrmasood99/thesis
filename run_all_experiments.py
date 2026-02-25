@@ -20,20 +20,20 @@ from pathlib import Path
 
 def build_commands(py_exec: str) -> list[tuple[str, list[str]]]:
     return [
-        (
-            "Fertilization | PPO adaptive fixed weather",
-            [
-                py_exec,
-                "experiments/fertilization/train.py",
-                "--total-years",
-                "5000",
-                "--n-process",
-                "8",
-                "--eval-freq",
-                "20000",
-                "--fixed-weather",
-            ],
-        ),
+        # (
+        #     "Fertilization | PPO adaptive fixed weather",
+        #     [
+        #         py_exec,
+        #         "experiments/fertilization/train.py",
+        #         "--total-years",
+        #         "5000",
+        #         "--n-process",
+        #         "8",
+        #         "--eval-freq",
+        #         "20000",
+        #         "--fixed-weather",
+        #     ],
+        # ),
         (
             "Fertilization | PPO adaptive random weather",
             [
@@ -47,21 +47,21 @@ def build_commands(py_exec: str) -> list[tuple[str, list[str]]]:
                 "20000",
             ],
         ),
-        (
-            "Fertilization | PPO non-adaptive fixed weather",
-            [
-                py_exec,
-                "experiments/fertilization/train.py",
-                "--total-years",
-                "5000",
-                "--n-process",
-                "8",
-                "--eval-freq",
-                "20000",
-                "--nonadaptive",
-                "--fixed-weather",
-            ],
-        ),
+        # (
+        #     "Fertilization | PPO non-adaptive fixed weather",
+        #     [
+        #         py_exec,
+        #         "experiments/fertilization/train.py",
+        #         "--total-years",
+        #         "5000",
+        #         "--n-process",
+        #         "8",
+        #         "--eval-freq",
+        #         "20000",
+        #         "--nonadaptive",
+        #         "--fixed-weather",
+        #     ],
+        # ),
         (
             "Fertilization | PPO non-adaptive random weather",
             [

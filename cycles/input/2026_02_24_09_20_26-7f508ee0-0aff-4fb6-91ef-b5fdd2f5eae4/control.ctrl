@@ -1,0 +1,30 @@
+SIMULATION_START_YEAR         2005
+SIMULATION_END_YEAR           2005
+ROTATION_SIZE                 1
+
+
+
+USE_REINITIALIZATION          0
+ADJUSTED_YIELDS               0
+HOURLY_INFILTRATION           1
+AUTOMATIC_NITROGEN            0
+AUTOMATIC_PHOSPHORUS          0
+AUTOMATIC_SULFUR              0
+DAILY_WEATHER_OUT             0
+DAILY_CROP_OUT                1
+DAILY_RESIDUE_OUT             0
+DAILY_WATER_OUT               0
+DAILY_NITROGEN_OUT            1
+DAILY_SOIL_CARBON_OUT         0
+DAILY_SOIL_LYR_CN_OUT         0
+ANNUAL_SOIL_OUT               0
+ANNUAL_PROFILE_OUT            0
+ANNUAL_NFLUX_OUT              0
+
+
+
+CROP_FILE                     2026_02_24_09_20_26-7f508ee0-0aff-4fb6-91ef-b5fdd2f5eae4/crop.crop
+OPERATION_FILE                2026_02_24_09_20_26-7f508ee0-0aff-4fb6-91ef-b5fdd2f5eae4/operation.operation
+SOIL_FILE                     2026_02_24_09_20_26-7f508ee0-0aff-4fb6-91ef-b5fdd2f5eae4/soil.soil
+WEATHER_FILE                  2026_02_24_09_20_26-7f508ee0-0aff-4fb6-91ef-b5fdd2f5eae4/weather.weather
+REINIT_FILE                   N / A

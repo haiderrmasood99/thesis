@@ -1,0 +1,7 @@
+method,nonadaptive,fixed_weather,n_runs,mean_score,std_score,min_score,max_score
+PPO,false,true,1,21683.79,0.0,21683.79,21683.79
+A2C,false,true,1,21292.441,0.0,21292.441,21292.441
+DQN,true,false,1,19553.072,0.0,19553.072,19553.072
+PPO,true,true,1,18848.514,0.0,18848.514,18848.514
+PPO,true,false,1,18469.4,0.0,18469.4,18469.4
+PPO,false,false,1,17403.996,0.0,17403.996,17403.996

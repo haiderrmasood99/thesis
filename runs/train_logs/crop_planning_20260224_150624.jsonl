@@ -1,0 +1,627 @@
+{"type": "start", "timestamp": "2026-02-24T15:06:25.079700", "total_timesteps": 0}
+{"type": "step", "timestamp": "2026-02-24T15:06:25.356055", "num_timesteps": 1, "rewards": [100.00992584228516], "actions": [24]}
+{"type": "step", "timestamp": "2026-02-24T15:06:25.644563", "num_timesteps": 2, "rewards": [2.009474277496338], "actions": [12]}
+{"type": "step", "timestamp": "2026-02-24T15:06:25.967239", "num_timesteps": 3, "rewards": [0.7413821220397949], "actions": [17]}
+{"type": "step", "timestamp": "2026-02-24T15:06:26.309398", "num_timesteps": 4, "rewards": [0.5467821955680847], "actions": [19]}
+{"type": "rollout", "timestamp": "2026-02-24T15:06:26.309514", "num_timesteps": 4, "logger": {"rollout/exploration_rate": 0.9239999999999999}}
+{"type": "step", "timestamp": "2026-02-24T15:06:26.620991", "num_timesteps": 5, "rewards": [0.5584230422973633], "actions": [20]}
+{"type": "step", "timestamp": "2026-02-24T15:06:26.968959", "num_timesteps": 6, "rewards": [0.3889027237892151], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:06:27.322207", "num_timesteps": 7, "rewards": [1.069035530090332], "actions": [8]}
+{"type": "step", "timestamp": "2026-02-24T15:06:27.691230", "num_timesteps": 8, "rewards": [0.3349621891975403], "actions": [23]}
+{"type": "rollout", "timestamp": "2026-02-24T15:06:27.691357", "num_timesteps": 8, "logger": {"rollout/exploration_rate": 0.8479999999999999}}
+{"type": "step", "timestamp": "2026-02-24T15:06:28.061345", "num_timesteps": 9, "rewards": [0.15334558486938477], "actions": [16]}
+{"type": "step", "timestamp": "2026-02-24T15:06:28.422099", "num_timesteps": 10, "rewards": [0.26472848653793335], "actions": [17]}
+{"type": "step", "timestamp": "2026-02-24T15:06:28.773824", "num_timesteps": 11, "rewards": [0.628227710723877], "actions": [10]}
+{"type": "step", "timestamp": "2026-02-24T15:06:29.087353", "num_timesteps": 12, "rewards": [0.5340554118156433], "actions": [11]}
+{"type": "rollout", "timestamp": "2026-02-24T15:06:29.087477", "num_timesteps": 12, "logger": {"rollout/exploration_rate": 0.7719999999999998}}
+{"type": "step", "timestamp": "2026-02-24T15:06:29.431082", "num_timesteps": 13, "rewards": [0.26811134815216064], "actions": [1]}
+{"type": "step", "timestamp": "2026-02-24T15:06:29.993318", "num_timesteps": 14, "rewards": [0.16104792058467865], "actions": [19]}
+{"type": "step", "timestamp": "2026-02-24T15:06:30.280309", "num_timesteps": 15, "rewards": [0.17514091730117798], "actions": [20]}
+{"type": "step", "timestamp": "2026-02-24T15:06:30.621959", "num_timesteps": 16, "rewards": [0.47376108169555664], "actions": [11]}
+{"type": "rollout", "timestamp": "2026-02-24T15:06:30.622075", "num_timesteps": 16, "logger": {"rollout/exploration_rate": 0.6959999999999997}}
+{"type": "step", "timestamp": "2026-02-24T15:06:30.923949", "num_timesteps": 17, "rewards": [0.21338775753974915], "actions": [27]}
+{"type": "step", "timestamp": "2026-02-24T15:06:31.269048", "num_timesteps": 18, "rewards": [0.19281110167503357], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:06:31.608663", "num_timesteps": 19, "rewards": [0.2133532166481018], "actions": [23]}
+{"type": "step", "timestamp": "2026-02-24T15:06:31.961572", "num_timesteps": 20, "rewards": [0.3656425476074219], "actions": [1]}
+{"type": "rollout", "timestamp": "2026-02-24T15:06:31.961693", "num_timesteps": 20, "logger": {"rollout/exploration_rate": 0.6199999999999997}}
+{"type": "step", "timestamp": "2026-02-24T15:06:32.289282", "num_timesteps": 21, "rewards": [0.18541276454925537], "actions": [15]}
+{"type": "step", "timestamp": "2026-02-24T15:06:32.617140", "num_timesteps": 22, "rewards": [0.22571736574172974], "actions": [22]}
+{"type": "step", "timestamp": "2026-02-24T15:06:32.975925", "num_timesteps": 23, "rewards": [0.396565318107605], "actions": [4]}
+{"type": "step", "timestamp": "2026-02-24T15:06:33.323566", "num_timesteps": 24, "rewards": [0.5666188597679138], "actions": [7]}
+{"type": "rollout", "timestamp": "2026-02-24T15:06:33.323691", "num_timesteps": 24, "logger": {"rollout/exploration_rate": 0.5439999999999996}}
+{"type": "step", "timestamp": "2026-02-24T15:06:33.650016", "num_timesteps": 25, "rewards": [0.4272463321685791], "actions": [5]}
+{"type": "step", "timestamp": "2026-02-24T15:06:34.002674", "num_timesteps": 26, "rewards": [0.1863187998533249], "actions": [24]}
+{"type": "step", "timestamp": "2026-02-24T15:06:34.346556", "num_timesteps": 27, "rewards": [0.4408118426799774], "actions": [12]}
+{"type": "step", "timestamp": "2026-02-24T15:06:34.898475", "num_timesteps": 28, "rewards": [0.14121432602405548], "actions": [14]}
+{"type": "rollout", "timestamp": "2026-02-24T15:06:34.898593", "num_timesteps": 28, "logger": {"rollout/exploration_rate": 0.4679999999999995}}
+{"type": "step", "timestamp": "2026-02-24T15:06:35.159658", "num_timesteps": 29, "rewards": [0.4683380126953125], "actions": [9]}
+{"type": "step", "timestamp": "2026-02-24T15:06:35.417498", "num_timesteps": 30, "rewards": [0.4530656635761261], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:06:35.682171", "num_timesteps": 31, "rewards": [0.37834274768829346], "actions": [1]}
+{"type": "step", "timestamp": "2026-02-24T15:06:36.016321", "num_timesteps": 32, "rewards": [0.18581435084342957], "actions": [26]}
+{"type": "rollout", "timestamp": "2026-02-24T15:06:36.016445", "num_timesteps": 32, "logger": {"rollout/exploration_rate": 0.39199999999999957}}
+{"type": "step", "timestamp": "2026-02-24T15:06:36.342948", "num_timesteps": 33, "rewards": [0.5133300423622131], "actions": [6]}
+{"type": "step", "timestamp": "2026-02-24T15:06:36.687083", "num_timesteps": 34, "rewards": [0.13699211180210114], "actions": [18]}
+{"type": "step", "timestamp": "2026-02-24T15:06:36.994932", "num_timesteps": 35, "rewards": [0.5408720970153809], "actions": [3]}
+{"type": "step", "timestamp": "2026-02-24T15:06:37.323244", "num_timesteps": 36, "rewards": [0.2050492912530899], "actions": [22]}
+{"type": "rollout", "timestamp": "2026-02-24T15:06:37.323365", "num_timesteps": 36, "logger": {"rollout/exploration_rate": 0.3160000000000006}}
+{"type": "step", "timestamp": "2026-02-24T15:06:37.668324", "num_timesteps": 37, "rewards": [0.18957175314426422], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:06:37.999527", "num_timesteps": 38, "rewards": [0.48693710565567017], "actions": [9]}
+{"type": "step", "timestamp": "2026-02-24T15:06:38.354499", "num_timesteps": 39, "rewards": [0.09530119597911835], "actions": [14]}
+{"type": "step", "timestamp": "2026-02-24T15:06:38.686995", "num_timesteps": 40, "rewards": [0.1545378863811493], "actions": [21]}
+{"type": "rollout", "timestamp": "2026-02-24T15:06:38.687124", "num_timesteps": 40, "logger": {"rollout/exploration_rate": 0.24000000000000044}}
+{"type": "step", "timestamp": "2026-02-24T15:06:39.038665", "num_timesteps": 41, "rewards": [0.12139471620321274], "actions": [14]}
+{"type": "step", "timestamp": "2026-02-24T15:06:39.614506", "num_timesteps": 42, "rewards": [0.47549206018447876], "actions": [7]}
+{"type": "step", "timestamp": "2026-02-24T15:06:39.862887", "num_timesteps": 43, "rewards": [0.14534229040145874], "actions": [15]}
+{"type": "step", "timestamp": "2026-02-24T15:06:40.188705", "num_timesteps": 44, "rewards": [0.4795283377170563], "actions": [5]}
+{"type": "rollout", "timestamp": "2026-02-24T15:06:40.188838", "num_timesteps": 44, "logger": {"rollout/exploration_rate": 0.16400000000000037}}
+{"type": "step", "timestamp": "2026-02-24T15:06:40.526271", "num_timesteps": 45, "rewards": [0.19919979572296143], "actions": [22]}
+{"type": "step", "timestamp": "2026-02-24T15:06:40.859724", "num_timesteps": 46, "rewards": [0.4419638514518738], "actions": [9]}
+{"type": "step", "timestamp": "2026-02-24T15:06:41.203401", "num_timesteps": 47, "rewards": [0.12235616147518158], "actions": [14]}
+{"type": "step", "timestamp": "2026-02-24T15:06:41.545854", "num_timesteps": 48, "rewards": [0.43229562044143677], "actions": [6]}
+{"type": "rollout", "timestamp": "2026-02-24T15:06:41.545974", "num_timesteps": 48, "logger": {"rollout/exploration_rate": 0.0880000000000003}}
+{"type": "step", "timestamp": "2026-02-24T15:06:41.888841", "num_timesteps": 49, "rewards": [0.12384459376335144], "actions": [18]}
+{"type": "step", "timestamp": "2026-02-24T15:06:42.221307", "num_timesteps": 50, "rewards": [0.30862191319465637], "actions": [12]}
+{"type": "step", "timestamp": "2026-02-24T15:06:42.550351", "num_timesteps": 51, "rewards": [0.37500178813934326], "actions": [11]}
+{"type": "step", "timestamp": "2026-02-24T15:06:42.887078", "num_timesteps": 52, "rewards": [0.11054932326078415], "actions": [14]}
+{"type": "rollout", "timestamp": "2026-02-24T15:06:42.887207", "num_timesteps": 52, "logger": {"rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:06:43.194842", "num_timesteps": 53, "rewards": [0.36073213815689087], "actions": [3]}
+{"type": "step", "timestamp": "2026-02-24T15:06:43.543744", "num_timesteps": 54, "rewards": [0.32475554943084717], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:06:43.891914", "num_timesteps": 55, "rewards": [0.2014811933040619], "actions": [22]}
+{"type": "step", "timestamp": "2026-02-24T15:06:44.460779", "num_timesteps": 56, "rewards": [0.36562976241111755], "actions": [0]}
+{"type": "rollout", "timestamp": "2026-02-24T15:06:44.462873", "num_timesteps": 56, "logger": {}}
+{"type": "step", "timestamp": "2026-02-24T15:06:44.724464", "num_timesteps": 57, "rewards": [0.17004992067813873], "actions": [27]}
+{"type": "step", "timestamp": "2026-02-24T15:06:45.046707", "num_timesteps": 58, "rewards": [0.42709898948669434], "actions": [11]}
+{"type": "step", "timestamp": "2026-02-24T15:06:45.388470", "num_timesteps": 59, "rewards": [0.407736212015152], "actions": [10]}
+{"type": "step", "timestamp": "2026-02-24T15:06:45.697731", "num_timesteps": 60, "rewards": [0.4126761853694916], "actions": [12]}
+{"type": "rollout", "timestamp": "2026-02-24T15:06:45.697847", "num_timesteps": 60, "logger": {"rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:06:46.015101", "num_timesteps": 61, "rewards": [0.16817930340766907], "actions": [20]}
+{"type": "step", "timestamp": "2026-02-24T15:06:46.347705", "num_timesteps": 62, "rewards": [0.39540597796440125], "actions": [5]}
+{"type": "step", "timestamp": "2026-02-24T15:06:46.686692", "num_timesteps": 63, "rewards": [0.4132343530654907], "actions": [6]}
+{"type": "step", "timestamp": "2026-02-24T15:06:47.030958", "num_timesteps": 64, "rewards": [0.38224852085113525], "actions": [4]}
+{"type": "rollout", "timestamp": "2026-02-24T15:06:47.031077", "num_timesteps": 64, "logger": {"rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:06:47.375776", "num_timesteps": 65, "rewards": [0.18473750352859497], "actions": [4]}
+{"type": "step", "timestamp": "2026-02-24T15:06:47.721391", "num_timesteps": 66, "rewards": [0.17714878916740417], "actions": [24]}
+{"type": "step", "timestamp": "2026-02-24T15:06:48.064082", "num_timesteps": 67, "rewards": [0.41398248076438904], "actions": [5]}
+{"type": "step", "timestamp": "2026-02-24T15:06:48.409711", "num_timesteps": 68, "rewards": [0.17687559127807617], "actions": [24]}
+{"type": "rollout", "timestamp": "2026-02-24T15:06:48.409833", "num_timesteps": 68, "logger": {"rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:06:48.771221", "num_timesteps": 69, "rewards": [0.15479116141796112], "actions": [18]}
+{"type": "step", "timestamp": "2026-02-24T15:06:49.341205", "num_timesteps": 70, "rewards": [0.4084700047969818], "actions": [8]}
+{"type": "step", "timestamp": "2026-02-24T15:06:49.629877", "num_timesteps": 71, "rewards": [0.17175084352493286], "actions": [23]}
+{"type": "step", "timestamp": "2026-02-24T15:06:49.968607", "num_timesteps": 72, "rewards": [0.3829216957092285], "actions": [12]}
+{"type": "rollout", "timestamp": "2026-02-24T15:06:49.968726", "num_timesteps": 72, "logger": {"rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:06:50.318996", "num_timesteps": 73, "rewards": [0.39498382806777954], "actions": [4]}
+{"type": "step", "timestamp": "2026-02-24T15:06:50.629612", "num_timesteps": 74, "rewards": [0.41791898012161255], "actions": [6]}
+{"type": "step", "timestamp": "2026-02-24T15:06:50.969856", "num_timesteps": 75, "rewards": [0.1481953114271164], "actions": [27]}
+{"type": "step", "timestamp": "2026-02-24T15:06:51.296235", "num_timesteps": 76, "rewards": [0.10833417624235153], "actions": [15]}
+{"type": "rollout", "timestamp": "2026-02-24T15:06:51.296358", "num_timesteps": 76, "logger": {"rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:06:51.648790", "num_timesteps": 77, "rewards": [0.2951544225215912], "actions": [0]}
+{"type": "step", "timestamp": "2026-02-24T15:06:51.980562", "num_timesteps": 78, "rewards": [0.19104212522506714], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:06:52.309511", "num_timesteps": 79, "rewards": [0.24271312355995178], "actions": [4]}
+{"type": "step", "timestamp": "2026-02-24T15:06:52.636532", "num_timesteps": 80, "rewards": [0.1290072202682495], "actions": [14]}
+{"type": "rollout", "timestamp": "2026-02-24T15:06:52.636651", "num_timesteps": 80, "logger": {"rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:06:53.024607", "num_timesteps": 81, "rewards": [0.4218479096889496], "actions": [9]}
+{"type": "step", "timestamp": "2026-02-24T15:06:53.387044", "num_timesteps": 82, "rewards": [0.1273810863494873], "actions": [15]}
+{"type": "step", "timestamp": "2026-02-24T15:06:53.733538", "num_timesteps": 83, "rewards": [0.1371561735868454], "actions": [16]}
+{"type": "step", "timestamp": "2026-02-24T15:06:54.305246", "num_timesteps": 84, "rewards": [0.09374391287565231], "actions": [14]}
+{"type": "rollout", "timestamp": "2026-02-24T15:06:54.305380", "num_timesteps": 84, "logger": {"rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:06:54.564041", "num_timesteps": 85, "rewards": [0.404857337474823], "actions": [0]}
+{"type": "step", "timestamp": "2026-02-24T15:06:54.910930", "num_timesteps": 86, "rewards": [0.16481110453605652], "actions": [25]}
+{"type": "step", "timestamp": "2026-02-24T15:06:55.265794", "num_timesteps": 87, "rewards": [0.195196732878685], "actions": [19]}
+{"type": "step", "timestamp": "2026-02-24T15:06:55.604901", "num_timesteps": 88, "rewards": [0.41488784551620483], "actions": [5]}
+{"type": "rollout", "timestamp": "2026-02-24T15:06:55.605021", "num_timesteps": 88, "logger": {"rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:06:55.931607", "num_timesteps": 89, "rewards": [0.42290836572647095], "actions": [10]}
+{"type": "step", "timestamp": "2026-02-24T15:06:56.275525", "num_timesteps": 90, "rewards": [0.3575025498867035], "actions": [5]}
+{"type": "step", "timestamp": "2026-02-24T15:06:56.620424", "num_timesteps": 91, "rewards": [0.12862835824489594], "actions": [19]}
+{"type": "step", "timestamp": "2026-02-24T15:06:56.972536", "num_timesteps": 92, "rewards": [0.35611972212791443], "actions": [9]}
+{"type": "rollout", "timestamp": "2026-02-24T15:06:56.972658", "num_timesteps": 92, "logger": {"rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:06:57.319218", "num_timesteps": 93, "rewards": [0.1987834870815277], "actions": [5]}
+{"type": "step", "timestamp": "2026-02-24T15:06:57.671747", "num_timesteps": 94, "rewards": [0.3515605926513672], "actions": [2]}
+{"type": "step", "timestamp": "2026-02-24T15:06:58.019774", "num_timesteps": 95, "rewards": [0.16935288906097412], "actions": [25]}
+{"type": "step", "timestamp": "2026-02-24T15:06:58.365715", "num_timesteps": 96, "rewards": [0.4110379219055176], "actions": [10]}
+{"type": "rollout", "timestamp": "2026-02-24T15:06:58.365837", "num_timesteps": 96, "logger": {"rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:06:58.698060", "num_timesteps": 97, "rewards": [0.1951603889465332], "actions": [21]}
+{"type": "step", "timestamp": "2026-02-24T15:06:59.280060", "num_timesteps": 98, "rewards": [0.3601955771446228], "actions": [1]}
+{"type": "step", "timestamp": "2026-02-24T15:06:59.552841", "num_timesteps": 99, "rewards": [0.4143543243408203], "actions": [3]}
+{"type": "step", "timestamp": "2026-02-24T15:09:33.474564", "num_timesteps": 100, "rewards": [0.41541534662246704], "actions": [1]}
+{"type": "rollout", "timestamp": "2026-02-24T15:09:33.474708", "num_timesteps": 100, "logger": {"rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:09:33.768075", "num_timesteps": 101, "rewards": [0.31280356645584106], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:09:34.043041", "num_timesteps": 102, "rewards": [0.4012746810913086], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:09:34.318442", "num_timesteps": 103, "rewards": [0.3800482153892517], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:09:34.661001", "num_timesteps": 104, "rewards": [0.13586603105068207], "actions": [26]}
+{"type": "rollout", "timestamp": "2026-02-24T15:09:34.661121", "num_timesteps": 104, "logger": {"rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:09:35.010456", "num_timesteps": 105, "rewards": [0.14036226272583008], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:09:35.348781", "num_timesteps": 106, "rewards": [0.19275271892547607], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:09:35.675029", "num_timesteps": 107, "rewards": [0.16545850038528442], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:09:36.019690", "num_timesteps": 108, "rewards": [0.43631303310394287], "actions": [7]}
+{"type": "rollout", "timestamp": "2026-02-24T15:09:36.019822", "num_timesteps": 108, "logger": {"rollout/exploration_rate": 0.05, "train/learning_rate": 0.0001, "train/n_updates": 1, "train/loss": 0.0942043587565422}}
+{"type": "step", "timestamp": "2026-02-24T15:09:36.368675", "num_timesteps": 109, "rewards": [0.38757073879241943], "actions": [10]}
+{"type": "step", "timestamp": "2026-02-24T15:09:36.702208", "num_timesteps": 110, "rewards": [0.405021995306015], "actions": [7]}
+{"type": "step", "timestamp": "2026-02-24T15:09:37.048769", "num_timesteps": 111, "rewards": [0.3628852069377899], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:09:37.600504", "num_timesteps": 112, "rewards": [0.2711648941040039], "actions": [7]}
+{"type": "rollout", "timestamp": "2026-02-24T15:09:37.601997", "num_timesteps": 112, "logger": {}}
+{"type": "step", "timestamp": "2026-02-24T15:09:37.879452", "num_timesteps": 113, "rewards": [0.10605339705944061], "actions": [14]}
+{"type": "step", "timestamp": "2026-02-24T15:09:38.193212", "num_timesteps": 114, "rewards": [0.3959801495075226], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:09:38.538027", "num_timesteps": 115, "rewards": [0.307818740606308], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:09:38.884323", "num_timesteps": 116, "rewards": [0.40871232748031616], "actions": [9]}
+{"type": "rollout", "timestamp": "2026-02-24T15:09:38.884446", "num_timesteps": 116, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 3, "train/loss": 0.10504572093486786, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:09:39.245214", "num_timesteps": 117, "rewards": [0.3929356038570404], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:09:39.579691", "num_timesteps": 118, "rewards": [0.3635268807411194], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:09:39.942712", "num_timesteps": 119, "rewards": [0.320250540971756], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:09:40.233300", "num_timesteps": 120, "rewards": [0.14864201843738556], "actions": [26]}
+{"type": "rollout", "timestamp": "2026-02-24T15:09:40.233423", "num_timesteps": 120, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 4, "train/loss": 0.07394833862781525, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:09:40.604302", "num_timesteps": 121, "rewards": [0.15958021581172943], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:09:40.999468", "num_timesteps": 122, "rewards": [0.31072890758514404], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:09:41.313281", "num_timesteps": 123, "rewards": [0.21003229916095734], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:09:41.662185", "num_timesteps": 124, "rewards": [0.20956279337406158], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:09:41.662312", "num_timesteps": 124, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 5, "train/loss": 0.08400923013687134, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:09:41.971559", "num_timesteps": 125, "rewards": [0.34465450048446655], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:09:42.534662", "num_timesteps": 126, "rewards": [0.28771576285362244], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:09:42.788298", "num_timesteps": 127, "rewards": [0.10505363345146179], "actions": [14]}
+{"type": "step", "timestamp": "2026-02-24T15:09:43.145805", "num_timesteps": 128, "rewards": [0.3924074172973633], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:09:43.145931", "num_timesteps": 128, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 6, "train/loss": 0.07967085391283035, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:09:43.475593", "num_timesteps": 129, "rewards": [0.34115147590637207], "actions": [3]}
+{"type": "step", "timestamp": "2026-02-24T15:09:43.818668", "num_timesteps": 130, "rewards": [0.2901124358177185], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:09:44.128320", "num_timesteps": 131, "rewards": [0.38789698481559753], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:09:44.453492", "num_timesteps": 132, "rewards": [0.3174308240413666], "actions": [4]}
+{"type": "rollout", "timestamp": "2026-02-24T15:09:44.453614", "num_timesteps": 132, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 7, "train/loss": 0.09259948134422302, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:09:44.785749", "num_timesteps": 133, "rewards": [0.3462143838405609], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:09:45.102773", "num_timesteps": 134, "rewards": [0.14690075814723969], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:09:45.443127", "num_timesteps": 135, "rewards": [0.15788616240024567], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:09:45.779326", "num_timesteps": 136, "rewards": [0.3076196610927582], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:09:45.779449", "num_timesteps": 136, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 8, "train/loss": 0.07365881651639938, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:09:46.120786", "num_timesteps": 137, "rewards": [0.2081231027841568], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:09:46.452086", "num_timesteps": 138, "rewards": [0.2329995185136795], "actions": [9]}
+{"type": "step", "timestamp": "2026-02-24T15:09:46.827363", "num_timesteps": 139, "rewards": [0.3649321496486664], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:09:47.433031", "num_timesteps": 140, "rewards": [0.15532250702381134], "actions": [16]}
+{"type": "rollout", "timestamp": "2026-02-24T15:09:47.433177", "num_timesteps": 140, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 9, "train/loss": 0.08298134058713913, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:09:47.712442", "num_timesteps": 141, "rewards": [0.1188923716545105], "actions": [14]}
+{"type": "step", "timestamp": "2026-02-24T15:09:48.043854", "num_timesteps": 142, "rewards": [0.3413030207157135], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:09:48.373600", "num_timesteps": 143, "rewards": [0.15884433686733246], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:09:48.698911", "num_timesteps": 144, "rewards": [0.3909987509250641], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:09:48.699032", "num_timesteps": 144, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 10, "train/loss": 0.08042901754379272, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:09:49.027337", "num_timesteps": 145, "rewards": [0.36251363158226013], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:09:49.349551", "num_timesteps": 146, "rewards": [0.12948422133922577], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:09:49.702142", "num_timesteps": 147, "rewards": [0.3584902584552765], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:09:50.076451", "num_timesteps": 148, "rewards": [0.18255484104156494], "actions": [26]}
+{"type": "rollout", "timestamp": "2026-02-24T15:09:50.076579", "num_timesteps": 148, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 11, "train/loss": 0.07196120917797089, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:09:50.420830", "num_timesteps": 149, "rewards": [0.15728561580181122], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:09:50.767715", "num_timesteps": 150, "rewards": [0.36511000990867615], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:09:51.098884", "num_timesteps": 151, "rewards": [0.3487307131290436], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:09:51.430710", "num_timesteps": 152, "rewards": [0.2739364504814148], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:09:51.430833", "num_timesteps": 152, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 12, "train/loss": 0.09275316447019577, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:09:51.768060", "num_timesteps": 153, "rewards": [0.3125186562538147], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:09:52.313711", "num_timesteps": 154, "rewards": [0.24997633695602417], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:09:52.610116", "num_timesteps": 155, "rewards": [0.10435184091329575], "actions": [14]}
+{"type": "step", "timestamp": "2026-02-24T15:09:52.942951", "num_timesteps": 156, "rewards": [0.3900812864303589], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:09:52.943076", "num_timesteps": 156, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 13, "train/loss": 0.07709133625030518, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:09:53.273537", "num_timesteps": 157, "rewards": [0.3032819926738739], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:09:53.600865", "num_timesteps": 158, "rewards": [0.28838911652565], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:09:53.947059", "num_timesteps": 159, "rewards": [0.3827248215675354], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:09:54.287913", "num_timesteps": 160, "rewards": [0.3569146692752838], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:09:54.288044", "num_timesteps": 160, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 14, "train/loss": 0.0848279520869255, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:09:54.621027", "num_timesteps": 161, "rewards": [0.31410640478134155], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:09:54.980236", "num_timesteps": 162, "rewards": [0.14572885632514954], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:09:55.313368", "num_timesteps": 163, "rewards": [0.3884315490722656], "actions": [8]}
+{"type": "step", "timestamp": "2026-02-24T15:09:55.647861", "num_timesteps": 164, "rewards": [0.15922312438488007], "actions": [26]}
+{"type": "rollout", "timestamp": "2026-02-24T15:09:55.647984", "num_timesteps": 164, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 15, "train/loss": 0.06734254211187363, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:09:55.980391", "num_timesteps": 165, "rewards": [0.2544315755367279], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:09:56.319870", "num_timesteps": 166, "rewards": [0.2644116282463074], "actions": [7]}
+{"type": "step", "timestamp": "2026-02-24T15:09:56.630832", "num_timesteps": 167, "rewards": [0.3823694586753845], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:09:57.175791", "num_timesteps": 168, "rewards": [0.28572532534599304], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:09:57.177263", "num_timesteps": 168, "logger": {}}
+{"type": "step", "timestamp": "2026-02-24T15:09:57.446290", "num_timesteps": 169, "rewards": [0.11736972630023956], "actions": [14]}
+{"type": "step", "timestamp": "2026-02-24T15:09:57.773844", "num_timesteps": 170, "rewards": [0.3371851146221161], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:09:58.131453", "num_timesteps": 171, "rewards": [0.29701194167137146], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:09:58.446835", "num_timesteps": 172, "rewards": [0.36632418632507324], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:09:58.446960", "num_timesteps": 172, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 17, "train/loss": 0.0744626373052597, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:09:58.781514", "num_timesteps": 173, "rewards": [0.3587404489517212], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:09:59.109686", "num_timesteps": 174, "rewards": [0.27739855647087097], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:09:59.447531", "num_timesteps": 175, "rewards": [0.35261523723602295], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:09:59.770637", "num_timesteps": 176, "rewards": [0.1806219220161438], "actions": [26]}
+{"type": "rollout", "timestamp": "2026-02-24T15:09:59.770762", "num_timesteps": 176, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 18, "train/loss": 0.06409789621829987, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:10:00.098468", "num_timesteps": 177, "rewards": [0.155304417014122], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:10:00.422597", "num_timesteps": 178, "rewards": [0.3599933385848999], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:10:00.757799", "num_timesteps": 179, "rewards": [0.3492221236228943], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:10:01.072880", "num_timesteps": 180, "rewards": [0.1641390025615692], "actions": [24]}
+{"type": "rollout", "timestamp": "2026-02-24T15:10:01.073008", "num_timesteps": 180, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 19, "train/loss": 0.0824364498257637, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:10:01.428582", "num_timesteps": 181, "rewards": [0.38461044430732727], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:10:02.021067", "num_timesteps": 182, "rewards": [0.2671988606452942], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:10:02.288752", "num_timesteps": 183, "rewards": [0.10260564833879471], "actions": [14]}
+{"type": "step", "timestamp": "2026-02-24T15:10:02.658376", "num_timesteps": 184, "rewards": [0.3837471902370453], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:10:02.658515", "num_timesteps": 184, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 20, "train/loss": 0.056129567325115204, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:10:03.000667", "num_timesteps": 185, "rewards": [0.29838094115257263], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:10:03.354124", "num_timesteps": 186, "rewards": [0.28367140889167786], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:10:03.707365", "num_timesteps": 187, "rewards": [0.37630608677864075], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:10:04.059768", "num_timesteps": 188, "rewards": [0.35076189041137695], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:10:04.059894", "num_timesteps": 188, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 21, "train/loss": 0.060939934104681015, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:10:04.368020", "num_timesteps": 189, "rewards": [0.30856242775917053], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:10:04.689383", "num_timesteps": 190, "rewards": [0.1431046575307846], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:10:05.046875", "num_timesteps": 191, "rewards": [0.15355908870697021], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:10:05.380471", "num_timesteps": 192, "rewards": [0.2991296648979187], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:10:05.380594", "num_timesteps": 192, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 22, "train/loss": 0.0642639696598053, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:10:05.715928", "num_timesteps": 193, "rewards": [0.20241889357566833], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:10:06.083702", "num_timesteps": 194, "rewards": [0.14219129085540771], "actions": [24]}
+{"type": "step", "timestamp": "2026-02-24T15:10:06.429971", "num_timesteps": 195, "rewards": [0.3828669786453247], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:10:06.957656", "num_timesteps": 196, "rewards": [0.30043378472328186], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:10:06.957781", "num_timesteps": 196, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 23, "train/loss": 0.07528431713581085, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:10:07.245854", "num_timesteps": 197, "rewards": [0.10260588675737381], "actions": [14]}
+{"type": "step", "timestamp": "2026-02-24T15:10:07.606676", "num_timesteps": 198, "rewards": [0.38381263613700867], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:10:07.920569", "num_timesteps": 199, "rewards": [0.29843857884407043], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:31.400626", "num_timesteps": 200, "rewards": [0.283704549074173], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:12:31.400962", "num_timesteps": 200, "logger": {"rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:12:31.757243", "num_timesteps": 201, "rewards": [0.3762909173965454], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:32.086227", "num_timesteps": 202, "rewards": [0.3506828844547272], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:32.457158", "num_timesteps": 203, "rewards": [0.30843907594680786], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:32.773175", "num_timesteps": 204, "rewards": [0.1430245041847229], "actions": [26]}
+{"type": "rollout", "timestamp": "2026-02-24T15:12:32.773429", "num_timesteps": 204, "logger": {"rollout/exploration_rate": 0.05, "train/learning_rate": 0.0001, "train/n_updates": 25, "train/loss": 0.0765891969203949}}
+{"type": "step", "timestamp": "2026-02-24T15:12:33.282449", "num_timesteps": 205, "rewards": [0.15345169603824615], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:12:33.674317", "num_timesteps": 206, "rewards": [0.2988971173763275], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:34.023963", "num_timesteps": 207, "rewards": [0.20225608348846436], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:34.377161", "num_timesteps": 208, "rewards": [0.20224229991436005], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:12:34.377322", "num_timesteps": 208, "logger": {"rollout/exploration_rate": 0.05, "train/learning_rate": 0.0001, "train/n_updates": 26, "train/loss": 0.05526851862668991}}
+{"type": "step", "timestamp": "2026-02-24T15:12:34.731661", "num_timesteps": 209, "rewards": [0.33384883403778076], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:35.301422", "num_timesteps": 210, "rewards": [0.2809823453426361], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:35.585412", "num_timesteps": 211, "rewards": [0.35423049330711365], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:35.903154", "num_timesteps": 212, "rewards": [0.37170735001564026], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:12:35.903310", "num_timesteps": 212, "logger": {"rollout/exploration_rate": 0.05, "train/learning_rate": 0.0001, "train/n_updates": 27, "train/loss": 0.06691434979438782}}
+{"type": "step", "timestamp": "2026-02-24T15:12:36.214466", "num_timesteps": 213, "rewards": [0.2997265160083771], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:36.503304", "num_timesteps": 214, "rewards": [0.2851358652114868], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:36.790886", "num_timesteps": 215, "rewards": [0.37819433212280273], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:37.140616", "num_timesteps": 216, "rewards": [0.1314241886138916], "actions": [26]}
+{"type": "rollout", "timestamp": "2026-02-24T15:12:37.140745", "num_timesteps": 216, "logger": {"rollout/exploration_rate": 0.05, "train/learning_rate": 0.0001, "train/n_updates": 28, "train/loss": 0.044694069772958755}}
+{"type": "step", "timestamp": "2026-02-24T15:12:37.483009", "num_timesteps": 217, "rewards": [0.15758457779884338], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:12:37.827837", "num_timesteps": 218, "rewards": [0.1440165489912033], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:12:38.204868", "num_timesteps": 219, "rewards": [0.1542361080646515], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:12:38.547101", "num_timesteps": 220, "rewards": [0.4218381643295288], "actions": [7]}
+{"type": "rollout", "timestamp": "2026-02-24T15:12:38.547253", "num_timesteps": 220, "logger": {"rollout/exploration_rate": 0.05, "train/learning_rate": 0.0001, "train/n_updates": 29, "train/loss": 0.06854104995727539}}
+{"type": "step", "timestamp": "2026-02-24T15:12:38.898425", "num_timesteps": 221, "rewards": [0.33184850215911865], "actions": [7]}
+{"type": "step", "timestamp": "2026-02-24T15:12:39.251954", "num_timesteps": 222, "rewards": [0.22111289203166962], "actions": [7]}
+{"type": "step", "timestamp": "2026-02-24T15:12:39.599991", "num_timesteps": 223, "rewards": [0.3721664845943451], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:40.178384", "num_timesteps": 224, "rewards": [0.2738514840602875], "actions": [7]}
+{"type": "rollout", "timestamp": "2026-02-24T15:12:40.179785", "num_timesteps": 224, "logger": {}}
+{"type": "step", "timestamp": "2026-02-24T15:12:40.460431", "num_timesteps": 225, "rewards": [0.3850826025009155], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:40.738962", "num_timesteps": 226, "rewards": [0.32879209518432617], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:41.045488", "num_timesteps": 227, "rewards": [0.2970084249973297], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:41.333478", "num_timesteps": 228, "rewards": [0.3659003674983978], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:12:41.333620", "num_timesteps": 228, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 31, "train/loss": 0.060097627341747284, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:12:41.651910", "num_timesteps": 229, "rewards": [0.35881707072257996], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:41.985791", "num_timesteps": 230, "rewards": [0.1278127282857895], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:12:42.363664", "num_timesteps": 231, "rewards": [0.13187044858932495], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:12:42.703991", "num_timesteps": 232, "rewards": [0.1807408481836319], "actions": [26]}
+{"type": "rollout", "timestamp": "2026-02-24T15:12:42.704122", "num_timesteps": 232, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 32, "train/loss": 0.06873136013746262, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:12:43.072600", "num_timesteps": 233, "rewards": [0.15492239594459534], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:12:43.416824", "num_timesteps": 234, "rewards": [0.40873071551322937], "actions": [7]}
+{"type": "step", "timestamp": "2026-02-24T15:12:43.773676", "num_timesteps": 235, "rewards": [0.3957553505897522], "actions": [7]}
+{"type": "step", "timestamp": "2026-02-24T15:12:44.117459", "num_timesteps": 236, "rewards": [0.4049791395664215], "actions": [7]}
+{"type": "rollout", "timestamp": "2026-02-24T15:12:44.117593", "num_timesteps": 236, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 33, "train/loss": 0.05261734127998352, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:12:44.465371", "num_timesteps": 237, "rewards": [0.34700900316238403], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:45.044696", "num_timesteps": 238, "rewards": [0.2442159354686737], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:45.328730", "num_timesteps": 239, "rewards": [0.42338863015174866], "actions": [7]}
+{"type": "step", "timestamp": "2026-02-24T15:12:45.642950", "num_timesteps": 240, "rewards": [0.3357338607311249], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:12:45.643086", "num_timesteps": 240, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 34, "train/loss": 0.07054382562637329, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:12:45.929099", "num_timesteps": 241, "rewards": [0.29631707072257996], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:46.233781", "num_timesteps": 242, "rewards": [0.36636149883270264], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:46.521794", "num_timesteps": 243, "rewards": [0.35800901055336], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:46.799960", "num_timesteps": 244, "rewards": [0.27585655450820923], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:12:46.800094", "num_timesteps": 244, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 35, "train/loss": 0.06928922981023788, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:12:47.090490", "num_timesteps": 245, "rewards": [0.3508625328540802], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:47.438352", "num_timesteps": 246, "rewards": [0.1796598583459854], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:12:47.757729", "num_timesteps": 247, "rewards": [0.15429340302944183], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:12:48.155451", "num_timesteps": 248, "rewards": [0.3572680354118347], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:12:48.155583", "num_timesteps": 248, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 36, "train/loss": 0.054808638989925385, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:12:48.504071", "num_timesteps": 249, "rewards": [0.34548625349998474], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:48.856131", "num_timesteps": 250, "rewards": [0.27032625675201416], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:49.202729", "num_timesteps": 251, "rewards": [0.30920153856277466], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:49.816503", "num_timesteps": 252, "rewards": [0.24692416191101074], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:12:49.816661", "num_timesteps": 252, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 37, "train/loss": 0.059128254652023315, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:12:50.097088", "num_timesteps": 253, "rewards": [0.38070544600486755], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:50.395423", "num_timesteps": 254, "rewards": [0.3635936975479126], "actions": [7]}
+{"type": "step", "timestamp": "2026-02-24T15:12:50.706232", "num_timesteps": 255, "rewards": [0.2936725318431854], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:51.077708", "num_timesteps": 256, "rewards": [0.1383843868970871], "actions": [20]}
+{"type": "rollout", "timestamp": "2026-02-24T15:12:51.077868", "num_timesteps": 256, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 38, "train/loss": 0.06505724787712097, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:12:51.429652", "num_timesteps": 257, "rewards": [0.3545280694961548], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:51.773093", "num_timesteps": 258, "rewards": [0.12684136629104614], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:12:52.107155", "num_timesteps": 259, "rewards": [0.34955164790153503], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:52.455797", "num_timesteps": 260, "rewards": [0.17773272097110748], "actions": [26]}
+{"type": "rollout", "timestamp": "2026-02-24T15:12:52.455932", "num_timesteps": 260, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 39, "train/loss": 0.05951444059610367, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:12:52.812533", "num_timesteps": 261, "rewards": [0.15289585292339325], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:12:53.153577", "num_timesteps": 262, "rewards": [0.34739670157432556], "actions": [1]}
+{"type": "step", "timestamp": "2026-02-24T15:12:53.504401", "num_timesteps": 263, "rewards": [0.32154980301856995], "actions": [1]}
+{"type": "step", "timestamp": "2026-02-24T15:12:53.847886", "num_timesteps": 264, "rewards": [0.28499624133110046], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:12:53.848022", "num_timesteps": 264, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 40, "train/loss": 0.06603963673114777, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:12:54.196367", "num_timesteps": 265, "rewards": [0.31902876496315], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:54.778785", "num_timesteps": 266, "rewards": [0.24605657160282135], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:55.062022", "num_timesteps": 267, "rewards": [0.3813619017601013], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:55.346853", "num_timesteps": 268, "rewards": [0.32562926411628723], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:12:55.346978", "num_timesteps": 268, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 41, "train/loss": 0.0493362694978714, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:12:55.617907", "num_timesteps": 269, "rewards": [0.29410502314567566], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:55.899113", "num_timesteps": 270, "rewards": [0.3622126877307892], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:56.185965", "num_timesteps": 271, "rewards": [0.35507476329803467], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:56.437426", "num_timesteps": 272, "rewards": [0.2741088271141052], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:12:56.437550", "num_timesteps": 272, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 42, "train/loss": 0.04430970549583435, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:12:56.748916", "num_timesteps": 273, "rewards": [0.3483300805091858], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:57.084017", "num_timesteps": 274, "rewards": [0.1781626045703888], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:12:57.447476", "num_timesteps": 275, "rewards": [0.1530195027589798], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:12:57.744834", "num_timesteps": 276, "rewards": [0.3543970286846161], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:12:57.744961", "num_timesteps": 276, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 43, "train/loss": 0.04939177632331848, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:12:58.076003", "num_timesteps": 277, "rewards": [0.34415626525878906], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:58.405056", "num_timesteps": 278, "rewards": [0.26940569281578064], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:58.744359", "num_timesteps": 279, "rewards": [0.3088120222091675], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:59.343400", "num_timesteps": 280, "rewards": [0.24682952463626862], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:12:59.344972", "num_timesteps": 280, "logger": {}}
+{"type": "step", "timestamp": "2026-02-24T15:12:59.593870", "num_timesteps": 281, "rewards": [0.3789679706096649], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:12:59.874371", "num_timesteps": 282, "rewards": [0.32358992099761963], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:13:00.156676", "num_timesteps": 283, "rewards": [0.2922506332397461], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:13:00.449551", "num_timesteps": 284, "rewards": [0.35989829897880554], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:13:00.449678", "num_timesteps": 284, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 45, "train/loss": 0.04571753367781639, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:13:00.706580", "num_timesteps": 285, "rewards": [0.35277149081230164], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:13:00.995821", "num_timesteps": 286, "rewards": [0.27230626344680786], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:13:01.299260", "num_timesteps": 287, "rewards": [0.3460192382335663], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:13:01.649861", "num_timesteps": 288, "rewards": [0.17697441577911377], "actions": [26]}
+{"type": "rollout", "timestamp": "2026-02-24T15:13:01.649987", "num_timesteps": 288, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 46, "train/loss": 0.061331603676080704, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:13:02.000418", "num_timesteps": 289, "rewards": [0.15199707448482513], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:13:02.302654", "num_timesteps": 290, "rewards": [0.3520505130290985], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:13:02.670969", "num_timesteps": 291, "rewards": [0.319221556186676], "actions": [10]}
+{"type": "step", "timestamp": "2026-02-24T15:13:03.021713", "num_timesteps": 292, "rewards": [0.2825343906879425], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:13:03.021857", "num_timesteps": 292, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 47, "train/loss": 0.0751848816871643, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:13:03.389430", "num_timesteps": 293, "rewards": [0.31106239557266235], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:13:03.967815", "num_timesteps": 294, "rewards": [0.2458329051733017], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:13:04.302019", "num_timesteps": 295, "rewards": [0.3476278483867645], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:13:04.636035", "num_timesteps": 296, "rewards": [0.12781023979187012], "actions": [18]}
+{"type": "rollout", "timestamp": "2026-02-24T15:13:04.636171", "num_timesteps": 296, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 48, "train/loss": 0.05389217659831047, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:13:04.966141", "num_timesteps": 297, "rewards": [0.29276323318481445], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:13:05.291603", "num_timesteps": 298, "rewards": [0.2788926362991333], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:13:05.647226", "num_timesteps": 299, "rewards": [0.37145718932151794], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:26.999803", "num_timesteps": 300, "rewards": [0.2853690981864929], "actions": [3]}
+{"type": "rollout", "timestamp": "2026-02-24T15:15:27.000044", "num_timesteps": 300, "logger": {"rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:15:27.316732", "num_timesteps": 301, "rewards": [0.3306044340133667], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:27.660217", "num_timesteps": 302, "rewards": [0.33763813972473145], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:28.005447", "num_timesteps": 303, "rewards": [0.3277328908443451], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:28.362446", "num_timesteps": 304, "rewards": [0.264615923166275], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:15:28.362574", "num_timesteps": 304, "logger": {"rollout/exploration_rate": 0.05, "train/learning_rate": 0.0001, "train/n_updates": 50, "train/loss": 0.0407772921025753}}
+{"type": "step", "timestamp": "2026-02-24T15:15:28.716938", "num_timesteps": 305, "rewards": [0.19349855184555054], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:29.061191", "num_timesteps": 306, "rewards": [0.1952429562807083], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:29.403979", "num_timesteps": 307, "rewards": [0.3297467827796936], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:29.999670", "num_timesteps": 308, "rewards": [0.2782890200614929], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:15:29.999807", "num_timesteps": 308, "logger": {"rollout/exploration_rate": 0.05, "train/learning_rate": 0.0001, "train/n_updates": 51, "train/loss": 0.0584392286837101}}
+{"type": "step", "timestamp": "2026-02-24T15:15:30.281258", "num_timesteps": 309, "rewards": [0.34612220525741577], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:30.573728", "num_timesteps": 310, "rewards": [0.36323386430740356], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:30.856195", "num_timesteps": 311, "rewards": [0.2927953600883484], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:31.141293", "num_timesteps": 312, "rewards": [0.27837473154067993], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:15:31.141419", "num_timesteps": 312, "logger": {"rollout/exploration_rate": 0.05, "train/learning_rate": 0.0001, "train/n_updates": 52, "train/loss": 0.05007432401180267}}
+{"type": "step", "timestamp": "2026-02-24T15:15:31.404910", "num_timesteps": 313, "rewards": [0.3689480423927307], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:31.672615", "num_timesteps": 314, "rewards": [0.3436571955680847], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:31.908315", "num_timesteps": 315, "rewards": [0.30310192704200745], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:32.233649", "num_timesteps": 316, "rewards": [0.13987919688224792], "actions": [26]}
+{"type": "rollout", "timestamp": "2026-02-24T15:15:32.233773", "num_timesteps": 316, "logger": {"rollout/exploration_rate": 0.05, "train/learning_rate": 0.0001, "train/n_updates": 53, "train/loss": 0.04460563510656357}}
+{"type": "step", "timestamp": "2026-02-24T15:15:32.534341", "num_timesteps": 317, "rewards": [0.08242141455411911], "actions": [15]}
+{"type": "step", "timestamp": "2026-02-24T15:15:32.875812", "num_timesteps": 318, "rewards": [0.2919076085090637], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:33.220732", "num_timesteps": 319, "rewards": [0.19720804691314697], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:33.553590", "num_timesteps": 320, "rewards": [0.20287677645683289], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:15:33.553715", "num_timesteps": 320, "logger": {"rollout/exploration_rate": 0.05, "train/learning_rate": 0.0001, "train/n_updates": 54, "train/loss": 0.05044369027018547}}
+{"type": "step", "timestamp": "2026-02-24T15:15:33.887744", "num_timesteps": 321, "rewards": [0.3292936086654663], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:34.462703", "num_timesteps": 322, "rewards": [0.27634888887405396], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:34.773028", "num_timesteps": 323, "rewards": [0.3467201590538025], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:35.034392", "num_timesteps": 324, "rewards": [0.36386245489120483], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:15:35.034517", "num_timesteps": 324, "logger": {"rollout/exploration_rate": 0.05, "train/learning_rate": 0.0001, "train/n_updates": 55, "train/loss": 0.037477411329746246}}
+{"type": "step", "timestamp": "2026-02-24T15:15:35.306038", "num_timesteps": 325, "rewards": [0.29329267144203186], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:35.571354", "num_timesteps": 326, "rewards": [0.27883240580558777], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:35.858619", "num_timesteps": 327, "rewards": [0.3695291578769684], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:36.095510", "num_timesteps": 328, "rewards": [0.3441751003265381], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:15:36.095634", "num_timesteps": 328, "logger": {"rollout/exploration_rate": 0.05, "train/learning_rate": 0.0001, "train/n_updates": 56, "train/loss": 0.05649346858263016}}
+{"type": "step", "timestamp": "2026-02-24T15:15:36.367723", "num_timesteps": 329, "rewards": [0.3035416901111603], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:36.690636", "num_timesteps": 330, "rewards": [0.14007538557052612], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:15:37.041198", "num_timesteps": 331, "rewards": [0.1501002162694931], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:15:37.379257", "num_timesteps": 332, "rewards": [0.29225534200668335], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:15:37.379387", "num_timesteps": 332, "logger": {"rollout/exploration_rate": 0.05, "train/learning_rate": 0.0001, "train/n_updates": 57, "train/loss": 0.04732755571603775}}
+{"type": "step", "timestamp": "2026-02-24T15:15:37.710979", "num_timesteps": 333, "rewards": [0.19764333963394165], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:38.041216", "num_timesteps": 334, "rewards": [0.19830632209777832], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:38.371742", "num_timesteps": 335, "rewards": [0.32730579376220703], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:38.954836", "num_timesteps": 336, "rewards": [0.2748589813709259], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:15:38.955964", "num_timesteps": 336, "logger": {}}
+{"type": "step", "timestamp": "2026-02-24T15:15:39.208906", "num_timesteps": 337, "rewards": [0.12954223155975342], "actions": [15]}
+{"type": "step", "timestamp": "2026-02-24T15:15:39.569975", "num_timesteps": 338, "rewards": [0.32830771803855896], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:39.907934", "num_timesteps": 339, "rewards": [0.28923705220222473], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:40.258825", "num_timesteps": 340, "rewards": [0.3564307391643524], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:15:40.258952", "num_timesteps": 340, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 59, "train/loss": 0.033706843852996826, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:15:40.601307", "num_timesteps": 341, "rewards": [0.34863027930259705], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:40.946050", "num_timesteps": 342, "rewards": [0.26897820830345154], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:41.291602", "num_timesteps": 343, "rewards": [0.3416493833065033], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:41.639739", "num_timesteps": 344, "rewards": [0.2252148538827896], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:15:41.639865", "num_timesteps": 344, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 60, "train/loss": 0.0460331067442894, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:15:41.993620", "num_timesteps": 345, "rewards": [0.15113314986228943], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:15:42.325197", "num_timesteps": 346, "rewards": [0.34797847270965576], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:42.663286", "num_timesteps": 347, "rewards": [0.3403832018375397], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:42.993273", "num_timesteps": 348, "rewards": [0.26710566878318787], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:15:42.993400", "num_timesteps": 348, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 61, "train/loss": 0.0453001894056797, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:15:43.331140", "num_timesteps": 349, "rewards": [0.30739325284957886], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:43.914803", "num_timesteps": 350, "rewards": [0.24611924588680267], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:44.167777", "num_timesteps": 351, "rewards": [0.3454596996307373], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:44.436661", "num_timesteps": 352, "rewards": [0.24376988410949707], "actions": [0]}
+{"type": "rollout", "timestamp": "2026-02-24T15:15:44.436786", "num_timesteps": 352, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 62, "train/loss": 0.059396471828222275, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:15:44.708974", "num_timesteps": 353, "rewards": [0.29127904772758484], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:44.977633", "num_timesteps": 354, "rewards": [0.27751994132995605], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:45.245088", "num_timesteps": 355, "rewards": [0.36886391043663025], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:45.522278", "num_timesteps": 356, "rewards": [0.34253832697868347], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:15:45.522406", "num_timesteps": 356, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 63, "train/loss": 0.050126709043979645, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:15:45.795417", "num_timesteps": 357, "rewards": [0.30252864956855774], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:46.137451", "num_timesteps": 358, "rewards": [0.13936124742031097], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:15:46.479429", "num_timesteps": 359, "rewards": [0.14939484000205994], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:15:46.845279", "num_timesteps": 360, "rewards": [0.2908470332622528], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:15:46.845405", "num_timesteps": 360, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 64, "train/loss": 0.03485827147960663, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:15:47.189901", "num_timesteps": 361, "rewards": [0.2462233155965805], "actions": [4]}
+{"type": "step", "timestamp": "2026-02-24T15:15:47.533490", "num_timesteps": 362, "rewards": [0.21024352312088013], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:47.862682", "num_timesteps": 363, "rewards": [0.3237365484237671], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:48.452066", "num_timesteps": 364, "rewards": [0.27418252825737], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:15:48.452207", "num_timesteps": 364, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 65, "train/loss": 0.03203221783041954, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:15:48.714864", "num_timesteps": 365, "rewards": [0.34569138288497925], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:49.002515", "num_timesteps": 366, "rewards": [0.36280664801597595], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:49.286841", "num_timesteps": 367, "rewards": [0.29242900013923645], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:49.567143", "num_timesteps": 368, "rewards": [0.2779793441295624], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:15:49.567283", "num_timesteps": 368, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 66, "train/loss": 0.038269687443971634, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:15:49.877663", "num_timesteps": 369, "rewards": [0.3683370351791382], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:50.159717", "num_timesteps": 370, "rewards": [0.3430052697658539], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:50.418285", "num_timesteps": 371, "rewards": [0.30246543884277344], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:50.759951", "num_timesteps": 372, "rewards": [0.13956092298030853], "actions": [26]}
+{"type": "rollout", "timestamp": "2026-02-24T15:15:50.760081", "num_timesteps": 372, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 67, "train/loss": 0.03580853343009949, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:15:51.112584", "num_timesteps": 373, "rewards": [0.14953374862670898], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:15:51.438428", "num_timesteps": 374, "rewards": [0.2911440432071686], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:51.781350", "num_timesteps": 375, "rewards": [0.19689753651618958], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:52.125843", "num_timesteps": 376, "rewards": [0.19757677614688873], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:15:52.125973", "num_timesteps": 376, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 68, "train/loss": 0.05051213875412941, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:15:52.461775", "num_timesteps": 377, "rewards": [0.32617753744125366], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:53.073423", "num_timesteps": 378, "rewards": [0.27401015162467957], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:53.345421", "num_timesteps": 379, "rewards": [0.3459029793739319], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:53.612582", "num_timesteps": 380, "rewards": [0.3630309998989105], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:15:53.612710", "num_timesteps": 380, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 69, "train/loss": 0.03647845610976219, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:15:53.900622", "num_timesteps": 381, "rewards": [0.29260385036468506], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:54.168871", "num_timesteps": 382, "rewards": [0.2781350314617157], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:54.433370", "num_timesteps": 383, "rewards": [0.36852502822875977], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:54.724881", "num_timesteps": 384, "rewards": [0.3431633412837982], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:15:54.725008", "num_timesteps": 384, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 70, "train/loss": 0.033297669142484665, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:15:55.082874", "num_timesteps": 385, "rewards": [0.16432307660579681], "actions": [20]}
+{"type": "step", "timestamp": "2026-02-24T15:15:55.434064", "num_timesteps": 386, "rewards": [0.13975679874420166], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:15:55.779663", "num_timesteps": 387, "rewards": [0.1496751308441162], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:15:56.133850", "num_timesteps": 388, "rewards": [0.40908798575401306], "actions": [7]}
+{"type": "rollout", "timestamp": "2026-02-24T15:15:56.133981", "num_timesteps": 388, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 71, "train/loss": 0.034983254969120026, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:15:56.473800", "num_timesteps": 389, "rewards": [0.24372009932994843], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:56.832164", "num_timesteps": 390, "rewards": [0.21407437324523926], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:57.198951", "num_timesteps": 391, "rewards": [0.32187342643737793], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:57.783729", "num_timesteps": 392, "rewards": [0.2702779471874237], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:15:57.785169", "num_timesteps": 392, "logger": {}}
+{"type": "step", "timestamp": "2026-02-24T15:15:58.061016", "num_timesteps": 393, "rewards": [0.3752592206001282], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:58.360000", "num_timesteps": 394, "rewards": [0.32047244906425476], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:58.624671", "num_timesteps": 395, "rewards": [0.2893921434879303], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:58.879371", "num_timesteps": 396, "rewards": [0.3562391400337219], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:15:58.879495", "num_timesteps": 396, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 73, "train/loss": 0.04159241542220116, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:15:59.150254", "num_timesteps": 397, "rewards": [0.34901127219200134], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:59.431303", "num_timesteps": 398, "rewards": [0.26927000284194946], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:15:59.728775", "num_timesteps": 399, "rewards": [0.3420247435569763], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:19.651371", "num_timesteps": 400, "rewards": [0.17487649619579315], "actions": [26]}
+{"type": "rollout", "timestamp": "2026-02-24T15:18:19.651505", "num_timesteps": 400, "logger": {"rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:18:19.988964", "num_timesteps": 401, "rewards": [0.15016119182109833], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:18:20.317210", "num_timesteps": 402, "rewards": [0.3478214144706726], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:20.648871", "num_timesteps": 403, "rewards": [0.3379700183868408], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:20.989709", "num_timesteps": 404, "rewards": [0.2648271322250366], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:18:20.989856", "num_timesteps": 404, "logger": {"rollout/exploration_rate": 0.05, "train/learning_rate": 0.0001, "train/n_updates": 75, "train/loss": 0.0407557338476181}}
+{"type": "step", "timestamp": "2026-02-24T15:18:21.309735", "num_timesteps": 405, "rewards": [0.3040289580821991], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:21.856938", "num_timesteps": 406, "rewards": [0.24348275363445282], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:22.138702", "num_timesteps": 407, "rewards": [0.3740794360637665], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:22.408444", "num_timesteps": 408, "rewards": [0.31946930289268494], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:18:22.408574", "num_timesteps": 408, "logger": {"rollout/exploration_rate": 0.05, "train/learning_rate": 0.0001, "train/n_updates": 76, "train/loss": 0.04402991384267807}}
+{"type": "step", "timestamp": "2026-02-24T15:18:22.684618", "num_timesteps": 409, "rewards": [0.28848230838775635], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:22.933049", "num_timesteps": 410, "rewards": [0.35510656237602234], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:23.209530", "num_timesteps": 411, "rewards": [0.3478861153125763], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:23.488813", "num_timesteps": 412, "rewards": [0.2683901786804199], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:18:23.488961", "num_timesteps": 412, "logger": {"rollout/exploration_rate": 0.05, "train/learning_rate": 0.0001, "train/n_updates": 77, "train/loss": 0.032026685774326324}}
+{"type": "step", "timestamp": "2026-02-24T15:18:23.760460", "num_timesteps": 413, "rewards": [0.3408958315849304], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:24.091107", "num_timesteps": 414, "rewards": [0.17429494857788086], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:18:24.427699", "num_timesteps": 415, "rewards": [0.1496594250202179], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:18:24.775675", "num_timesteps": 416, "rewards": [0.3466636538505554], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:18:24.775804", "num_timesteps": 416, "logger": {"rollout/exploration_rate": 0.05, "train/learning_rate": 0.0001, "train/n_updates": 78, "train/loss": 0.03539932519197464}}
+{"type": "step", "timestamp": "2026-02-24T15:18:25.110240", "num_timesteps": 417, "rewards": [0.33686187863349915], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:25.444026", "num_timesteps": 418, "rewards": [0.2639806568622589], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:25.793110", "num_timesteps": 419, "rewards": [0.30309537053108215], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:26.325463", "num_timesteps": 420, "rewards": [0.24277427792549133], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:18:26.325588", "num_timesteps": 420, "logger": {"rollout/exploration_rate": 0.05, "train/learning_rate": 0.0001, "train/n_updates": 79, "train/loss": 0.038089703768491745}}
+{"type": "step", "timestamp": "2026-02-24T15:18:26.588039", "num_timesteps": 421, "rewards": [0.3730104863643646], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:26.867690", "num_timesteps": 422, "rewards": [0.31856071949005127], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:27.141208", "num_timesteps": 423, "rewards": [0.28765833377838135], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:27.410454", "num_timesteps": 424, "rewards": [0.3540807068347931], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:18:27.410578", "num_timesteps": 424, "logger": {"rollout/exploration_rate": 0.05, "train/learning_rate": 0.0001, "train/n_updates": 80, "train/loss": 0.030031809583306313}}
+{"type": "step", "timestamp": "2026-02-24T15:18:27.687465", "num_timesteps": 425, "rewards": [0.34686678647994995], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:27.955023", "num_timesteps": 426, "rewards": [0.26759281754493713], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:28.229179", "num_timesteps": 427, "rewards": [0.33987221121788025], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:28.554127", "num_timesteps": 428, "rewards": [0.17376740276813507], "actions": [26]}
+{"type": "rollout", "timestamp": "2026-02-24T15:18:28.554265", "num_timesteps": 428, "logger": {"rollout/exploration_rate": 0.05, "train/learning_rate": 0.0001, "train/n_updates": 81, "train/loss": 0.035690661519765854}}
+{"type": "step", "timestamp": "2026-02-24T15:18:28.887010", "num_timesteps": 429, "rewards": [0.14920401573181152], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:18:29.221887", "num_timesteps": 430, "rewards": [0.3456122875213623], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:29.550112", "num_timesteps": 431, "rewards": [0.3358549475669861], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:29.905327", "num_timesteps": 432, "rewards": [0.26321104168891907], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:18:29.905456", "num_timesteps": 432, "logger": {"rollout/exploration_rate": 0.05, "train/learning_rate": 0.0001, "train/n_updates": 82, "train/loss": 0.04318689927458763}}
+{"type": "step", "timestamp": "2026-02-24T15:18:30.239354", "num_timesteps": 433, "rewards": [0.3022460639476776], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:30.793694", "num_timesteps": 434, "rewards": [0.242129385471344], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:31.084510", "num_timesteps": 435, "rewards": [0.3720380365848541], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:31.362427", "num_timesteps": 436, "rewards": [0.31773436069488525], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:18:31.362552", "num_timesteps": 436, "logger": {"rollout/exploration_rate": 0.05, "train/learning_rate": 0.0001, "train/n_updates": 83, "train/loss": 0.033485978841781616}}
+{"type": "step", "timestamp": "2026-02-24T15:18:31.633437", "num_timesteps": 437, "rewards": [0.2869090437889099], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:31.901343", "num_timesteps": 438, "rewards": [0.3531477749347687], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:32.167842", "num_timesteps": 439, "rewards": [0.3459395170211792], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:32.493101", "num_timesteps": 440, "rewards": [0.1333196461200714], "actions": [24]}
+{"type": "rollout", "timestamp": "2026-02-24T15:18:32.493235", "num_timesteps": 440, "logger": {"rollout/exploration_rate": 0.05, "train/learning_rate": 0.0001, "train/n_updates": 84, "train/loss": 0.01693674363195896}}
+{"type": "step", "timestamp": "2026-02-24T15:18:32.824755", "num_timesteps": 441, "rewards": [0.34075188636779785], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:33.150466", "num_timesteps": 442, "rewards": [0.17307935655117035], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:18:33.499891", "num_timesteps": 443, "rewards": [0.14878301322460175], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:18:33.847091", "num_timesteps": 444, "rewards": [0.34480828046798706], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:18:33.847246", "num_timesteps": 444, "logger": {"rollout/exploration_rate": 0.05, "train/learning_rate": 0.0001, "train/n_updates": 85, "train/loss": 0.04718153923749924}}
+{"type": "step", "timestamp": "2026-02-24T15:18:34.180417", "num_timesteps": 445, "rewards": [0.33355680108070374], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:34.513688", "num_timesteps": 446, "rewards": [0.2614143490791321], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:34.850985", "num_timesteps": 447, "rewards": [0.29970043897628784], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:35.472814", "num_timesteps": 448, "rewards": [0.24030984938144684], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:18:35.474464", "num_timesteps": 448, "logger": {}}
+{"type": "step", "timestamp": "2026-02-24T15:18:35.747277", "num_timesteps": 449, "rewards": [0.3719131052494049], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:36.016098", "num_timesteps": 450, "rewards": [0.31763169169425964], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:36.282975", "num_timesteps": 451, "rewards": [0.35657626390457153], "actions": [4]}
+{"type": "step", "timestamp": "2026-02-24T15:18:36.574008", "num_timesteps": 452, "rewards": [0.3735000789165497], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:18:36.574134", "num_timesteps": 452, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 87, "train/loss": 0.03162834048271179, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:18:36.851395", "num_timesteps": 453, "rewards": [0.3459005653858185], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:37.118749", "num_timesteps": 454, "rewards": [0.2682352662086487], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:37.399901", "num_timesteps": 455, "rewards": [0.3383587598800659], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:37.727363", "num_timesteps": 456, "rewards": [0.17323599755764008], "actions": [26]}
+{"type": "rollout", "timestamp": "2026-02-24T15:18:37.727495", "num_timesteps": 456, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 88, "train/loss": 0.03200378268957138, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:18:38.099031", "num_timesteps": 457, "rewards": [0.1487267166376114], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:18:38.431731", "num_timesteps": 458, "rewards": [0.3444554805755615], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:38.744945", "num_timesteps": 459, "rewards": [0.33249422907829285], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:39.088546", "num_timesteps": 460, "rewards": [0.26069241762161255], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:18:39.088684", "num_timesteps": 460, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 89, "train/loss": 0.028709126636385918, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:18:39.467873", "num_timesteps": 461, "rewards": [0.29861173033714294], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:40.048831", "num_timesteps": 462, "rewards": [0.2393144965171814], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:40.307339", "num_timesteps": 463, "rewards": [0.3418313264846802], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:40.579674", "num_timesteps": 464, "rewards": [0.358781635761261], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:18:40.579799", "num_timesteps": 464, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 90, "train/loss": 0.02813045307993889, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:18:40.853227", "num_timesteps": 465, "rewards": [0.2891561686992645], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:41.122504", "num_timesteps": 466, "rewards": [0.2748104929924011], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:41.385252", "num_timesteps": 467, "rewards": [0.36403384804725647], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:41.652508", "num_timesteps": 468, "rewards": [0.33890092372894287], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:18:41.652630", "num_timesteps": 468, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 91, "train/loss": 0.03167181834578514, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:18:41.926044", "num_timesteps": 469, "rewards": [0.29877644777297974], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:42.218822", "num_timesteps": 470, "rewards": [0.32634446024894714], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:42.577878", "num_timesteps": 471, "rewards": [0.14742974936962128], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:18:42.896182", "num_timesteps": 472, "rewards": [0.28729093074798584], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:18:42.896310", "num_timesteps": 472, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 92, "train/loss": 0.03309815376996994, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:18:43.229636", "num_timesteps": 473, "rewards": [0.19424058496952057], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:43.580801", "num_timesteps": 474, "rewards": [0.19679389894008636], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:43.905139", "num_timesteps": 475, "rewards": [0.32468318939208984], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:44.484412", "num_timesteps": 476, "rewards": [0.2742123305797577], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:18:44.484557", "num_timesteps": 476, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 93, "train/loss": 0.03464445844292641, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:18:44.756383", "num_timesteps": 477, "rewards": [0.34124132990837097], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:45.036647", "num_timesteps": 478, "rewards": [0.35816600918769836], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:45.318049", "num_timesteps": 479, "rewards": [0.2886573374271393], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:45.600559", "num_timesteps": 480, "rewards": [0.27433037757873535], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:18:45.600684", "num_timesteps": 480, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 94, "train/loss": 0.03636302426457405, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:18:45.874865", "num_timesteps": 481, "rewards": [0.3633865714073181], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:46.147460", "num_timesteps": 482, "rewards": [0.3382876217365265], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:46.430171", "num_timesteps": 483, "rewards": [0.29822787642478943], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:46.714515", "num_timesteps": 484, "rewards": [0.33913853764533997], "actions": [10]}
+{"type": "rollout", "timestamp": "2026-02-24T15:18:46.714666", "num_timesteps": 484, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 95, "train/loss": 0.018644046038389206, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:18:47.039282", "num_timesteps": 485, "rewards": [0.14903803169727325], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:18:47.382069", "num_timesteps": 486, "rewards": [0.28673750162124634], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:47.737806", "num_timesteps": 487, "rewards": [0.16897916793823242], "actions": [25]}
+{"type": "step", "timestamp": "2026-02-24T15:18:48.104161", "num_timesteps": 488, "rewards": [0.2984415292739868], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:18:48.104288", "num_timesteps": 488, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 96, "train/loss": 0.029841028153896332, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:18:48.446760", "num_timesteps": 489, "rewards": [0.33507928252220154], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:49.026930", "num_timesteps": 490, "rewards": [0.1587824672460556], "actions": [19]}
+{"type": "step", "timestamp": "2026-02-24T15:18:49.325610", "num_timesteps": 491, "rewards": [0.3405110538005829], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:49.597679", "num_timesteps": 492, "rewards": [0.35740333795547485], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:18:49.597804", "num_timesteps": 492, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 97, "train/loss": 0.034093547612428665, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:18:49.892889", "num_timesteps": 493, "rewards": [0.2880403697490692], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:50.175493", "num_timesteps": 494, "rewards": [0.27373841404914856], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:50.460436", "num_timesteps": 495, "rewards": [0.36259180307388306], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:50.743766", "num_timesteps": 496, "rewards": [0.33753764629364014], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:18:50.743892", "num_timesteps": 496, "logger": {"train/learning_rate": 0.0001, "train/n_updates": 98, "train/loss": 0.019757186993956566, "rollout/exploration_rate": 0.05}}
+{"type": "step", "timestamp": "2026-02-24T15:18:51.002831", "num_timesteps": 497, "rewards": [0.29755929112434387], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:51.270589", "num_timesteps": 498, "rewards": [0.3250058889389038], "actions": [13]}
+{"type": "step", "timestamp": "2026-02-24T15:18:51.615053", "num_timesteps": 499, "rewards": [0.14682279527187347], "actions": [26]}
+{"type": "step", "timestamp": "2026-02-24T15:21:12.626541", "num_timesteps": 500, "rewards": [0.2861133813858032], "actions": [13]}
+{"type": "rollout", "timestamp": "2026-02-24T15:21:12.626679", "num_timesteps": 500, "logger": {"rollout/exploration_rate": 0.05}}
+{"type": "end", "timestamp": "2026-02-24T15:21:12.636380", "total_timesteps": 500}
