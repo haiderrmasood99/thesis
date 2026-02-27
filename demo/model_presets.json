@@ -1,0 +1,28 @@
+{
+  "presets": [
+    {
+      "id": "fert_robust_random",
+      "title": "Fertilization: Robust PPO (Adaptive + Random Weather)",
+      "domain": "fertilization",
+      "run_dir": "run-20260224_083626-5auy5345",
+      "model_path": "wandb/run-20260224_083626-5auy5345/files/model.zip",
+      "notes": "Recommended practical demo model. Strong holdout behavior and robust random-weather policy."
+    },
+    {
+      "id": "fert_peak_fixed",
+      "title": "Fertilization: Peak PPO (Adaptive + Fixed Weather)",
+      "domain": "fertilization",
+      "run_dir": "run-20260223_211845-zyo19dh1",
+      "model_path": "wandb/run-20260223_211845-zyo19dh1/files/model.zip",
+      "notes": "Highest observed peak deterministic score in audited runs; less robust than random-weather recommendation."
+    },
+    {
+      "id": "crop_best_observed",
+      "title": "Crop Planning: Best Observed PPO (Adaptive + Fixed Weather)",
+      "domain": "crop_planning",
+      "run_dir": "run-20260224_115813-ryiikyh2",
+      "model_path": "wandb/run-20260224_115813-ryiikyh2/files/model.zip",
+      "notes": "Best observed crop-planning score in current evidence table."
+    }
+  ]
+}
