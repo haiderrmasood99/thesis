@@ -3,7 +3,7 @@
 This repository contains an [OpenAI gym](https://gym.openai.com/) interface to the [Cycles 
 crop growth simulator](https://plantscience.psu.edu/research/labs/kemanian/models-and-tools/cycles).
 
-For more information about cyclesgym, see our [user manual](documents/manual.md).
+For complete repository and thesis documentation, start with [final_docs/README.md](final_docs/README.md).
 
 ## Installation
 
@@ -39,4 +39,3 @@ Or, if you are using zsh:
 ```bash
 pip install -e .\[SOLVERS\]
 ```
-

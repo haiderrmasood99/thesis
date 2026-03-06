@@ -1,0 +1,436 @@
+"Name","State","Notes","User","Tags","Created","Runtime","Sweep","_current_progress_remaining","_custom_logger","_episode_num","_last_episode_starts","_last_obs","_last_original_obs","_logger","_n_calls","_n_updates","_num_timesteps_at_start","_stats_window_size","_total_timesteps","_vec_normalize_env","action_noise","action_space","algo","batch_norm_stats","batch_norm_stats_target","batch_size","buffer_size","clip_range","clip_range_vf","device","ent_coef","env","env_class","ep_info_buffer","ep_success_buffer","eval_end_year","eval_env_class","eval_freq","eval_start_year","exploration_final_eps","exploration_fraction","exploration_initial_eps","exploration_rate","exploration_schedule","fixed_weather","gae_lambda","gamma","gradient_steps","learning_rate","learning_starts","log_every_steps","log_step_actions","log_step_rewards","lr_schedule","max_grad_norm","method","n_envs","n_epochs","n_process","n_steps","non_adaptive","norm_reward","normalize_advantage","num_timesteps","observation_space","optimize_memory_usage","policy","policy_class","policy_kwargs","q_net","q_net_target","replay_buffer","replay_buffer_class","replay_buffer_kwargs","rollout_buffer","rollout_buffer_class","rollout_buffer_kwargs","run_id","sde_sample_freq","seed","start_time","target_kl","target_update_interval","tau","tensorboard_log","total_timesteps","train_end_year","train_freq","train_start_year","use_sde","use_sde_at_warmup","verbose","vf_coef","weather_generator_class","weather_generator_kwargs.base_weather_file","weather_generator_kwargs.n_weather_samples","weather_generator_kwargs.sampling_end_year","weather_generator_kwargs.sampling_start_year","weather_generator_kwargs.target_year_range","eval_det/mean_ep_length","eval_det/mean_reward","eval_det_new_years/mean_ep_length","eval_det_new_years/mean_reward","eval_det_other_loc/mean_ep_length","eval_det_other_loc/mean_reward","eval_det_other_loc_long/mean_ep_length","eval_det_other_loc_long/mean_reward","eval_sto/mean_ep_length","eval_sto/mean_reward","eval_sto_new_years/mean_ep_length","eval_sto_new_years/mean_reward","eval_sto_other_loc/mean_ep_length","eval_sto_other_loc/mean_reward","eval_sto_other_loc_long/mean_ep_length","eval_sto_other_loc_long/mean_reward","global_step","rollout/ep_len_mean","rollout/ep_rew_mean","rollout/exploration_rate","time/fps","train/approx_kl","train/clip_fraction","train/clip_range","train/entropy_loss","train/explained_variance","train/learning_rate","train/loss","train/policy_gradient_loss","train/policy_loss","train/value_loss"
+"stoic-disco-14","finished","-","","","2026-02-24T15:06:22.000Z","891","","1","False","0","[ True]","[[-0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071
+  -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071
+  -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071
+  -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071
+  -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071
+  -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071]]","[[-1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1.
+  -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1.]]","<stable_baselines3.common.logger.Logger object at 0x70cd5c10f700>","0","0","0","100","500","<stable_baselines3.common.vec_env.vec_normalize.VecNormalize object at 0x70cd5ca3bbe0>","None","Discrete(28)","DQN","[]","[]","64","1000000","","","auto","","<stable_baselines3.common.vec_env.vec_normalize.VecNormalize object at 0x70cd5ca3bbe0>","CropPlanningFixedPlantingRotationObserver","deque([], maxlen=100)","deque([], maxlen=100)","2019","CropPlanningFixedPlantingRotationObserver","100","2019","0.05","0.1","1","0","LinearSchedule(start=1.0, end=0.05, end_fraction=0.1)","False","","0.99","1","0.0001","100","1","true","true","FloatSchedule(ConstantSchedule(val=0.0001))","10","DQN","1","10","1","80","True","true","","0","Box(-inf, -inf, (36,), float32)","False","DQNPolicy(
+  (q_net): QNetwork(
+    (features_extractor): FlattenExtractor(
+      (flatten): Flatten(start_dim=1, end_dim=-1)
+    )
+    (q_net): Sequential(
+      (0): Linear(in_features=36, out_features=64, bias=True)
+      (1): ReLU()
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): ReLU()
+      (4): Linear(in_features=64, out_features=28, bias=True)
+    )
+  )
+  (q_net_target): QNetwork(
+    (features_extractor): FlattenExtractor(
+      (flatten): Flatten(start_dim=1, end_dim=-1)
+    )
+    (q_net): Sequential(
+      (0): Linear(in_features=36, out_features=64, bias=True)
+      (1): ReLU()
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): ReLU()
+      (4): Linear(in_features=64, out_features=28, bias=True)
+    )
+  )
+)","<class 'stable_baselines3.dqn.policies.DQNPolicy'>","{}","QNetwork(
+  (features_extractor): FlattenExtractor(
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+  )
+  (q_net): Sequential(
+    (0): Linear(in_features=36, out_features=64, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=64, out_features=64, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=64, out_features=28, bias=True)
+  )
+)","QNetwork(
+  (features_extractor): FlattenExtractor(
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+  )
+  (q_net): Sequential(
+    (0): Linear(in_features=36, out_features=64, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=64, out_features=64, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=64, out_features=28, bias=True)
+  )
+)","<stable_baselines3.common.buffers.ReplayBuffer object at 0x70cd5de8ec20>","<class 'stable_baselines3.common.buffers.ReplayBuffer'>","{}","","","","0","-1","1","1771945584860840200","","10000","1","/workspace/thesis/wandb/run-20260224_150621-yk2yycaq/files","500","2018","TrainFreq(frequency=4, unit=<TrainFrequencyUnit.STEP: 'step'>)","2005","False","False","1","","WeatherShuffler","/workspace/thesis/cycles/input/Pakistan_Site_final.weather","2","2018","2005","[2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018]","14","19553.072","1","1746.9648","14","19553.072","14","19553.072","14","19553.072","1","1746.9648","14","19059.66","14","18810.371","500","14","17962.68","0.05","0","","","","","","0.0001","0.02195337","","",""
+"different-grass-13","finished","-","","","2026-02-24T14:50:13.000Z","962","","1","False","0","[ True]","[[9.9999998e-03 9.9969227e-03 9.9990647e-03 9.9989166e-03 0.0000000e+00
+  9.9989166e-03 9.5731830e-03 8.2798884e-05 4.4254060e-03 2.0287931e-05
+  1.0798919e-06]]","[[1.559642e+04 4.030213e+01 7.312494e+01 6.793092e+01 0.000000e+00
+  6.793092e+01 3.312440e+00 8.281000e-03 4.935440e-01 2.029000e-03
+  1.080000e-04]]","<stable_baselines3.common.logger.Logger object at 0x7b22569abfd0>","","0","0","100","500","<stable_baselines3.common.vec_env.vec_normalize.VecNormalize object at 0x7b225693fc10>","None","MultiDiscrete([ 2 14])","A2C","","","64","","","","auto","0","<stable_baselines3.common.vec_env.vec_normalize.VecNormalize object at 0x7b225693fc10>","CropPlanningFixedPlanting","deque([], maxlen=100)","deque([], maxlen=100)","2019","CropPlanningFixedPlanting","100","2019","","","","","","True","1","0.99","","0.0007","","1","true","true","FloatSchedule(ConstantSchedule(val=0.0007))","0.5","A2C","1","10","1","80","False","true","False","0","Box(-inf, -inf, (11,), float32)","","ActorCriticPolicy(
+  (features_extractor): FlattenExtractor(
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+  )
+  (pi_features_extractor): FlattenExtractor(
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+  )
+  (vf_features_extractor): FlattenExtractor(
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+  )
+  (mlp_extractor): MlpExtractor(
+    (policy_net): Sequential(
+      (0): Linear(in_features=11, out_features=64, bias=True)
+      (1): Tanh()
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): Tanh()
+    )
+    (value_net): Sequential(
+      (0): Linear(in_features=11, out_features=64, bias=True)
+      (1): Tanh()
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): Tanh()
+    )
+  )
+  (action_net): Linear(in_features=64, out_features=16, bias=True)
+  (value_net): Linear(in_features=64, out_features=1, bias=True)
+)","<class 'stable_baselines3.common.policies.ActorCriticPolicy'>","{'optimizer_class': <class 'torch.optim.rmsprop.RMSprop'>, 'optimizer_kwargs': {'alpha': 0.99, 'eps': 1e-05, 'weight_decay': 0}}","","","","","","<stable_baselines3.common.buffers.RolloutBuffer object at 0x7b2257d92c20>","<class 'stable_baselines3.common.buffers.RolloutBuffer'>","{}","0","-1","1","1771944616409197000","","","","/workspace/thesis/wandb/run-20260224_145013-g2qwi6fs/files","500","2018","","2005","False","","1","0.5","FixedWeatherGenerator","/workspace/thesis/cycles/input/Pakistan_Site_final.weather","","","","","14","21292.441","1","728.56665","14","21292.441","14","21292.441","14","20636.96","1","687.8882","14","20028.355","14","19266.537","500","14","17869.656","","0","","","","-2.939037","0.33404315","0.0007","","","-1.1569688","0.1906661"
+"eager-haze-12","finished","-","","","2026-02-24T12:45:11.000Z","907","","1","False","0","[ True]","[[-0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071
+  -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071
+  -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071
+  -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071
+  -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071
+  -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071]]","[[-1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1.
+  -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1.]]","<stable_baselines3.common.logger.Logger object at 0x7bdf84476050>","","0","0","100","500","<stable_baselines3.common.vec_env.vec_normalize.VecNormalize object at 0x7bdf8453fc70>","None","MultiDiscrete([ 2 14])","PPO","","","64","","FloatSchedule(ConstantSchedule(val=0.2))","None","auto","0","<stable_baselines3.common.vec_env.vec_normalize.VecNormalize object at 0x7bdf8453fc70>","CropPlanningFixedPlantingRotationObserver","deque([], maxlen=100)","deque([], maxlen=100)","2019","CropPlanningFixedPlantingRotationObserver","100","2019","","","","","","False","0.95","0.99","","0.0003","","1","true","true","FloatSchedule(ConstantSchedule(val=0.0003))","0.5","PPO","1","10","1","80","True","true","True","0","Box(-inf, -inf, (36,), float32)","","ActorCriticPolicy(
+  (features_extractor): FlattenExtractor(
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+  )
+  (pi_features_extractor): FlattenExtractor(
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+  )
+  (vf_features_extractor): FlattenExtractor(
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+  )
+  (mlp_extractor): MlpExtractor(
+    (policy_net): Sequential(
+      (0): Linear(in_features=36, out_features=64, bias=True)
+      (1): Tanh()
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): Tanh()
+    )
+    (value_net): Sequential(
+      (0): Linear(in_features=36, out_features=64, bias=True)
+      (1): Tanh()
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): Tanh()
+    )
+  )
+  (action_net): Linear(in_features=64, out_features=16, bias=True)
+  (value_net): Linear(in_features=64, out_features=1, bias=True)
+)","<class 'stable_baselines3.common.policies.ActorCriticPolicy'>","{}","","","","","","<stable_baselines3.common.buffers.RolloutBuffer object at 0x7bdf84476e90>","<class 'stable_baselines3.common.buffers.RolloutBuffer'>","{}","0","-1","1","1771937114237370400","None","","","/workspace/thesis/wandb/run-20260224_124511-f6pjgtck/files","500","2018","","2005","False","","1","0.5","WeatherShuffler","/workspace/thesis/cycles/input/Pakistan_Site_final.weather","2","2018","2005","[2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018]","14","18469.4","1","1889.8268","14","18469.4","14","18469.4","14","15674.016","1","1393.8458","14","15566.752","14","17646.756","560","14","16511.969","","0","0.011656553","0.0484375","0.2","-3.261532","0.83714914","0.0003","0.16549009","-0.031318046","","0.65072834"
+"pleasant-spaceship-11","finished","-","","","2026-02-24T12:29:53.000Z","911","","1","False","0","[ True]","[[-0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071
+  -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071
+  -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071
+  -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071
+  -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071
+  -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071]]","[[-1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1.
+  -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1.]]","<stable_baselines3.common.logger.Logger object at 0x73fa322a5180>","","0","0","100","500","<stable_baselines3.common.vec_env.vec_normalize.VecNormalize object at 0x73fa3223fb80>","None","MultiDiscrete([ 2 14])","PPO","","","64","","FloatSchedule(ConstantSchedule(val=0.2))","None","auto","0","<stable_baselines3.common.vec_env.vec_normalize.VecNormalize object at 0x73fa3223fb80>","CropPlanningFixedPlantingRotationObserver","deque([], maxlen=100)","deque([], maxlen=100)","2019","CropPlanningFixedPlantingRotationObserver","100","2019","","","","","","True","0.95","0.99","","0.0003","","1","true","true","FloatSchedule(ConstantSchedule(val=0.0003))","0.5","PPO","1","10","1","80","True","true","True","0","Box(-inf, -inf, (36,), float32)","","ActorCriticPolicy(
+  (features_extractor): FlattenExtractor(
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+  )
+  (pi_features_extractor): FlattenExtractor(
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+  )
+  (vf_features_extractor): FlattenExtractor(
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+  )
+  (mlp_extractor): MlpExtractor(
+    (policy_net): Sequential(
+      (0): Linear(in_features=36, out_features=64, bias=True)
+      (1): Tanh()
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): Tanh()
+    )
+    (value_net): Sequential(
+      (0): Linear(in_features=36, out_features=64, bias=True)
+      (1): Tanh()
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): Tanh()
+    )
+  )
+  (action_net): Linear(in_features=64, out_features=16, bias=True)
+  (value_net): Linear(in_features=64, out_features=1, bias=True)
+)","<class 'stable_baselines3.common.policies.ActorCriticPolicy'>","{}","","","","","","<stable_baselines3.common.buffers.RolloutBuffer object at 0x73fa3368bcd0>","<class 'stable_baselines3.common.buffers.RolloutBuffer'>","{}","0","-1","1","1771936196372180700","None","","","/workspace/thesis/wandb/run-20260224_122953-pn2y0yb8/files","500","2018","","2005","False","","1","0.5","FixedWeatherGenerator","/workspace/thesis/cycles/input/Pakistan_Site_final.weather","","","","","14","18848.514","1","1897.7816","14","18848.514","14","18848.514","14","15704.614","1","1173.3745","14","15906.553","14","17377.621","560","14","16359.381","","0","0.006258182","0.0125","0.2","-3.2805896","0.8410999","0.0003","0.21346137","-0.023660664","","0.78218675"
+"fine-energy-10","finished","-","","","2026-02-24T12:14:01.000Z","946","","1","False","0","[ True]","[[9.9999998e-03 9.9969581e-03 9.9989222e-03 9.9987397e-03 0.0000000e+00
+  9.9987397e-03 9.6246237e-03 8.8647648e-05 3.0348080e-03 2.2377706e-05
+  1.1898810e-06]]","[[1.5601363e+04 4.0535339e+01 6.8122505e+01 6.2987484e+01 0.0000000e+00
+  6.2987484e+01 3.5464449e+00 8.8660000e-03 3.1853399e-01 2.2380000e-03
+  1.1900000e-04]]","<stable_baselines3.common.logger.Logger object at 0x7a176c883160>","","0","0","100","500","<stable_baselines3.common.vec_env.vec_normalize.VecNormalize object at 0x7a176c94bc40>","None","MultiDiscrete([ 2 14])","PPO","","","64","","FloatSchedule(ConstantSchedule(val=0.2))","None","auto","0","<stable_baselines3.common.vec_env.vec_normalize.VecNormalize object at 0x7a176c94bc40>","CropPlanningFixedPlanting","deque([], maxlen=100)","deque([], maxlen=100)","2019","CropPlanningFixedPlanting","100","2019","","","","","","False","0.95","0.99","","0.0003","","1","true","true","FloatSchedule(ConstantSchedule(val=0.0003))","0.5","PPO","1","10","1","80","False","true","True","0","Box(-inf, -inf, (11,), float32)","","ActorCriticPolicy(
+  (features_extractor): FlattenExtractor(
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+  )
+  (pi_features_extractor): FlattenExtractor(
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+  )
+  (vf_features_extractor): FlattenExtractor(
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+  )
+  (mlp_extractor): MlpExtractor(
+    (policy_net): Sequential(
+      (0): Linear(in_features=11, out_features=64, bias=True)
+      (1): Tanh()
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): Tanh()
+    )
+    (value_net): Sequential(
+      (0): Linear(in_features=11, out_features=64, bias=True)
+      (1): Tanh()
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): Tanh()
+    )
+  )
+  (action_net): Linear(in_features=64, out_features=16, bias=True)
+  (value_net): Linear(in_features=64, out_features=1, bias=True)
+)","<class 'stable_baselines3.common.policies.ActorCriticPolicy'>","{}","","","","","","<stable_baselines3.common.buffers.RolloutBuffer object at 0x7a176dda2aa0>","<class 'stable_baselines3.common.buffers.RolloutBuffer'>","{}","0","-1","1","1771935244485876000","None","","","/workspace/thesis/wandb/run-20260224_121401-t7z41gpn/files","500","2018","","2005","False","","1","0.5","WeatherShuffler","/workspace/thesis/cycles/input/Pakistan_Site_final.weather","2","2018","2005","[2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018]","14","17403.996","1","703.26276","14","17403.996","14","17403.996","14","18872.559","1","1128.4663","14","18887.105","14","17144.584","560","14","16728.74","","0","0.008154463","0.021875","0.2","-3.287976","0.71956146","0.0003","0.11383096","-0.029564755","","0.4987775"
+"mild-leaf-9","finished","-","","","2026-02-24T11:58:14.000Z","941","","1","False","0","[ True]","[[9.9999998e-03 9.9969227e-03 9.9990647e-03 9.9989166e-03 0.0000000e+00
+  9.9989166e-03 9.5731830e-03 8.2798884e-05 4.4254060e-03 2.0287931e-05
+  1.0798919e-06]]","[[1.559642e+04 4.030213e+01 7.312494e+01 6.793092e+01 0.000000e+00
+  6.793092e+01 3.312440e+00 8.281000e-03 4.935440e-01 2.029000e-03
+  1.080000e-04]]","<stable_baselines3.common.logger.Logger object at 0x79f7505b6cb0>","","0","0","100","500","<stable_baselines3.common.vec_env.vec_normalize.VecNormalize object at 0x79f750547c70>","None","MultiDiscrete([ 2 14])","PPO","","","64","","FloatSchedule(ConstantSchedule(val=0.2))","None","auto","0","<stable_baselines3.common.vec_env.vec_normalize.VecNormalize object at 0x79f750547c70>","CropPlanningFixedPlanting","deque([], maxlen=100)","deque([], maxlen=100)","2019","CropPlanningFixedPlanting","100","2019","","","","","","True","0.95","0.99","","0.0003","","1","true","true","FloatSchedule(ConstantSchedule(val=0.0003))","0.5","PPO","1","10","1","80","False","true","True","0","Box(-inf, -inf, (11,), float32)","","ActorCriticPolicy(
+  (features_extractor): FlattenExtractor(
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+  )
+  (pi_features_extractor): FlattenExtractor(
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+  )
+  (vf_features_extractor): FlattenExtractor(
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+  )
+  (mlp_extractor): MlpExtractor(
+    (policy_net): Sequential(
+      (0): Linear(in_features=11, out_features=64, bias=True)
+      (1): Tanh()
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): Tanh()
+    )
+    (value_net): Sequential(
+      (0): Linear(in_features=11, out_features=64, bias=True)
+      (1): Tanh()
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): Tanh()
+    )
+  )
+  (action_net): Linear(in_features=64, out_features=16, bias=True)
+  (value_net): Linear(in_features=64, out_features=1, bias=True)
+)","<class 'stable_baselines3.common.policies.ActorCriticPolicy'>","{}","","","","","","<stable_baselines3.common.buffers.RolloutBuffer object at 0x79f750547ee0>","<class 'stable_baselines3.common.buffers.RolloutBuffer'>","{}","0","-1","1","1771934297337030700","None","","","/workspace/thesis/wandb/run-20260224_115813-ryiikyh2/files","500","2018","","2005","False","","1","0.5","FixedWeatherGenerator","/workspace/thesis/cycles/input/Pakistan_Site_final.weather","","","","","14","21683.79","1","703.26276","14","21683.79","14","21683.79","14","19436.912","1","1128.4663","14","18883.314","14","16335.58","560","14","16831.422","","0","0.0058783386","0.01484375","0.2","-3.2978895","0.69649565","0.0003","0.19811529","-0.025220117","","0.6307563"
+"fragrant-paper-8","failed","-","","","2026-02-24T04:00:20.000Z","2","","","","","","","","","","","","","","","","","","","","64","","","","auto","","","CropPlanningFixedPlantingRotationObserver","","","2019","CropPlanningFixedPlantingRotationObserver","100","2019","","","","","","False","","","","","","1","true","true","","","DQN","","10","1","80","True","true","","","","","","","","","","","","","","","","0","","1","","","","","","500","2018","","2005","","","1","","WeatherShuffler","/workspace/thesis/cycles/input/Pakistan_Site_final.weather","2","2018","2005","[2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018]","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"dulcet-field-7","finished","-","","","2026-02-24T03:44:45.000Z","928","","1","False","0","[ True]","[[9.9999998e-03 9.9969227e-03 9.9990647e-03 9.9989166e-03 0.0000000e+00
+  9.9989166e-03 9.5731830e-03 8.2798884e-05 4.4254060e-03 2.0287931e-05
+  1.0798919e-06]]","[[1.559642e+04 4.030213e+01 7.312494e+01 6.793092e+01 0.000000e+00
+  6.793092e+01 3.312440e+00 8.281000e-03 4.935440e-01 2.029000e-03
+  1.080000e-04]]","<stable_baselines3.common.logger.Logger object at 0x7afddcbcec80>","","0","0","100","500","<stable_baselines3.common.vec_env.vec_normalize.VecNormalize object at 0x7afddd573460>","None","MultiDiscrete([ 2 14])","A2C","","","64","","","","auto","0","<stable_baselines3.common.vec_env.vec_normalize.VecNormalize object at 0x7afddd573460>","CropPlanningFixedPlanting","deque([], maxlen=100)","deque([], maxlen=100)","2019","CropPlanningFixedPlanting","100","2019","","","","","","True","1","0.99","","0.0007","","1","true","true","FloatSchedule(ConstantSchedule(val=0.0007))","0.5","A2C","1","10","1","80","False","true","False","0","Box(-inf, -inf, (11,), float32)","","ActorCriticPolicy(
+  (features_extractor): FlattenExtractor(
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+  )
+  (pi_features_extractor): FlattenExtractor(
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+  )
+  (vf_features_extractor): FlattenExtractor(
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+  )
+  (mlp_extractor): MlpExtractor(
+    (policy_net): Sequential(
+      (0): Linear(in_features=11, out_features=64, bias=True)
+      (1): Tanh()
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): Tanh()
+    )
+    (value_net): Sequential(
+      (0): Linear(in_features=11, out_features=64, bias=True)
+      (1): Tanh()
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): Tanh()
+    )
+  )
+  (action_net): Linear(in_features=64, out_features=16, bias=True)
+  (value_net): Linear(in_features=64, out_features=1, bias=True)
+)","<class 'stable_baselines3.common.policies.ActorCriticPolicy'>","{'optimizer_class': <class 'torch.optim.rmsprop.RMSprop'>, 'optimizer_kwargs': {'alpha': 0.99, 'eps': 1e-05, 'weight_decay': 0}}","","","","","","<stable_baselines3.common.buffers.RolloutBuffer object at 0x7afdddfa5810>","<class 'stable_baselines3.common.buffers.RolloutBuffer'>","{}","0","-1","1","1771904688435898400","","","","/workspace/thesis/wandb/run-20260224_034445-8ocpqsgt/files","500","2018","","2005","False","","1","0.5","FixedWeatherGenerator","/workspace/thesis/cycles/input/Pakistan_Site_final.weather","","","","","14","21292.441","1","728.56665","14","21292.441","14","21292.441","14","20636.96","1","687.8882","14","20028.355","14","19266.537","500","14","17869.656","","0","","","","-2.939037","0.33404315","0.0007","","","-1.1569688","0.1906661"
+"misunderstood-snowflake-6","finished","-","","","2026-02-24T03:18:30.000Z","923","","1","False","0","[ True]","[[-0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071
+  -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071
+  -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071
+  -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071
+  -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071
+  -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071]]","[[-1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1.
+  -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1.]]","<stable_baselines3.common.logger.Logger object at 0x7acfa4f69ea0>","","0","0","100","500","<stable_baselines3.common.vec_env.vec_normalize.VecNormalize object at 0x7acfa6a5f460>","None","MultiDiscrete([ 2 14])","PPO","","","64","","FloatSchedule(ConstantSchedule(val=0.2))","None","auto","0","<stable_baselines3.common.vec_env.vec_normalize.VecNormalize object at 0x7acfa6a5f460>","CropPlanningFixedPlantingRotationObserver","deque([], maxlen=100)","deque([], maxlen=100)","2019","CropPlanningFixedPlantingRotationObserver","100","2019","","","","","","False","0.95","0.99","","0.0003","","1","true","true","FloatSchedule(ConstantSchedule(val=0.0003))","0.5","PPO","1","10","1","80","True","true","True","0","Box(-inf, -inf, (36,), float32)","","ActorCriticPolicy(
+  (features_extractor): FlattenExtractor(
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+  )
+  (pi_features_extractor): FlattenExtractor(
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+  )
+  (vf_features_extractor): FlattenExtractor(
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+  )
+  (mlp_extractor): MlpExtractor(
+    (policy_net): Sequential(
+      (0): Linear(in_features=36, out_features=64, bias=True)
+      (1): Tanh()
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): Tanh()
+    )
+    (value_net): Sequential(
+      (0): Linear(in_features=36, out_features=64, bias=True)
+      (1): Tanh()
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): Tanh()
+    )
+  )
+  (action_net): Linear(in_features=64, out_features=16, bias=True)
+  (value_net): Linear(in_features=64, out_features=1, bias=True)
+)","<class 'stable_baselines3.common.policies.ActorCriticPolicy'>","{}","","","","","","<stable_baselines3.common.buffers.RolloutBuffer object at 0x7acfa4f6b550>","<class 'stable_baselines3.common.buffers.RolloutBuffer'>","{}","0","-1","1","1771903113416347100","None","","","/workspace/thesis/wandb/run-20260224_031830-1ey5et2m/files","500","2018","","2005","False","","1","0.5","WeatherShuffler","/workspace/thesis/cycles/input/Pakistan_Site_final.weather","2","2018","2005","[2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018]","14","18469.4","1","1889.8268","14","18469.4","14","18469.4","14","15674.016","1","1393.8458","14","15566.752","14","17646.756","560","14","16511.969","","0","0.011656553","0.0484375","0.2","-3.261532","0.83714914","0.0003","0.16549009","-0.031318046","","0.65072834"
+"solar-surf-5","finished","-","","","2026-02-24T03:03:15.000Z","909","","1","False","0","[ True]","[[-0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071
+  -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071
+  -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071
+  -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071
+  -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071
+  -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071 -0.00707071]]","[[-1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1.
+  -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1.]]","<stable_baselines3.common.logger.Logger object at 0x7a6a3a1e8130>","","0","0","100","500","<stable_baselines3.common.vec_env.vec_normalize.VecNormalize object at 0x7a6a3ab5f460>","None","MultiDiscrete([ 2 14])","PPO","","","64","","FloatSchedule(ConstantSchedule(val=0.2))","None","auto","0","<stable_baselines3.common.vec_env.vec_normalize.VecNormalize object at 0x7a6a3ab5f460>","CropPlanningFixedPlantingRotationObserver","deque([], maxlen=100)","deque([], maxlen=100)","2019","CropPlanningFixedPlantingRotationObserver","100","2019","","","","","","True","0.95","0.99","","0.0003","","1","true","true","FloatSchedule(ConstantSchedule(val=0.0003))","0.5","PPO","1","10","1","80","True","true","True","0","Box(-inf, -inf, (36,), float32)","","ActorCriticPolicy(
+  (features_extractor): FlattenExtractor(
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+  )
+  (pi_features_extractor): FlattenExtractor(
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+  )
+  (vf_features_extractor): FlattenExtractor(
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+  )
+  (mlp_extractor): MlpExtractor(
+    (policy_net): Sequential(
+      (0): Linear(in_features=36, out_features=64, bias=True)
+      (1): Tanh()
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): Tanh()
+    )
+    (value_net): Sequential(
+      (0): Linear(in_features=36, out_features=64, bias=True)
+      (1): Tanh()
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): Tanh()
+    )
+  )
+  (action_net): Linear(in_features=64, out_features=16, bias=True)
+  (value_net): Linear(in_features=64, out_features=1, bias=True)
+)","<class 'stable_baselines3.common.policies.ActorCriticPolicy'>","{}","","","","","","<stable_baselines3.common.buffers.RolloutBuffer object at 0x7a6a3a1ea860>","<class 'stable_baselines3.common.buffers.RolloutBuffer'>","{}","0","-1","1","1771902198591030800","None","","","/workspace/thesis/wandb/run-20260224_030315-b9ectdnu/files","500","2018","","2005","False","","1","0.5","FixedWeatherGenerator","/workspace/thesis/cycles/input/Pakistan_Site_final.weather","","","","","14","18848.514","1","1897.7816","14","18848.514","14","18848.514","14","15704.614","1","1173.3745","14","15906.553","14","17377.621","560","14","16359.381","","0","0.006258182","0.0125","0.2","-3.2805896","0.8410999","0.0003","0.21346137","-0.023660664","","0.78218675"
+"cool-tree-4","finished","-","","","2026-02-24T02:47:28.000Z","941","","1","False","0","[ True]","[[9.9999998e-03 9.9969581e-03 9.9989222e-03 9.9987397e-03 0.0000000e+00
+  9.9987397e-03 9.6246237e-03 8.8647648e-05 3.0348080e-03 2.2377706e-05
+  1.1898810e-06]]","[[1.5601363e+04 4.0535339e+01 6.8122505e+01 6.2987484e+01 0.0000000e+00
+  6.2987484e+01 3.5464449e+00 8.8660000e-03 3.1853399e-01 2.2380000e-03
+  1.1900000e-04]]","<stable_baselines3.common.logger.Logger object at 0x714de190c400>","","0","0","100","500","<stable_baselines3.common.vec_env.vec_normalize.VecNormalize object at 0x714de345b460>","None","MultiDiscrete([ 2 14])","PPO","","","64","","FloatSchedule(ConstantSchedule(val=0.2))","None","auto","0","<stable_baselines3.common.vec_env.vec_normalize.VecNormalize object at 0x714de345b460>","CropPlanningFixedPlanting","deque([], maxlen=100)","deque([], maxlen=100)","2019","CropPlanningFixedPlanting","100","2019","","","","","","False","0.95","0.99","","0.0003","","1","true","true","FloatSchedule(ConstantSchedule(val=0.0003))","0.5","PPO","1","10","1","80","False","true","True","0","Box(-inf, -inf, (11,), float32)","","ActorCriticPolicy(
+  (features_extractor): FlattenExtractor(
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+  )
+  (pi_features_extractor): FlattenExtractor(
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+  )
+  (vf_features_extractor): FlattenExtractor(
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+  )
+  (mlp_extractor): MlpExtractor(
+    (policy_net): Sequential(
+      (0): Linear(in_features=11, out_features=64, bias=True)
+      (1): Tanh()
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): Tanh()
+    )
+    (value_net): Sequential(
+      (0): Linear(in_features=11, out_features=64, bias=True)
+      (1): Tanh()
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): Tanh()
+    )
+  )
+  (action_net): Linear(in_features=64, out_features=16, bias=True)
+  (value_net): Linear(in_features=64, out_features=1, bias=True)
+)","<class 'stable_baselines3.common.policies.ActorCriticPolicy'>","{}","","","","","","<stable_baselines3.common.buffers.RolloutBuffer object at 0x714de190cd00>","<class 'stable_baselines3.common.buffers.RolloutBuffer'>","{}","0","-1","1","1771901251715716900","None","","","/workspace/thesis/wandb/run-20260224_024728-nihqzg3y/files","500","2018","","2005","False","","1","0.5","WeatherShuffler","/workspace/thesis/cycles/input/Pakistan_Site_final.weather","2","2018","2005","[2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018]","14","17403.996","1","703.26276","14","17403.996","14","17403.996","14","18872.559","1","1128.4663","14","18887.105","14","17144.584","560","14","16728.74","","0","0.008154463","0.021875","0.2","-3.287976","0.71956146","0.0003","0.11383096","-0.029564755","","0.4987775"
+"happy-cloud-3","finished","-","","","2026-02-24T02:31:40.000Z","942","","1","False","0","[ True]","[[9.9999998e-03 9.9969227e-03 9.9990647e-03 9.9989166e-03 0.0000000e+00
+  9.9989166e-03 9.5731830e-03 8.2798884e-05 4.4254060e-03 2.0287931e-05
+  1.0798919e-06]]","[[1.559642e+04 4.030213e+01 7.312494e+01 6.793092e+01 0.000000e+00
+  6.793092e+01 3.312440e+00 8.281000e-03 4.935440e-01 2.029000e-03
+  1.080000e-04]]","<stable_baselines3.common.logger.Logger object at 0x78b2f44c1330>","","0","0","100","500","<stable_baselines3.common.vec_env.vec_normalize.VecNormalize object at 0x78b2f465b460>","None","MultiDiscrete([ 2 14])","PPO","","","64","","FloatSchedule(ConstantSchedule(val=0.2))","None","auto","0","<stable_baselines3.common.vec_env.vec_normalize.VecNormalize object at 0x78b2f465b460>","CropPlanningFixedPlanting","deque([], maxlen=100)","deque([], maxlen=100)","2019","CropPlanningFixedPlanting","100","2019","","","","","","True","0.95","0.99","","0.0003","","1","true","true","FloatSchedule(ConstantSchedule(val=0.0003))","0.5","PPO","1","10","1","80","False","true","True","0","Box(-inf, -inf, (11,), float32)","","ActorCriticPolicy(
+  (features_extractor): FlattenExtractor(
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+  )
+  (pi_features_extractor): FlattenExtractor(
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+  )
+  (vf_features_extractor): FlattenExtractor(
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+  )
+  (mlp_extractor): MlpExtractor(
+    (policy_net): Sequential(
+      (0): Linear(in_features=11, out_features=64, bias=True)
+      (1): Tanh()
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): Tanh()
+    )
+    (value_net): Sequential(
+      (0): Linear(in_features=11, out_features=64, bias=True)
+      (1): Tanh()
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): Tanh()
+    )
+  )
+  (action_net): Linear(in_features=64, out_features=16, bias=True)
+  (value_net): Linear(in_features=64, out_features=1, bias=True)
+)","<class 'stable_baselines3.common.policies.ActorCriticPolicy'>","{}","","","","","","<stable_baselines3.common.buffers.RolloutBuffer object at 0x78b2f44c13f0>","<class 'stable_baselines3.common.buffers.RolloutBuffer'>","{}","0","-1","1","1771900302999598800","None","","","/workspace/thesis/wandb/run-20260224_023139-na8sa0ll/files","500","2018","","2005","False","","1","0.5","FixedWeatherGenerator","/workspace/thesis/cycles/input/Pakistan_Site_final.weather","","","","","14","21683.79","1","703.26276","14","21683.79","14","21683.79","14","19436.912","1","1128.4663","14","18883.314","14","16335.58","560","14","16831.422","","0","0.0058783386","0.01484375","0.2","-3.2978895","0.69649565","0.0003","0.19811529","-0.025220117","","0.6307563"
+"azure-bush-2","crashed","-","","","2026-02-23T23:44:59.000Z","16","","1","False","0","[ True]","[[9.9999998e-03 9.9969227e-03 9.9990657e-03 9.9989176e-03 0.0000000e+00
+  9.9989176e-03 9.5738387e-03 8.2868864e-05 4.4257953e-03 2.0287931e-05
+  1.0798919e-06]]","[[1.7282410e+04 4.0304844e+01 7.3169693e+01 6.7978455e+01 0.0000000e+00
+  6.7978455e+01 3.3151619e+00 8.2879998e-03 4.9359801e-01 2.0290001e-03
+  1.0800000e-04]]","<stable_baselines3.common.logger.Logger object at 0x701e8dcd0b50>","","0","0","100","500","<stable_baselines3.common.vec_env.vec_normalize.VecNormalize object at 0x701e8e65ef20>","None","MultiDiscrete([ 2 14])","PPO","","","64","","FloatSchedule(ConstantSchedule(val=0.2))","None","auto","0","<stable_baselines3.common.vec_env.vec_normalize.VecNormalize object at 0x701e8e65ef20>","CropPlanningFixedPlanting","deque([], maxlen=100)","deque([], maxlen=100)","2024","CropPlanningFixedPlanting","100","2019","","","","","","True","0.95","0.99","","0.0003","","1","true","true","FloatSchedule(ConstantSchedule(val=0.0003))","0.5","PPO","1","10","1","80","False","true","True","0","Box(-inf, -inf, (11,), float32)","","ActorCriticPolicy(
+  (features_extractor): FlattenExtractor(
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+  )
+  (pi_features_extractor): FlattenExtractor(
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+  )
+  (vf_features_extractor): FlattenExtractor(
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+  )
+  (mlp_extractor): MlpExtractor(
+    (policy_net): Sequential(
+      (0): Linear(in_features=11, out_features=64, bias=True)
+      (1): Tanh()
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): Tanh()
+    )
+    (value_net): Sequential(
+      (0): Linear(in_features=11, out_features=64, bias=True)
+      (1): Tanh()
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): Tanh()
+    )
+  )
+  (action_net): Linear(in_features=64, out_features=16, bias=True)
+  (value_net): Linear(in_features=64, out_features=1, bias=True)
+)","<class 'stable_baselines3.common.policies.ActorCriticPolicy'>","{}","","","","","","<stable_baselines3.common.buffers.RolloutBuffer object at 0x701e8f099870>","<class 'stable_baselines3.common.buffers.RolloutBuffer'>","{}","0","-1","1","1771890302168763000","None","","","/workspace/thesis/wandb/run-20260223_234457-h2dde51l/files","500","2018","","2005","False","","1","0.5","FixedWeatherGenerator","/workspace/thesis/cycles/input/Pakistan_Site_final.weather","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"zesty-disco-1","failed","-","","","2026-02-23T19:45:09.000Z","86","","1","False","0","[ True]","[[9.9999998e-03 9.9969236e-03 9.9990675e-03 9.9989204e-03 0.0000000e+00
+  9.9989204e-03 9.5751304e-03 8.2998842e-05 4.4248938e-03 2.0287931e-05
+  1.0798919e-06]]","[[2.3693893e+04 4.0310204e+01 7.3244446e+01 6.8058449e+01 0.0000000e+00
+  6.8058449e+01 3.3205330e+00 8.3010001e-03 4.9347299e-01 2.0290001e-03
+  1.0800000e-04]]","<stable_baselines3.common.logger.Logger object at 0x72f2ecbe9a50>","","0","0","100","500","<stable_baselines3.common.vec_env.vec_normalize.VecNormalize object at 0x72f2ed55f460>","None","MultiDiscrete([ 2 14])","PPO","","","64","","FloatSchedule(ConstantSchedule(val=0.2))","None","auto","0","<stable_baselines3.common.vec_env.vec_normalize.VecNormalize object at 0x72f2ed55f460>","CropPlanningFixedPlanting","deque([], maxlen=100)","deque([], maxlen=100)","2024","CropPlanningFixedPlanting","100","2019","","","","","","True","0.95","0.99","","0.0003","","1","true","true","FloatSchedule(ConstantSchedule(val=0.0003))","0.5","PPO","1","10","1","80","False","true","True","0","Box(-inf, -inf, (11,), float32)","","ActorCriticPolicy(
+  (features_extractor): FlattenExtractor(
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+  )
+  (pi_features_extractor): FlattenExtractor(
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+  )
+  (vf_features_extractor): FlattenExtractor(
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+  )
+  (mlp_extractor): MlpExtractor(
+    (policy_net): Sequential(
+      (0): Linear(in_features=11, out_features=64, bias=True)
+      (1): Tanh()
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): Tanh()
+    )
+    (value_net): Sequential(
+      (0): Linear(in_features=11, out_features=64, bias=True)
+      (1): Tanh()
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): Tanh()
+    )
+  )
+  (action_net): Linear(in_features=64, out_features=16, bias=True)
+  (value_net): Linear(in_features=64, out_features=1, bias=True)
+)","<class 'stable_baselines3.common.policies.ActorCriticPolicy'>","{}","","","","","","<stable_baselines3.common.buffers.RolloutBuffer object at 0x72f2edf958a0>","<class 'stable_baselines3.common.buffers.RolloutBuffer'>","{}","0","-1","1","1771875912141124400","None","","","/workspace/thesis/wandb/run-20260223_194508-ver807s8/files","500","2018","","2005","False","","1","0.5","FixedWeatherGenerator","/workspace/thesis/cycles/input/Pakistan_Site_final.weather","","","","","14","12070.0205","","","","","","","14","16691.29","","","","","","","100","14","16428.316","","2","0.00095007475","0","0.2","-3.3319507","-0.0017222166","0.0003","356.78433","-0.009485624","","172.5901"
