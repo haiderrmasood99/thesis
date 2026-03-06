@@ -5,7 +5,7 @@ import datetime
 from cyclesgym.managers.operation import OperationManager
 from cyclesgym.envs.utils import date2ydoy
 
-__all__ = ['Fertilizer', 'FixedRateNFertilizer']
+__all__ = ['Fertilizer', 'FixedRateNFertilizer', 'FixedRateNPKFertilizer']
 
 
 class Implementer(object):
@@ -160,8 +160,9 @@ class Fertilizer(Implementer):
         # Update value for affected nutrients
         total_mass = sum([m for m in masses.values()])
         op_val.update({'MASS': total_mass})
-        op_val.update({nutrient: mass / total_mass for
-                       (nutrient, mass) in masses.items()})
+        if total_mass > 0:
+            op_val.update({nutrient: mass / total_mass for
+                           (nutrient, mass) in masses.items()})
         op = {key: op_val}
         return op
 
@@ -193,7 +194,7 @@ class Fertilizer(Implementer):
         return rerun_cycles
 
     def _check_collision(self, year, doy, operation_details):
-        key = (year, doy, 'FERTILIZATION')
+        key = self._get_operation_key(year, doy)
         operation = self.operation_manager.op_dict.get(key)
         collision = operation is not None
         return operation, collision
@@ -241,7 +242,7 @@ class Fertilizer(Implementer):
             # Update with new masses when specified
             if n in new_masses.keys():
                 final_masses[n] = new_masses[n] if mode == 'absolute' else \
-                    new_masses[n] + old_op[n]
+                    new_masses[n] + old_op[n] * old_op['MASS']
             # Copy old masses otherwise
             else:
                 final_masses[n] = old_op[n] * old_op['MASS']
@@ -281,6 +282,53 @@ class FixedRateNFertilizer(Fertilizer):
     def implement_action(self, date: datetime.date, mass: float):
         masses = self.convert_mass(mass)
         return super(FixedRateNFertilizer, self).implement_action(date, masses)
+
+
+class FixedRateNPKFertilizer(Fertilizer):
+    """
+    NPK scaffolding implementer:
+    - N is split between NH4 and NO3 with a fixed ratio.
+    - P and K are passed as elemental masses (P_INORGANIC and K).
+    """
+
+    def __init__(self, operation_manager: OperationManager,
+                 operation_fname: Path,
+                 n_nh4_rate: float,
+                 start_year: int):
+        nutrients = ['N_NH4', 'N_NO3', 'P_INORGANIC', 'K']
+        super(FixedRateNPKFertilizer, self).__init__(operation_manager,
+                                                     operation_fname,
+                                                     nutrients,
+                                                     start_year)
+        assert 0 <= n_nh4_rate <= 1, (
+            f'N split rate must be in [0, 1]. It is {n_nh4_rate} instead'
+        )
+        self.n_nh4_rate = n_nh4_rate
+
+    def convert_mass(self, mass_n: float, mass_p: float, mass_k: float):
+        masses = {
+            'N_NH4': mass_n * self.n_nh4_rate,
+            'N_NO3': mass_n * (1 - self.n_nh4_rate),
+            'P_INORGANIC': mass_p,
+            'K': mass_k,
+        }
+        return masses
+
+    def implement_action(self, date: datetime.date, action):
+        if isinstance(action, dict):
+            mass_n = float(action.get('N', 0.0))
+            mass_p = float(action.get('P', 0.0))
+            mass_k = float(action.get('K', 0.0))
+        else:
+            if not hasattr(action, '__iter__'):
+                mass_n, mass_p, mass_k = float(action), 0.0, 0.0
+            else:
+                arr = list(action)
+                mass_n = float(arr[0]) if len(arr) > 0 else 0.0
+                mass_p = float(arr[1]) if len(arr) > 1 else 0.0
+                mass_k = float(arr[2]) if len(arr) > 2 else 0.0
+        masses = self.convert_mass(mass_n=mass_n, mass_p=mass_p, mass_k=mass_k)
+        return super(FixedRateNPKFertilizer, self).implement_action(date, masses)
 
 
 class Planter(Implementer):
@@ -329,7 +377,7 @@ class Planter(Implementer):
         if old_op is None:
             return True
         else:
-            return old_op['CROP'] == crop_details['CROP']
+            return old_op['CROP'] != crop_details['CROP']
 
     def _check_valid_action(self, action_details: dict):
         assert (action_details['CROP'] in self.valid_crops), f'You can only specify planting date for ' \
@@ -424,11 +472,44 @@ class RotationPlanter(Planter):
     def __init__(self, operation_manager: OperationManager,
                  operation_fname: Path,
                  rotation_crops: list,
-                 start_year: int):
+                 start_year: int,
+                 crop_calendar_windows: dict = None,
+                 n_doy_bins: int = 14,
+                 n_end_doy_bins: int = 10):
         super(RotationPlanter, self).__init__(operation_manager,
                                               operation_fname,
                                               rotation_crops,
                                               start_year)
+        self.crop_calendar_windows = crop_calendar_windows or {}
+        self.n_doy_bins = n_doy_bins
+        self.n_end_doy_bins = n_end_doy_bins
+        self._validate_calendar_windows()
+
+    def _validate_calendar_windows(self):
+        for crop, window in self.crop_calendar_windows.items():
+            assert crop in self.valid_crops, (
+                f"Unknown crop '{crop}' in crop_calendar_windows"
+            )
+            assert isinstance(window, tuple) and len(window) == 2, (
+                f"Window for '{crop}' must be a tuple(start_doy, end_doy)"
+            )
+            start_doy, end_doy = window
+            assert 1 <= int(start_doy) <= 366 and 1 <= int(end_doy) <= 366, (
+                f"Window for '{crop}' must be in [1, 366]. Got {window}"
+            )
+            assert int(start_doy) <= int(end_doy), (
+                f"Window for '{crop}' must satisfy start <= end. Got {window}"
+            )
+
+    def _map_week_index_to_doy(self, week_index: int, crop: str) -> int:
+        if crop in self.crop_calendar_windows:
+            start_doy, end_doy = self.crop_calendar_windows[crop]
+            if self.n_doy_bins <= 1:
+                return int(start_doy)
+            span = end_doy - start_doy
+            return int(round(start_doy + (span * week_index) / (self.n_doy_bins - 1)))
+        # Backward-compatible legacy mapping
+        return int(90 + week_index * 7)
 
     def convert_action_to_dict(self, crop_categorical: int, doy: int,
                                end_doy: int, max_smc: int):
@@ -438,12 +519,25 @@ class RotationPlanter(Planter):
         end_doy: upper bound of the planting date, as number of weeks from the doy
         max_smc: maximum moisture for automated planting"""
 
-        doy = 90 + doy * 7
-        end_doy = doy + end_doy * 7
+        crop_name = self.affected_crops[crop_categorical]
+        doy = self._map_week_index_to_doy(doy, crop_name)
+
+        if crop_name in self.crop_calendar_windows:
+            _, window_end = self.crop_calendar_windows[crop_name]
+            max_extension = max(0, window_end - doy)
+            if self.n_end_doy_bins <= 1:
+                end_doy = doy
+            else:
+                end_doy = int(round(
+                    doy + (max_extension * end_doy) / (self.n_end_doy_bins - 1)
+                ))
+        else:
+            end_doy = int(doy + end_doy * 7)
+
         max_smc = float((1 + max_smc) / 10.)
 
         operation_det = {'DOY': doy,
-                         'CROP': self.affected_crops[crop_categorical],
+                         'CROP': crop_name,
                          'END_DOY': end_doy,
                          'MAX_SMC': max_smc}
         return operation_det

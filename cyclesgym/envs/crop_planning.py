@@ -5,6 +5,7 @@ from cyclesgym.envs.implementers import RotationPlanter, RotationPlanterFixedPla
 from cyclesgym.managers import WeatherManager, CropManager, SeasonManager, OperationManager, SoilNManager
 from cyclesgym.utils.paths import CYCLES_PATH
 from cyclesgym.envs.weather_generator import WeatherShuffler, FixedWeatherGenerator
+from cyclesgym.utils.pakistan_crop_calendar import get_calendar_windows_for_crops
 
 from cyclesgym.utils.gym_compat import spaces, GYMNASIUM
 from typing import Tuple
@@ -22,7 +23,9 @@ class CropPlanning(CyclesEnv):
                  soil_file='Pakistan_Soil_final.soil',
                  weather_generator_class=FixedWeatherGenerator,
                  weather_generator_kwargs={
-                     'base_weather_file': CYCLES_PATH.joinpath('input', 'Pakistan_Site_final.weather')}
+                     'base_weather_file': CYCLES_PATH.joinpath('input', 'Pakistan_Site_final.weather')},
+                 use_pakistan_crop_calendar=False,
+                 crop_calendar_windows=None
                  ):
 
         super().__init__(SIMULATION_START_YEAR=start_year,
@@ -53,6 +56,13 @@ class CropPlanning(CyclesEnv):
                          REINIT_FILE='N / A',
                          delta=365)
         self.rotation_crops = rotation_crops
+        if crop_calendar_windows is not None:
+            self.crop_calendar_windows = crop_calendar_windows
+        elif use_pakistan_crop_calendar:
+            self.crop_calendar_windows = get_calendar_windows_for_crops(rotation_crops)
+        else:
+            self.crop_calendar_windows = {}
+
         self.reset()
         self._generate_observation_space()
         self._generate_action_space(len(rotation_crops))
@@ -64,7 +74,7 @@ class CropPlanning(CyclesEnv):
     def _generate_observation_space(self):
         self.observation_space = spaces.Box(
             low=np.array(self.observer.lower_bound, dtype=np.float32),
-            high=np.array(self.observer.lower_bound, dtype=np.float32),
+            high=np.array(self.observer.upper_bound, dtype=np.float32),
             shape=self.observer.lower_bound.shape,
             dtype=np.float32)
 
@@ -79,7 +89,8 @@ class CropPlanning(CyclesEnv):
             operation_manager=self.op_manager,
             operation_fname=self.op_file,
             rotation_crops=self.rotation_crops,
-            start_year=self.ctrl_base_manager.ctrl_dict['SIMULATION_START_YEAR']
+            start_year=self.ctrl_base_manager.ctrl_dict['SIMULATION_START_YEAR'],
+            crop_calendar_windows=self.crop_calendar_windows
         )
 
     def _init_output_managers(self):
@@ -170,7 +181,8 @@ class CropPlanningFixedPlanting(CropPlanning):
             operation_manager=self.op_manager,
             operation_fname=self.op_file,
             rotation_crops=self.rotation_crops,
-            start_year=self.ctrl_base_manager.ctrl_dict['SIMULATION_START_YEAR']
+            start_year=self.ctrl_base_manager.ctrl_dict['SIMULATION_START_YEAR'],
+            crop_calendar_windows=self.crop_calendar_windows
         )
 
 
@@ -226,5 +238,3 @@ if __name__ == '__main__':
                 break
 
     print(rewards)
-
-

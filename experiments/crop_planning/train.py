@@ -217,14 +217,14 @@ class Train:
         mean deterministic reward
 
         """
-        mean_r_det, _, actions_det, episode_rewards_det = _evaluate_policy(model,
-                                                                           env=eval_env,
-                                                                           n_eval_episodes=1,
-                                                                           deterministic=True)
-        mean_r_stoc, std_r_stoc, actions_stoc, episode_rewards_stoc = _evaluate_policy(model,
-                                                                                       env=eval_env,
-                                                                                       n_eval_episodes=5,
-                                                                                       deterministic=False)
+        mean_r_det, _, actions_det, episode_rewards_det, _, _ = _evaluate_policy(model,
+                                                                                 env=eval_env,
+                                                                                 n_eval_episodes=1,
+                                                                                 deterministic=True)
+        mean_r_stoc, std_r_stoc, actions_stoc, episode_rewards_stoc, _, _ = _evaluate_policy(model,
+                                                                                              env=eval_env,
+                                                                                              n_eval_episodes=5,
+                                                                                              deterministic=False)
         wandb.log({'deterministic_return': mean_r_det,
                    'stochastic_return_mean': mean_r_stoc,
                    'stochastic_return_std': std_r_stoc,
@@ -232,11 +232,12 @@ class Train:
         episode_actions_names = [*list(f"det{i + 1}" for i in range(len(actions_det))),
                                  *list(f"stoc{i + 1}" for i in range(len(actions_stoc)))]
         episode_actions = [*actions_det, *actions_stoc]
+        T = actions_stoc.shape[1]
         fertilizer_table = wandb.Table(
-            columns=['Run', 'Total Fertilizer', *[f'Week{i}' for i in range(53)]])
+            columns=['Run', 'Total Fertilizer', *[f'Week{i}' for i in range(T)]])
         for i in range(len(episode_actions)):
             acts = episode_actions[i]
-            data = [[week, fert] for (week, fert) in zip(range(53), acts)]
+            data = [[week, fert] for (week, fert) in zip(range(T), acts)]
             table = wandb.Table(data=data, columns=['Week', 'N added'])
             fertilizer_table.add_data(
                 *[episode_actions_names[i], np.sum(acts), *acts])

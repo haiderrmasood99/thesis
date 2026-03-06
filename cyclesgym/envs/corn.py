@@ -3,7 +3,7 @@ from cyclesgym.envs.common import CyclesEnv
 from cyclesgym.envs.observers import compound_observer, CropObserver, \
     WeatherObserver, NToDateObserver
 from cyclesgym.envs.rewarders import compound_rewarder, CropRewarder, \
-    NProfitabilityRewarder
+    NProfitabilityRewarder, NPKProfitabilityRewarder
 from cyclesgym.utils.paths import CYCLES_PATH
 from cyclesgym.envs.weather_generator import WeatherShuffler, FixedWeatherGenerator
 import os
@@ -28,6 +28,13 @@ class Corn(CyclesEnv):
     def __init__(self, delta,
                  n_actions,
                  maxN,
+                 nutrient_action_mode='N',
+                 maxP=0.0,
+                 maxK=0.0,
+                 p_actions=None,
+                 k_actions=None,
+                 n_nh4_rate=0.75,
+                 price_profile='us_legacy',
                  operation_file='Pakistan_Corn_final.operation',
                  soil_file='Pakistan_Soil_final.soil',
                  weather_generator_class=FixedWeatherGenerator,
@@ -37,6 +44,16 @@ class Corn(CyclesEnv):
                  end_year=2005,
                  use_reinit=True
                  ):
+        self.nutrient_action_mode = str(nutrient_action_mode).upper()
+        assert self.nutrient_action_mode in ['N', 'NPK'], (
+            f"nutrient_action_mode must be 'N' or 'NPK'. Got {nutrient_action_mode}"
+        )
+        self.price_profile = price_profile
+        self.maxP = float(maxP)
+        self.maxK = float(maxK)
+        self.p_actions = int(p_actions) if p_actions is not None else int(n_actions)
+        self.k_actions = int(k_actions) if k_actions is not None else int(n_actions)
+        self.n_nh4_rate = float(n_nh4_rate)
         self.rotation_size = end_year - start_year + 1
         self.use_reinit = use_reinit
         super().__init__(SIMULATION_START_YEAR=start_year,
@@ -79,7 +96,10 @@ class Corn(CyclesEnv):
         self.soil_n_manager = None
 
     def _generate_action_space(self, n_actions, maxN):
-        self.action_space = spaces.Discrete(n_actions, )
+        if self.nutrient_action_mode == 'NPK':
+            self.action_space = spaces.MultiDiscrete([int(n_actions), self.p_actions, self.k_actions])
+        else:
+            self.action_space = spaces.Discrete(n_actions, )
         self.maxN = maxN
         self.n_actions = n_actions
 
@@ -121,16 +141,29 @@ class Corn(CyclesEnv):
                                            ])
 
     def _init_rewarder(self, *args, **kwargs):
-        self.rewarder = compound_rewarder([CropRewarder(self.season_manager, 'CornRM.90'),
-                                           NProfitabilityRewarder()])
+        crop_rewarder = CropRewarder(self.season_manager, 'CornRM.90',
+                                     price_profile=self.price_profile)
+        if self.nutrient_action_mode == 'NPK':
+            nutrient_rewarder = NPKProfitabilityRewarder(price_profile=self.price_profile)
+        else:
+            nutrient_rewarder = NProfitabilityRewarder(price_profile=self.price_profile)
+        self.rewarder = compound_rewarder([crop_rewarder, nutrient_rewarder])
 
     def _init_implementer(self, *args, **kwargs):
-        self.implementer = FixedRateNFertilizer(
-            operation_manager=self.op_manager,
-            operation_fname=self.op_file,
-            rate=0.75,
-            start_year=self.ctrl_base_manager.ctrl_dict['SIMULATION_START_YEAR']
-        )
+        if self.nutrient_action_mode == 'NPK':
+            self.implementer = FixedRateNPKFertilizer(
+                operation_manager=self.op_manager,
+                operation_fname=self.op_file,
+                n_nh4_rate=self.n_nh4_rate,
+                start_year=self.ctrl_base_manager.ctrl_dict['SIMULATION_START_YEAR']
+            )
+        else:
+            self.implementer = FixedRateNFertilizer(
+                operation_manager=self.op_manager,
+                operation_fname=self.op_file,
+                rate=self.n_nh4_rate,
+                start_year=self.ctrl_base_manager.ctrl_dict['SIMULATION_START_YEAR']
+            )
 
     def _init_constrainer(self):
         # Initialize constrainer
@@ -141,14 +174,35 @@ class Corn(CyclesEnv):
              LeachingConstrainer(soil_n_manager=self.soil_n_manager,
                                  end_year=end_year)])
 
+    @staticmethod
+    def _scaled_discrete_to_mass(action: int, max_mass: float, n_bins: int) -> float:
+        if n_bins <= 1:
+            return 0.0
+        return max_mass * float(action) / float(n_bins - 1)
+
     def _action2mass(self, action: int) -> float:
-        return self.maxN * action / (self.n_actions - 1)
+        return self._scaled_discrete_to_mass(action=action, max_mass=self.maxN, n_bins=self.n_actions)
+
+    def _action2npk(self, action):
+        if self.nutrient_action_mode != 'NPK':
+            return {'N': self._action2mass(int(action)), 'P': 0.0, 'K': 0.0}
+
+        arr = np.asarray(action, dtype=np.int64).reshape(-1)
+        assert arr.size >= 3, f'Expected 3 action channels (N, P, K), got {arr}'
+        n_mass = self._scaled_discrete_to_mass(int(arr[0]), self.maxN, self.n_actions)
+        p_mass = self._scaled_discrete_to_mass(int(arr[1]), self.maxP, self.p_actions)
+        k_mass = self._scaled_discrete_to_mass(int(arr[2]), self.maxK, self.k_actions)
+        return {'N': n_mass, 'P': p_mass, 'K': k_mass}
 
     def step(self, action: int):
-        assert self.action_space.contains(action), f'{action} is not contained in the action space'
-        action = self._action2mass(action)
-        rerun_cycles = self.implementer.implement_action(
-            date=self.date, mass=action)
+        action_for_check = np.asarray(action, dtype=np.int64) if self.nutrient_action_mode == 'NPK' else action
+        assert self.action_space.contains(action_for_check), f'{action} is not contained in the action space'
+
+        nutrient_action = self._action2npk(action_for_check)
+        if self.nutrient_action_mode == 'NPK':
+            rerun_cycles = self.implementer.implement_action(date=self.date, action=nutrient_action)
+        else:
+            rerun_cycles = self.implementer.implement_action(date=self.date, mass=nutrient_action['N'])
 
         doy = None
         reinit = False
@@ -179,15 +233,15 @@ class Corn(CyclesEnv):
 
         # Compute reward
         r = self.rewarder.compute_reward(date=self.date, delta=self.delta,
-                                         action=action)
+                                         action=nutrient_action)
         # Compute constraints values
         info = {}
         constraints = self.constrainer.compute_constraint(date=self.date,
-                                                          action=action)
+                                                          action=nutrient_action)
         info.update(constraints)
 
         # Compute
-        obs = self.observer.compute_obs(self.date, N=action)
+        obs = self.observer.compute_obs(self.date, N=nutrient_action['N'])
         # Ensure dtype matches observation_space (Gymnasium strict check)
         obs = np.asarray(obs, dtype=np.float32)
 
@@ -313,4 +367,3 @@ if __name__ == '__main__':
             if done:
                 break
     print(rewards)
-

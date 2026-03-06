@@ -24,11 +24,19 @@ from cyclesgym.policies.dummy_policies import OpenLoopPolicy
 import expert
 import argparse
 import random
+from cyclesgym.managers import WeatherManager
 
 PAK_WEATHER_FILE = CYCLES_PATH.joinpath('input', 'Pakistan_Site_final.weather')
-PAK_WEATHER_START_YEAR = 2005
-PAK_WEATHER_END_YEAR = 2019
-PAK_DEFAULT_SAMPLING_END_YEAR = 2018
+
+
+def _weather_year_bounds(weather_file):
+    manager = WeatherManager(weather_file)
+    years = manager.mutables['YEAR'].astype(int).to_numpy()
+    return int(years.min()), int(years.max())
+
+
+PAK_WEATHER_START_YEAR, PAK_WEATHER_END_YEAR = _weather_year_bounds(PAK_WEATHER_FILE)
+PAK_DEFAULT_SAMPLING_END_YEAR = max(PAK_WEATHER_START_YEAR, PAK_WEATHER_END_YEAR - 1)
 
 
 class Train:
@@ -202,11 +210,11 @@ class Train:
             eval_prefix='eval_test_sto')
 
         eval_callback_det = EvalCallbackCustom(eval_env_train, best_model_save_path=None,
-            log_path=str(self.model_dir.joinpath('eval_test_det')),
+            log_path=str(self.model_dir.joinpath('eval_train_det')),
             eval_freq=eval_freq, deterministic=True, render=False,
             eval_prefix='eval_train_det')
         eval_callback_sto = EvalCallbackCustom(eval_env_train, best_model_save_path=str(self.model_dir.joinpath('train_sto')),
-            log_path=str(self.model_dir.joinpath('eval_test_det')),
+            log_path=str(self.model_dir.joinpath('eval_train_sto')),
             eval_freq=eval_freq, deterministic=False, render=False,
             eval_prefix='eval_train_sto')
 

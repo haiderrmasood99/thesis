@@ -9,6 +9,39 @@ __all__ = ['DummyConstrainer', 'LeachingConstrainer',
            'compound_constrainer']
 
 
+def _parse_action_masses(action):
+    """
+    Parse scalar/list/dict fertilization action into aggregate masses.
+
+    Returns
+    -------
+    n_mass: float
+        Nitrogen mass (kg/ha)
+    total_mass: float
+        Total nutrient mass across N/P/K channels (kg/ha)
+    """
+    if action is None:
+        return 0.0, 0.0
+
+    if isinstance(action, dict):
+        n_mass = float(action.get('N', 0.0))
+        n_mass += float(action.get('N_NH4', 0.0))
+        n_mass += float(action.get('N_NO3', 0.0))
+        p_mass = float(action.get('P', 0.0)) + float(action.get('P_INORGANIC', 0.0))
+        k_mass = float(action.get('K', 0.0))
+        return n_mass, n_mass + p_mass + k_mass
+
+    if hasattr(action, '__iter__') and not isinstance(action, (str, bytes)):
+        arr = list(action)
+        n_mass = float(arr[0]) if len(arr) > 0 else 0.0
+        p_mass = float(arr[1]) if len(arr) > 1 else 0.0
+        k_mass = float(arr[2]) if len(arr) > 2 else 0.0
+        return n_mass, n_mass + p_mass + k_mass
+
+    n_mass = float(action)
+    return n_mass, n_mass
+
+
 # TODO: Bad interface, improve
 class Constrainer(ABC):
     def __init__(self):
@@ -67,7 +100,8 @@ class LeachingConstrainer(Constrainer):
             emission = data.iloc[0, self.emission_columns]
             constraint_values = [sum(leaching), sum(volatilization), sum(emission)]
         else:
-            print('Empty!')
+            # Keep interface stable when output row is unavailable
+            constraint_values = [0.0, 0.0, 0.0]
 
         return self._get_constraint_dict(constraint_values)
 
@@ -78,8 +112,9 @@ class FertilizationEventConstrainer(Constrainer):
         self.n_constraints = len(self.constraint_names)
 
     def compute_constraint(self, date, action, *args, **kwargs):
-        # action = kwargs['action']
-        constraint_values = int(action > 0)
+        del date, args, kwargs
+        _, total_mass = _parse_action_masses(action)
+        constraint_values = int(total_mass > 0)
         return self._get_constraint_dict(constraint_values)
 
 
@@ -89,7 +124,9 @@ class TotalNitrogenConstrainer(Constrainer):
         self.n_constraints = len(self.constraint_names)
 
     def compute_constraint(self, date, action, *args, **kwargs):
-        return self._get_constraint_dict(constraint_values=action)
+        del date, args, kwargs
+        n_mass, _ = _parse_action_masses(action)
+        return self._get_constraint_dict(constraint_values=n_mass)
 
 
 def compound_constrainer(c_list: List[Constrainer]):
@@ -123,5 +160,3 @@ def compound_constrainer(c_list: List[Constrainer]):
             return constraints_dict
 
     return Compound(c_list)
-
-
