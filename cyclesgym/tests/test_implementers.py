@@ -127,6 +127,20 @@ class TestFertilizer(unittest.TestCase):
     def test_reset(self):
         pass
 
+    def test_normalize_fractions_for_cycles_tiny_overflow(self):
+        fractions = {
+            'N_NH4': 0.3093195186823687,
+            'N_NO3': 0.10310650622745622,
+            'P_INORGANIC': 0.20938309153232268,
+            'K': 0.3781908835578526,
+        }
+        # Simulate floating-point drift seen in real runs.
+        assert sum(fractions.values()) > 1.0
+
+        cleaned = self.fert._normalize_fractions_for_cycles(fractions)
+        assert sum(cleaned.values()) <= 1.0
+        assert all(v >= 0 for v in cleaned.values())
+
 
 class TestRotationPlanterCalendar(unittest.TestCase):
     def setUp(self) -> None:

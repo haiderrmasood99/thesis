@@ -451,6 +451,15 @@ def _build_run_env(args: argparse.Namespace) -> dict[str, str]:
     if args.wandb_offline:
         env["WANDB_MODE"] = "offline"
 
+    # Keep per-process math threads low; each RL run already parallelizes via SubprocVecEnv.
+    # This avoids oversubscription and pthread_create failures on large machines/containers.
+    env.setdefault("OMP_NUM_THREADS", "1")
+    env.setdefault("OPENBLAS_NUM_THREADS", "1")
+    env.setdefault("MKL_NUM_THREADS", "1")
+    env.setdefault("NUMEXPR_NUM_THREADS", "1")
+    # Reduce TensorFlow/XLA log noise emitted via tensorboard dependencies.
+    env.setdefault("TF_CPP_MIN_LOG_LEVEL", "2")
+
     return env
 
 
@@ -745,4 +754,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

@@ -107,6 +107,43 @@ class Fertilizer(Implementer):
         self.affected_nutrients = affected_nutrients
         self.start_year = start_year
 
+    @staticmethod
+    def _normalize_fractions_for_cycles(fractions: dict, eps: float = 1e-12) -> dict:
+        """
+        Keep fertilizer fractions numerically safe for CYCLES.
+
+        In practice, floating-point arithmetic can yield totals like
+        1.0000000000000002 even when mathematically equal to 1. CYCLES rejects
+        those operation rows, so we gently correct tiny drift.
+        """
+        clean = {}
+        for nutrient, value in fractions.items():
+            v = float(value)
+            # Remove tiny negative artifacts.
+            if -eps < v < 0.0:
+                v = 0.0
+            clean[nutrient] = v
+
+        total = float(sum(clean.values()))
+        if total > 1.0:
+            overflow = total - 1.0
+            # For tiny numeric drift, subtract only the overflow from the largest term.
+            if overflow <= eps:
+                largest = max(clean, key=clean.get)
+                clean[largest] = max(0.0, clean[largest] - overflow)
+            else:
+                # For true overflow, renormalize to a valid simplex.
+                scale = 1.0 / total
+                for nutrient in clean:
+                    clean[nutrient] *= scale
+                # Guard against any residual machine error after scaling.
+                total2 = float(sum(clean.values()))
+                if total2 > 1.0:
+                    largest = max(clean, key=clean.get)
+                    clean[largest] = max(0.0, clean[largest] - (total2 - 1.0))
+
+        return clean
+
     def _is_new_action(self, year: int, doy: int, new_masses: dict) -> bool:
         """
         Is the fertilization recommended for (year, doy) different from previous one?
@@ -161,8 +198,10 @@ class Fertilizer(Implementer):
         total_mass = sum([m for m in masses.values()])
         op_val.update({'MASS': total_mass})
         if total_mass > 0:
-            op_val.update({nutrient: mass / total_mass for
-                           (nutrient, mass) in masses.items()})
+            fractions = {n: 0.0 for n in self.valid_nutrients}
+            fractions.update({nutrient: mass / total_mass for
+                              (nutrient, mass) in masses.items()})
+            op_val.update(self._normalize_fractions_for_cycles(fractions))
         op = {key: op_val}
         return op
 
@@ -251,9 +290,11 @@ class Fertilizer(Implementer):
         total_mass = sum(final_masses.values())
         new_op['MASS'] = total_mass
         if total_mass > 0:
-            new_op.update(
-                {nutrient: final_mass / total_mass for (nutrient, final_mass)
-                 in final_masses.items()})
+            fractions = {
+                nutrient: final_mass / total_mass
+                for (nutrient, final_mass) in final_masses.items()
+            }
+            new_op.update(self._normalize_fractions_for_cycles(fractions))
         else:
             new_op.update({nutrient: 0 for nutrient in self.valid_nutrients})
 
