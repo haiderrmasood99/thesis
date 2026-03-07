@@ -51,7 +51,12 @@ def run_env(env, actions_to_use=None):
         else:
             a = actions_to_use[i]
 
-        s, r, done, info = env.step(a)
+        step_out = env.step(a)
+        if len(step_out) == 5:
+            s, r, terminated, truncated, info = step_out
+            done = bool(terminated or truncated)
+        else:
+            s, r, done, info = step_out
         observations.append(s)
         actions.append(a)
 
@@ -77,9 +82,11 @@ def compare_env(env1, env2):
     obs_1 = np.array(obs_1)
     obs_2 = np.array(obs_2)
 
-    df1 = pd.DataFrame(obs_1)
-    df2 = pd.DataFrame(obs_2)
-    plot_two_environments(df1, df2, ['1', '2'], range(0, obs_1.shape[1]))
+    # Optional plotting for interactive debugging only.
+    if os.environ.get('CYCLESGYM_PLOT_COMPARE', '0') == '1':
+        df1 = pd.DataFrame(obs_1)
+        df2 = pd.DataFrame(obs_2)
+        plot_two_environments(df1, df2, ['1', '2'], range(0, obs_1.shape[1]))
 
     return obs_1, obs_2, time_1, time_2
 

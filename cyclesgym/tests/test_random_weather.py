@@ -8,7 +8,7 @@ from cyclesgym.envs.corn import Corn
 from cyclesgym.envs.utils import date2ydoy
 from cyclesgym.managers import WeatherManager, CropManager, SeasonManager
 from cyclesgym.envs.weather_generator import WeatherShuffler
-from cyclesgym.utils.paths import CYCLES_PATH, TEST_PATH
+from cyclesgym.utils.paths import CYCLES_PATH, CYCLES_EXE, TEST_PATH
 
 TEST_FILENAMES = ['CornRandomWeatherTest.ctrl',
                   'NCornTest.operation']
@@ -112,14 +112,23 @@ class TestShuffleWeather(unittest.TestCase):
 
 
             env = Corn(delta=1, maxN=150, n_actions=16, start_year=start_year, end_year=end_year, operation_file=operation_file,
-                       use_reinit=False, weather_generator_class=WeatherShuffler, weather_generator_kwargs=weather_generator_kwargs)
+                       use_reinit=False,
+                       crop_file='GenericCrops.crop',
+                       soil_file='GenericHagerstown.soil',
+                       weather_generator_class=WeatherShuffler,
+                       weather_generator_kwargs=weather_generator_kwargs)
 
         # Run simulation with same management and compare
         env.reset()
         while True:
             _, doy = date2ydoy(env.date)
             a = 15 if doy == 106 else 0
-            _, _, done, _ = env.step(a)
+            step_out = env.step(a)
+            if len(step_out) == 5:
+                _, _, terminated, truncated, _ = step_out
+                done = bool(terminated or truncated)
+            else:
+                _, _, done, _ = step_out
             if done:
                 break
 
@@ -135,7 +144,7 @@ class TestShuffleWeather(unittest.TestCase):
 
     @staticmethod
     def _call_cycles(ctrl):
-        subprocess.run(['./Cycles', '-b', ctrl], cwd=CYCLES_PATH)
+        subprocess.run([str(CYCLES_PATH.joinpath(CYCLES_EXE)), '-b', ctrl], cwd=CYCLES_PATH, check=True)
 
 
 if __name__ == '__main__':

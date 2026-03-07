@@ -20,10 +20,18 @@ class OpenLoopPolicy(BasePolicy):
     def predict(self, observation, state=None, episode_start=None,
                 deterministic=False):
         obs = np.asarray(observation)
+        action = np.asarray(next(self.actions))
         if obs.ndim == 1:
-            return next(self.actions), None
-        else:
-            return np.atleast_1d(next(self.actions)), None
+            if action.ndim == 0:
+                return int(action), None
+            return action, None
+
+        # Vectorized observation: broadcast one open-loop action to all envs.
+        n_envs = int(obs.shape[0])
+        if action.ndim == 0:
+            return np.full((n_envs,), int(action), dtype=np.int64), None
+        tiled = np.repeat(action[np.newaxis, ...], n_envs, axis=0)
+        return tiled, None
 
 
 class ActionProcesser(ABC):

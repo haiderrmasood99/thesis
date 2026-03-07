@@ -1,3 +1,8 @@
+from __future__ import annotations
+
+from bisect import bisect_right
+import json
+from pathlib import Path
 from typing import Dict
 
 __all__ = [
@@ -7,6 +12,8 @@ __all__ = [
     'crop_prices',
     'crop_type',
     'PRICE_PROFILES',
+    'PAKISTAN_PRICE_DATA_PATH',
+    'lookup_year_value',
     'get_price_profile',
     'get_crop_prices',
     'get_crop_type',
@@ -25,6 +32,44 @@ def _clone_year_series_map(series_map: Dict[str, Dict[int, float]]) -> Dict[str,
 def _bag_price_to_rs_per_kg_nutrient(bag_price_rs: float, nutrient_fraction_in_product: float) -> float:
     assert nutrient_fraction_in_product > 0.0, 'Nutrient fraction must be > 0'
     return bag_price_rs / (50.0 * nutrient_fraction_in_product)
+
+
+def lookup_year_value(year_to_value: Dict[int, float], year: int) -> float:
+    """
+    Return value for `year`, falling back to nearest available historical year.
+    """
+    if year in year_to_value:
+        return year_to_value[year]
+    years = sorted(year_to_value.keys())
+    if not years:
+        raise KeyError('Price dictionary is empty')
+    idx = bisect_right(years, year) - 1
+    if idx < 0:
+        return year_to_value[years[0]]
+    return year_to_value[years[idx]]
+
+
+def _load_int_key_series(d: dict) -> Dict[int, float]:
+    out: Dict[int, float] = {}
+    for k, v in d.items():
+        out[int(k)] = float(v)
+    return out
+
+
+def _load_pakistan_series_from_file(path: Path):
+    payload = json.loads(path.read_text(encoding='utf-8'))
+    crops = payload['crop_prices_lcu_per_tonne']
+    nutrients = payload['nutrient_prices_rs_per_kg']
+    return (
+        _load_int_key_series(crops['maize']),
+        _load_int_key_series(crops['soybeans']),
+        _load_int_key_series(crops['maize_silage_proxy']),
+        {
+            'N': _load_int_key_series(nutrients['N']),
+            'P': _load_int_key_series(nutrients['P']),
+            'K': _load_int_key_series(nutrients['K']),
+        },
+    )
 
 
 # Conversion rate for corn from bushel to metric ton from
@@ -84,67 +129,66 @@ _US_NUTRIENT_PRICES = {
 }
 
 # ---------------------------------------------------------------------------
-# Pakistan baseline profile (opt-in)
+# Pakistan baseline profile (opt-in; year-varying)
 # ---------------------------------------------------------------------------
-# FAOSTAT producer prices for Pakistan, LCU/tonne.
-# Source dataset:
-# https://fenixservices.fao.org/faostat/static/bulkdownloads/Prices_E_All_Data_(Normalized).zip
-_PAK_MAIZE_PRICE_RUPEES_PER_TONNE = {
-    2005: 10115.0,
-    2006: 11000.0,
-    2007: 11500.0,
-    2008: 11800.0,
-    2009: 17824.0,
-    2010: 19504.0,
-    2020: 39293.4,
-    2021: 45853.9,
-    2022: 69412.8,
-    2023: 62974.0,
-    2024: 63679.5,
-}
-
-_PAK_SOY_BEANS_PRICE_RUPEES_PER_TONNE = {
-    2005: 20000.0,
-    2006: 24000.0,
-    2007: 25500.0,
-    2008: 26000.0,
-    2009: 32060.0,
-    2010: 35430.0,
-}
-
-# Use legacy silage/grain ratio only as scaffolding until a Pakistan silage
-# series is added.
-_LEGACY_SILAGE_TO_GRAIN_RATIO = (
-    _US_CORN_SILAGE_PRICE_DOLLARS_PER_TONNE[1980] /
-    _US_CORN_PRICE_DOLLARS_PER_TONNE[1980]
+PAKISTAN_PRICE_DATA_PATH = (
+    Path(__file__).resolve().parents[1]
+    / 'resources'
+    / 'pricing'
+    / 'pakistan_yearly_series.json'
 )
-_PAK_CORN_SILAGE_PRICE_RUPEES_PER_TONNE = {
-    y: _PAK_MAIZE_PRICE_RUPEES_PER_TONNE[y] * _LEGACY_SILAGE_TO_GRAIN_RATIO
-    for y in _PAK_MAIZE_PRICE_RUPEES_PER_TONNE.keys()
-}
 
-# NFDC retail fertilizer prices (Rs per 50kg bag), latest annual row (2021-22):
-# https://nfdc.gov.pk/Web-Page%20Updating/prices.htm
-# We convert product price to Rs/kg nutrient (element basis).
-_PAK_RS_PER_50KG_BAG_2021_22 = {
-    'urea': 1913.0,      # assumed 46% N
-    'dap_18_46': 8227.0, # assumed 46% P2O5
-    'sop': 7727.0,       # assumed 50% K2O
-}
+try:
+    (
+        _PAK_MAIZE_PRICE_RUPEES_PER_TONNE,
+        _PAK_SOY_BEANS_PRICE_RUPEES_PER_TONNE,
+        _PAK_CORN_SILAGE_PRICE_RUPEES_PER_TONNE,
+        _PAK_NUTRIENT_PRICES,
+    ) = _load_pakistan_series_from_file(PAKISTAN_PRICE_DATA_PATH)
+except Exception:
+    # Fallback keeps runtime stable even when external data file is unavailable.
+    _PAK_MAIZE_PRICE_RUPEES_PER_TONNE = {
+        2005: 10115.0,
+        2006: 11000.0,
+        2007: 11500.0,
+        2008: 11800.0,
+        2009: 17824.0,
+        2010: 19504.0,
+        2020: 39293.4,
+        2021: 45853.9,
+        2022: 69412.8,
+        2023: 62974.0,
+        2024: 63679.5,
+    }
+    _PAK_SOY_BEANS_PRICE_RUPEES_PER_TONNE = {
+        2005: 20000.0,
+        2006: 24000.0,
+        2007: 25500.0,
+        2008: 26000.0,
+        2009: 32060.0,
+        2010: 35430.0,
+    }
+    _PAK_CORN_SILAGE_PRICE_RUPEES_PER_TONNE = {
+        y: _PAK_MAIZE_PRICE_RUPEES_PER_TONNE[y] * 0.35
+        for y in _PAK_MAIZE_PRICE_RUPEES_PER_TONNE.keys()
+    }
+    _PAK_RS_PER_50KG_BAG_2021_22 = {
+        'urea': 1913.0,
+        'dap_18_46': 8227.0,
+        'sop': 7727.0,
+    }
+    _P2O5_TO_P = 0.4364
+    _K2O_TO_K = 0.8301
+    _PAK_NPK_RS_PER_KG_2021_22 = {
+        'N': _bag_price_to_rs_per_kg_nutrient(_PAK_RS_PER_50KG_BAG_2021_22['urea'], 0.46),
+        'P': _bag_price_to_rs_per_kg_nutrient(_PAK_RS_PER_50KG_BAG_2021_22['dap_18_46'], 0.46 * _P2O5_TO_P),
+        'K': _bag_price_to_rs_per_kg_nutrient(_PAK_RS_PER_50KG_BAG_2021_22['sop'], 0.50 * _K2O_TO_K),
+    }
+    _PAK_NUTRIENT_PRICES = {
+        n: _constant_series(v, start_year=1980, end_year=2100)
+        for n, v in _PAK_NPK_RS_PER_KG_2021_22.items()
+    }
 
-_P2O5_TO_P = 0.4364
-_K2O_TO_K = 0.8301
-
-_PAK_NPK_RS_PER_KG_2021_22 = {
-    'N': _bag_price_to_rs_per_kg_nutrient(_PAK_RS_PER_50KG_BAG_2021_22['urea'], 0.46),
-    'P': _bag_price_to_rs_per_kg_nutrient(_PAK_RS_PER_50KG_BAG_2021_22['dap_18_46'], 0.46 * _P2O5_TO_P),
-    'K': _bag_price_to_rs_per_kg_nutrient(_PAK_RS_PER_50KG_BAG_2021_22['sop'], 0.50 * _K2O_TO_K),
-}
-
-_PAK_NUTRIENT_PRICES = {
-    n: _constant_series(v, start_year=1980, end_year=2100)
-    for n, v in _PAK_NPK_RS_PER_KG_2021_22.items()
-}
 
 _PAK_CROP_PRICES = {
     'CornRM.90': _PAK_MAIZE_PRICE_RUPEES_PER_TONNE,

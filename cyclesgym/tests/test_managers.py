@@ -1,6 +1,7 @@
 import unittest
 import numpy as np
 import pandas as pd
+from pandas.testing import assert_frame_equal
 from cyclesgym.managers import *
 from cyclesgym.managers.utils import *
 
@@ -160,7 +161,7 @@ class TestSeasonManager(unittest.TestCase):
         self.target = pd.DataFrame(data=values, index=None, columns=columns)
 
     def test_parse(self):
-        assert self.target.equals(self.manager.season_df)
+        assert_frame_equal(self.target, self.manager.season_df, check_dtype=False)
 
 
 class TestUtils(unittest.TestCase):
@@ -185,7 +186,7 @@ class TestUtils(unittest.TestCase):
                               new_col_names=['PLANT_YEAR', 'PLANT_DOY'],
                               inplace=False)
         assert not new_df.equals(self.date_df)
-        assert new_df.equals(self.ydoy_df)
+        assert_frame_equal(new_df, self.ydoy_df, check_dtype=False)
 
     def test_datetoydoy_inplace(self):
         new_df = date_to_ydoy(self.date_df, 'DATE',
@@ -194,7 +195,7 @@ class TestUtils(unittest.TestCase):
                               new_col_names=['PLANT_YEAR', 'PLANT_DOY'],
                               inplace=True)
         assert new_df.equals(self.date_df)
-        assert new_df.equals(self.ydoy_df)
+        assert_frame_equal(new_df, self.ydoy_df, check_dtype=False)
 
     def test_ydoytodate(self):
         new_df = ydoy_to_date(self.ydoy_df, old_col_names=['YEAR', 'DOY'],
@@ -226,7 +227,9 @@ def compare_stripped_string(s1, s2):
     else:
         equal = True
         for el1, el2 in zip(l1, l2):
-            equal &= el1.replace(' ', '') == el2.replace(' ', '')
+            norm_1 = el1.replace(' ', '').replace('\t', '').replace('\r', '')
+            norm_2 = el2.replace(' ', '').replace('\t', '').replace('\r', '')
+            equal &= norm_1 == norm_2
             if not equal:
                 print(el1)
                 print(el2)

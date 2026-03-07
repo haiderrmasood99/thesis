@@ -121,3 +121,130 @@ experiments/fertilization/train.py   | 18 +++++++++++++-----
   - `pytest cyclesgym/tests/test_crop_planning.py -q` -> FAIL (`2 failed`)
   - Failure remains `PermissionError: [WinError 5] Access is denied` from tests invoking `subprocess.run(['./Cycles', ...])`.
   - Step 2 Python-layer changes validated independently (unit tests + env smoke checks), but direct `./Cycles` invocation path in tests is still environment-blocked.
+- 2026-03-07 ~02:40 +05:00: Fixed cross-platform CYCLES invocation in tests:
+  - Replaced `./Cycles` with `CYCLES_PATH.joinpath(CYCLES_EXE)` in:
+    - `cyclesgym/tests/test_crop_planning.py`
+    - `cyclesgym/tests/test_env.py`
+    - `cyclesgym/tests/test_random_weather.py`
+- 2026-03-07 ~02:44 +05:00: Fixed Gymnasium step-return compatibility in integration paths:
+  - Updated test unpacking logic (4/5 tuple handling).
+  - Updated `cyclesgym/utils/utils.py::run_env` to support Gymnasium returns.
+- 2026-03-07 ~02:46 +05:00: Resolved integration drift between manual controls and env defaults:
+  - Added `crop_file` parameter to:
+    - `cyclesgym/envs/corn.py`
+    - `cyclesgym/envs/crop_planning.py`
+  - Updated tests to use matching legacy files (`GenericCrops.crop`, `GenericHagerstown.soil`, `RockSprings.weather`) when comparing against manual control-file simulations.
+- 2026-03-07 ~02:48 +05:00: Removed plot-based test hang in env comparison:
+  - `cyclesgym/utils/utils.py::compare_env` plotting now opt-in via `CYCLESGYM_PLOT_COMPARE=1`.
+- 2026-03-07 ~02:52 +05:00: Started Step 3 hierarchical integration:
+  - Added new env: `cyclesgym/envs/hierarchical.py` (`HierarchicalCropPlanningFertilization`).
+  - Exported from `cyclesgym/envs/__init__.py`.
+  - Added training entrypoint wiring in `experiments/crop_planning/train.py` via `--hierarchical True`.
+  - Added test: `cyclesgym/tests/test_hierarchical_env.py`.
+- 2026-03-07 ~02:56 +05:00: Verification after Step 3 + integration fixes:
+  - `pytest cyclesgym/tests/test_crop_planning.py cyclesgym/tests/test_env.py cyclesgym/tests/test_random_weather.py cyclesgym/tests/test_hierarchical_env.py -q` -> PASS (`10 passed`, warnings only)
+  - `pytest cyclesgym/tests/test_rewarders.py cyclesgym/tests/test_implementers.py cyclesgym/tests/test_constrainers.py cyclesgym/tests/test_pricing_utils.py -q` -> PASS (`21 passed`, warnings only)
+- 2026-03-07 ~02:57 +05:00: Added implementation explainer:
+  - `Changes/THESIS_IMPLEMENTATION_03_HIERARCHICAL_INTEGRATION_AND_TEST_FIXES.md`
+- 2026-03-07 ~03:08 +05:00: Full-suite stabilization updates:
+  - `cyclesgym/tests/test_policies.py`
+    - Replaced legacy `gym` import with compatibility import:
+      - `from cyclesgym.utils.gym_compat import gym, spaces`
+  - `cyclesgym/tests/test_managers.py`
+    - Normalized strict string-compare helper against tab/CRLF formatting noise.
+    - Switched dataframe equality checks to `assert_frame_equal(..., check_dtype=False)` where parser output dtype may vary by pandas/platform.
+- 2026-03-07 ~03:11 +05:00: Verification after full-suite stabilization:
+  - `pytest cyclesgym/tests/test_managers.py -q` -> PASS (`15 passed`)
+  - `pytest cyclesgym/tests -q` -> PASS (`53 passed`, warnings only)
+- 2026-03-07 ~03:14 +05:00: Workspace cleanup:
+  - Restored tracked weather input accidentally removed during test side effects:
+    - `cycles/input/weather0.weather`
+  - Removed generated untracked test artifacts:
+    - `cycles/output/CropPlanningTest/`
+    - `cyclesgym/tests/DummyWeatherFromManager.weather`
+
+## Final Status (2026-03-07)
+
+1. Step 1, Step 2, and Step 3 thesis implementations are integrated.
+2. The previous `./Cycles` invocation blocker is resolved via platform-aware executable calls.
+3. The full `cyclesgym/tests` suite passes in this environment:
+   - `53 passed` (warnings only).
+4. No unresolved Python-level logic/test blockers remain from this implementation cycle.
+5. Final confirmation rerun:
+   - Command: `pytest cyclesgym/tests -q`
+   - Result: `53 passed, 8 warnings` (2026-03-07).
+- 2026-03-07 ~04:15 +05:00: Started Step 4 + thesis hardening implementation:
+  - Added hierarchical reporting callback:
+    - `cyclesgym/utils/thesis_reporting.py`
+  - Added structured reporting fields in hierarchical env step info:
+    - `cyclesgym/envs/hierarchical.py`
+  - Integrated reporting callback and standardized summary emission in crop-planning training:
+    - `experiments/crop_planning/train.py`
+- 2026-03-07 ~04:24 +05:00: Added Pakistan year-varying data pipeline:
+  - New data builder script:
+    - `scripts/build_pakistan_price_series.py`
+  - Generated data asset:
+    - `cyclesgym/resources/pricing/pakistan_yearly_series.json`
+  - Refactored pricing loader:
+    - `cyclesgym/utils/pricing_utils.py`
+  - Replaced legacy silage placeholder logic with Pakistan-maize-linked proxy series (`0.35 * maize`).
+- 2026-03-07 ~04:35 +05:00: Added standardized thesis matrix + RL-vs-baseline summary wiring:
+  - `experiments/fertilization/train.py` now writes standardized summary JSON (including baseline-only mode).
+  - `experiments/crop_planning/train.py` now writes standardized summary JSON + baseline policy comparisons where applicable.
+  - `run_all_2.py` now:
+    - injects per-run `--summary-json`,
+    - supports hierarchical matrix branch,
+    - exports baseline/uplift/holdout columns in summary CSV.
+- 2026-03-07 ~04:48 +05:00: Added/updated tests:
+  - new: `cyclesgym/tests/test_thesis_reporting.py`
+  - updated:
+    - `cyclesgym/tests/test_pricing_utils.py`
+    - `cyclesgym/tests/test_hierarchical_env.py`
+- 2026-03-07 ~04:55 +05:00: Verification after Step 4 + hardening:
+  - `python -m compileall ...` on changed modules -> PASS
+  - `pytest cyclesgym/tests/test_pricing_utils.py cyclesgym/tests/test_rewarders.py cyclesgym/tests/test_hierarchical_env.py cyclesgym/tests/test_thesis_reporting.py -q` -> PASS (`13 passed`)
+  - `pytest cyclesgym/tests -q` -> PASS (`57 passed`, warnings only)
+- 2026-03-07 ~05:25 +05:00: Runtime hardening during smoke validation:
+  - `experiments/crop_planning/train.py`:
+    - added optional `--without-tracking` mode with no-op W&B fallback.
+    - fixed no-tracking execution on systems without tensorboard by disabling SB3 tensorboard logger when tracking is disabled.
+    - guarded W&B import to avoid failures in environments with namespace-shadowed/non-functional `wandb`.
+  - `experiments/fertilization/train.py`:
+    - added optional `--without-tracking` mode with no-op W&B fallback.
+    - fixed no-tracking execution on systems without tensorboard by disabling SB3 tensorboard logger when tracking is disabled.
+    - guarded W&B import to avoid failures in environments with namespace-shadowed/non-functional `wandb`.
+- 2026-03-07 ~05:35 +05:00: Fixed backward-compatibility bug in fertilization env stack:
+  - `experiments/fertilization/corn_soil_refined.py`:
+    - initialized new nutrient-mode attributes expected by `cyclesgym/envs/corn.py` (`nutrient_action_mode`, `price_profile`, `n_nh4_rate`, etc.).
+    - resolves `AttributeError: 'CornSoilCropWeatherObs' object has no attribute 'nutrient_action_mode'`.
+- 2026-03-07 ~05:50 +05:00: Re-verification after runtime hardening:
+  - `python -m compileall experiments/crop_planning/train.py experiments/fertilization/train.py experiments/fertilization/corn_soil_refined.py` -> PASS
+  - `pytest cyclesgym/tests -q` -> PASS (`57 passed, 8 warnings`)
+- 2026-03-07 ~05:55 +05:00: Smoke-run note:
+  - Long simulation smoke commands for full training/baseline timed out at 20 minutes in this environment.
+  - Partial hierarchical reporting artifacts were still generated before timeout:
+    - `runs/thesis_reports/smoke_hier/weekly_npk_log.csv`
+    - `runs/thesis_reports/smoke_hier/yearly_crop_decisions.csv`
+- 2026-03-07 ~17:00 +05:00: Final-run fertilization upgrade to Pakistan NPK mode:
+  - `experiments/fertilization/corn_soil_refined.py`
+    - added full pass-through support for `nutrient_action_mode`, `price_profile`, and NPK channel parameters (`maxP`, `maxK`, `p_actions`, `k_actions`, `n_nh4_rate`).
+  - `experiments/fertilization/train.py`
+    - defaulted to `nutrient_action_mode="NPK"` and `price_profile="pakistan_baseline"`.
+    - added CLI flags for NPK channel control + pricing profile.
+    - env construction now propagates NPK/Pakistan parameters in adaptive/nonadaptive and fixed/random weather branches.
+    - baseline sequence evaluation now supports NPK mode by encoding N-only baselines as `[N, 0, 0]`.
+    - fixed logical bug in holdout evaluation path (`eval_nh`) to use test env instead of train env.
+  - `cyclesgym/policies/dummy_policies.py`
+    - fixed `OpenLoopPolicy` batched action shape for vectorized MultiDiscrete envs.
+  - `run_all_2.py`
+    - added fertilization matrix controls for NPK/Pakistan settings and set defaults to Pakistan NPK.
+    - fertilization core/DQN/baseline command builders now pass these flags.
+- 2026-03-07 ~17:02 +05:00: Live data refresh completed for final run:
+  - executed `python scripts/build_pakistan_price_series.py`.
+  - refreshed `cyclesgym/resources/pricing/pakistan_yearly_series.json` from online FAOSTAT + NFDC sources.
+- 2026-03-07 ~17:03 +05:00: Verification after final-run fertilization upgrade:
+  - `python -m compileall experiments/fertilization/train.py experiments/fertilization/corn_soil_refined.py cyclesgym/policies/dummy_policies.py run_all_2.py cyclesgym/tests/test_policies.py` -> PASS
+  - `pytest cyclesgym/tests/test_policies.py cyclesgym/tests/test_pricing_utils.py cyclesgym/tests/test_rewarders.py cyclesgym/tests/test_hierarchical_env.py cyclesgym/tests/test_thesis_reporting.py -q` -> PASS (`17 passed`)
+  - `pytest cyclesgym/tests -q` -> PASS (`59 passed, 8 warnings`)
+  - `python run_all_2.py --dry-run --include-hierarchical --include-baseline` -> PASS
+  - direct NPK wrapper smoke check (`CornSoilRefined`, reset + step) -> PASS (`MultiDiscrete([11 11 11])`)

@@ -4,6 +4,7 @@ warnings.filterwarnings("ignore")
 from stable_baselines3.common.vec_env import SubprocVecEnv, DummyVecEnv, VecNormalize
 from stable_baselines3.common.vec_env import VecMonitor
 from stable_baselines3 import PPO, A2C, DQN
+from stable_baselines3.common.callbacks import BaseCallback
 from stable_baselines3.common.evaluation import evaluate_policy
 from stable_baselines3.common.utils import set_random_seed
 from cyclesgym.envs.corn import Corn
@@ -11,13 +12,12 @@ from cyclesgym.utils.utils import EvalCallbackCustom, _evaluate_policy, JsonlTra
 from cyclesgym.utils.wandb_utils import WANDB_ENTITY, FERTILIZATION_EXPERIMENT
 import gymnasium as gym
 from corn_soil_refined import CornSoilRefined, NonAdaptiveCorn
-import wandb
-from wandb.integration.sb3 import WandbCallback
 from pathlib import Path
 from cyclesgym.utils.paths import PROJECT_PATH, CYCLES_PATH
 from cyclesgym.envs.weather_generator import WeatherShuffler
 import sys
 from datetime import datetime
+import json
 
 
 from cyclesgym.policies.dummy_policies import OpenLoopPolicy
@@ -25,6 +25,82 @@ import expert
 import argparse
 import random
 from cyclesgym.managers import WeatherManager
+
+try:
+    import wandb as _wandb_module
+except Exception:
+    _wandb_module = None
+
+try:
+    from wandb.integration.sb3 import WandbCallback as _WandbCallback
+except Exception:
+    _WandbCallback = None
+
+
+class _NoOpWandbConfig(dict):
+    def update(self, *args, **kwargs):
+        kwargs.pop('allow_val_change', None)
+        if args and not isinstance(args[0], dict) and hasattr(args[0], '__dict__'):
+            args = (vars(args[0]),) + args[1:]
+        return super().update(*args, **kwargs)
+
+
+class _NoOpWandbRun:
+    def __init__(self, run_id: str, run_dir: Path):
+        self.id = run_id
+        self.dir = str(run_dir)
+
+
+class _NoOpWandbTable:
+    def __init__(self, *args, **kwargs):
+        pass
+
+    def add_data(self, *args, **kwargs):
+        return None
+
+
+class _NoOpWandbPlot:
+    @staticmethod
+    def bar(*args, **kwargs):
+        return None
+
+
+class _NoOpWandb:
+    Table = _NoOpWandbTable
+    plot = _NoOpWandbPlot()
+
+    def __init__(self):
+        self.config = _NoOpWandbConfig()
+        self.run = _NoOpWandbRun('offline-uninitialized', PROJECT_PATH.joinpath('runs', 'offline', 'uninitialized'))
+
+    def init(self, config=None, dir=None, **kwargs):
+        run_id = datetime.now().strftime('offline_%Y%m%d_%H%M%S')
+        run_root = Path(dir) if dir is not None else PROJECT_PATH
+        run_dir = run_root.joinpath('runs', 'offline', run_id)
+        run_dir.mkdir(parents=True, exist_ok=True)
+        self.config = _NoOpWandbConfig(dict(config or {}))
+        self.run = _NoOpWandbRun(run_id, run_dir)
+        return self
+
+    def log(self, *args, **kwargs):
+        return None
+
+
+class _NoOpWandbCallback(BaseCallback):
+    def __init__(self, *args, **kwargs):
+        super().__init__(verbose=0)
+
+    def _on_step(self):
+        return True
+
+
+_WANDB_TRACKING_AVAILABLE = (
+    (_wandb_module is not None)
+    and hasattr(_wandb_module, 'init')
+    and (_WandbCallback is not None)
+)
+wandb = _wandb_module if _WANDB_TRACKING_AVAILABLE else _NoOpWandb()
+WandbCallback = _WandbCallback if _WANDB_TRACKING_AVAILABLE else _NoOpWandbCallback
 
 PAK_WEATHER_FILE = CYCLES_PATH.joinpath('input', 'Pakistan_Site_final.weather')
 
@@ -49,6 +125,19 @@ class Train:
         self.model_dir = Path(self.dir).joinpath('models')
         # rl config is configured from wandb config
 
+    def _nutrient_mode(self) -> str:
+        return str(self.config.get('nutrient_action_mode', 'NPK')).upper()
+
+    def _is_npk_mode(self) -> bool:
+        return self._nutrient_mode() == 'NPK'
+
+    def _mode_action_sequence(self, n_sequence):
+        n_arr = np.asarray(n_sequence, dtype=np.int64)
+        if not self._is_npk_mode():
+            return n_arr
+        zeros = np.zeros_like(n_arr, dtype=np.int64)
+        return np.stack([n_arr, zeros, zeros], axis=1)
+
     def env_maker(self, training = True, n_procs = 1, soil_env = False, start_year = PAK_WEATHER_START_YEAR, end_year = PAK_WEATHER_START_YEAR,
         sampling_start_year=PAK_WEATHER_START_YEAR, sampling_end_year=PAK_DEFAULT_SAMPLING_END_YEAR,
         n_weather_samples=100, fixed_weather = True, with_obs_year=False,
@@ -58,26 +147,56 @@ class Train:
             # creates a function returning the basic env. Used by SubprocVecEnv later to create a
             # vectorized environment
             def _f():
+                nutrient_action_mode = self._nutrient_mode()
+                max_n = float(self.config.get('maxN', 150.0))
+                max_p = float(self.config.get('maxP', 80.0))
+                max_k = float(self.config.get('maxK', 60.0))
+                p_actions = int(self.config.get('p_actions', self.config.get('n_actions', 11)))
+                k_actions = int(self.config.get('k_actions', self.config.get('n_actions', 11)))
+                n_nh4_rate = float(self.config.get('n_nh4_rate', 0.75))
+                price_profile = str(self.config.get('price_profile', 'pakistan_baseline'))
+
                 if nonadaptive:
-                    env = NonAdaptiveCorn(delta=7, maxN=150, n_actions=self.config['n_actions'],
+                    env = NonAdaptiveCorn(delta=7, maxN=max_n, n_actions=self.config['n_actions'],
                             start_year = start_year, end_year = end_year,
                             sampling_start_year=sampling_start_year,
                             sampling_end_year=sampling_end_year,
                             n_weather_samples=n_weather_samples,
                             fixed_weather=fixed_weather,
-                            with_obs_year=with_obs_year)
+                            with_obs_year=with_obs_year,
+                            nutrient_action_mode=nutrient_action_mode,
+                            maxP=max_p,
+                            maxK=max_k,
+                            p_actions=p_actions,
+                            k_actions=k_actions,
+                            n_nh4_rate=n_nh4_rate,
+                            price_profile=price_profile)
                 else:
                     if soil_env:
-                        env = CornSoilRefined(delta=7, maxN=150, n_actions=self.config['n_actions'],
+                        env = CornSoilRefined(delta=7, maxN=max_n, n_actions=self.config['n_actions'],
                             start_year = start_year, end_year = end_year,
                             sampling_start_year=sampling_start_year,
                             sampling_end_year=sampling_end_year,
                             n_weather_samples=n_weather_samples,
                             fixed_weather=fixed_weather,
-                            with_obs_year=with_obs_year)
+                            with_obs_year=with_obs_year,
+                            nutrient_action_mode=nutrient_action_mode,
+                            maxP=max_p,
+                            maxK=max_k,
+                            p_actions=p_actions,
+                            k_actions=k_actions,
+                            n_nh4_rate=n_nh4_rate,
+                            price_profile=price_profile)
                     else:
                         if fixed_weather:
-                            env = Corn(delta=7, maxN=150, n_actions=self.config['n_actions'],
+                            env = Corn(delta=7, maxN=max_n, n_actions=self.config['n_actions'],
+                                nutrient_action_mode=nutrient_action_mode,
+                                maxP=max_p,
+                                maxK=max_k,
+                                p_actions=p_actions,
+                                k_actions=k_actions,
+                                n_nh4_rate=n_nh4_rate,
+                                price_profile=price_profile,
                                 start_year = start_year, end_year = end_year)
                         else:
                             target_year_range = np.arange(start_year, end_year + 1)
@@ -87,7 +206,14 @@ class Train:
                                 sampling_end_year=sampling_end_year,
                                 target_year_range=target_year_range,
                                 base_weather_file=PAK_WEATHER_FILE)
-                            env = Corn(delta=7, maxN=150, n_actions=self.config['n_actions'],
+                            env = Corn(delta=7, maxN=max_n, n_actions=self.config['n_actions'],
+                                       nutrient_action_mode=nutrient_action_mode,
+                                       maxP=max_p,
+                                       maxK=max_k,
+                                       p_actions=p_actions,
+                                       k_actions=k_actions,
+                                       n_nh4_rate=n_nh4_rate,
+                                       price_profile=price_profile,
                                        start_year=start_year, end_year=end_year,
                                        weather_generator_class=WeatherShuffler,
                                        weather_generator_kwargs=weather_generator_kwargs)
@@ -240,13 +366,14 @@ class Train:
         duration = self.config['end_year'] - self.config['start_year']
         total_timesteps = self.config["total_years"] * 53
         n_steps = int(self.config['n_steps'] / self.config['n_process'])
+        tensorboard_log = None if bool(self.config.get('without_tracking', False)) else self.dir
 
         if self.config["method"] == "A2C":
-            model = A2C('MlpPolicy', train_env, verbose=0, ent_coef=self.config.get('ent_coef', 0.0), tensorboard_log=self.dir)
+            model = A2C('MlpPolicy', train_env, verbose=0, ent_coef=self.config.get('ent_coef', 0.0), tensorboard_log=tensorboard_log)
         elif self.config["method"] == "PPO":
-            model = PPO('MlpPolicy', train_env, verbose=0, n_steps= n_steps, ent_coef=self.config.get('ent_coef', 0.0), tensorboard_log=self.dir)
+            model = PPO('MlpPolicy', train_env, verbose=0, n_steps= n_steps, ent_coef=self.config.get('ent_coef', 0.0), tensorboard_log=tensorboard_log)
         elif self.config["method"] == "DQN":
-            model = DQN('MlpPolicy', train_env, verbose=0, tensorboard_log=self.dir)
+            model = DQN('MlpPolicy', train_env, verbose=0, tensorboard_log=tensorboard_log)
         else:
             raise Exception("Not an RL method that has been implemented")
 
@@ -287,7 +414,7 @@ class Train:
         mean deterministic reward
 
         """
-        #list, list, numpy array, list
+        # list, list, numpy array, list
         mean_r_det, std_r_det, actions_det, episode_rewards_det, _, _ = _evaluate_policy(model,
                                                                                          env=eval_env,
                                                                                          n_eval_episodes=1,
@@ -298,35 +425,85 @@ class Train:
                                                                                             n_eval_episodes=5,
                                                                                             deterministic=False)
 
-        T = actions_stoc.shape[1]
-        wandb.log({'deterministic_return': mean_r_det,
-                   'stochastic_return_mean': mean_r_stoc,
-                   'stochastic_return_std': std_r_stoc,
-                   })
-        episode_actions_names = [*list(f"det{i + 1}" for i in range(len(actions_det))),
-                                 *list(f"stoc{i + 1}" for i in range(len(actions_stoc)))]
+        metrics = {
+            'deterministic_return': float(mean_r_det),
+            'stochastic_return_mean': float(mean_r_stoc),
+            'stochastic_return_std': float(std_r_stoc),
+        }
+        wandb.log(metrics)
+
+        episode_actions_names = [
+            *list(f"det{i + 1}" for i in range(len(actions_det))),
+            *list(f"stoc{i + 1}" for i in range(len(actions_stoc)))
+        ]
         episode_actions = [*actions_det, *actions_stoc]
-        fertilizer_table = wandb.Table(
-            columns=['Run', 'Total Fertilizer', *[f'Week{i}' for i in range(T)]])
-        for i in range(len(episode_actions)):
-            acts = episode_actions[i]
-            data = [[week, fert] for (week, fert) in zip(range(T), acts)]
-            table = wandb.Table(data=data, columns=['Week', 'N added'])
-            fertilizer_table.add_data(
-                *[episode_actions_names[i], np.sum(acts), *acts])
+        if not episode_actions:
+            return metrics
+
+        sample_action = np.asarray(episode_actions[0])
+
+        if sample_action.ndim == 1:
+            # Legacy N-only runs.
+            T = int(sample_action.shape[0])
+            fertilizer_table = wandb.Table(
+                columns=['Run', 'Total Fertilizer', *[f'Week{i}' for i in range(T)]]
+            )
+            for i, acts in enumerate(episode_actions):
+                acts_arr = np.asarray(acts)
+                data = [[week, fert] for (week, fert) in zip(range(T), acts_arr)]
+                table = wandb.Table(data=data, columns=['Week', 'N added'])
+                fertilizer_table.add_data(
+                    *[episode_actions_names[i], float(np.sum(acts_arr)), *acts_arr.tolist()]
+                )
+                try:
+                    wandb.log({
+                        f'train/actions/{episode_actions_names[i]}': wandb.plot.bar(
+                            table, 'Week', 'N added',
+                            title=f'Training action sequence {episode_actions_names[i]}'
+                        )
+                    })
+                except FileNotFoundError as e:
+                    print(f"Warning: Failed to log action sequence {episode_actions_names[i]} due to FileNotFoundError: {e}")
             try:
-                wandb.log({f'train/actions/{episode_actions_names[i]}': wandb.plot.bar(table, 'Week', 'N added',
-                                                                                       title=f'Training action sequence {episode_actions_names[i]}')})
+                wandb.log({'train/fertilizer': fertilizer_table})
             except FileNotFoundError as e:
-                print(f"Warning: Failed to log action sequence {episode_actions_names[i]} due to FileNotFoundError: {e}")
-        try:
-            wandb.log({'train/fertilizer': fertilizer_table})
-        except FileNotFoundError as e:
-             print(f"Warning: Failed to log fertilizer table due to FileNotFoundError: {e}")
+                print(f"Warning: Failed to log fertilizer table due to FileNotFoundError: {e}")
+        elif sample_action.ndim == 2:
+            # NPK runs: action shape is [T, C]
+            T = int(sample_action.shape[0])
+            channels = int(sample_action.shape[1])
+            nutrient_names = ['N', 'P', 'K']
+            nutrient_names = nutrient_names[:channels] + [f'X{i}' for i in range(max(0, channels - len(nutrient_names)))]
+
+            fertilizer_table = wandb.Table(
+                columns=['Run', *[f'Total_{n}' for n in nutrient_names]]
+            )
+
+            for i, acts in enumerate(episode_actions):
+                acts_arr = np.asarray(acts, dtype=np.int64)
+                totals = acts_arr.sum(axis=0).tolist()
+                fertilizer_table.add_data(*[episode_actions_names[i], *totals])
+
+                for j, nutrient in enumerate(nutrient_names):
+                    data = [[week, int(acts_arr[week, j])] for week in range(T)]
+                    table = wandb.Table(data=data, columns=['Week', f'{nutrient} action'])
+                    try:
+                        wandb.log({
+                            f'train/actions/{episode_actions_names[i]}_{nutrient}': wandb.plot.bar(
+                                table, 'Week', f'{nutrient} action',
+                                title=f'{nutrient} action sequence {episode_actions_names[i]}'
+                            )
+                        })
+                    except FileNotFoundError as e:
+                        print(f"Warning: Failed to log {nutrient} sequence for {episode_actions_names[i]} due to FileNotFoundError: {e}")
+            try:
+                wandb.log({'train/fertilizer_npk': fertilizer_table})
+            except FileNotFoundError as e:
+                print(f"Warning: Failed to log NPK fertilizer table due to FileNotFoundError: {e}")
 
         ## create a plot of the reward in each year
         ## create a plot of fertilizer cost in each year
-        return mean_r_det
+        return metrics
 
     def eval_openloop(self, action_series, eval_env, name):
         action_series_int = np.array(action_series, dtype=int)
@@ -336,7 +513,7 @@ class Train:
                                 n_eval_episodes=100,
                                 deterministic=True)
         wandb.log({f'train/baseline/'+name: r})
-        return
+        return float(r)
 
     def one_year_eval(self, model):
         """
@@ -371,22 +548,22 @@ class Train:
         eval_env_train, eval_env_test = self.get_envs(n_procs = 1)
 
         agro_exact_sequence = expert.create_action_sequence(doy=[110, 155], weight=[35, 120],
-                                             maxN=150,
+                                             maxN=self.config['maxN'],
                                              n_actions=self.config['n_actions'],
                                              delta_t=7)
 
         nonsense_exact_sequence = expert.create_action_sequence(doy=[110, 155, 300], weight=[35, 120, 50],
-                                             maxN=150,
+                                             maxN=self.config['maxN'],
                                              n_actions=self.config['n_actions'],
                                              delta_t=7)
 
         cycles_exact_sequence = expert.create_action_sequence(doy=110, weight=150,
-                                             maxN=150,
+                                             maxN=self.config['maxN'],
                                              n_actions=self.config['n_actions'],
                                              delta_t=7)
 
         organic_exact_sequence = expert.create_action_sequence(doy=110, weight=0,
-                                             maxN=150,
+                                             maxN=self.config['maxN'],
                                              n_actions=self.config['n_actions'],
                                              delta_t=7)
         
@@ -395,23 +572,54 @@ class Train:
         nonsense_exact_sequence = make_multi_year(nonsense_exact_sequence, n)
         cycles_exact_sequence = make_multi_year(cycles_exact_sequence, n)
         organic_exact_sequence = make_multi_year(organic_exact_sequence, n)
-        self.eval_openloop(organic_exact_sequence, eval_env_train, "organic-train")
-        self.eval_openloop(agro_exact_sequence, eval_env_train, "agro-train")
-        self.eval_openloop(cycles_exact_sequence, eval_env_train, "cycles-train")
-        self.eval_openloop(nonsense_exact_sequence, eval_env_train, "nonsense-train")
+        agro_exact_sequence = self._mode_action_sequence(agro_exact_sequence)
+        nonsense_exact_sequence = self._mode_action_sequence(nonsense_exact_sequence)
+        cycles_exact_sequence = self._mode_action_sequence(cycles_exact_sequence)
+        organic_exact_sequence = self._mode_action_sequence(organic_exact_sequence)
+        out = {}
+        out["organic_train"] = self.eval_openloop(organic_exact_sequence, eval_env_train, "organic-train")
+        out["agro_train"] = self.eval_openloop(agro_exact_sequence, eval_env_train, "agro-train")
+        out["cycles_train"] = self.eval_openloop(cycles_exact_sequence, eval_env_train, "cycles-train")
+        out["nonsense_train"] = self.eval_openloop(nonsense_exact_sequence, eval_env_train, "nonsense-train")
 
-        self.eval_openloop(organic_exact_sequence, eval_env_test, "organic-test")
-        self.eval_openloop(agro_exact_sequence, eval_env_test, "agro-test")
-        self.eval_openloop(cycles_exact_sequence, eval_env_test, "cycles-test")
-        self.eval_openloop(nonsense_exact_sequence, eval_env_test, "nonsense-test")
+        out["organic_test"] = self.eval_openloop(organic_exact_sequence, eval_env_test, "organic-test")
+        out["agro_test"] = self.eval_openloop(agro_exact_sequence, eval_env_test, "agro-test")
+        out["cycles_test"] = self.eval_openloop(cycles_exact_sequence, eval_env_test, "cycles-test")
+        out["nonsense_test"] = self.eval_openloop(nonsense_exact_sequence, eval_env_test, "nonsense-test")
 
-        return
+        return out
+
+    def write_standardized_summary(self, metrics: dict):
+        out_path = self.config.get('summary_json')
+        if not out_path:
+            out_path = str(
+                PROJECT_PATH.joinpath('runs', 'experiment_summaries', 'metrics', f'fertilization_{wandb.run.id}.json')
+            )
+        path = Path(out_path)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        payload = {
+            'timestamp': datetime.now().isoformat(),
+            'run_id': wandb.run.id,
+            'domain': 'fertilization',
+            'method': str(self.config.get('method')),
+            'seed': int(self.config.get('seed', 0)),
+            'fixed_weather': bool(self.config.get('fixed_weather', False)),
+            'nonadaptive': bool(self.config.get('nonadaptive', False)),
+            'total_years': int(self.config.get('total_years', 0)),
+            'baseline': bool(self.config.get('baseline', False)),
+            'nutrient_action_mode': self._nutrient_mode(),
+            'price_profile': str(self.config.get('price_profile', 'pakistan_baseline')),
+            'metrics': metrics,
+        }
+        path.write_text(json.dumps(payload, indent=2), encoding='utf-8')
+        wandb.log({'summary_json_path': str(path)})
+        return str(path)
 
     def eval_nh(self,model):
         """
         evaluate the model on Pakistan holdout years
         """
-        eval_env, _  = self.get_envs(n_procs = 1)
+        _, eval_env  = self.get_envs(n_procs = 1)
         eval_env = VecNormalize.load(self.config['stats_path'], eval_env)
         eval_env.training = False
         eval_env.norm_reward = False
@@ -421,7 +629,7 @@ class Train:
            n_eval_episodes=20,
            deterministic=False)
         wandb.log({'pak_holdout_return': mean_r})
-        return
+        return float(mean_r)
 
 
 def make_multi_year(action_seq, n):
@@ -431,6 +639,15 @@ def make_multi_year(action_seq, n):
 
 if __name__ == '__main__':
     RANDOM_SEED = 0
+    if ('-h' in sys.argv) or ('--help' in sys.argv):
+        pass
+    elif '--without-tracking' in sys.argv:
+        wandb = _NoOpWandb()
+        WandbCallback = _NoOpWandbCallback
+    elif not _WANDB_TRACKING_AVAILABLE:
+        raise ModuleNotFoundError(
+            'wandb + wandb.integration.sb3 is required. Install wandb or pass --without-tracking.'
+        )
     """
     torch.manual_seed(RANDOM_SEED)
     env.seed(RANDOM_SEED)
@@ -441,6 +658,14 @@ if __name__ == '__main__':
                   method = "PPO", 
                   ent_coef = 0.0,
                   n_actions = 11, 
+                  nutrient_action_mode = "NPK",
+                  price_profile = "pakistan_baseline",
+                  maxN = 150.0,
+                  maxP = 80.0,
+                  maxK = 60.0,
+                  p_actions = 11,
+                  k_actions = 11,
+                  n_nh4_rate = 0.75,
                   soil_env=True, 
                   start_year = PAK_WEATHER_START_YEAR,
                   sampling_start_year=PAK_WEATHER_START_YEAR, 
@@ -450,7 +675,8 @@ if __name__ == '__main__':
                   with_obs_year = True,
                   log_every_steps = 1,
                   log_step_actions = True,
-                  log_step_rewards = True)
+                  log_step_rewards = True,
+                  summary_json = '')
     wandb.init(
     config=config,
     sync_tensorboard=True,
@@ -488,6 +714,27 @@ if __name__ == '__main__':
     parser.add_argument('-m', '--method', type=str.upper, default='PPO',
                         choices=['PPO', 'A2C', 'DQN'],
                         help='RL method to train (default: PPO)')
+    parser.add_argument('--nutrient-action-mode', type=str.upper, default='NPK',
+                        choices=['N', 'NPK'],
+                        help='N-only or NPK fertilization action mode')
+    parser.add_argument('--price-profile', default='pakistan_baseline',
+                        help='Economics profile to use (e.g. us_legacy, pakistan_baseline)')
+    parser.add_argument('--maxN', type=float, default=150.0,
+                        help='Max N kg/ha per application')
+    parser.add_argument('--maxP', type=float, default=80.0,
+                        help='Max P kg/ha per application (NPK mode)')
+    parser.add_argument('--maxK', type=float, default=60.0,
+                        help='Max K kg/ha per application (NPK mode)')
+    parser.add_argument('--p-actions', type=int, default=11,
+                        help='Number of discrete bins for P channel (NPK mode)')
+    parser.add_argument('--k-actions', type=int, default=11,
+                        help='Number of discrete bins for K channel (NPK mode)')
+    parser.add_argument('--n-nh4-rate', type=float, default=0.75,
+                        help='Fraction of N allocated to NH4 when applying N')
+    parser.add_argument('--without-tracking', action='store_true', default=False,
+                        help='Disable W&B tracking and run with local no-op logger')
+    parser.add_argument('--summary-json', default='',
+                        help='Optional path for standardized run summary JSON')
 
     args = parser.parse_args()
 
@@ -518,6 +765,16 @@ if __name__ == '__main__':
         config['sampling_end_year'] = PAK_WEATHER_END_YEAR
     if config['sampling_end_year'] < config['sampling_start_year']:
         config['sampling_end_year'] = config['sampling_start_year']
+    config['nutrient_action_mode'] = str(config.get('nutrient_action_mode', 'NPK')).upper()
+    if config['nutrient_action_mode'] not in {'N', 'NPK'}:
+        config['nutrient_action_mode'] = 'NPK'
+    config['p_actions'] = max(2, int(config.get('p_actions', config.get('n_actions', 11))))
+    config['k_actions'] = max(2, int(config.get('k_actions', config.get('n_actions', 11))))
+    config['n_actions'] = max(2, int(config.get('n_actions', 11)))
+    config['maxN'] = max(0.0, float(config.get('maxN', 150.0)))
+    config['maxP'] = max(0.0, float(config.get('maxP', 80.0)))
+    config['maxK'] = max(0.0, float(config.get('maxK', 60.0)))
+    config['n_nh4_rate'] = float(np.clip(float(config.get('n_nh4_rate', 0.75)), 0.0, 1.0))
 
     set_random_seed(config['seed'])
     np.random.seed(config['seed'])
@@ -529,7 +786,12 @@ if __name__ == '__main__':
     
     #if trying to get baselines...
     if config['baseline']:
-        trainer.eval_baselines()
+        baseline_returns = trainer.eval_baselines()
+        baseline_best = max(baseline_returns.values()) if baseline_returns else None
+        trainer.write_standardized_summary({
+            'baseline_returns': baseline_returns,
+            'baseline_best_return': float(baseline_best) if baseline_best is not None else None,
+        })
     else:
         if config['posthoc']:
             file = PROJECT_PATH.joinpath('experiments/data/model.zip')
@@ -547,12 +809,13 @@ if __name__ == '__main__':
         # reward normalization is not needed at test time
         eval_env_test.norm_reward = False
         
-        trainer.evaluate_log(model, eval_env_test)
+        metrics = trainer.evaluate_log(model, eval_env_test)
         
         if config['start_year'] == config['end_year']:
             trainer.one_year_eval(model)
         
-        trainer.eval_nh(model)
+        metrics['pak_holdout_return'] = trainer.eval_nh(model)
+        trainer.write_standardized_summary(metrics)
 
 
 

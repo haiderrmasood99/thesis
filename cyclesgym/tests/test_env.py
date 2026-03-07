@@ -7,13 +7,15 @@ import subprocess
 from cyclesgym.envs.corn import Corn
 from cyclesgym.envs.common import PartialObsEnv
 from cyclesgym.envs.utils import date2ydoy
+from cyclesgym.envs.weather_generator import FixedWeatherGenerator
 from cyclesgym.managers import *
 from cyclesgym.utils.utils import compare_env, maximum_absolute_percentage_error
-from cyclesgym.utils.paths import CYCLES_PATH, TEST_PATH
+from cyclesgym.utils.paths import CYCLES_PATH, CYCLES_EXE, TEST_PATH
 
 TEST_FILENAMES = ['NCornTest.ctrl',
                   'NCornTest.operation',
                   'NCornTestNoFertilization.operation']
+TEST_WEATHER_KWARGS = {'base_weather_file': CYCLES_PATH.joinpath('input', 'RockSprings.weather')}
 
 
 def copy_cycles_test_files():
@@ -58,14 +60,24 @@ class TestCornEnv(unittest.TestCase):
         # Start gym env
         operation_file = TEST_FILENAMES[2]
         env = Corn(delta=1, maxN=150, n_actions=16,
-                      operation_file=operation_file)
+                   start_year=1980, end_year=1980,
+                   crop_file='GenericCrops.crop',
+                   soil_file='GenericHagerstown.soil',
+                   weather_generator_class=FixedWeatherGenerator,
+                   weather_generator_kwargs=TEST_WEATHER_KWARGS,
+                   operation_file=operation_file)
 
         # Run simulation with same management and compare
         env.reset()
         while True:
             _, doy = date2ydoy(env.date)
             a = 15 if doy == 106 else 0
-            _, _, done, _ = env.step(a)
+            step_out = env.step(a)
+            if len(step_out) == 5:
+                _, _, terminated, truncated, _ = step_out
+                done = bool(terminated or truncated)
+            else:
+                _, _, done, _ = step_out
             if done:
                 break
 
@@ -84,7 +96,12 @@ class TestCornEnv(unittest.TestCase):
         while True:
             _, doy = date2ydoy(env.date)
             a = 15 if doy == 107 else 0
-            _, _, done, _ = env.step(a)
+            step_out = env.step(a)
+            if len(step_out) == 5:
+                _, _, terminated, truncated, _ = step_out
+                done = bool(terminated or truncated)
+            else:
+                _, _, done, _ = step_out
             if done:
                 break
         crop_output_file = env._get_output_dir().joinpath('CornRM.90.dat')
@@ -108,10 +125,18 @@ class TestCornEnv(unittest.TestCase):
         maxN = 120
 
         self.env_cont = Corn(delta=delta, n_actions=n_actions, maxN=maxN, start_year=self.START_YEAR,
-                             end_year=self.END_YEAR, use_reinit=False)
+                             end_year=self.END_YEAR, use_reinit=False,
+                             crop_file='GenericCrops.crop',
+                             soil_file='GenericHagerstown.soil',
+                             weather_generator_class=FixedWeatherGenerator,
+                             weather_generator_kwargs=TEST_WEATHER_KWARGS)
 
         self.env_impr = Corn(delta=delta, n_actions=n_actions, maxN=maxN, start_year=self.START_YEAR,
-                             end_year=self.END_YEAR)
+                             end_year=self.END_YEAR,
+                             crop_file='GenericCrops.crop',
+                             soil_file='GenericHagerstown.soil',
+                             weather_generator_class=FixedWeatherGenerator,
+                             weather_generator_kwargs=TEST_WEATHER_KWARGS)
 
         obs_cont, obs_impr, time_cont, time_impr = compare_env(self.env_cont, self.env_impr)
         print(f'Time of continuous environemnt over {self.END_YEAR - self.START_YEAR} years: {time_cont}')
@@ -123,16 +148,24 @@ class TestCornEnv(unittest.TestCase):
 
     @staticmethod
     def _call_cycles(ctrl):
-        subprocess.run(['./Cycles', '-b', ctrl], cwd=CYCLES_PATH)
+        subprocess.run([str(CYCLES_PATH.joinpath(CYCLES_EXE)), '-b', ctrl], cwd=CYCLES_PATH, check=True)
 
 
 class TestPartiallyObservableEnv(unittest.TestCase):
     def setUp(self) -> None:
         copy_cycles_test_files()
         self.f_env = Corn(delta=1, maxN=150, n_actions=16,
-                                operation_file=TEST_FILENAMES[2])
+                          crop_file='GenericCrops.crop',
+                          soil_file='GenericHagerstown.soil',
+                          weather_generator_class=FixedWeatherGenerator,
+                          weather_generator_kwargs=TEST_WEATHER_KWARGS,
+                          operation_file=TEST_FILENAMES[2])
         self.base_env = Corn(delta=1, maxN=150, n_actions=16,
-                                operation_file=TEST_FILENAMES[2])
+                             crop_file='GenericCrops.crop',
+                             soil_file='GenericHagerstown.soil',
+                             weather_generator_class=FixedWeatherGenerator,
+                             weather_generator_kwargs=TEST_WEATHER_KWARGS,
+                             operation_file=TEST_FILENAMES[2])
         n_obs = np.prod(self.base_env.observation_space.shape)
 
         np.random.seed(0)
@@ -143,15 +176,28 @@ class TestPartiallyObservableEnv(unittest.TestCase):
         remove_cycles_test_files()
 
     def test_full_vs_partial_observation(self):
-        f_obs = self.f_env.reset()
-        p_obs = self.wrapped_env.reset()
+        f_reset = self.f_env.reset()
+        p_reset = self.wrapped_env.reset()
+        f_obs = f_reset[0] if isinstance(f_reset, tuple) else f_reset
+        p_obs = p_reset[0] if isinstance(p_reset, tuple) else p_reset
         print(self.wrapped_env.env.observer.obs_names)
 
         assert np.all(p_obs == f_obs[self.mask])
         for _ in range(5):
             a = self.f_env.action_space.sample()
-            f_obs, f_r, f_done, _ = self.f_env.step(a)
-            p_obs, p_r, p_done, _ = self.wrapped_env.step(a)
+            f_step = self.f_env.step(a)
+            p_step = self.wrapped_env.step(a)
+            if len(f_step) == 5:
+                f_obs, f_r, f_term, f_trunc, _ = f_step
+                f_done = bool(f_term or f_trunc)
+            else:
+                f_obs, f_r, f_done, _ = f_step
+
+            if len(p_step) == 5:
+                p_obs, p_r, p_term, p_trunc, _ = p_step
+                p_done = bool(p_term or p_trunc)
+            else:
+                p_obs, p_r, p_done, _ = p_step
             assert np.all(p_obs == f_obs[self.mask])
             assert f_r == p_r
             assert f_done == p_done

@@ -20,6 +20,8 @@ class CropPlanning(CyclesEnv):
                  start_year,
                  end_year,
                  rotation_crops,
+                 crop_file='GenericCrops_final.crop',
+                 operation_file='Pakistan_Corn_final.operation',
                  soil_file='Pakistan_Soil_final.soil',
                  weather_generator_class=FixedWeatherGenerator,
                  weather_generator_kwargs={
@@ -47,8 +49,8 @@ class CropPlanning(CyclesEnv):
                          ANNUAL_SOIL_OUT=0,
                          ANNUAL_PROFILE_OUT=0,
                          ANNUAL_NFLUX_OUT=0,
-                         CROP_FILE='GenericCrops_final.crop',
-                         OPERATION_FILE='Pakistan_Corn_final.operation',
+                         CROP_FILE=crop_file,
+                         OPERATION_FILE=operation_file,
                          #TODO: right now the operation file is totally ignored
                          SOIL_FILE=soil_file,
                          WEATHER_GENERATOR_CLASS=weather_generator_class,

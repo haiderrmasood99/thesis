@@ -201,3 +201,171 @@ Step 2 has now been implemented in a backward-compatible way:
 If opening a new thread, use this updated prompt seed:
 
 > Read `Changes/THESIS_CONTEXT_HANDOFF.md`, `Changes/BUG_FIX_LOG.md`, and `Changes/THESIS_IMPLEMENTATION_02_PAK_PRICE_LOCALIZATION_NPK_SCAFFOLD.md`. Continue with Step 3 (hierarchical integration + Pakistan year-varying fertilizer/crop economics) while preserving backward compatibility and rerunning targeted tests after each change.
+
+## 14. Step 3 Started and Integrated
+
+Step 3 has now been started with code + verification:
+
+1. New hierarchical env:
+- `cyclesgym/envs/hierarchical.py`
+- `HierarchicalCropPlanningFertilization` combines:
+  - yearly crop planning actions,
+  - weekly fertilization actions,
+  - NPK economics via profile-aware rewarders.
+
+2. Training entrypoint wiring:
+- `experiments/crop_planning/train.py`
+- new CLI switch:
+  - `--hierarchical True`
+
+3. Test-suite execution blockers resolved:
+- cross-platform CYCLES invocation fixed in integration tests (uses `CYCLES_EXE`).
+- Gymnasium 5-tuple step handling fixed in test and utility paths.
+- plotting hang removed from `compare_env()` unless explicitly enabled.
+- manual-sim parity restored via explicit legacy input-file config in tests.
+
+4. Verification:
+- `pytest cyclesgym/tests/test_crop_planning.py cyclesgym/tests/test_env.py cyclesgym/tests/test_random_weather.py cyclesgym/tests/test_hierarchical_env.py -q`
+- Result: `10 passed`
+- Step 1/2 regression set also passing:
+  - `21 passed`
+
+5. Step 3 implementation note:
+- `Changes/THESIS_IMPLEMENTATION_03_HIERARCHICAL_INTEGRATION_AND_TEST_FIXES.md`
+
+Updated prompt seed for next thread:
+
+> Read `Changes/THESIS_CONTEXT_HANDOFF.md`, `Changes/BUG_FIX_LOG.md`, `Changes/THESIS_IMPLEMENTATION_02_PAK_PRICE_LOCALIZATION_NPK_SCAFFOLD.md`, and `Changes/THESIS_IMPLEMENTATION_03_HIERARCHICAL_INTEGRATION_AND_TEST_FIXES.md`. Continue with Step 4 by adding hierarchical experiment reporting (yearly crop decisions, weekly N/P/K actions, per-nutrient cost decomposition, and season-window compliance metrics) while preserving backward compatibility.
+
+## 15. Superseding Final Verification Update (2026-03-07)
+
+This section supersedes earlier notes about unresolved `WinError 5` execution blockers.
+
+1. Integration execution blocker resolved:
+   - Tests now invoke CYCLES using `CYCLES_PATH.joinpath(CYCLES_EXE)` instead of hardcoded `./Cycles`.
+2. Step 3 integrated into training pipeline:
+   - new env `HierarchicalCropPlanningFertilization`
+   - opt-in entrypoint wiring in `experiments/crop_planning/train.py` via `--hierarchical True`
+3. Full test status:
+   - `pytest cyclesgym/tests -q`
+   - Result: `53 passed`, warnings only (run on 2026-03-07).
+4. Additional compatibility fixes included in this final pass:
+   - `cyclesgym/tests/test_policies.py` now uses `gym_compat` imports.
+   - `cyclesgym/tests/test_managers.py` uses robust dataframe/string assertions across pandas/CRLF variations.
+5. Working-tree hygiene:
+   - Restored `cycles/input/weather0.weather` (tracked file).
+   - Removed generated test artifacts from output folders.
+
+### New Thread Prompt Seed (Current)
+
+> Read `Changes/THESIS_CONTEXT_HANDOFF.md`, `Changes/BUG_FIX_LOG.md`, `Changes/THESIS_IMPLEMENTATION_01_SEASON_ALIGNMENT.md`, `Changes/THESIS_IMPLEMENTATION_02_PAK_PRICE_LOCALIZATION_NPK_SCAFFOLD.md`, and `Changes/THESIS_IMPLEMENTATION_03_HIERARCHICAL_INTEGRATION_AND_TEST_FIXES.md`. Assume Step 1-3 are integrated and tests are green (`53 passed`). Continue with Step 4: hierarchical reporting/analysis outputs (yearly crop decisions, weekly N/P/K actions, nutrient cost decomposition, season-window compliance metrics), keeping backward compatibility.
+
+## 16. Step 4 Completed (2026-03-07)
+
+Step 4 and associated hardening tasks are now implemented and verified.
+
+1. Reporting layer delivered:
+   - `cyclesgym/utils/thesis_reporting.py` callback writes:
+     - `weekly_npk_log.csv`
+     - `yearly_crop_decisions.csv`
+     - `season_window_compliance.csv`
+     - `reporting_summary.json`
+   - `cyclesgym/envs/hierarchical.py` now emits structured report keys in `info`.
+   - `experiments/crop_planning/train.py` auto-attaches reporting callback for hierarchical runs.
+
+2. Data hardening delivered:
+   - `scripts/build_pakistan_price_series.py` builds year-varying Pakistan crop/fertilizer series from FAOSTAT + NFDC.
+   - `cyclesgym/resources/pricing/pakistan_yearly_series.json` added.
+   - `cyclesgym/utils/pricing_utils.py` now loads these year-varying series.
+   - Corn silage pricing no longer uses legacy US-ratio placeholder; it now uses a Pakistan-maize-linked proxy series.
+
+3. Thesis-strength experiment pipeline delivered:
+   - `experiments/fertilization/train.py` and `experiments/crop_planning/train.py` now emit standardized per-run summary JSON (`--summary-json`).
+   - `run_all_2.py` now:
+     - injects `--summary-json` per run,
+     - supports hierarchical matrix branch,
+     - includes standardized RL-vs-baseline/holdout columns in summary CSV.
+
+4. Verification:
+   - `pytest cyclesgym/tests -q` -> `57 passed`, warnings only.
+
+### New Thread Prompt Seed (Updated)
+
+> Read `Changes/THESIS_CONTEXT_HANDOFF.md`, `Changes/BUG_FIX_LOG.md`, `Changes/THESIS_IMPLEMENTATION_01_SEASON_ALIGNMENT.md`, `Changes/THESIS_IMPLEMENTATION_02_PAK_PRICE_LOCALIZATION_NPK_SCAFFOLD.md`, `Changes/THESIS_IMPLEMENTATION_03_HIERARCHICAL_INTEGRATION_AND_TEST_FIXES.md`, and `Changes/THESIS_IMPLEMENTATION_04_REPORTING_DATA_HARDENING_AND_MATRIX_STANDARDIZATION.md`. Assume Steps 1-4 are integrated and tests are green (`57 passed`). Continue with Step 5: statistical significance layer (confidence intervals/hypothesis tests), multi-zone transfer experiments, and thesis defense figure pack generation from standardized summary outputs.
+
+## 17. Runtime Hardening Follow-up (2026-03-07)
+
+After Step 4 completion, additional runtime hardening was added without changing thesis semantics:
+
+1. Training entrypoints now support no-tracking execution:
+   - `experiments/crop_planning/train.py`
+   - `experiments/fertilization/train.py`
+   - Added CLI flag: `--without-tracking`
+   - Added safe no-op W&B fallback for environments lacking a functional `wandb` install.
+   - Disabled SB3 tensorboard logger in no-tracking mode to avoid hard dependency on tensorboard.
+
+2. Backward-compatibility fix in fertilization wrappers:
+   - `experiments/fertilization/corn_soil_refined.py`
+   - Initialized attributes required by updated `Corn` nutrient-mode internals (e.g., `nutrient_action_mode`, `n_nh4_rate`, etc.).
+   - Fixed runtime error in baseline/eval paths:
+     - `AttributeError: 'CornSoilCropWeatherObs' object has no attribute 'nutrient_action_mode'`.
+
+3. Verification after hardening:
+   - `pytest cyclesgym/tests -q` -> `57 passed, 8 warnings`.
+
+4. Smoke-run note:
+   - Full simulation smoke commands are long in this environment and timed out at the 20-minute command cap.
+   - Partial Step 4 reporting artifacts were confirmed to be emitted before timeout:
+     - `runs/thesis_reports/smoke_hier/weekly_npk_log.csv`
+     - `runs/thesis_reports/smoke_hier/yearly_crop_decisions.csv`
+
+## 18. Fertilization NPK + Pakistan Final-Run Readiness (2026-03-07)
+
+This follow-up closes the remaining caveat that fertilization wrappers were effectively N-only and US-legacy-biased by default.
+
+1. Fertilization wrappers now preserve NPK mode and Pakistan pricing end-to-end:
+   - `experiments/fertilization/corn_soil_refined.py`
+   - Added pass-through for:
+     - `nutrient_action_mode`
+     - `price_profile`
+     - `maxP`, `maxK`, `p_actions`, `k_actions`, `n_nh4_rate`
+
+2. Fertilization trainer defaults now align to thesis Pakistan setup:
+   - `experiments/fertilization/train.py`
+   - Defaults:
+     - `nutrient_action_mode="NPK"`
+     - `price_profile="pakistan_baseline"`
+   - New CLI options:
+     - `--nutrient-action-mode`
+     - `--price-profile`
+     - `--maxN --maxP --maxK --p-actions --k-actions --n-nh4-rate`
+   - Baseline evaluation supports NPK mode by mapping legacy N-only baseline schedules into NPK action vectors.
+   - Fixed logical issue in holdout evaluation (`eval_nh`) to evaluate on holdout/test env.
+
+3. Matrix runner now launches fertilization in Pakistan NPK mode by default:
+   - `run_all_2.py`
+   - Added fertilization matrix options:
+     - `--fert-nutrient-action-mode` (default `NPK`)
+     - `--fert-price-profile` (default `pakistan_baseline`)
+     - `--fert-maxN --fert-maxP --fert-maxK --fert-p-actions --fert-k-actions --fert-n-nh4-rate`
+
+4. Policy helper compatibility fix:
+   - `cyclesgym/policies/dummy_policies.py`
+   - `OpenLoopPolicy.predict()` now returns correct batched action shapes for vectorized MultiDiscrete envs.
+
+5. Data refresh:
+   - Re-ran `python scripts/build_pakistan_price_series.py`.
+   - Refreshed:
+     - `cyclesgym/resources/pricing/pakistan_yearly_series.json`
+   - Live sources used:
+     - FAOSTAT Prices bulk zip
+     - NFDC fertilizer prices table
+
+6. Verification:
+   - `pytest cyclesgym/tests -q` -> `59 passed, 8 warnings`
+   - `python run_all_2.py --dry-run --include-hierarchical --include-baseline` -> PASS
+   - NPK wrapper smoke check (`CornSoilRefined`, reset + step) -> PASS (`MultiDiscrete([11 11 11])`)
+
+### New Thread Prompt Seed (Current)
+
+> Read `Changes/THESIS_CONTEXT_HANDOFF.md`, `Changes/BUG_FIX_LOG.md`, `Changes/THESIS_IMPLEMENTATION_01_SEASON_ALIGNMENT.md`, `Changes/THESIS_IMPLEMENTATION_02_PAK_PRICE_LOCALIZATION_NPK_SCAFFOLD.md`, `Changes/THESIS_IMPLEMENTATION_03_HIERARCHICAL_INTEGRATION_AND_TEST_FIXES.md`, `Changes/THESIS_IMPLEMENTATION_04_REPORTING_DATA_HARDENING_AND_MATRIX_STANDARDIZATION.md`, and `Changes/THESIS_IMPLEMENTATION_05_FERTILIZATION_NPK_PAKISTAN_FINAL_RUN_READINESS.md`. Assume Steps 1-5 are integrated and tests are green (`59 passed`). Proceed with final experiment execution and thesis figure/statistics generation from standardized summary outputs.

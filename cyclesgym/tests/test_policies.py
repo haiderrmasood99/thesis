@@ -1,7 +1,7 @@
 from cyclesgym.policies.informed_policy import InformedPolicy
+from cyclesgym.policies.dummy_policies import OpenLoopPolicy
 import unittest
-import gym
-from gym import spaces
+from cyclesgym.utils.gym_compat import gym, spaces
 import numpy as np
 from numpy.testing import *
 
@@ -79,6 +79,23 @@ class TestInformedPolicy(unittest.TestCase):
         actions, _ = self.model.predict(self.obs[-1, :], deterministic=False)
         target_actions = np.array([1])
         assert_equal(actions, target_actions)
+
+
+class TestOpenLoopPolicy(unittest.TestCase):
+    def test_predict_vectorized_discrete(self):
+        policy = OpenLoopPolicy(np.array([2, 1, 0], dtype=np.int64))
+        obs = np.zeros((1, 4), dtype=np.float32)
+        action, _ = policy.predict(obs)
+        assert_equal(action.shape, (1,))
+        assert_equal(action[0], 2)
+
+    def test_predict_vectorized_multichannel(self):
+        seq = np.array([[3, 1, 0], [0, 0, 0]], dtype=np.int64)
+        policy = OpenLoopPolicy(seq)
+        obs = np.zeros((1, 4), dtype=np.float32)
+        action, _ = policy.predict(obs)
+        assert_equal(action.shape, (1, 3))
+        assert_equal(action[0], np.array([3, 1, 0], dtype=np.int64))
 
 
 if __name__ == '__main__':

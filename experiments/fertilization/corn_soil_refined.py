@@ -15,6 +15,13 @@ class CornSoilCropWeatherObs(Corn):
                  delta,
                  n_actions,
                  maxN,
+                 nutrient_action_mode='N',
+                 maxP=0.0,
+                 maxK=0.0,
+                 p_actions=None,
+                 k_actions=None,
+                 n_nh4_rate=0.75,
+                 price_profile='pakistan_baseline',
                  operation_file='Pakistan_Corn_final.operation',
                  soil_file='Pakistan_Soil_final.soil',
                  weather_generator_class=FixedWeatherGenerator,
@@ -25,6 +32,14 @@ class CornSoilCropWeatherObs(Corn):
                  use_reinit=True,
                  with_obs_year=False,
                  ):
+        # Keep compatibility with Corn's rewarder/action setup while allowing NPK mode.
+        self.nutrient_action_mode = str(nutrient_action_mode).upper()
+        self.price_profile = str(price_profile)
+        self.maxP = float(maxP)
+        self.maxK = float(maxK)
+        self.p_actions = int(p_actions) if p_actions is not None else int(n_actions)
+        self.k_actions = int(k_actions) if k_actions is not None else int(n_actions)
+        self.n_nh4_rate = float(n_nh4_rate)
         self.rotation_size = end_year - start_year + 1
         self.use_reinit = use_reinit
 
@@ -88,7 +103,9 @@ class CornSoilCropWeatherObs(Corn):
 
 
 def CornSoilRefined(delta, n_actions, maxN, start_year, end_year, sampling_start_year, sampling_end_year,
-     n_weather_samples, fixed_weather, with_obs_year):
+     n_weather_samples, fixed_weather, with_obs_year,
+     nutrient_action_mode='N', maxP=0.0, maxK=0.0, p_actions=None, k_actions=None,
+     n_nh4_rate=0.75, price_profile='pakistan_baseline'):
     target_obs = ['PP', # Precipitation
                   'TX', # Max temperature
                   'TN', # Min temperature
@@ -108,21 +125,31 @@ def CornSoilRefined(delta, n_actions, maxN, start_year, end_year, sampling_start
 
     return generate_partially_observable_env(target_obs, delta, n_actions, maxN, start_year, end_year,
                                              sampling_start_year,
-                                             sampling_end_year, n_weather_samples, fixed_weather, with_obs_year)
+                                             sampling_end_year, n_weather_samples, fixed_weather, with_obs_year,
+                                             nutrient_action_mode=nutrient_action_mode,
+                                             maxP=maxP, maxK=maxK, p_actions=p_actions, k_actions=k_actions,
+                                             n_nh4_rate=n_nh4_rate, price_profile=price_profile)
 
 
 def NonAdaptiveCorn(delta, n_actions, maxN, start_year, end_year, sampling_start_year, sampling_end_year,
-     n_weather_samples, fixed_weather, with_obs_year):
+     n_weather_samples, fixed_weather, with_obs_year,
+     nutrient_action_mode='N', maxP=0.0, maxK=0.0, p_actions=None, k_actions=None,
+     n_nh4_rate=0.75, price_profile='pakistan_baseline'):
     target_obs = ['Y', # Years left
                   'DOY', # Day of the year
                   'N TO DATE'
                  ]
     return generate_partially_observable_env(target_obs, delta, n_actions, maxN, start_year, end_year, sampling_start_year,
-                                      sampling_end_year, n_weather_samples, fixed_weather, with_obs_year)
+                                      sampling_end_year, n_weather_samples, fixed_weather, with_obs_year,
+                                      nutrient_action_mode=nutrient_action_mode,
+                                      maxP=maxP, maxK=maxK, p_actions=p_actions, k_actions=k_actions,
+                                      n_nh4_rate=n_nh4_rate, price_profile=price_profile)
 
 
 def generate_partially_observable_env(target_obs, delta, n_actions, maxN, start_year, end_year, sampling_start_year,
                                       sampling_end_year, n_weather_samples, fixed_weather, with_obs_year,
+                                      nutrient_action_mode='N', maxP=0.0, maxK=0.0, p_actions=None, k_actions=None,
+                                      n_nh4_rate=0.75, price_profile='pakistan_baseline',
                                       ):
     # Weather generator
     if fixed_weather:
@@ -141,6 +168,13 @@ def generate_partially_observable_env(target_obs, delta, n_actions, maxN, start_
     fully_observable_env = CornSoilCropWeatherObs(delta=delta,
                                                   n_actions=n_actions,
                                                   maxN=maxN,
+                                                  nutrient_action_mode=nutrient_action_mode,
+                                                  maxP=maxP,
+                                                  maxK=maxK,
+                                                  p_actions=p_actions,
+                                                  k_actions=k_actions,
+                                                  n_nh4_rate=n_nh4_rate,
+                                                  price_profile=price_profile,
                                                   start_year=start_year,
                                                   end_year=end_year,
                                                   with_obs_year=with_obs_year,
@@ -149,7 +183,10 @@ def generate_partially_observable_env(target_obs, delta, n_actions, maxN, start_
 
     # Mask it with target obs
     mask = compute_mask(target_obs, delta, n_actions, maxN, start_year, end_year, sampling_start_year,
-                        sampling_end_year, n_weather_samples, fixed_weather, with_obs_year)
+                        sampling_end_year, n_weather_samples, fixed_weather, with_obs_year,
+                        nutrient_action_mode=nutrient_action_mode, maxP=maxP, maxK=maxK,
+                        p_actions=p_actions, k_actions=k_actions, n_nh4_rate=n_nh4_rate,
+                        price_profile=price_profile)
     partially_observable_env = PartialObsEnv(fully_observable_env, mask=mask)
     partially_observable_env.reset()
     return partially_observable_env
@@ -165,13 +202,27 @@ def compute_mask(target_obs,
                  sampling_end_year,
                  n_weather_samples,
                  fixed_weather,
-                 with_obs_year):
+                 with_obs_year,
+                 nutrient_action_mode='N',
+                 maxP=0.0,
+                 maxK=0.0,
+                 p_actions=None,
+                 k_actions=None,
+                 n_nh4_rate=0.75,
+                 price_profile='pakistan_baseline'):
 
     # Initialize environment
     if fixed_weather:
         large_obs_corn_env = CornSoilCropWeatherObs(delta=delta,
                                                     n_actions=n_actions,
                                                     maxN=maxN,
+                                                    nutrient_action_mode=nutrient_action_mode,
+                                                    maxP=maxP,
+                                                    maxK=maxK,
+                                                    p_actions=p_actions,
+                                                    k_actions=k_actions,
+                                                    n_nh4_rate=n_nh4_rate,
+                                                    price_profile=price_profile,
                                                     start_year=start_year,
                                                     end_year=end_year,
                                                     with_obs_year=with_obs_year)
@@ -184,7 +235,15 @@ def compute_mask(target_obs,
                                         base_weather_file=CYCLES_PATH.joinpath('input', 'Pakistan_Site_final.weather'))
         large_obs_corn_env = CornSoilCropWeatherObs(delta=delta,
                                                     n_actions=n_actions,
-                                                    maxN=maxN, start_year=start_year,
+                                                    maxN=maxN,
+                                                    nutrient_action_mode=nutrient_action_mode,
+                                                    maxP=maxP,
+                                                    maxK=maxK,
+                                                    p_actions=p_actions,
+                                                    k_actions=k_actions,
+                                                    n_nh4_rate=n_nh4_rate,
+                                                    price_profile=price_profile,
+                                                    start_year=start_year,
                                                     end_year=end_year,
                                                     with_obs_year=with_obs_year,
                                                     weather_generator_class=WeatherShuffler,
@@ -197,6 +256,4 @@ def compute_mask(target_obs,
     # Compute mask for partially observable environment
     mask = np.isin(np.asarray(large_obs_corn_env.observer.obs_names), target_obs)
     return mask
-
-
 

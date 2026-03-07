@@ -1,11 +1,12 @@
 from cyclesgym.envs.crop_planning import CropPlanning
+from cyclesgym.envs.weather_generator import FixedWeatherGenerator
 import unittest
 import shutil
 import subprocess
 
 from cyclesgym.managers import CropManager
 from cyclesgym.utils.utils import diff_pd
-from cyclesgym.utils.paths import CYCLES_PATH, TEST_PATH
+from cyclesgym.utils.paths import CYCLES_PATH, CYCLES_EXE, TEST_PATH
 import time
 
 
@@ -13,7 +14,13 @@ class TestCropPlanning(unittest.TestCase):
 
     @staticmethod
     def _call_cycles(ctrl):
-        subprocess.run(['./Cycles', '-b', ctrl], cwd=CYCLES_PATH)
+        subprocess.run([str(CYCLES_PATH.joinpath(CYCLES_EXE)), '-b', ctrl], cwd=CYCLES_PATH, check=True)
+
+    @staticmethod
+    def _extract_done(step_out):
+        if len(step_out) == 5:
+            return bool(step_out[2] or step_out[3])
+        return bool(step_out[2])
 
     def setUp(self):
         self.fnames = ['CropPlanningTest.ctrl',
@@ -34,7 +41,13 @@ class TestCropPlanning(unittest.TestCase):
                                                            'SoybeanMG.3.dat'))
 
         env = CropPlanning(start_year=1980, end_year=1990, rotation_crops=['CornSilageRM.90',
-                                                                           'SoybeanMG.3'])
+                                                                           'SoybeanMG.3'],
+                           crop_file='GenericCrops.crop',
+                           soil_file='GenericHagerstown.soil',
+                           weather_generator_class=FixedWeatherGenerator,
+                           weather_generator_kwargs={
+                               'base_weather_file': CYCLES_PATH.joinpath('input', 'RockSprings.weather')
+                           })
         env._create_sim_id = self.custom_sim_id
 
         env.reset()
@@ -43,7 +56,7 @@ class TestCropPlanning(unittest.TestCase):
         start = time.time()
         while True:
             a = policy[year % 2]
-            _, _, done, _ = env.step(a)
+            done = self._extract_done(env.step(a))
             year += 1
             if done:
                 break
