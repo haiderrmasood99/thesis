@@ -30,7 +30,9 @@ It is written for both:
    Prioritized technical, agricultural, and research gaps with concrete next steps.
 10. `09_Legacy_Markdown_Mapping.md`  
     Mapping of older markdown sources to new consolidated documents.
-11. `legacy_markdown_archive/`  
+11. `10_RL_Training_Targets_and_Workflows_Noob_Friendly.md`  
+    Beginner-first explanation of RL training targets, losses, and algorithm workflows for fertilization and crop planning.
+12. `legacy_markdown_archive/`  
     Archived legacy markdown trees moved from the repo root.
 
 ## Fast Paths
