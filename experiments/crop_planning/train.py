@@ -19,6 +19,7 @@ from cyclesgym.policies.dummy_policies import OpenLoopPolicy
 from cyclesgym.utils.thesis_reporting import HierarchicalThesisReportCallback
 import random
 import argparse
+import sys
 from datetime import datetime
 import json
 
@@ -131,6 +132,31 @@ def _as_bool(value, default=False):
     return default
 
 
+def _json_safe(value):
+    if isinstance(value, Path):
+        return str(value)
+    if isinstance(value, np.ndarray):
+        return [_json_safe(v) for v in value.tolist()]
+    if isinstance(value, np.generic):
+        return value.item()
+    if isinstance(value, dict):
+        return {str(k): _json_safe(v) for k, v in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [_json_safe(v) for v in value]
+    return value
+
+
+def _as_optional_float(value, default=None):
+    if value is None:
+        return default
+    if isinstance(value, str) and not value.strip():
+        return default
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return default
+
+
 def _is_hierarchical_env(env_class_value) -> bool:
     if env_class_value == HierarchicalCropPlanningFertilization:
         return True
@@ -220,6 +246,22 @@ class Train:
                         k_actions=int(self.config.get('k_actions', 11)),
                         price_profile=str(self.config.get('price_profile', 'pakistan_baseline')),
                         use_pakistan_crop_calendar=_as_bool(self.config.get('use_pakistan_crop_calendar', True), default=True),
+                        enforce_calendar_windows=_as_bool(self.config.get('enforce_calendar_windows', True), default=True),
+                        limit_fertilizer_to_season=_as_bool(self.config.get('limit_fertilizer_to_season', True), default=True),
+                        preplant_fertilizer_days=int(self.config.get('preplant_fertilizer_days', 14)),
+                        postplant_fertilizer_days=int(self.config.get('postplant_fertilizer_days', 120)),
+                        annual_n_budget=_as_optional_float(
+                            self.config.get('annual_n_budget'),
+                            default=float(self.config.get('maxN', 150)),
+                        ),
+                        annual_p_budget=_as_optional_float(
+                            self.config.get('annual_p_budget'),
+                            default=float(self.config.get('maxP', 80.0)),
+                        ),
+                        annual_k_budget=_as_optional_float(
+                            self.config.get('annual_k_budget'),
+                            default=float(self.config.get('maxK', 60.0)),
+                        ),
                     )
                 else:
                     env_conf = dict(
@@ -465,6 +507,20 @@ if __name__ == '__main__':
                         help='Enable Pakistan crop-calendar windows')
     parser.add_argument('--price_profile', default='pakistan_baseline',
                         help='Economics profile to use (e.g. us_legacy, pakistan_baseline)')
+    parser.add_argument('--enforce_calendar_windows', default='True',
+                        help='Sanitize hierarchical crop choices to crops with defined calendar windows')
+    parser.add_argument('--limit_fertilizer_to_season', default='True',
+                        help='Zero-out hierarchical fertilizer actions outside the crop-season window')
+    parser.add_argument('--preplant_fertilizer_days', default=14,
+                        help='Allow hierarchical fertilizer this many days before the planned planting window')
+    parser.add_argument('--postplant_fertilizer_days', default=120,
+                        help='Allow hierarchical fertilizer this many days after the planned planting window')
+    parser.add_argument('--annual_n_budget', default='',
+                        help='Optional annual N budget for hierarchical runs; blank defaults to maxN')
+    parser.add_argument('--annual_p_budget', default='',
+                        help='Optional annual P budget for hierarchical runs; blank defaults to maxP')
+    parser.add_argument('--annual_k_budget', default='',
+                        help='Optional annual K budget for hierarchical runs; blank defaults to maxK')
     parser.add_argument('--enable-thesis-reporting', default='True',
                         help='Enable hierarchical thesis CSV/JSON reporting outputs')
     parser.add_argument('--thesis-report-dir', default='',
@@ -480,6 +536,9 @@ if __name__ == '__main__':
                         help='RL method to train (default: PPO)')
 
     args = vars(parser.parse_args())
+
+    if _as_bool(args.get('hierarchical'), default=False) and '--use_pakistan_crop_calendar' not in sys.argv:
+        args['use_pakistan_crop_calendar'] = 'True'
 
     set_random_seed(args['seed'])
     np.random.seed(args['seed'])
@@ -521,6 +580,8 @@ if __name__ == '__main__':
                   use_pakistan_crop_calendar='False',
                   nutrient_action_mode='NPK',
                   price_profile='pakistan_baseline',
+                  enforce_calendar_windows='True',
+                  limit_fertilizer_to_season='True',
                   maxN=150,
                   maxP=80.0,
                   maxK=60.0,
@@ -528,6 +589,11 @@ if __name__ == '__main__':
                   p_actions=11,
                   k_actions=11,
                   fert_delta=7,
+                  preplant_fertilizer_days=14,
+                  postplant_fertilizer_days=120,
+                  annual_n_budget='',
+                  annual_p_budget='',
+                  annual_k_budget='',
                   log_every_steps=1,
                   log_step_actions=True,
                   log_step_rewards=True,
@@ -546,7 +612,7 @@ if __name__ == '__main__':
         )
 
     wandb.init(
-        config=config,
+        config=_json_safe(config),
         sync_tensorboard=True,
         project=CROP_PLANNING_EXPERIMENT,
         entity=WANDB_ENTITY,
@@ -555,7 +621,7 @@ if __name__ == '__main__':
         dir=PROJECT_PATH,
     )
 
-    config = wandb.config
+    config = _json_safe(dict(wandb.config))
 
     trainer = Train(config)
     model, eval_env = trainer.train()

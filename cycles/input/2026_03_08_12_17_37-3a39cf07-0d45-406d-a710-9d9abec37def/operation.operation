@@ -1,0 +1,685 @@
+FIXED_FERTILIZATION
+YEAR                          	1
+DOY                           	1
+SOURCE                        	Unknown
+MASS                          	126.0
+FORM                          	Unknown
+METHOD                        	Unknown
+LAYER                         	1
+C_Organic                     	0.0
+C_Charcoal                    	0.0
+N_Organic                     	0.0
+N_Charcoal                    	0.0
+N_NH4                         	0.5357142857142857
+N_NO3                         	0.17857142857142858
+P_Organic                     	0.0
+P_CHARCOAL                    	0.0
+P_INORGANIC                   	0.19047619047619047
+K                             	0.09523809523809523
+S                             	0.0
+
+FIXED_FERTILIZATION
+YEAR                          	1
+DOY                           	8
+SOURCE                        	Unknown
+MASS                          	159.0
+FORM                          	Unknown
+METHOD                        	Unknown
+LAYER                         	1
+C_Organic                     	0.0
+C_Charcoal                    	0.0
+N_Organic                     	0.0
+N_Charcoal                    	0.0
+N_NH4                         	0.21226415094339623
+N_NO3                         	0.07075471698113207
+P_Organic                     	0.0
+P_CHARCOAL                    	0.0
+P_INORGANIC                   	0.4528301886792453
+K                             	0.2641509433962264
+S                             	0.0
+
+FIXED_FERTILIZATION
+YEAR                          	1
+DOY                           	15
+SOURCE                        	Unknown
+MASS                          	189.0
+FORM                          	Unknown
+METHOD                        	Unknown
+LAYER                         	1
+C_Organic                     	0.0
+C_Charcoal                    	0.0
+N_Organic                     	0.0
+N_Charcoal                    	0.0
+N_NH4                         	0.2976190476190476
+N_NO3                         	0.0992063492063492
+P_Organic                     	0.0
+P_CHARCOAL                    	0.0
+P_INORGANIC                   	0.38095238095238093
+K                             	0.2222222222222222
+S                             	0.0
+
+FIXED_FERTILIZATION
+YEAR                          	1
+DOY                           	22
+SOURCE                        	Unknown
+MASS                          	198.0
+FORM                          	Unknown
+METHOD                        	Unknown
+LAYER                         	1
+C_Organic                     	0.0
+C_Charcoal                    	0.0
+N_Organic                     	0.0
+N_Charcoal                    	0.0
+N_NH4                         	0.45454545454545453
+N_NO3                         	0.15151515151515152
+P_Organic                     	0.0
+P_CHARCOAL                    	0.0
+P_INORGANIC                   	0.12121212121212122
+K                             	0.2727272727272727
+S                             	0.0
+
+FIXED_FERTILIZATION
+YEAR                          	1
+DOY                           	29
+SOURCE                        	Unknown
+MASS                          	197.0
+FORM                          	Unknown
+METHOD                        	Unknown
+LAYER                         	1
+C_Organic                     	0.0
+C_Charcoal                    	0.0
+N_Organic                     	0.0
+N_Charcoal                    	0.0
+N_NH4                         	0.5139593908629442
+N_NO3                         	0.1713197969543147
+P_Organic                     	0.0
+P_CHARCOAL                    	0.0
+P_INORGANIC                   	0.16243654822335024
+K                             	0.15228426395939088
+S                             	0.0
+
+FIXED_FERTILIZATION
+YEAR                          	1
+DOY                           	36
+SOURCE                        	Unknown
+MASS                          	206.0
+FORM                          	Unknown
+METHOD                        	Unknown
+LAYER                         	1
+C_Organic                     	0.0
+C_Charcoal                    	0.0
+N_Organic                     	0.0
+N_Charcoal                    	0.0
+N_NH4                         	0.4368932038834951
+N_NO3                         	0.14563106796116504
+P_Organic                     	0.0
+P_CHARCOAL                    	0.0
+P_INORGANIC                   	0.1553398058252427
+K                             	0.2621359223300971
+S                             	0.0
+
+FIXED_FERTILIZATION
+YEAR                          	1
+DOY                           	43
+SOURCE                        	Unknown
+MASS                          	227.0
+FORM                          	Unknown
+METHOD                        	Unknown
+LAYER                         	1
+C_Organic                     	0.0
+C_Charcoal                    	0.0
+N_Organic                     	0.0
+N_Charcoal                    	0.0
+N_NH4                         	0.4460352422907489
+N_NO3                         	0.1486784140969163
+P_Organic                     	0.0
+P_CHARCOAL                    	0.0
+P_INORGANIC                   	0.14096916299559473
+K                             	0.2643171806167401
+S                             	0.0
+
+FIXED_FERTILIZATION
+YEAR                          	1
+DOY                           	50
+SOURCE                        	Unknown
+MASS                          	162.0
+FORM                          	Unknown
+METHOD                        	Unknown
+LAYER                         	1
+C_Organic                     	0.0
+C_Charcoal                    	0.0
+N_Organic                     	0.0
+N_Charcoal                    	0.0
+N_NH4                         	0.4166666666666667
+N_NO3                         	0.1388888888888889
+P_Organic                     	0.0
+P_CHARCOAL                    	0.0
+P_INORGANIC                   	0.14814814814814814
+K                             	0.2962962962962963
+S                             	0.0
+
+FIXED_FERTILIZATION
+YEAR                          	1
+DOY                           	57
+SOURCE                        	Unknown
+MASS                          	216.0
+FORM                          	Unknown
+METHOD                        	Unknown
+LAYER                         	1
+C_Organic                     	0.0
+C_Charcoal                    	0.0
+N_Organic                     	0.0
+N_Charcoal                    	0.0
+N_NH4                         	0.5208333333333334
+N_NO3                         	0.1736111111111111
+P_Organic                     	0.0
+P_CHARCOAL                    	0.0
+P_INORGANIC                   	0.1111111111111111
+K                             	0.19444444444444445
+S                             	0.0
+
+FIXED_FERTILIZATION
+YEAR                          	1
+DOY                           	64
+SOURCE                        	Unknown
+MASS                          	219.0
+FORM                          	Unknown
+METHOD                        	Unknown
+LAYER                         	1
+C_Organic                     	0.0
+C_Charcoal                    	0.0
+N_Organic                     	0.0
+N_Charcoal                    	0.0
+N_NH4                         	0.4623287671232877
+N_NO3                         	0.1541095890410959
+P_Organic                     	0.0
+P_CHARCOAL                    	0.0
+P_INORGANIC                   	0.1095890410958904
+K                             	0.273972602739726
+S                             	0.0
+
+FIXED_FERTILIZATION
+YEAR                          	1
+DOY                           	71
+SOURCE                        	Unknown
+MASS                          	178.0
+FORM                          	Unknown
+METHOD                        	Unknown
+LAYER                         	1
+C_Organic                     	0.0
+C_Charcoal                    	0.0
+N_Organic                     	0.0
+N_Charcoal                    	0.0
+N_NH4                         	0.5056179775280899
+N_NO3                         	0.16853932584269662
+P_Organic                     	0.0
+P_CHARCOAL                    	0.0
+P_INORGANIC                   	0.2247191011235955
+K                             	0.10112359550561797
+S                             	0.0
+
+FIXED_FERTILIZATION
+YEAR                          	1
+DOY                           	75
+SOURCE                        	UreaAmmoniumNitrate
+MASS                          	0.0
+FORM                          	Liquid
+METHOD                        	Broadcast
+LAYER                         	1.0
+C_Organic                     	0
+C_Charcoal                    	0
+N_Organic                     	0
+N_Charcoal                    	0
+N_NH4                         	0
+N_NO3                         	0
+P_Organic                     	0
+P_CHARCOAL                    	0
+P_INORGANIC                   	0
+K                             	0
+S                             	0
+
+PLANTING
+YEAR                          	1
+DOY                           	75
+END_DOY                       	-999.0
+MAX_SMC                       	-999.0
+MIN_SMC                       	0.0
+MIN_SOIL_TEMP                 	0.0
+CROP                          	CornRM.90
+USE_AUTO_IRR                  	0.0
+USE_AUTO_FERT                 	0.0
+FRACTION                      	1.0
+CLIPPING_START                	1.0
+CLIPPING_END                  	366.0
+
+TILLAGE
+YEAR                          	1
+DOY                           	75
+TOOL                          	Planter_double_disk_opnr
+DEPTH                         	0.03
+SOIL_DISTURB_RATIO            	5.0
+MIXING_EFFICIENCY             	0.071554
+CROP_NAME                     	N/A
+FRAC_THERMAL_TIME             	0.0
+KILL_EFFICIENCY               	0.0
+
+FIXED_FERTILIZATION
+YEAR                          	1
+DOY                           	78
+SOURCE                        	Unknown
+MASS                          	132.0
+FORM                          	Unknown
+METHOD                        	Unknown
+LAYER                         	1
+C_Organic                     	0.0
+C_Charcoal                    	0.0
+N_Organic                     	0.0
+N_Charcoal                    	0.0
+N_NH4                         	0.5113636363636364
+N_NO3                         	0.17045454545454544
+P_Organic                     	0.0
+P_CHARCOAL                    	0.0
+P_INORGANIC                   	0.18181818181818182
+K                             	0.13636363636363635
+S                             	0.0
+
+FIXED_FERTILIZATION
+YEAR                          	1
+DOY                           	85
+SOURCE                        	Unknown
+MASS                          	93.0
+FORM                          	Unknown
+METHOD                        	Unknown
+LAYER                         	1
+C_Organic                     	0.0
+C_Charcoal                    	0.0
+N_Organic                     	0.0
+N_Charcoal                    	0.0
+N_NH4                         	0.3629032258064516
+N_NO3                         	0.12096774193548387
+P_Organic                     	0.0
+P_CHARCOAL                    	0.0
+P_INORGANIC                   	0.5161290322580645
+K                             	0.0
+S                             	0.0
+
+FIXED_FERTILIZATION
+YEAR                          	1
+DOY                           	92
+SOURCE                        	Unknown
+MASS                          	101.0
+FORM                          	Unknown
+METHOD                        	Unknown
+LAYER                         	1
+C_Organic                     	0.0
+C_Charcoal                    	0.0
+N_Organic                     	0.0
+N_Charcoal                    	0.0
+N_NH4                         	0.11138613861386139
+N_NO3                         	0.03712871287128713
+P_Organic                     	0.0
+P_CHARCOAL                    	0.0
+P_INORGANIC                   	0.7920792079207921
+K                             	0.0594059405940594
+S                             	0.0
+
+FIXED_FERTILIZATION
+YEAR                          	1
+DOY                           	99
+SOURCE                        	Unknown
+MASS                          	172.0
+FORM                          	Unknown
+METHOD                        	Unknown
+LAYER                         	1
+C_Organic                     	0.0
+C_Charcoal                    	0.0
+N_Organic                     	0.0
+N_Charcoal                    	0.0
+N_NH4                         	0.6540697674418605
+N_NO3                         	0.2180232558139535
+P_Organic                     	0.0
+P_CHARCOAL                    	0.0
+P_INORGANIC                   	0.09302325581395349
+K                             	0.03488372093023256
+S                             	0.0
+
+FIXED_FERTILIZATION
+YEAR                          	1
+DOY                           	106
+SOURCE                        	Unknown
+MASS                          	151.0
+FORM                          	Unknown
+METHOD                        	Unknown
+LAYER                         	1
+C_Organic                     	0.0
+C_Charcoal                    	0.0
+N_Organic                     	0.0
+N_Charcoal                    	0.0
+N_NH4                         	0.5215231788079471
+N_NO3                         	0.173841059602649
+P_Organic                     	0.0
+P_CHARCOAL                    	0.0
+P_INORGANIC                   	0.10596026490066225
+K                             	0.1986754966887417
+S                             	0.0
+
+FIXED_FERTILIZATION
+YEAR                          	1
+DOY                           	113
+SOURCE                        	Unknown
+MASS                          	6.0
+FORM                          	Unknown
+METHOD                        	Unknown
+LAYER                         	1
+C_Organic                     	0.0
+C_Charcoal                    	0.0
+N_Organic                     	0.0
+N_Charcoal                    	0.0
+N_NH4                         	0.0
+N_NO3                         	0.0
+P_Organic                     	0.0
+P_CHARCOAL                    	0.0
+P_INORGANIC                   	0.0
+K                             	1.0
+S                             	0.0
+
+FIXED_FERTILIZATION
+YEAR                          	1
+DOY                           	120
+SOURCE                        	Unknown
+MASS                          	6.0
+FORM                          	Unknown
+METHOD                        	Unknown
+LAYER                         	1
+C_Organic                     	0.0
+C_Charcoal                    	0.0
+N_Organic                     	0.0
+N_Charcoal                    	0.0
+N_NH4                         	0.0
+N_NO3                         	0.0
+P_Organic                     	0.0
+P_CHARCOAL                    	0.0
+P_INORGANIC                   	0.0
+K                             	1.0
+S                             	0.0
+
+FIXED_FERTILIZATION
+YEAR                          	1
+DOY                           	127
+SOURCE                        	Unknown
+MASS                          	12.0
+FORM                          	Unknown
+METHOD                        	Unknown
+LAYER                         	1
+C_Organic                     	0.0
+C_Charcoal                    	0.0
+N_Organic                     	0.0
+N_Charcoal                    	0.0
+N_NH4                         	0.0
+N_NO3                         	0.0
+P_Organic                     	0.0
+P_CHARCOAL                    	0.0
+P_INORGANIC                   	0.0
+K                             	1.0
+S                             	0.0
+
+FIXED_FERTILIZATION
+YEAR                          	1
+DOY                           	141
+SOURCE                        	Unknown
+MASS                          	21.0
+FORM                          	Unknown
+METHOD                        	Unknown
+LAYER                         	1
+C_Organic                     	0.0
+C_Charcoal                    	0.0
+N_Organic                     	0.0
+N_Charcoal                    	0.0
+N_NH4                         	0.5357142857142857
+N_NO3                         	0.17857142857142858
+P_Organic                     	0.0
+P_CHARCOAL                    	0.0
+P_INORGANIC                   	0.0
+K                             	0.2857142857142857
+S                             	0.0
+
+FIXED_FERTILIZATION
+YEAR                          	1
+DOY                           	148
+SOURCE                        	Unknown
+MASS                          	6.0
+FORM                          	Unknown
+METHOD                        	Unknown
+LAYER                         	1
+C_Organic                     	0.0
+C_Charcoal                    	0.0
+N_Organic                     	0.0
+N_Charcoal                    	0.0
+N_NH4                         	0.0
+N_NO3                         	0.0
+P_Organic                     	0.0
+P_CHARCOAL                    	0.0
+P_INORGANIC                   	0.0
+K                             	1.0
+S                             	0.0
+
+FIXED_FERTILIZATION
+YEAR                          	1
+DOY                           	155
+SOURCE                        	Unknown
+MASS                          	21.0
+FORM                          	Unknown
+METHOD                        	Unknown
+LAYER                         	1
+C_Organic                     	0.0
+C_Charcoal                    	0.0
+N_Organic                     	0.0
+N_Charcoal                    	0.0
+N_NH4                         	0.5357142857142857
+N_NO3                         	0.17857142857142858
+P_Organic                     	0.0
+P_CHARCOAL                    	0.0
+P_INORGANIC                   	0.0
+K                             	0.2857142857142857
+S                             	0.0
+
+FIXED_FERTILIZATION
+YEAR                          	1
+DOY                           	162
+SOURCE                        	Unknown
+MASS                          	15.0
+FORM                          	Unknown
+METHOD                        	Unknown
+LAYER                         	1
+C_Organic                     	0.0
+C_Charcoal                    	0.0
+N_Organic                     	0.0
+N_Charcoal                    	0.0
+N_NH4                         	0.75
+N_NO3                         	0.25
+P_Organic                     	0.0
+P_CHARCOAL                    	0.0
+P_INORGANIC                   	0.0
+K                             	0.0
+S                             	0.0
+
+FIXED_FERTILIZATION
+YEAR                          	1
+DOY                           	169
+SOURCE                        	Unknown
+MASS                          	6.0
+FORM                          	Unknown
+METHOD                        	Unknown
+LAYER                         	1
+C_Organic                     	0.0
+C_Charcoal                    	0.0
+N_Organic                     	0.0
+N_Charcoal                    	0.0
+N_NH4                         	0.0
+N_NO3                         	0.0
+P_Organic                     	0.0
+P_CHARCOAL                    	0.0
+P_INORGANIC                   	0.0
+K                             	1.0
+S                             	0.0
+
+FIXED_FERTILIZATION
+YEAR                          	1
+DOY                           	183
+SOURCE                        	Unknown
+MASS                          	6.0
+FORM                          	Unknown
+METHOD                        	Unknown
+LAYER                         	1
+C_Organic                     	0.0
+C_Charcoal                    	0.0
+N_Organic                     	0.0
+N_Charcoal                    	0.0
+N_NH4                         	0.0
+N_NO3                         	0.0
+P_Organic                     	0.0
+P_CHARCOAL                    	0.0
+P_INORGANIC                   	0.0
+K                             	1.0
+S                             	0.0
+
+FIXED_FERTILIZATION
+YEAR                          	1
+DOY                           	190
+SOURCE                        	Unknown
+MASS                          	12.0
+FORM                          	Unknown
+METHOD                        	Unknown
+LAYER                         	1
+C_Organic                     	0.0
+C_Charcoal                    	0.0
+N_Organic                     	0.0
+N_Charcoal                    	0.0
+N_NH4                         	0.0
+N_NO3                         	0.0
+P_Organic                     	0.0
+P_CHARCOAL                    	0.0
+P_INORGANIC                   	0.0
+K                             	1.0
+S                             	0.0
+
+FIXED_FERTILIZATION
+YEAR                          	1
+DOY                           	197
+SOURCE                        	Unknown
+MASS                          	6.0
+FORM                          	Unknown
+METHOD                        	Unknown
+LAYER                         	1
+C_Organic                     	0.0
+C_Charcoal                    	0.0
+N_Organic                     	0.0
+N_Charcoal                    	0.0
+N_NH4                         	0.0
+N_NO3                         	0.0
+P_Organic                     	0.0
+P_CHARCOAL                    	0.0
+P_INORGANIC                   	0.0
+K                             	1.0
+S                             	0.0
+
+FIXED_FERTILIZATION
+YEAR                          	1
+DOY                           	211
+SOURCE                        	Unknown
+MASS                          	6.0
+FORM                          	Unknown
+METHOD                        	Unknown
+LAYER                         	1
+C_Organic                     	0.0
+C_Charcoal                    	0.0
+N_Organic                     	0.0
+N_Charcoal                    	0.0
+N_NH4                         	0.0
+N_NO3                         	0.0
+P_Organic                     	0.0
+P_CHARCOAL                    	0.0
+P_INORGANIC                   	0.0
+K                             	1.0
+S                             	0.0
+
+FIXED_FERTILIZATION
+YEAR                          	1
+DOY                           	218
+SOURCE                        	Unknown
+MASS                          	21.0
+FORM                          	Unknown
+METHOD                        	Unknown
+LAYER                         	1
+C_Organic                     	0.0
+C_Charcoal                    	0.0
+N_Organic                     	0.0
+N_Charcoal                    	0.0
+N_NH4                         	0.5357142857142857
+N_NO3                         	0.17857142857142858
+P_Organic                     	0.0
+P_CHARCOAL                    	0.0
+P_INORGANIC                   	0.0
+K                             	0.2857142857142857
+S                             	0.0
+
+FIXED_FERTILIZATION
+YEAR                          	1
+DOY                           	225
+SOURCE                        	Unknown
+MASS                          	6.0
+FORM                          	Unknown
+METHOD                        	Unknown
+LAYER                         	1
+C_Organic                     	0.0
+C_Charcoal                    	0.0
+N_Organic                     	0.0
+N_Charcoal                    	0.0
+N_NH4                         	0.0
+N_NO3                         	0.0
+P_Organic                     	0.0
+P_CHARCOAL                    	0.0
+P_INORGANIC                   	0.0
+K                             	1.0
+S                             	0.0
+
+FIXED_FERTILIZATION
+YEAR                          	1
+DOY                           	232
+SOURCE                        	Unknown
+MASS                          	6.0
+FORM                          	Unknown
+METHOD                        	Unknown
+LAYER                         	1
+C_Organic                     	0.0
+C_Charcoal                    	0.0
+N_Organic                     	0.0
+N_Charcoal                    	0.0
+N_NH4                         	0.0
+N_NO3                         	0.0
+P_Organic                     	0.0
+P_CHARCOAL                    	0.0
+P_INORGANIC                   	0.0
+K                             	1.0
+S                             	0.0
+
+FIXED_FERTILIZATION
+YEAR                          	1
+DOY                           	239
+SOURCE                        	Unknown
+MASS                          	6.0
+FORM                          	Unknown
+METHOD                        	Unknown
+LAYER                         	1
+C_Organic                     	0.0
+C_Charcoal                    	0.0
+N_Organic                     	0.0
+N_Charcoal                    	0.0
+N_NH4                         	0.0
+N_NO3                         	0.0
+P_Organic                     	0.0
+P_CHARCOAL                    	0.0
+P_INORGANIC                   	0.0
+K                             	1.0
+S                             	0.0
+

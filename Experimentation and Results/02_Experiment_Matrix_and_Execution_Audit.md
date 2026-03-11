@@ -1,62 +1,60 @@
-﻿# Experiment Matrix and Execution Audit
+# Experiment Matrix and Execution Audit
 
-## Runner Intent
+## Matrix Definition
 
-| Runner | Intended Scope | Planned Commands (Default) |
+| Matrix Component | Description | Planned Configs |
 |---|---|---:|
-| `run_all_experiments.py` | Mixed fertilization and crop planning baselines (PPO/A2C/DQN variants + baseline run) | 12 |
-| `master_runner_run_all.2.py` | Additional fertilization PPO variants not covered by `run_all_experiments.py` | 8 |
-| `run_all_2.py` | Full thesis matrix: fertilization + crop planning over methods, adaptation/weather modes, seeds, and budgets | 96 |
+| Fertilization core | PPO/A2C x adaptive/nonadaptive x fixed/random weather x 3 seeds x 3 budgets | 72 |
+| Crop-planning core | PPO/A2C x adaptive/nonadaptive x fixed/random weather x 3 seeds | 24 |
+| Hierarchical crop-planning failed ablation | PPO/A2C x fixed/random weather x 3 seeds | 12 |
+| DQN ablations | Fertilization DQN (2 weather modes) + crop-planning DQN (2 weather modes) | 4 |
+| Fertilization baseline | Pakistan-baseline fertilization reference run | 1 |
+| Total planned matrix | Defined by `run_experiments_7_3_2026.py` | 113 |
 
 Notes:
-- `run_all_2.py` evidence file `run_all_2_summary_dryrun.csv` confirms the 96-command plan.
-- `master_runner_run_all.2.py` default excludes seed `0` coverage already handled elsewhere.
+- `10_3_2026_experiments.py` executed the non-hierarchical tail of this matrix and the DQN reruns.
+- `10_3_2026_heira_exp.py` executed the hierarchical branch in parallel.
+- The primary evidence file is `run_experiments_7_3_2026_RUNS/wandb_export_2026-03-11T01_53_38.382+05_00.csv`.
 
 ## Observed Run Evidence Window
-- Earliest audited run: `run-20260223_211845-zyo19dh1`
-- Latest audited run: `run-20260225_120700-xw0jtd6e`
-- Date span: February 23, 2026 to February 25, 2026
+- Earliest run in export: `2026-03-07 21:43:45 PKT`
+- Latest run in export: `2026-03-11 01:20:53 PKT`
+- Campaign span: March 7, 2026 to March 11, 2026
 
-## Execution Summary (From `wandb`)
-- Total run folders audited: `64`
-- `ok`: `44`
-- `failed_traceback`: `16`
-- `no_summary`: `4`
+## Execution Summary
+- Total W&B attempts in export: `117`
+- Finished: `113`
+- Failed: `4`
+- Unique finished configs: `113/113`
+- Comparison against the generator: `0` missing, `0` extra
 
-By domain:
-- Fertilization: `48`
-- Crop planning: `12`
-- Unknown/incomplete metadata: `4`
+Finished configs by domain:
+- Fertilization: `75`
+- Crop planning (non-hierarchical): `26`
+- Crop planning (hierarchical): `12`
 
-## Train Log Audit (`runs/train_logs`)
-- JSONL train logs found: `60`
-- Logs with explicit `end` event: `49`
-- Logs without `end` event: `11`
+## Rerun Recovery Audit
 
-This aligns with partial/failed runs seen in traceback audit.
+| Domain | Configuration | Initial Failed Attempt | Successful Rerun |
+|---|---|---|---|
+| Fertilization | `DQN + adaptive + fixed_weather + years=5000 + seed=0` | `boomerang-mushroom-117` | `mini-castle-122` |
+| Fertilization | `DQN + adaptive + random_weather + years=5000 + seed=0` | `jumping-warp-118` | `metal-level-123` |
+| Crop planning | `DQN + nonadaptive + fixed_weather + seed=0` | `starry-starman-119` | `spiky-toadette-124` |
+| Crop planning | `DQN + nonadaptive + random_weather + seed=0` | `yellow-goomba-120` | `royal-toad-125` |
 
-## `run_all_2` Coverage vs Plan
-- Planned configs (dry-run matrix): `96`
-- Observed in run metadata: `34`
-- Successful and covered: `34`
+All four failed attempts happened on March 10, 2026 in the early-morning Pakistan time window and were recovered with successful reruns later the same day.
 
-Coverage gap summary:
-- Missing many seed-0 entries for PPO in fertilization and crop planning.
-- A2C coverage is heavily incomplete for the expanded `run_all_2` grid.
-
-## Failure Signature Audit
-
-| Failure Signature | Count | Typical Impact |
-|---|---:|---|
-| `subproc_eoferror` | 8 | Training process interruption during vectorized rollout |
-| `weather_shuffle_empty_choice` | 4 | Weather sampling window issue (`np.random.choice` on empty set) |
-| `dqn_eval_get_distribution_missing` | 2 | DQN evaluation path incompatible with policy distribution call |
-| `reward_price_missing_year_2020` | 1 | Baseline-like run failed due missing year key in reward pricing |
-| `dqn_unsupported_multidiscrete` | 1 | Crop-planning DQN incompatible with MultiDiscrete action space |
+## Reliability Takeaway
+- The final matrix is complete even though the first DQN pass was not one-pass stable.
+- PPO and A2C non-hierarchical sweeps completed without missing configurations.
+- Hierarchical jobs completed operationally, but they are excluded from the main comparison tables because all `12/12` runs are negative.
+- The failed-ablation audit shows mean nutrient cost of about `8.6M`, only `38.3%` of yearly decisions with a defined calendar window, and a strong negative cost-vs-return correlation (`-0.85`).
+- The correct audit conclusion is that matrix coverage is complete, while the hierarchical branch failed on formulation quality rather than execution coverage.
 
 ## Pakistan Data Confirmation
 Code-level evidence indicates Pakistani weather/soil integration:
-- Fertilization constants in `experiments/fertilization/train.py` reference `Pakistan_Site_final.weather` and Pakistan year bounds.
-- Crop planning defaults in `experiments/crop_planning/train.py` reference `Pakistan_Site_final.weather` and `Pakistan_Soil_final.soil`.
+- Fertilization defaults in `experiments/fertilization/train.py` reference the Pakistan weather window and Pakistan price profile.
+- Crop-planning defaults in `experiments/crop_planning/train.py` reference `Pakistan_Site_final.weather` and `Pakistan_Soil_final.soil`.
+- The full March campaign used `price_profile=pakistan_baseline` and `nutrient_action_mode=NPK`.
 
-Artifacts used for this audit are in `artifacts/`.
+Artifacts used for this audit are in `artifacts/`, and the primary export is in `run_experiments_7_3_2026_RUNS/`.

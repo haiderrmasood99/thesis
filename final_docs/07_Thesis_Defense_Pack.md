@@ -9,12 +9,14 @@ Target claim area:
 ## Defensible Claim Style
 
 Use phrasing like:
-- "best observed under audited runs"
-- "evidence suggests"
-- "within the current experiment coverage"
+- "within the completed 113-case matrix"
+- "best repeated group"
+- "best single run"
+- "under the current simulator and reward design"
 
 Avoid:
-- "globally optimal across all configurations" (unless full matrix is executed and statistically validated)
+- "globally optimal for all farms"
+- "field-validated recommendation"
 
 ## X/Y/Z Framing
 
@@ -26,47 +28,48 @@ Use a clean configuration language:
 Optional fourth factor in fertilization:
 - training budget (`total_years`)
 
-## Evidence Snapshot (From Existing Audit Docs)
+## Evidence Snapshot (Final March 2026 Audit)
 
-Audit window documented in repo:
-- February 23, 2026 to February 25, 2026
+Campaign window documented in repo:
+- March 7, 2026 to March 11, 2026 (Pakistan time)
 
-Observed summary values reported in existing markdown:
-- run folders audited: 64
-- successful with summary: 44
-- failed with traceback: 16
-- no-summary metadata: 4
-- `run_all_2` planned configurations: 96
-- successful covered configurations observed: 34
+Observed summary values from the final export:
+- planned configurations: `113`
+- unique finished configurations: `113/113`
+- total attempts: `117`
+- initial failed attempts: `4`, all rerun successfully
+- finished by domain: `75` fertilization, `26` crop planning, `12` hierarchical failed-ablation runs
+- fertilization baseline best return: `750,198.06`
+- fertilization RL runs exceeding baseline: `11/74`
 
 ## Core Storyline You Can Defend
 
 1. Problem:
    resource allocation under weather uncertainty and fertilizer cost pressure
 2. Method:
-   RL over CYCLES-based simulator with economic reward shaping
+   RL over a CYCLES-based simulator with Pakistan weather, soil, and price assumptions
 3. Findings:
-   PPO-based settings lead observed performance in current evidence
+   PPO is the strongest overall fertilization family; crop planning is competitive between non-hierarchical PPO and A2C; the hierarchical branch is a failed ablation rather than a benchmark contender
 4. Practical recommendation:
-   fertilization deployment prefers robust random-weather PPO settings for holdout behavior
+   deploy non-hierarchical policies only, with PPO as the main fertilization reference and PPO/A2C as crop-planning candidates
 5. Limitation:
-   full design-space coverage and stronger multi-seed robustness remain pending
+   results are simulator-based and still need formal statistics plus external validation
 
 ## Likely Committee Questions and Tight Answers
 
-1. Why simulation, not field trial?  
-   Simulation enables large-scale policy learning safely; field validation is planned next phase.
-2. Why believe generalization?  
-   Held-out weather evaluation is included, but full robustness requires expanded matrix completion.
-3. Is this only fertilizer optimization?  
-   Current code directly optimizes weekly N and yearly crop choice; irrigation and other resources are identified extensions.
-4. Are economics realistic?  
-   Current rewards are simplified and transparent; richer pricing/risk models are a declared future step.
+1. Why simulation, not field trial?
+   Simulation enables safe, large-scale policy search first; field validation is the next phase, not the evidence base used here.
+2. Why believe generalization?
+   Fertilization includes holdout-weather evaluation (`pak_holdout_return`), and crop planning was tested across fixed/random weather with three seeds for PPO and A2C.
+3. What if the committee asks about hierarchical RL?
+   The hierarchical branch was executed completely, but all 12 runs were strongly negative and are excluded from the main result table. The report shows mean nutrient cost of about `8.6M`, only `38.3%` of yearly decisions with defined calendar windows, and a strong negative cost-vs-return correlation (`-0.85`), so the defensible position is failed ablation plus future work.
+4. Are the economics realistic?
+   They are Pakistan-localized and cost-aware, but still simplified relative to full farm economics.
 
 ## Defense Slide Checklist
 
 1. one architecture slide (policy -> env -> simulator -> reward)
-2. one environment slide (fertilization vs crop-planning actions/observations)
-3. one evidence slide (audited run counts + top observed configurations)
-4. one caveat slide (coverage gaps + what is needed for full closure)
-5. one roadmap slide (pilot inference UI -> full validation)
+2. one matrix-completion slide (`113/113` finished, `4` reruns recovered)
+3. one results slide (top fertilization and crop-planning groups)
+4. one caveat slide (hierarchical failed ablation due to nutrient-cost blow-up and incomplete calendar coverage, plus no field validation and no significance tests yet)
+5. one roadmap slide (statistics package -> constrained hierarchical redesign -> pilot validation)

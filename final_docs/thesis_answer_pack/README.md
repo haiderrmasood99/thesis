@@ -3,7 +3,7 @@
 This folder is a defense-ready answer pack for:
 
 - complete experimentation commands and file entrypoints
-- run-time estimates from historical runs
+- run-time estimates from the final March 2026 campaign
 - unresolved work and research gaps
 - detailed answers to questions `0` to `9`
 - contribution roadmap for master's-level work
@@ -36,7 +36,9 @@ $env:WANDB_PROJECT_CROP_PLANNING = "thesis_crop_planning_v2"
 Then run experiments:
 
 ```powershell
-python run_all_2.py --dry-run
-python run_all_2.py
-python run_all_2.py --include-dqn --include-baseline
+python run_experiments_7_3_2026.py --dry-run
+python run_experiments_7_3_2026.py
+# optional split execution / rerun helpers used in the March 2026 campaign
+python 10_3_2026_heira_exp.py
+python 10_3_2026_experiments.py --start-index 75
 ```

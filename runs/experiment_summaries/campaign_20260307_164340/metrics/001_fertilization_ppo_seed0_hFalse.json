@@ -1,0 +1,19 @@
+{
+  "timestamp": "2026-03-07T17:14:20.700476",
+  "run_id": "ufdasqcn",
+  "domain": "fertilization",
+  "method": "PPO",
+  "seed": 0,
+  "fixed_weather": true,
+  "nonadaptive": false,
+  "total_years": 1000,
+  "baseline": false,
+  "nutrient_action_mode": "NPK",
+  "price_profile": "pakistan_baseline",
+  "metrics": {
+    "deterministic_return": 546478.4375,
+    "stochastic_return_mean": 75343.65625,
+    "stochastic_return_std": 44435.77734375,
+    "pak_holdout_return": 76791.7734375
+  }
+}

@@ -1,0 +1,602 @@
+{"type": "start", "timestamp": "2026-03-09T23:04:32.946978", "total_timesteps": 0}
+{"type": "step", "timestamp": "2026-03-09T23:04:33.501034", "num_timesteps": 1, "rewards": [100.00997924804688], "actions": [[0, 4]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:33.801079", "num_timesteps": 2, "rewards": [2.0508270263671875], "actions": [[1, 11]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:34.100592", "num_timesteps": 3, "rewards": [1.78804349899292], "actions": [[0, 12]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:34.399066", "num_timesteps": 4, "rewards": [0.5780102014541626], "actions": [[1, 13]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:34.701352", "num_timesteps": 5, "rewards": [0.719147801399231], "actions": [[0, 13]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:04:34.702078", "num_timesteps": 5, "logger": {}}
+{"type": "step", "timestamp": "2026-03-09T23:04:35.160928", "num_timesteps": 6, "rewards": [0.39473745226860046], "actions": [[1, 10]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:35.462092", "num_timesteps": 7, "rewards": [0.4072948694229126], "actions": [[1, 6]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:35.774932", "num_timesteps": 8, "rewards": [0.7378473877906799], "actions": [[0, 11]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:36.075984", "num_timesteps": 9, "rewards": [0.2721048593521118], "actions": [[1, 6]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:36.380232", "num_timesteps": 10, "rewards": [0.6039762496948242], "actions": [[0, 9]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:04:36.380953", "num_timesteps": 10, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 1, "train/explained_variance": -0.006563067436218262, "train/entropy_loss": -3.332190752029419, "train/policy_loss": 76.47432708740234, "train/value_loss": 2221.0263671875}}
+{"type": "step", "timestamp": "2026-03-09T23:04:36.699110", "num_timesteps": 11, "rewards": [0.512911319732666], "actions": [[0, 10]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:37.004999", "num_timesteps": 12, "rewards": [0.17062819004058838], "actions": [[1, 1]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:37.307511", "num_timesteps": 13, "rewards": [0.16575399041175842], "actions": [[1, 13]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:37.809483", "num_timesteps": 14, "rewards": [0.1413397639989853], "actions": [[1, 2]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:38.051477", "num_timesteps": 15, "rewards": [0.4005395472049713], "actions": [[0, 9]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:04:38.052195", "num_timesteps": 15, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 2, "train/explained_variance": 0.13737624883651733, "train/entropy_loss": -3.3269097805023193, "train/policy_loss": 3.188300371170044, "train/value_loss": 1.3207601308822632}}
+{"type": "step", "timestamp": "2026-03-09T23:04:38.366597", "num_timesteps": 16, "rewards": [0.07799769192934036], "actions": [[1, 3]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:38.667002", "num_timesteps": 17, "rewards": [0.4349650740623474], "actions": [[0, 11]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:38.981075", "num_timesteps": 18, "rewards": [0.42548254132270813], "actions": [[0, 10]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:39.288268", "num_timesteps": 19, "rewards": [0.12582695484161377], "actions": [[1, 5]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:39.590013", "num_timesteps": 20, "rewards": [0.16157115995883942], "actions": [[1, 9]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:04:39.590725", "num_timesteps": 20, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 3, "train/explained_variance": -38.55340576171875, "train/entropy_loss": -3.3056771755218506, "train/policy_loss": 0.1275554746389389, "train/value_loss": 3.146268606185913}}
+{"type": "step", "timestamp": "2026-03-09T23:04:39.897357", "num_timesteps": 21, "rewards": [0.46408793330192566], "actions": [[0, 9]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:40.201320", "num_timesteps": 22, "rewards": [0.1559426337480545], "actions": [[1, 8]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:40.514549", "num_timesteps": 23, "rewards": [0.46384838223457336], "actions": [[0, 10]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:40.830224", "num_timesteps": 24, "rewards": [0.13499224185943604], "actions": [[1, 3]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:41.136579", "num_timesteps": 25, "rewards": [0.3803192377090454], "actions": [[0, 0]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:04:41.137297", "num_timesteps": 25, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 4, "train/explained_variance": -1.1599640846252441, "train/entropy_loss": -3.312556505203247, "train/policy_loss": 3.6372413635253906, "train/value_loss": 1.65813410282135}}
+{"type": "step", "timestamp": "2026-03-09T23:04:41.448231", "num_timesteps": 26, "rewards": [0.15320689976215363], "actions": [[1, 0]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:41.755623", "num_timesteps": 27, "rewards": [0.31880712509155273], "actions": [[0, 13]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:42.259378", "num_timesteps": 28, "rewards": [0.1552530825138092], "actions": [[1, 12]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:42.502469", "num_timesteps": 29, "rewards": [0.3598804175853729], "actions": [[0, 1]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:42.746872", "num_timesteps": 30, "rewards": [0.22784633934497833], "actions": [[0, 0]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:04:42.747577", "num_timesteps": 30, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 5, "train/explained_variance": -0.2845020294189453, "train/entropy_loss": -3.291323184967041, "train/policy_loss": 2.4021027088165283, "train/value_loss": 0.7908533215522766}}
+{"type": "step", "timestamp": "2026-03-09T23:04:42.997258", "num_timesteps": 31, "rewards": [0.4145503044128418], "actions": [[0, 3]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:43.242277", "num_timesteps": 32, "rewards": [0.46958333253860474], "actions": [[0, 4]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:43.486301", "num_timesteps": 33, "rewards": [0.29309821128845215], "actions": [[0, 12]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:43.789843", "num_timesteps": 34, "rewards": [0.14354123175144196], "actions": [[1, 7]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:44.092595", "num_timesteps": 35, "rewards": [0.40172526240348816], "actions": [[0, 2]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:04:44.093303", "num_timesteps": 35, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 6, "train/explained_variance": -11.431300163269043, "train/entropy_loss": -3.2526676654815674, "train/policy_loss": 1.1591628789901733, "train/value_loss": 4.039731502532959}}
+{"type": "step", "timestamp": "2026-03-09T23:04:44.400105", "num_timesteps": 36, "rewards": [0.11963792145252228], "actions": [[1, 4]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:44.705190", "num_timesteps": 37, "rewards": [0.4458158612251282], "actions": [[0, 10]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:45.011199", "num_timesteps": 38, "rewards": [0.13682973384857178], "actions": [[1, 13]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:45.316171", "num_timesteps": 39, "rewards": [0.12289104610681534], "actions": [[1, 0]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:45.620709", "num_timesteps": 40, "rewards": [0.47380104660987854], "actions": [[0, 3]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:04:45.621425", "num_timesteps": 40, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 7, "train/explained_variance": -0.1366269588470459, "train/entropy_loss": -3.2567832469940186, "train/policy_loss": 2.9201812744140625, "train/value_loss": 1.1331578493118286}}
+{"type": "step", "timestamp": "2026-03-09T23:04:45.932601", "num_timesteps": 41, "rewards": [0.16791416704654694], "actions": [[1, 12]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:46.447617", "num_timesteps": 42, "rewards": [0.1290905624628067], "actions": [[1, 0]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:46.689144", "num_timesteps": 43, "rewards": [0.35780081152915955], "actions": [[0, 1]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:46.942055", "num_timesteps": 44, "rewards": [0.2782829999923706], "actions": [[0, 4]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:47.183903", "num_timesteps": 45, "rewards": [0.4031318724155426], "actions": [[0, 13]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:04:47.184612", "num_timesteps": 45, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 8, "train/explained_variance": -0.8708716630935669, "train/entropy_loss": -3.233975648880005, "train/policy_loss": 1.3906259536743164, "train/value_loss": 0.38909900188446045}}
+{"type": "step", "timestamp": "2026-03-09T23:04:47.488596", "num_timesteps": 46, "rewards": [0.1769561916589737], "actions": [[1, 6]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:47.791182", "num_timesteps": 47, "rewards": [0.35256049036979675], "actions": [[0, 6]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:48.093434", "num_timesteps": 48, "rewards": [0.10841618478298187], "actions": [[1, 4]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:48.394804", "num_timesteps": 49, "rewards": [0.45030874013900757], "actions": [[0, 7]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:48.696052", "num_timesteps": 50, "rewards": [0.11777070164680481], "actions": [[1, 4]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:04:48.696758", "num_timesteps": 50, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 9, "train/explained_variance": -8.51580810546875, "train/entropy_loss": -3.2029740810394287, "train/policy_loss": 0.5773205757141113, "train/value_loss": 3.589317798614502}}
+{"type": "step", "timestamp": "2026-03-09T23:04:49.003303", "num_timesteps": 51, "rewards": [0.1576869785785675], "actions": [[1, 12]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:49.306645", "num_timesteps": 52, "rewards": [0.3937552571296692], "actions": [[0, 12]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:49.609138", "num_timesteps": 53, "rewards": [0.14518235623836517], "actions": [[1, 4]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:49.933224", "num_timesteps": 54, "rewards": [0.44899895787239075], "actions": [[0, 1]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:50.238106", "num_timesteps": 55, "rewards": [0.16642624139785767], "actions": [[1, 11]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:04:50.238815", "num_timesteps": 55, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 10, "train/explained_variance": -0.7506260871887207, "train/entropy_loss": -3.1247527599334717, "train/policy_loss": 3.119213819503784, "train/value_loss": 1.37283194065094}}
+{"type": "step", "timestamp": "2026-03-09T23:04:50.743707", "num_timesteps": 56, "rewards": [0.39456310868263245], "actions": [[0, 12]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:50.988115", "num_timesteps": 57, "rewards": [0.366156667470932], "actions": [[0, 2]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:51.232084", "num_timesteps": 58, "rewards": [0.3305390179157257], "actions": [[0, 12]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:51.531442", "num_timesteps": 59, "rewards": [0.171871155500412], "actions": [[1, 5]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:51.832227", "num_timesteps": 60, "rewards": [0.4387427270412445], "actions": [[0, 2]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:04:51.832941", "num_timesteps": 60, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 11, "train/explained_variance": 0.30160659551620483, "train/entropy_loss": -3.1778640747070312, "train/policy_loss": 1.7260397672653198, "train/value_loss": 0.38304343819618225}}
+{"type": "step", "timestamp": "2026-03-09T23:04:52.136791", "num_timesteps": 61, "rewards": [0.35400548577308655], "actions": [[0, 6]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:52.455463", "num_timesteps": 62, "rewards": [0.1315484195947647], "actions": [[1, 6]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:52.758388", "num_timesteps": 63, "rewards": [0.37507522106170654], "actions": [[0, 1]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:53.062679", "num_timesteps": 64, "rewards": [0.1631115823984146], "actions": [[1, 9]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:53.365681", "num_timesteps": 65, "rewards": [0.4223215878009796], "actions": [[0, 8]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:04:53.366387", "num_timesteps": 65, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 12, "train/explained_variance": -5.440709114074707, "train/entropy_loss": -3.157550096511841, "train/policy_loss": 3.1443865299224854, "train/value_loss": 4.900460243225098}}
+{"type": "step", "timestamp": "2026-03-09T23:04:53.677469", "num_timesteps": 66, "rewards": [0.15116268396377563], "actions": [[1, 6]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:53.981437", "num_timesteps": 67, "rewards": [0.1540692150592804], "actions": [[1, 11]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:54.296472", "num_timesteps": 68, "rewards": [0.4449975788593292], "actions": [[0, 1]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:54.601153", "num_timesteps": 69, "rewards": [0.11703413724899292], "actions": [[1, 0]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:55.101293", "num_timesteps": 70, "rewards": [0.15027065575122833], "actions": [[1, 4]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:04:55.101996", "num_timesteps": 70, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 13, "train/explained_variance": -0.31677019596099854, "train/entropy_loss": -3.168447971343994, "train/policy_loss": 1.8325632810592651, "train/value_loss": 0.5552662014961243}}
+{"type": "step", "timestamp": "2026-03-09T23:04:55.349155", "num_timesteps": 71, "rewards": [0.40721696615219116], "actions": [[0, 9]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:55.650415", "num_timesteps": 72, "rewards": [0.07673770934343338], "actions": [[1, 5]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:55.954469", "num_timesteps": 73, "rewards": [0.4105432629585266], "actions": [[0, 1]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:56.256779", "num_timesteps": 74, "rewards": [0.4591458737850189], "actions": [[0, 6]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:56.559060", "num_timesteps": 75, "rewards": [0.1343841701745987], "actions": [[1, 6]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:04:56.559776", "num_timesteps": 75, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 14, "train/explained_variance": -0.48501622676849365, "train/entropy_loss": -3.2163548469543457, "train/policy_loss": -2.316018581390381, "train/value_loss": 0.6559153199195862}}
+{"type": "step", "timestamp": "2026-03-09T23:04:56.868508", "num_timesteps": 76, "rewards": [0.4218529164791107], "actions": [[0, 7]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:57.175089", "num_timesteps": 77, "rewards": [0.15619276463985443], "actions": [[1, 12]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:57.492972", "num_timesteps": 78, "rewards": [0.4058709144592285], "actions": [[0, 9]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:57.795566", "num_timesteps": 79, "rewards": [0.14472785592079163], "actions": [[1, 3]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:58.100255", "num_timesteps": 80, "rewards": [0.11874887347221375], "actions": [[1, 2]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:04:58.100981", "num_timesteps": 80, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 15, "train/explained_variance": -11.402966499328613, "train/entropy_loss": -3.073838233947754, "train/policy_loss": 3.563507080078125, "train/value_loss": 4.358063220977783}}
+{"type": "step", "timestamp": "2026-03-09T23:04:58.415977", "num_timesteps": 81, "rewards": [0.15935076773166656], "actions": [[1, 7]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:58.727600", "num_timesteps": 82, "rewards": [0.1978604644536972], "actions": [[1, 7]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:59.034926", "num_timesteps": 83, "rewards": [0.3904097080230713], "actions": [[0, 1]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:59.542161", "num_timesteps": 84, "rewards": [0.4212467670440674], "actions": [[0, 10]]}
+{"type": "step", "timestamp": "2026-03-09T23:04:59.785243", "num_timesteps": 85, "rewards": [0.3777920603752136], "actions": [[0, 4]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:04:59.785964", "num_timesteps": 85, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 16, "train/explained_variance": -0.4806705713272095, "train/entropy_loss": -3.182105302810669, "train/policy_loss": 2.210905075073242, "train/value_loss": 0.7708368301391602}}
+{"type": "step", "timestamp": "2026-03-09T23:05:00.093838", "num_timesteps": 86, "rewards": [0.11478888988494873], "actions": [[1, 8]]}
+{"type": "step", "timestamp": "2026-03-09T23:05:00.400823", "num_timesteps": 87, "rewards": [0.44400620460510254], "actions": [[0, 11]]}
+{"type": "step", "timestamp": "2026-03-09T23:05:00.703252", "num_timesteps": 88, "rewards": [0.16608916223049164], "actions": [[1, 3]]}
+{"type": "step", "timestamp": "2026-03-09T23:05:01.004580", "num_timesteps": 89, "rewards": [0.2885694205760956], "actions": [[0, 12]]}
+{"type": "step", "timestamp": "2026-03-09T23:05:01.310687", "num_timesteps": 90, "rewards": [0.1399066150188446], "actions": [[1, 7]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:05:01.311412", "num_timesteps": 90, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 17, "train/explained_variance": -4.765474319458008, "train/entropy_loss": -3.1028356552124023, "train/policy_loss": 2.061765432357788, "train/value_loss": 2.360074758529663}}
+{"type": "step", "timestamp": "2026-03-09T23:05:01.621922", "num_timesteps": 91, "rewards": [0.42736536264419556], "actions": [[0, 10]]}
+{"type": "step", "timestamp": "2026-03-09T23:05:01.927147", "num_timesteps": 92, "rewards": [0.1675380915403366], "actions": [[1, 12]]}
+{"type": "step", "timestamp": "2026-03-09T23:05:02.233737", "num_timesteps": 93, "rewards": [0.13351483643054962], "actions": [[1, 1]]}
+{"type": "step", "timestamp": "2026-03-09T23:05:02.541252", "num_timesteps": 94, "rewards": [0.4273727238178253], "actions": [[0, 9]]}
+{"type": "step", "timestamp": "2026-03-09T23:05:02.861940", "num_timesteps": 95, "rewards": [0.13111184537410736], "actions": [[1, 3]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:05:02.862641", "num_timesteps": 95, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 18, "train/explained_variance": 0.5750614404678345, "train/entropy_loss": -2.966317892074585, "train/policy_loss": 1.7196391820907593, "train/value_loss": 0.4827256202697754}}
+{"type": "step", "timestamp": "2026-03-09T23:05:03.173113", "num_timesteps": 96, "rewards": [0.3635297417640686], "actions": [[0, 12]]}
+{"type": "step", "timestamp": "2026-03-09T23:05:03.482146", "num_timesteps": 97, "rewards": [0.34191054105758667], "actions": [[0, 6]]}
+{"type": "step", "timestamp": "2026-03-09T23:05:03.993370", "num_timesteps": 98, "rewards": [0.16644829511642456], "actions": [[1, 9]]}
+{"type": "step", "timestamp": "2026-03-09T23:05:04.237045", "num_timesteps": 99, "rewards": [0.42023909091949463], "actions": [[0, 6]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:16.440295", "num_timesteps": 100, "rewards": [0.1380200982093811], "actions": [[1, 9]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:07:16.440896", "num_timesteps": 100, "logger": {}}
+{"type": "step", "timestamp": "2026-03-09T23:07:16.743615", "num_timesteps": 101, "rewards": [0.43668317794799805], "actions": [[0, 12]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:17.043773", "num_timesteps": 102, "rewards": [0.18380962312221527], "actions": [[1, 5]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:17.344782", "num_timesteps": 103, "rewards": [0.35319840908050537], "actions": [[0, 9]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:17.644792", "num_timesteps": 104, "rewards": [0.1408545970916748], "actions": [[1, 7]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:17.943896", "num_timesteps": 105, "rewards": [0.19023343920707703], "actions": [[1, 6]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:07:17.944608", "num_timesteps": 105, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 20, "train/explained_variance": -2.3343024253845215, "train/entropy_loss": -2.897972822189331, "train/policy_loss": 1.1101216077804565, "train/value_loss": 2.739246368408203}}
+{"type": "step", "timestamp": "2026-03-09T23:07:18.252570", "num_timesteps": 106, "rewards": [0.09115736931562424], "actions": [[1, 1]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:18.558180", "num_timesteps": 107, "rewards": [0.4233281910419464], "actions": [[0, 8]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:18.861656", "num_timesteps": 108, "rewards": [0.17053945362567902], "actions": [[1, 11]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:19.163919", "num_timesteps": 109, "rewards": [0.3953121602535248], "actions": [[0, 3]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:19.469726", "num_timesteps": 110, "rewards": [0.1985747516155243], "actions": [[1, 7]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:07:19.470443", "num_timesteps": 110, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 21, "train/explained_variance": 0.20007216930389404, "train/entropy_loss": -2.8722338676452637, "train/policy_loss": 0.8405373692512512, "train/value_loss": 0.2588765621185303}}
+{"type": "step", "timestamp": "2026-03-09T23:07:19.779761", "num_timesteps": 111, "rewards": [0.4482857286930084], "actions": [[0, 4]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:20.278808", "num_timesteps": 112, "rewards": [0.37013882398605347], "actions": [[0, 4]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:20.518700", "num_timesteps": 113, "rewards": [0.32358789443969727], "actions": [[0, 13]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:20.816115", "num_timesteps": 114, "rewards": [0.11958908289670944], "actions": [[1, 13]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:21.115096", "num_timesteps": 115, "rewards": [0.4124484658241272], "actions": [[0, 13]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:07:21.115816", "num_timesteps": 115, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 22, "train/explained_variance": 0.856977105140686, "train/entropy_loss": -3.0379252433776855, "train/policy_loss": 1.4442589282989502, "train/value_loss": 0.1931898444890976}}
+{"type": "step", "timestamp": "2026-03-09T23:07:21.418970", "num_timesteps": 116, "rewards": [0.1671777069568634], "actions": [[1, 3]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:21.726078", "num_timesteps": 117, "rewards": [0.3478478193283081], "actions": [[0, 2]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:22.027352", "num_timesteps": 118, "rewards": [0.09884925186634064], "actions": [[1, 2]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:22.329163", "num_timesteps": 119, "rewards": [0.41271018981933594], "actions": [[0, 13]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:22.629967", "num_timesteps": 120, "rewards": [0.08714574575424194], "actions": [[1, 6]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:07:22.630667", "num_timesteps": 120, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 23, "train/explained_variance": -2.5898025035858154, "train/entropy_loss": -2.9291720390319824, "train/policy_loss": 1.5344598293304443, "train/value_loss": 2.312302589416504}}
+{"type": "step", "timestamp": "2026-03-09T23:07:22.936355", "num_timesteps": 121, "rewards": [0.4220356047153473], "actions": [[0, 11]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:23.239480", "num_timesteps": 122, "rewards": [0.1255059391260147], "actions": [[1, 3]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:23.544232", "num_timesteps": 123, "rewards": [0.16540533304214478], "actions": [[1, 8]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:23.846232", "num_timesteps": 124, "rewards": [0.14713813364505768], "actions": [[1, 0]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:24.147910", "num_timesteps": 125, "rewards": [0.38970524072647095], "actions": [[0, 11]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:07:24.148620", "num_timesteps": 125, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 24, "train/explained_variance": 0.1866828203201294, "train/entropy_loss": -2.8665249347686768, "train/policy_loss": 1.8453266620635986, "train/value_loss": 0.5664960741996765}}
+{"type": "step", "timestamp": "2026-03-09T23:07:24.662200", "num_timesteps": 126, "rewards": [0.1108226478099823], "actions": [[1, 2]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:24.905353", "num_timesteps": 127, "rewards": [0.3524456322193146], "actions": [[0, 12]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:25.205949", "num_timesteps": 128, "rewards": [0.12070181220769882], "actions": [[1, 13]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:25.517448", "num_timesteps": 129, "rewards": [0.4210558831691742], "actions": [[0, 2]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:25.816694", "num_timesteps": 130, "rewards": [0.18473735451698303], "actions": [[1, 7]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:07:25.817407", "num_timesteps": 130, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 25, "train/explained_variance": 0.9456843137741089, "train/entropy_loss": -3.0293033123016357, "train/policy_loss": 0.37319907546043396, "train/value_loss": 0.01972135901451111}}
+{"type": "step", "timestamp": "2026-03-09T23:07:26.137598", "num_timesteps": 131, "rewards": [0.3331916034221649], "actions": [[0, 1]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:26.440667", "num_timesteps": 132, "rewards": [0.10088662058115005], "actions": [[1, 2]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:26.743314", "num_timesteps": 133, "rewards": [0.45018526911735535], "actions": [[0, 8]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:27.046603", "num_timesteps": 134, "rewards": [0.12125562131404877], "actions": [[1, 5]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:27.352921", "num_timesteps": 135, "rewards": [0.4263008236885071], "actions": [[0, 11]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:07:27.353633", "num_timesteps": 135, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 26, "train/explained_variance": -1.5766949653625488, "train/entropy_loss": -2.88698148727417, "train/policy_loss": 2.2205750942230225, "train/value_loss": 3.10396671295166}}
+{"type": "step", "timestamp": "2026-03-09T23:07:27.664235", "num_timesteps": 136, "rewards": [0.17842915654182434], "actions": [[1, 8]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:27.972848", "num_timesteps": 137, "rewards": [0.4438813626766205], "actions": [[0, 9]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:28.276731", "num_timesteps": 138, "rewards": [0.14754264056682587], "actions": [[1, 0]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:28.585247", "num_timesteps": 139, "rewards": [0.46084997057914734], "actions": [[0, 5]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:29.100955", "num_timesteps": 140, "rewards": [0.1491313874721527], "actions": [[1, 5]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:07:29.101650", "num_timesteps": 140, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 27, "train/explained_variance": 0.09634160995483398, "train/entropy_loss": -2.9370741844177246, "train/policy_loss": 1.124760627746582, "train/value_loss": 0.2869139611721039}}
+{"type": "step", "timestamp": "2026-03-09T23:07:29.348438", "num_timesteps": 141, "rewards": [0.37080255150794983], "actions": [[0, 11]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:29.644073", "num_timesteps": 142, "rewards": [0.12019416689872742], "actions": [[1, 13]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:29.941914", "num_timesteps": 143, "rewards": [0.41946014761924744], "actions": [[0, 2]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:30.241553", "num_timesteps": 144, "rewards": [0.4284331500530243], "actions": [[0, 11]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:30.544661", "num_timesteps": 145, "rewards": [0.11288217455148697], "actions": [[1, 4]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:07:30.545388", "num_timesteps": 145, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 28, "train/explained_variance": 0.35961228609085083, "train/entropy_loss": -2.945772409439087, "train/policy_loss": -0.48831382393836975, "train/value_loss": 0.13886912167072296}}
+{"type": "step", "timestamp": "2026-03-09T23:07:30.855128", "num_timesteps": 146, "rewards": [0.443121999502182], "actions": [[0, 9]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:31.155899", "num_timesteps": 147, "rewards": [0.13706842064857483], "actions": [[1, 3]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:31.456109", "num_timesteps": 148, "rewards": [0.41473641991615295], "actions": [[0, 8]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:31.758824", "num_timesteps": 149, "rewards": [0.16821883618831635], "actions": [[1, 6]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:32.064265", "num_timesteps": 150, "rewards": [0.18060049414634705], "actions": [[1, 9]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:07:32.064998", "num_timesteps": 150, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 29, "train/explained_variance": -8.4969482421875, "train/entropy_loss": -2.8755710124969482, "train/policy_loss": 4.381709575653076, "train/value_loss": 3.9639484882354736}}
+{"type": "step", "timestamp": "2026-03-09T23:07:32.371737", "num_timesteps": 151, "rewards": [0.4280095398426056], "actions": [[0, 10]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:32.671389", "num_timesteps": 152, "rewards": [0.17423966526985168], "actions": [[1, 2]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:32.977893", "num_timesteps": 153, "rewards": [0.17070245742797852], "actions": [[1, 6]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:33.487394", "num_timesteps": 154, "rewards": [0.439178466796875], "actions": [[0, 7]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:33.730710", "num_timesteps": 155, "rewards": [0.42199015617370605], "actions": [[0, 7]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:07:33.731414", "num_timesteps": 155, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 30, "train/explained_variance": 0.03429216146469116, "train/entropy_loss": -3.063497543334961, "train/policy_loss": 1.1225272417068481, "train/value_loss": 0.33714166283607483}}
+{"type": "step", "timestamp": "2026-03-09T23:07:34.034149", "num_timesteps": 156, "rewards": [0.12021994590759277], "actions": [[1, 13]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:34.332986", "num_timesteps": 157, "rewards": [0.45042884349823], "actions": [[0, 11]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:34.629986", "num_timesteps": 158, "rewards": [0.15606354176998138], "actions": [[1, 2]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:34.933948", "num_timesteps": 159, "rewards": [0.2922482490539551], "actions": [[0, 12]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:35.238121", "num_timesteps": 160, "rewards": [0.1576298475265503], "actions": [[1, 9]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:07:35.238838", "num_timesteps": 160, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 31, "train/explained_variance": -1.244480848312378, "train/entropy_loss": -3.0616531372070312, "train/policy_loss": 1.9357880353927612, "train/value_loss": 2.5350959300994873}}
+{"type": "step", "timestamp": "2026-03-09T23:07:35.542532", "num_timesteps": 161, "rewards": [0.36620476841926575], "actions": [[0, 0]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:35.840862", "num_timesteps": 162, "rewards": [0.3964487314224243], "actions": [[0, 7]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:36.143934", "num_timesteps": 163, "rewards": [0.15593671798706055], "actions": [[1, 12]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:36.448185", "num_timesteps": 164, "rewards": [0.13313287496566772], "actions": [[1, 5]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:36.752262", "num_timesteps": 165, "rewards": [0.4236777424812317], "actions": [[0, 13]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:07:36.752986", "num_timesteps": 165, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 32, "train/explained_variance": 0.4068770408630371, "train/entropy_loss": -2.801640033721924, "train/policy_loss": 0.6901363134384155, "train/value_loss": 0.15315039455890656}}
+{"type": "step", "timestamp": "2026-03-09T23:07:37.056897", "num_timesteps": 166, "rewards": [0.1739315539598465], "actions": [[1, 2]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:37.359368", "num_timesteps": 167, "rewards": [0.17720414698123932], "actions": [[1, 7]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:37.866261", "num_timesteps": 168, "rewards": [0.43620938062667847], "actions": [[0, 8]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:38.108928", "num_timesteps": 169, "rewards": [0.4011209309101105], "actions": [[0, 5]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:38.412980", "num_timesteps": 170, "rewards": [0.07480951398611069], "actions": [[1, 4]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:07:38.413694", "num_timesteps": 170, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 33, "train/explained_variance": 0.8403348922729492, "train/entropy_loss": -3.068692922592163, "train/policy_loss": 0.46900463104248047, "train/value_loss": 0.04191207513213158}}
+{"type": "step", "timestamp": "2026-03-09T23:07:38.722242", "num_timesteps": 171, "rewards": [0.44001978635787964], "actions": [[0, 12]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:39.023645", "num_timesteps": 172, "rewards": [0.18826472759246826], "actions": [[1, 9]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:39.327478", "num_timesteps": 173, "rewards": [0.3207004964351654], "actions": [[0, 11]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:39.635572", "num_timesteps": 174, "rewards": [0.09818926453590393], "actions": [[1, 3]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:39.943137", "num_timesteps": 175, "rewards": [0.45172715187072754], "actions": [[0, 7]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:07:39.943873", "num_timesteps": 175, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 34, "train/explained_variance": -0.6226596832275391, "train/entropy_loss": -2.967315912246704, "train/policy_loss": 1.6891502141952515, "train/value_loss": 2.3538930416107178}}
+{"type": "step", "timestamp": "2026-03-09T23:07:40.250219", "num_timesteps": 176, "rewards": [0.12630826234817505], "actions": [[1, 5]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:40.553024", "num_timesteps": 177, "rewards": [0.15891656279563904], "actions": [[1, 11]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:40.862230", "num_timesteps": 178, "rewards": [0.17048171162605286], "actions": [[1, 11]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:41.171200", "num_timesteps": 179, "rewards": [0.1532827466726303], "actions": [[1, 11]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:41.474923", "num_timesteps": 180, "rewards": [0.45879799127578735], "actions": [[0, 2]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:07:41.475633", "num_timesteps": 180, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 35, "train/explained_variance": 0.7718824744224548, "train/entropy_loss": -2.791220188140869, "train/policy_loss": 0.7039960026741028, "train/value_loss": 0.09963428974151611}}
+{"type": "step", "timestamp": "2026-03-09T23:07:41.782963", "num_timesteps": 181, "rewards": [0.17145708203315735], "actions": [[1, 6]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:42.285745", "num_timesteps": 182, "rewards": [0.16907647252082825], "actions": [[1, 8]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:42.525946", "num_timesteps": 183, "rewards": [0.37097012996673584], "actions": [[0, 1]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:42.828068", "num_timesteps": 184, "rewards": [0.16189859807491302], "actions": [[1, 9]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:43.135493", "num_timesteps": 185, "rewards": [0.4235404133796692], "actions": [[0, 1]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:07:43.136215", "num_timesteps": 185, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 36, "train/explained_variance": -0.6921349763870239, "train/entropy_loss": -3.1349704265594482, "train/policy_loss": 0.6016924381256104, "train/value_loss": 0.11316269636154175}}
+{"type": "step", "timestamp": "2026-03-09T23:07:43.452579", "num_timesteps": 186, "rewards": [0.19029846787452698], "actions": [[1, 9]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:43.754012", "num_timesteps": 187, "rewards": [0.3620850145816803], "actions": [[0, 6]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:44.057887", "num_timesteps": 188, "rewards": [0.10025393217802048], "actions": [[1, 3]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:44.362563", "num_timesteps": 189, "rewards": [0.4350586235523224], "actions": [[0, 10]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:44.666733", "num_timesteps": 190, "rewards": [0.1021643877029419], "actions": [[1, 5]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:07:44.667454", "num_timesteps": 190, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 37, "train/explained_variance": -0.2465686798095703, "train/entropy_loss": -3.0066797733306885, "train/policy_loss": 0.8238924145698547, "train/value_loss": 2.7868540287017822}}
+{"type": "step", "timestamp": "2026-03-09T23:07:44.975456", "num_timesteps": 191, "rewards": [0.42645391821861267], "actions": [[0, 7]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:45.281206", "num_timesteps": 192, "rewards": [0.12504610419273376], "actions": [[1, 3]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:45.591309", "num_timesteps": 193, "rewards": [0.44393885135650635], "actions": [[0, 9]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:45.898858", "num_timesteps": 194, "rewards": [0.18247327208518982], "actions": [[1, 3]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:46.203911", "num_timesteps": 195, "rewards": [0.38974854350090027], "actions": [[0, 11]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:07:46.204604", "num_timesteps": 195, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 38, "train/explained_variance": 0.8283332586288452, "train/entropy_loss": -2.8441250324249268, "train/policy_loss": 1.1081680059432983, "train/value_loss": 0.17668162286281586}}
+{"type": "step", "timestamp": "2026-03-09T23:07:46.715499", "num_timesteps": 196, "rewards": [0.127324178814888], "actions": [[1, 4]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:46.953863", "num_timesteps": 197, "rewards": [0.12642094492912292], "actions": [[1, 4]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:47.252011", "num_timesteps": 198, "rewards": [0.36062705516815186], "actions": [[0, 4]]}
+{"type": "step", "timestamp": "2026-03-09T23:07:47.557409", "num_timesteps": 199, "rewards": [0.421531081199646], "actions": [[0, 1]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:00.074408", "num_timesteps": 200, "rewards": [0.4019022285938263], "actions": [[0, 12]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:10:00.075051", "num_timesteps": 200, "logger": {}}
+{"type": "step", "timestamp": "2026-03-09T23:10:00.379304", "num_timesteps": 201, "rewards": [0.13124282658100128], "actions": [[1, 6]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:00.687900", "num_timesteps": 202, "rewards": [0.10305323451757431], "actions": [[1, 0]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:01.007548", "num_timesteps": 203, "rewards": [0.37774458527565], "actions": [[0, 1]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:01.311634", "num_timesteps": 204, "rewards": [0.08895942568778992], "actions": [[1, 0]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:01.617190", "num_timesteps": 205, "rewards": [0.4241175651550293], "actions": [[0, 7]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:10:01.617917", "num_timesteps": 205, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 40, "train/explained_variance": -1.23280930519104, "train/entropy_loss": -2.8026747703552246, "train/policy_loss": 2.412149429321289, "train/value_loss": 2.0004379749298096}}
+{"type": "step", "timestamp": "2026-03-09T23:10:01.933054", "num_timesteps": 206, "rewards": [0.1828189194202423], "actions": [[1, 10]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:02.247101", "num_timesteps": 207, "rewards": [0.13202768564224243], "actions": [[1, 3]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:02.565036", "num_timesteps": 208, "rewards": [0.4471532702445984], "actions": [[0, 1]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:02.870990", "num_timesteps": 209, "rewards": [0.17370781302452087], "actions": [[1, 8]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:03.383454", "num_timesteps": 210, "rewards": [0.17474859952926636], "actions": [[1, 10]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:10:03.384163", "num_timesteps": 210, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 41, "train/explained_variance": -2.056896924972534, "train/entropy_loss": -2.9464261531829834, "train/policy_loss": 0.7626655697822571, "train/value_loss": 0.2669438123703003}}
+{"type": "step", "timestamp": "2026-03-09T23:10:03.633139", "num_timesteps": 211, "rewards": [0.3956601619720459], "actions": [[0, 10]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:03.961158", "num_timesteps": 212, "rewards": [0.07568711787462234], "actions": [[1, 4]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:04.278158", "num_timesteps": 213, "rewards": [0.459622859954834], "actions": [[0, 6]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:04.587325", "num_timesteps": 214, "rewards": [0.178227037191391], "actions": [[1, 13]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:04.895497", "num_timesteps": 215, "rewards": [0.374622642993927], "actions": [[0, 4]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:10:04.896245", "num_timesteps": 215, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 42, "train/explained_variance": 0.8767222166061401, "train/entropy_loss": -3.0901622772216797, "train/policy_loss": -1.588038444519043, "train/value_loss": 0.3308999538421631}}
+{"type": "step", "timestamp": "2026-03-09T23:10:05.207962", "num_timesteps": 216, "rewards": [0.13139177858829498], "actions": [[1, 13]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:05.522364", "num_timesteps": 217, "rewards": [0.46089017391204834], "actions": [[0, 5]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:05.833694", "num_timesteps": 218, "rewards": [0.1676870733499527], "actions": [[1, 12]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:06.139069", "num_timesteps": 219, "rewards": [0.434835284948349], "actions": [[0, 10]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:06.451928", "num_timesteps": 220, "rewards": [0.1367054134607315], "actions": [[1, 5]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:10:06.452633", "num_timesteps": 220, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 43, "train/explained_variance": -10.574494361877441, "train/entropy_loss": -2.9062180519104004, "train/policy_loss": 3.4840104579925537, "train/value_loss": 2.908812999725342}}
+{"type": "step", "timestamp": "2026-03-09T23:10:06.770947", "num_timesteps": 221, "rewards": [0.4258870482444763], "actions": [[0, 13]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:07.078052", "num_timesteps": 222, "rewards": [0.18235772848129272], "actions": [[1, 3]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:07.386898", "num_timesteps": 223, "rewards": [0.4599124491214752], "actions": [[0, 5]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:07.893902", "num_timesteps": 224, "rewards": [0.14599759876728058], "actions": [[1, 13]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:08.137045", "num_timesteps": 225, "rewards": [0.37138500809669495], "actions": [[0, 11]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:10:08.137769", "num_timesteps": 225, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 44, "train/explained_variance": 0.6999082565307617, "train/entropy_loss": -2.9432053565979004, "train/policy_loss": 0.3458855450153351, "train/value_loss": 0.06177399680018425}}
+{"type": "step", "timestamp": "2026-03-09T23:10:08.447267", "num_timesteps": 226, "rewards": [0.07273361086845398], "actions": [[1, 4]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:08.745593", "num_timesteps": 227, "rewards": [0.4605450928211212], "actions": [[0, 10]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:09.058525", "num_timesteps": 228, "rewards": [0.185479074716568], "actions": [[1, 5]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:09.366355", "num_timesteps": 229, "rewards": [0.2932814061641693], "actions": [[0, 12]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:09.673572", "num_timesteps": 230, "rewards": [0.14961890876293182], "actions": [[1, 8]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:10:09.674307", "num_timesteps": 230, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 45, "train/explained_variance": -0.40962469577789307, "train/entropy_loss": -2.9029548168182373, "train/policy_loss": 1.1154664754867554, "train/value_loss": 1.6109174489974976}}
+{"type": "step", "timestamp": "2026-03-09T23:10:09.983263", "num_timesteps": 231, "rewards": [0.13870705664157867], "actions": [[1, 2]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:10.289739", "num_timesteps": 232, "rewards": [0.408437579870224], "actions": [[0, 9]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:10.596582", "num_timesteps": 233, "rewards": [0.15286880731582642], "actions": [[1, 4]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:10.904462", "num_timesteps": 234, "rewards": [0.41026630997657776], "actions": [[0, 5]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:11.217103", "num_timesteps": 235, "rewards": [0.1312570571899414], "actions": [[1, 3]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:10:11.217845", "num_timesteps": 235, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 46, "train/explained_variance": 0.7060405611991882, "train/entropy_loss": -2.708998680114746, "train/policy_loss": 0.9721483588218689, "train/value_loss": 0.19436462223529816}}
+{"type": "step", "timestamp": "2026-03-09T23:10:11.531117", "num_timesteps": 236, "rewards": [0.4451901316642761], "actions": [[0, 1]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:11.837478", "num_timesteps": 237, "rewards": [0.1358587145805359], "actions": [[1, 2]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:12.343256", "num_timesteps": 238, "rewards": [0.15222586691379547], "actions": [[1, 4]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:12.585930", "num_timesteps": 239, "rewards": [0.39435523748397827], "actions": [[0, 10]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:12.886231", "num_timesteps": 240, "rewards": [0.0765017569065094], "actions": [[1, 3]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:10:12.886936", "num_timesteps": 240, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 47, "train/explained_variance": 0.34158098697662354, "train/entropy_loss": -2.88254714012146, "train/policy_loss": 0.5411666631698608, "train/value_loss": 0.1380603313446045}}
+{"type": "step", "timestamp": "2026-03-09T23:10:13.207453", "num_timesteps": 241, "rewards": [0.4226990044116974], "actions": [[0, 1]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:13.510164", "num_timesteps": 242, "rewards": [0.36636659502983093], "actions": [[0, 13]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:13.813894", "num_timesteps": 243, "rewards": [0.07818449288606644], "actions": [[1, 0]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:14.118122", "num_timesteps": 244, "rewards": [0.3849174976348877], "actions": [[0, 12]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:14.430974", "num_timesteps": 245, "rewards": [0.10018229484558105], "actions": [[1, 0]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:10:14.431677", "num_timesteps": 245, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 48, "train/explained_variance": 0.10246998071670532, "train/entropy_loss": -2.9262008666992188, "train/policy_loss": 0.6181973814964294, "train/value_loss": 2.0040667057037354}}
+{"type": "step", "timestamp": "2026-03-09T23:10:14.751020", "num_timesteps": 246, "rewards": [0.31042999029159546], "actions": [[0, 4]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:15.055272", "num_timesteps": 247, "rewards": [0.4278995394706726], "actions": [[0, 6]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:15.364338", "num_timesteps": 248, "rewards": [0.12497147172689438], "actions": [[1, 3]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:15.669781", "num_timesteps": 249, "rewards": [0.36377179622650146], "actions": [[0, 1]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:15.974307", "num_timesteps": 250, "rewards": [0.19359144568443298], "actions": [[1, 9]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:10:15.975021", "num_timesteps": 250, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 49, "train/explained_variance": 0.7304052710533142, "train/entropy_loss": -2.805992841720581, "train/policy_loss": 0.2969558835029602, "train/value_loss": 0.055298466235399246}}
+{"type": "step", "timestamp": "2026-03-09T23:10:16.286358", "num_timesteps": 251, "rewards": [0.4166067838668823], "actions": [[0, 10]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:16.792505", "num_timesteps": 252, "rewards": [0.15204061567783356], "actions": [[1, 13]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:17.032351", "num_timesteps": 253, "rewards": [0.14200983941555023], "actions": [[1, 6]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:17.333669", "num_timesteps": 254, "rewards": [0.32069769501686096], "actions": [[0, 1]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:17.638266", "num_timesteps": 255, "rewards": [0.46078813076019287], "actions": [[0, 9]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:10:17.638993", "num_timesteps": 255, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 50, "train/explained_variance": 0.8059879541397095, "train/entropy_loss": -3.0706841945648193, "train/policy_loss": 0.3114983141422272, "train/value_loss": 0.039255548268556595}}
+{"type": "step", "timestamp": "2026-03-09T23:10:17.946183", "num_timesteps": 256, "rewards": [0.1816404014825821], "actions": [[1, 6]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:18.249769", "num_timesteps": 257, "rewards": [0.33297452330589294], "actions": [[0, 1]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:18.555277", "num_timesteps": 258, "rewards": [0.09334582090377808], "actions": [[1, 0]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:18.860860", "num_timesteps": 259, "rewards": [0.4157778322696686], "actions": [[0, 13]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:19.165454", "num_timesteps": 260, "rewards": [0.16349712014198303], "actions": [[1, 13]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:10:19.166165", "num_timesteps": 260, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 51, "train/explained_variance": 0.0748450756072998, "train/entropy_loss": -2.8043954372406006, "train/policy_loss": 2.5171499252319336, "train/value_loss": 1.882799744606018}}
+{"type": "step", "timestamp": "2026-03-09T23:10:19.475285", "num_timesteps": 261, "rewards": [0.13405407965183258], "actions": [[1, 1]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:19.779311", "num_timesteps": 262, "rewards": [0.3514501452445984], "actions": [[0, 1]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:20.080936", "num_timesteps": 263, "rewards": [0.13141986727714539], "actions": [[1, 3]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:20.383820", "num_timesteps": 264, "rewards": [0.41965189576148987], "actions": [[0, 0]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:20.684379", "num_timesteps": 265, "rewards": [0.13597051799297333], "actions": [[1, 2]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:10:20.685088", "num_timesteps": 265, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 52, "train/explained_variance": 0.9007399082183838, "train/entropy_loss": -2.774151563644409, "train/policy_loss": -0.424270361661911, "train/value_loss": 0.03596789017319679}}
+{"type": "step", "timestamp": "2026-03-09T23:10:21.189759", "num_timesteps": 266, "rewards": [0.43546345829963684], "actions": [[0, 6]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:21.431315", "num_timesteps": 267, "rewards": [0.32671383023262024], "actions": [[0, 13]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:21.734732", "num_timesteps": 268, "rewards": [0.07089872658252716], "actions": [[1, 5]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:22.039973", "num_timesteps": 269, "rewards": [0.4620526432991028], "actions": [[0, 10]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:22.342706", "num_timesteps": 270, "rewards": [0.16957032680511475], "actions": [[1, 3]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:10:22.343421", "num_timesteps": 270, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 53, "train/explained_variance": 0.9356323480606079, "train/entropy_loss": -3.138552665710449, "train/policy_loss": 0.24265757203102112, "train/value_loss": 0.014364385977387428}}
+{"type": "step", "timestamp": "2026-03-09T23:10:22.651999", "num_timesteps": 271, "rewards": [0.33346468210220337], "actions": [[0, 1]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:22.958088", "num_timesteps": 272, "rewards": [0.10557575523853302], "actions": [[1, 3]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:23.265458", "num_timesteps": 273, "rewards": [0.4303744435310364], "actions": [[0, 12]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:23.573197", "num_timesteps": 274, "rewards": [0.12055125832557678], "actions": [[1, 8]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:23.878894", "num_timesteps": 275, "rewards": [0.410925954580307], "actions": [[0, 12]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:10:23.879538", "num_timesteps": 275, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 54, "train/explained_variance": 0.0991060733795166, "train/entropy_loss": -2.8178157806396484, "train/policy_loss": 1.5614970922470093, "train/value_loss": 1.4990216493606567}}
+{"type": "step", "timestamp": "2026-03-09T23:10:24.191486", "num_timesteps": 276, "rewards": [0.17702730000019073], "actions": [[1, 8]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:24.499668", "num_timesteps": 277, "rewards": [0.35908013582229614], "actions": [[0, 0]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:24.805983", "num_timesteps": 278, "rewards": [0.4449659585952759], "actions": [[0, 8]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:25.113614", "num_timesteps": 279, "rewards": [0.13784430921077728], "actions": [[1, 3]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:25.621741", "num_timesteps": 280, "rewards": [0.41281336545944214], "actions": [[0, 11]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:10:25.622457", "num_timesteps": 280, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 55, "train/explained_variance": 0.8052738308906555, "train/entropy_loss": -2.787198305130005, "train/policy_loss": 0.1924942582845688, "train/value_loss": 0.02882365696132183}}
+{"type": "step", "timestamp": "2026-03-09T23:10:25.867031", "num_timesteps": 281, "rewards": [0.41515183448791504], "actions": [[0, 9]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:26.165568", "num_timesteps": 282, "rewards": [0.08170474320650101], "actions": [[1, 4]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:26.468186", "num_timesteps": 283, "rewards": [0.4220215082168579], "actions": [[0, 1]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:26.768027", "num_timesteps": 284, "rewards": [0.14281973242759705], "actions": [[1, 0]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:27.069994", "num_timesteps": 285, "rewards": [0.34789910912513733], "actions": [[0, 10]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:10:27.070687", "num_timesteps": 285, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 56, "train/explained_variance": 0.7569239139556885, "train/entropy_loss": -2.9988179206848145, "train/policy_loss": 0.02857004478573799, "train/value_loss": 0.044878292828798294}}
+{"type": "step", "timestamp": "2026-03-09T23:10:27.377581", "num_timesteps": 286, "rewards": [0.13298699259757996], "actions": [[1, 6]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:27.680609", "num_timesteps": 287, "rewards": [0.44895970821380615], "actions": [[0, 4]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:27.982346", "num_timesteps": 288, "rewards": [0.17229905724525452], "actions": [[1, 11]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:28.285840", "num_timesteps": 289, "rewards": [0.4097945988178253], "actions": [[0, 12]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:28.587872", "num_timesteps": 290, "rewards": [0.13389912247657776], "actions": [[1, 5]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:10:28.588589", "num_timesteps": 290, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 57, "train/explained_variance": -9.506645202636719, "train/entropy_loss": -2.8382456302642822, "train/policy_loss": 0.709820032119751, "train/value_loss": 1.3258318901062012}}
+{"type": "step", "timestamp": "2026-03-09T23:10:28.898627", "num_timesteps": 291, "rewards": [0.1313144862651825], "actions": [[1, 3]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:29.206803", "num_timesteps": 292, "rewards": [0.4139293134212494], "actions": [[0, 10]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:29.514791", "num_timesteps": 293, "rewards": [0.17308931052684784], "actions": [[1, 8]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:30.021320", "num_timesteps": 294, "rewards": [0.40113064646720886], "actions": [[0, 4]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:30.262551", "num_timesteps": 295, "rewards": [0.14186277985572815], "actions": [[1, 6]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:10:30.263325", "num_timesteps": 295, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 58, "train/explained_variance": 0.937201738357544, "train/entropy_loss": -2.8622777462005615, "train/policy_loss": -0.1202203556895256, "train/value_loss": 0.01129967998713255}}
+{"type": "step", "timestamp": "2026-03-09T23:10:30.571406", "num_timesteps": 296, "rewards": [0.3205024302005768], "actions": [[0, 1]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:30.881717", "num_timesteps": 297, "rewards": [0.4273153841495514], "actions": [[0, 3]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:31.189771", "num_timesteps": 298, "rewards": [0.36528870463371277], "actions": [[0, 13]]}
+{"type": "step", "timestamp": "2026-03-09T23:10:31.496012", "num_timesteps": 299, "rewards": [0.12077049911022186], "actions": [[1, 5]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:43.435783", "num_timesteps": 300, "rewards": [0.3760239779949188], "actions": [[0, 5]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:12:43.436713", "num_timesteps": 300, "logger": {}}
+{"type": "step", "timestamp": "2026-03-09T23:12:43.745416", "num_timesteps": 301, "rewards": [0.4553942382335663], "actions": [[0, 6]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:44.052463", "num_timesteps": 302, "rewards": [0.12653551995754242], "actions": [[1, 5]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:44.358630", "num_timesteps": 303, "rewards": [0.4232097566127777], "actions": [[0, 7]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:44.664429", "num_timesteps": 304, "rewards": [0.12367265671491623], "actions": [[1, 3]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:44.969336", "num_timesteps": 305, "rewards": [0.45195063948631287], "actions": [[0, 7]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:12:44.970052", "num_timesteps": 305, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 60, "train/explained_variance": 0.7414954900741577, "train/entropy_loss": -2.9591543674468994, "train/policy_loss": 0.46931275725364685, "train/value_loss": 0.09025607258081436}}
+{"type": "step", "timestamp": "2026-03-09T23:12:45.283680", "num_timesteps": 306, "rewards": [0.3214535713195801], "actions": [[0, 13]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:45.592602", "num_timesteps": 307, "rewards": [0.17673790454864502], "actions": [[1, 7]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:46.099184", "num_timesteps": 308, "rewards": [0.38347506523132324], "actions": [[0, 13]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:46.345269", "num_timesteps": 309, "rewards": [0.42082157731056213], "actions": [[0, 7]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:46.643749", "num_timesteps": 310, "rewards": [0.06794983148574829], "actions": [[1, 5]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:12:46.644467", "num_timesteps": 310, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 61, "train/explained_variance": 0.9498591423034668, "train/entropy_loss": -2.9934322834014893, "train/policy_loss": -0.28411009907722473, "train/value_loss": 0.018276555463671684}}
+{"type": "step", "timestamp": "2026-03-09T23:12:46.949600", "num_timesteps": 311, "rewards": [0.45414969325065613], "actions": [[0, 6]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:47.252903", "num_timesteps": 312, "rewards": [0.18091242015361786], "actions": [[1, 6]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:47.569332", "num_timesteps": 313, "rewards": [0.3694680333137512], "actions": [[0, 3]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:47.874047", "num_timesteps": 314, "rewards": [0.12350106239318848], "actions": [[1, 5]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:48.176281", "num_timesteps": 315, "rewards": [0.42905479669570923], "actions": [[0, 10]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:12:48.177242", "num_timesteps": 315, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 62, "train/explained_variance": 0.6158387660980225, "train/entropy_loss": -2.9992587566375732, "train/policy_loss": 1.8643369674682617, "train/value_loss": 0.9638023376464844}}
+{"type": "step", "timestamp": "2026-03-09T23:12:48.484655", "num_timesteps": 316, "rewards": [0.13315200805664062], "actions": [[1, 8]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:48.790517", "num_timesteps": 317, "rewards": [0.1779671162366867], "actions": [[1, 8]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:49.099024", "num_timesteps": 318, "rewards": [0.12191647291183472], "actions": [[1, 3]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:49.404373", "num_timesteps": 319, "rewards": [0.45005863904953003], "actions": [[0, 7]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:49.710543", "num_timesteps": 320, "rewards": [0.16903479397296906], "actions": [[1, 12]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:12:49.711246", "num_timesteps": 320, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 63, "train/explained_variance": 0.8965461254119873, "train/entropy_loss": -2.8616580963134766, "train/policy_loss": 0.00888297613710165, "train/value_loss": 0.014278835617005825}}
+{"type": "step", "timestamp": "2026-03-09T23:12:50.019490", "num_timesteps": 321, "rewards": [0.1564832627773285], "actions": [[1, 13]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:50.526957", "num_timesteps": 322, "rewards": [0.38655227422714233], "actions": [[0, 3]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:50.770194", "num_timesteps": 323, "rewards": [0.3916253447532654], "actions": [[0, 10]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:51.076980", "num_timesteps": 324, "rewards": [0.0750068947672844], "actions": [[1, 4]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:51.378982", "num_timesteps": 325, "rewards": [0.45932918787002563], "actions": [[0, 10]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:12:51.379688", "num_timesteps": 325, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 64, "train/explained_variance": 0.6277799606323242, "train/entropy_loss": -2.9977574348449707, "train/policy_loss": -0.7369794845581055, "train/value_loss": 0.06342535465955734}}
+{"type": "step", "timestamp": "2026-03-09T23:12:51.685577", "num_timesteps": 326, "rewards": [0.18328823149204254], "actions": [[1, 7]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:51.996480", "num_timesteps": 327, "rewards": [0.36210697889328003], "actions": [[0, 7]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:52.301609", "num_timesteps": 328, "rewards": [0.13042370975017548], "actions": [[1, 13]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:52.607745", "num_timesteps": 329, "rewards": [0.4507036805152893], "actions": [[0, 7]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:52.911096", "num_timesteps": 330, "rewards": [0.10800395160913467], "actions": [[1, 3]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:12:52.911827", "num_timesteps": 330, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 65, "train/explained_variance": 0.7514654994010925, "train/entropy_loss": -2.9868030548095703, "train/policy_loss": 1.5678739547729492, "train/value_loss": 0.6776317954063416}}
+{"type": "step", "timestamp": "2026-03-09T23:12:53.218499", "num_timesteps": 331, "rewards": [0.42339926958084106], "actions": [[0, 6]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:53.523372", "num_timesteps": 332, "rewards": [0.12010668963193893], "actions": [[1, 2]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:53.830722", "num_timesteps": 333, "rewards": [0.42417216300964355], "actions": [[0, 10]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:54.138676", "num_timesteps": 334, "rewards": [0.1695244014263153], "actions": [[1, 13]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:54.443168", "num_timesteps": 335, "rewards": [0.15591678023338318], "actions": [[1, 5]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:12:54.443914", "num_timesteps": 335, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 66, "train/explained_variance": 0.9870373010635376, "train/entropy_loss": -2.782630443572998, "train/policy_loss": 0.22978854179382324, "train/value_loss": 0.009363015182316303}}
+{"type": "step", "timestamp": "2026-03-09T23:12:54.953547", "num_timesteps": 336, "rewards": [0.3844984471797943], "actions": [[0, 13]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:55.193086", "num_timesteps": 337, "rewards": [0.18842753767967224], "actions": [[1, 12]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:55.492046", "num_timesteps": 338, "rewards": [0.33410051465034485], "actions": [[0, 13]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:55.796016", "num_timesteps": 339, "rewards": [0.19006796181201935], "actions": [[1, 11]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:56.101423", "num_timesteps": 340, "rewards": [0.4287842810153961], "actions": [[0, 1]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:12:56.102147", "num_timesteps": 340, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 67, "train/explained_variance": 0.978204607963562, "train/entropy_loss": -2.9033143520355225, "train/policy_loss": -0.4759865701198578, "train/value_loss": 0.03275393322110176}}
+{"type": "step", "timestamp": "2026-03-09T23:12:56.405068", "num_timesteps": 341, "rewards": [0.3494654893875122], "actions": [[0, 2]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:56.706376", "num_timesteps": 342, "rewards": [0.14179623126983643], "actions": [[1, 7]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:57.008331", "num_timesteps": 343, "rewards": [0.4461490213871002], "actions": [[0, 4]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:57.313411", "num_timesteps": 344, "rewards": [0.10203958302736282], "actions": [[1, 2]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:57.629361", "num_timesteps": 345, "rewards": [0.38833436369895935], "actions": [[0, 13]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:12:57.630106", "num_timesteps": 345, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 68, "train/explained_variance": 0.6987870931625366, "train/entropy_loss": -2.9762566089630127, "train/policy_loss": 1.9980099201202393, "train/value_loss": 0.5950292348861694}}
+{"type": "step", "timestamp": "2026-03-09T23:12:57.936146", "num_timesteps": 346, "rewards": [0.12908779084682465], "actions": [[1, 5]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:58.238475", "num_timesteps": 347, "rewards": [0.35982924699783325], "actions": [[0, 1]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:58.543933", "num_timesteps": 348, "rewards": [0.1914888471364975], "actions": [[1, 9]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:58.856822", "num_timesteps": 349, "rewards": [0.349623441696167], "actions": [[0, 12]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:59.361008", "num_timesteps": 350, "rewards": [0.12223955988883972], "actions": [[1, 4]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:12:59.361700", "num_timesteps": 350, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 69, "train/explained_variance": 0.9543812870979309, "train/entropy_loss": -2.8546831607818604, "train/policy_loss": -0.23648157715797424, "train/value_loss": 0.013232529163360596}}
+{"type": "step", "timestamp": "2026-03-09T23:12:59.610165", "num_timesteps": 351, "rewards": [0.140939861536026], "actions": [[1, 6]]}
+{"type": "step", "timestamp": "2026-03-09T23:12:59.909840", "num_timesteps": 352, "rewards": [0.35969510674476624], "actions": [[0, 11]]}
+{"type": "step", "timestamp": "2026-03-09T23:13:00.210946", "num_timesteps": 353, "rewards": [0.17542268335819244], "actions": [[1, 5]]}
+{"type": "step", "timestamp": "2026-03-09T23:13:00.512027", "num_timesteps": 354, "rewards": [0.47342950105667114], "actions": [[0, 5]]}
+{"type": "step", "timestamp": "2026-03-09T23:13:00.819225", "num_timesteps": 355, "rewards": [0.0920153334736824], "actions": [[1, 1]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:13:00.820183", "num_timesteps": 355, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 70, "train/explained_variance": 0.7054398655891418, "train/entropy_loss": -2.9977376461029053, "train/policy_loss": 1.0218775272369385, "train/value_loss": 0.1712089627981186}}
+{"type": "step", "timestamp": "2026-03-09T23:13:01.129573", "num_timesteps": 356, "rewards": [0.3001544177532196], "actions": [[0, 0]]}
+{"type": "step", "timestamp": "2026-03-09T23:13:01.430842", "num_timesteps": 357, "rewards": [0.13089986145496368], "actions": [[1, 1]]}
+{"type": "step", "timestamp": "2026-03-09T23:13:01.733954", "num_timesteps": 358, "rewards": [0.3794383108615875], "actions": [[0, 13]]}
+{"type": "step", "timestamp": "2026-03-09T23:13:02.035626", "num_timesteps": 359, "rewards": [0.119469553232193], "actions": [[1, 0]]}
+{"type": "step", "timestamp": "2026-03-09T23:13:02.340866", "num_timesteps": 360, "rewards": [0.3478138744831085], "actions": [[0, 1]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:13:02.341592", "num_timesteps": 360, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 71, "train/explained_variance": -1.139225959777832, "train/entropy_loss": -2.955416440963745, "train/policy_loss": 0.33877530694007874, "train/value_loss": 0.30268049240112305}}
+{"type": "step", "timestamp": "2026-03-09T23:13:02.659096", "num_timesteps": 361, "rewards": [0.44293156266212463], "actions": [[0, 8]]}
+{"type": "step", "timestamp": "2026-03-09T23:13:02.962636", "num_timesteps": 362, "rewards": [0.1955113410949707], "actions": [[1, 7]]}
+{"type": "step", "timestamp": "2026-03-09T23:13:03.264750", "num_timesteps": 363, "rewards": [0.12870122492313385], "actions": [[1, 1]]}
+{"type": "step", "timestamp": "2026-03-09T23:13:03.768311", "num_timesteps": 364, "rewards": [0.4246767461299896], "actions": [[0, 10]]}
+{"type": "step", "timestamp": "2026-03-09T23:13:04.011171", "num_timesteps": 365, "rewards": [0.42128750681877136], "actions": [[0, 7]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:13:04.011910", "num_timesteps": 365, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 72, "train/explained_variance": 0.7543538212776184, "train/entropy_loss": -2.7211220264434814, "train/policy_loss": 0.1517920345067978, "train/value_loss": 0.029105890542268753}}
+{"type": "step", "timestamp": "2026-03-09T23:13:04.316395", "num_timesteps": 366, "rewards": [0.12028981000185013], "actions": [[1, 13]]}
+{"type": "step", "timestamp": "2026-03-09T23:13:04.617959", "num_timesteps": 367, "rewards": [0.4585241377353668], "actions": [[0, 10]]}
+{"type": "step", "timestamp": "2026-03-09T23:13:04.917826", "num_timesteps": 368, "rewards": [0.1425887644290924], "actions": [[1, 0]]}
+{"type": "step", "timestamp": "2026-03-09T23:13:05.217653", "num_timesteps": 369, "rewards": [0.3311195373535156], "actions": [[0, 1]]}
+{"type": "step", "timestamp": "2026-03-09T23:13:05.535426", "num_timesteps": 370, "rewards": [0.10008420050144196], "actions": [[1, 2]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:13:05.536145", "num_timesteps": 370, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 73, "train/explained_variance": 0.8246147632598877, "train/entropy_loss": -3.1017754077911377, "train/policy_loss": 1.9155329465866089, "train/value_loss": 0.6049360632896423}}
+{"type": "step", "timestamp": "2026-03-09T23:13:05.841924", "num_timesteps": 371, "rewards": [0.42419055104255676], "actions": [[0, 11]]}
+{"type": "step", "timestamp": "2026-03-09T23:13:06.145904", "num_timesteps": 372, "rewards": [0.12071757018566132], "actions": [[1, 8]]}
+{"type": "step", "timestamp": "2026-03-09T23:13:06.457836", "num_timesteps": 373, "rewards": [0.3464057147502899], "actions": [[0, 1]]}
+{"type": "step", "timestamp": "2026-03-09T23:13:06.763175", "num_timesteps": 374, "rewards": [0.16829434037208557], "actions": [[1, 7]]}
+{"type": "step", "timestamp": "2026-03-09T23:13:07.069538", "num_timesteps": 375, "rewards": [0.11813707649707794], "actions": [[1, 0]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:13:07.070243", "num_timesteps": 375, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 74, "train/explained_variance": 0.9728720784187317, "train/entropy_loss": -2.7818915843963623, "train/policy_loss": 0.012923875823616982, "train/value_loss": 0.0034582007210701704}}
+{"type": "step", "timestamp": "2026-03-09T23:13:07.379307", "num_timesteps": 376, "rewards": [0.3867591321468353], "actions": [[0, 11]]}
+{"type": "step", "timestamp": "2026-03-09T23:13:07.683088", "num_timesteps": 377, "rewards": [0.14661751687526703], "actions": [[1, 4]]}
+{"type": "step", "timestamp": "2026-03-09T23:13:08.189159", "num_timesteps": 378, "rewards": [0.4254488945007324], "actions": [[0, 10]]}
+{"type": "step", "timestamp": "2026-03-09T23:13:08.430035", "num_timesteps": 379, "rewards": [0.13518686592578888], "actions": [[1, 5]]}
+{"type": "step", "timestamp": "2026-03-09T23:13:08.729409", "num_timesteps": 380, "rewards": [0.4253409802913666], "actions": [[0, 7]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:13:08.730121", "num_timesteps": 380, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 75, "train/explained_variance": 0.9840059280395508, "train/entropy_loss": -2.916398763656616, "train/policy_loss": -0.293657124042511, "train/value_loss": 0.01193267572671175}}
+{"type": "step", "timestamp": "2026-03-09T23:13:09.036648", "num_timesteps": 381, "rewards": [0.4072319269180298], "actions": [[0, 0]]}
+{"type": "step", "timestamp": "2026-03-09T23:13:09.337204", "num_timesteps": 382, "rewards": [0.364265114068985], "actions": [[0, 13]]}
+{"type": "step", "timestamp": "2026-03-09T23:13:09.637058", "num_timesteps": 383, "rewards": [0.09445209056138992], "actions": [[1, 3]]}
+{"type": "step", "timestamp": "2026-03-09T23:13:09.935895", "num_timesteps": 384, "rewards": [0.4152313768863678], "actions": [[0, 10]]}
+{"type": "step", "timestamp": "2026-03-09T23:13:10.235689", "num_timesteps": 385, "rewards": [0.42822548747062683], "actions": [[0, 5]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:13:10.236409", "num_timesteps": 385, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 76, "train/explained_variance": 0.9454123973846436, "train/entropy_loss": -2.845881223678589, "train/policy_loss": 1.4860191345214844, "train/value_loss": 0.32144007086753845}}
+{"type": "step", "timestamp": "2026-03-09T23:13:10.552789", "num_timesteps": 386, "rewards": [0.29134222865104675], "actions": [[0, 3]]}
+{"type": "step", "timestamp": "2026-03-09T23:13:10.853286", "num_timesteps": 387, "rewards": [0.13259416818618774], "actions": [[1, 2]]}
+{"type": "step", "timestamp": "2026-03-09T23:13:11.154858", "num_timesteps": 388, "rewards": [0.37253233790397644], "actions": [[0, 11]]}
+{"type": "step", "timestamp": "2026-03-09T23:13:11.457547", "num_timesteps": 389, "rewards": [0.1299353539943695], "actions": [[1, 3]]}
+{"type": "step", "timestamp": "2026-03-09T23:13:11.760831", "num_timesteps": 390, "rewards": [0.3861399292945862], "actions": [[0, 11]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:13:11.761546", "num_timesteps": 390, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 77, "train/explained_variance": 0.7352855205535889, "train/entropy_loss": -2.9647254943847656, "train/policy_loss": 0.6570022702217102, "train/value_loss": 0.09694566577672958}}
+{"type": "step", "timestamp": "2026-03-09T23:13:12.068276", "num_timesteps": 391, "rewards": [0.136959046125412], "actions": [[1, 3]]}
+{"type": "step", "timestamp": "2026-03-09T23:13:12.580593", "num_timesteps": 392, "rewards": [0.3730655014514923], "actions": [[0, 0]]}
+{"type": "step", "timestamp": "2026-03-09T23:13:12.823135", "num_timesteps": 393, "rewards": [0.39004766941070557], "actions": [[0, 10]]}
+{"type": "step", "timestamp": "2026-03-09T23:13:13.122102", "num_timesteps": 394, "rewards": [0.08188389986753464], "actions": [[1, 6]]}
+{"type": "step", "timestamp": "2026-03-09T23:13:13.424479", "num_timesteps": 395, "rewards": [0.4497479200363159], "actions": [[0, 11]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:13:13.425198", "num_timesteps": 395, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 78, "train/explained_variance": 0.9706310033798218, "train/entropy_loss": -2.9598259925842285, "train/policy_loss": 0.53759765625, "train/value_loss": 0.04707864671945572}}
+{"type": "step", "timestamp": "2026-03-09T23:13:13.730767", "num_timesteps": 396, "rewards": [0.14734001457691193], "actions": [[1, 1]]}
+{"type": "step", "timestamp": "2026-03-09T23:13:14.034567", "num_timesteps": 397, "rewards": [0.34506356716156006], "actions": [[0, 10]]}
+{"type": "step", "timestamp": "2026-03-09T23:13:14.346400", "num_timesteps": 398, "rewards": [0.09801365435123444], "actions": [[1, 3]]}
+{"type": "step", "timestamp": "2026-03-09T23:13:14.648489", "num_timesteps": 399, "rewards": [0.45146921277046204], "actions": [[0, 6]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:28.484937", "num_timesteps": 400, "rewards": [0.10250204801559448], "actions": [[1, 2]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:15:28.485731", "num_timesteps": 400, "logger": {}}
+{"type": "step", "timestamp": "2026-03-09T23:15:28.791052", "num_timesteps": 401, "rewards": [0.34540966153144836], "actions": [[0, 1]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:29.105654", "num_timesteps": 402, "rewards": [0.41218143701553345], "actions": [[0, 13]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:29.422869", "num_timesteps": 403, "rewards": [0.2803516685962677], "actions": [[0, 3]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:29.729180", "num_timesteps": 404, "rewards": [0.19475087523460388], "actions": [[1, 6]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:30.032291", "num_timesteps": 405, "rewards": [0.4575611352920532], "actions": [[0, 6]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:15:30.033004", "num_timesteps": 405, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 80, "train/explained_variance": 0.9824521541595459, "train/entropy_loss": -2.774662494659424, "train/policy_loss": 0.17662015557289124, "train/value_loss": 0.007040624972432852}}
+{"type": "step", "timestamp": "2026-03-09T23:15:30.538134", "num_timesteps": 406, "rewards": [0.14609192311763763], "actions": [[1, 3]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:30.779139", "num_timesteps": 407, "rewards": [0.3223836421966553], "actions": [[0, 13]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:31.078938", "num_timesteps": 408, "rewards": [0.0700327679514885], "actions": [[1, 5]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:31.380998", "num_timesteps": 409, "rewards": [0.41758638620376587], "actions": [[0, 1]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:31.678177", "num_timesteps": 410, "rewards": [0.4313689172267914], "actions": [[0, 9]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:15:31.678911", "num_timesteps": 410, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 81, "train/explained_variance": 0.9851758480072021, "train/entropy_loss": -2.9882023334503174, "train/policy_loss": 2.1108717918395996, "train/value_loss": 0.391682893037796}}
+{"type": "step", "timestamp": "2026-03-09T23:15:31.978270", "num_timesteps": 411, "rewards": [0.08516058325767517], "actions": [[1, 0]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:32.284710", "num_timesteps": 412, "rewards": [0.37865227460861206], "actions": [[0, 12]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:32.596658", "num_timesteps": 413, "rewards": [0.14089250564575195], "actions": [[1, 4]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:32.900045", "num_timesteps": 414, "rewards": [0.35892829298973083], "actions": [[0, 6]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:33.202115", "num_timesteps": 415, "rewards": [0.1625736504793167], "actions": [[1, 5]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:15:33.202827", "num_timesteps": 415, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 82, "train/explained_variance": 0.6624428033828735, "train/entropy_loss": -2.912651777267456, "train/policy_loss": 0.6042896509170532, "train/value_loss": 0.5502888560295105}}
+{"type": "step", "timestamp": "2026-03-09T23:15:33.514888", "num_timesteps": 416, "rewards": [0.4222506284713745], "actions": [[0, 9]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:33.824435", "num_timesteps": 417, "rewards": [0.4321260452270508], "actions": [[0, 8]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:34.127916", "num_timesteps": 418, "rewards": [0.1729148030281067], "actions": [[1, 11]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:34.432535", "num_timesteps": 419, "rewards": [0.14568883180618286], "actions": [[1, 4]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:34.939035", "num_timesteps": 420, "rewards": [0.42160364985466003], "actions": [[0, 10]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:15:34.939747", "num_timesteps": 420, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 83, "train/explained_variance": 0.7410658597946167, "train/entropy_loss": -2.76631498336792, "train/policy_loss": 0.10785501450300217, "train/value_loss": 0.03010612726211548}}
+{"type": "step", "timestamp": "2026-03-09T23:15:35.185700", "num_timesteps": 421, "rewards": [0.11156616359949112], "actions": [[1, 2]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:35.489970", "num_timesteps": 422, "rewards": [0.32500696182250977], "actions": [[0, 1]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:35.795444", "num_timesteps": 423, "rewards": [0.4362659156322479], "actions": [[0, 12]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:36.096417", "num_timesteps": 424, "rewards": [0.17822778224945068], "actions": [[1, 4]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:36.398779", "num_timesteps": 425, "rewards": [0.3432364761829376], "actions": [[0, 10]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:15:36.399472", "num_timesteps": 425, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 84, "train/explained_variance": 0.916312038898468, "train/entropy_loss": -3.0298964977264404, "train/policy_loss": 0.42061638832092285, "train/value_loss": 0.03252977132797241}}
+{"type": "step", "timestamp": "2026-03-09T23:15:36.712656", "num_timesteps": 426, "rewards": [0.16474008560180664], "actions": [[1, 10]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:37.018540", "num_timesteps": 427, "rewards": [0.446092814207077], "actions": [[0, 7]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:37.323456", "num_timesteps": 428, "rewards": [0.10698262602090836], "actions": [[1, 3]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:37.629297", "num_timesteps": 429, "rewards": [0.41446202993392944], "actions": [[0, 8]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:37.937510", "num_timesteps": 430, "rewards": [0.17882820963859558], "actions": [[1, 9]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:15:37.938225", "num_timesteps": 430, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 85, "train/explained_variance": -1.0825347900390625, "train/entropy_loss": -2.7897956371307373, "train/policy_loss": 1.7393087148666382, "train/value_loss": 0.6250295042991638}}
+{"type": "step", "timestamp": "2026-03-09T23:15:38.251345", "num_timesteps": 431, "rewards": [0.41987642645835876], "actions": [[0, 5]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:38.555268", "num_timesteps": 432, "rewards": [0.19678737223148346], "actions": [[1, 8]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:38.862974", "num_timesteps": 433, "rewards": [0.4162308871746063], "actions": [[0, 3]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:39.370280", "num_timesteps": 434, "rewards": [0.1487448811531067], "actions": [[1, 4]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:39.614301", "num_timesteps": 435, "rewards": [0.34583741426467896], "actions": [[0, 12]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:15:39.615048", "num_timesteps": 435, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 86, "train/explained_variance": 0.997161328792572, "train/entropy_loss": -2.778505802154541, "train/policy_loss": 0.06484183669090271, "train/value_loss": 0.0008143968298099935}}
+{"type": "step", "timestamp": "2026-03-09T23:15:39.923311", "num_timesteps": 436, "rewards": [0.1149747222661972], "actions": [[1, 8]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:40.225523", "num_timesteps": 437, "rewards": [0.45410406589508057], "actions": [[0, 9]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:40.527513", "num_timesteps": 438, "rewards": [0.16675087809562683], "actions": [[1, 3]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:40.832029", "num_timesteps": 439, "rewards": [0.35079655051231384], "actions": [[0, 9]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:41.136128", "num_timesteps": 440, "rewards": [0.09769781678915024], "actions": [[1, 3]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:15:41.136853", "num_timesteps": 440, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 87, "train/explained_variance": 0.7618891000747681, "train/entropy_loss": -3.2171578407287598, "train/policy_loss": 0.8823843002319336, "train/value_loss": 0.38739126920700073}}
+{"type": "step", "timestamp": "2026-03-09T23:15:41.443361", "num_timesteps": 441, "rewards": [0.42510220408439636], "actions": [[0, 10]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:41.746728", "num_timesteps": 442, "rewards": [0.13193322718143463], "actions": [[1, 8]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:42.054951", "num_timesteps": 443, "rewards": [0.38413509726524353], "actions": [[0, 13]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:42.359927", "num_timesteps": 444, "rewards": [0.12782442569732666], "actions": [[1, 5]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:42.663647", "num_timesteps": 445, "rewards": [0.4401020109653473], "actions": [[0, 8]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:15:42.664547", "num_timesteps": 445, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 88, "train/explained_variance": 0.9736832976341248, "train/entropy_loss": -2.706757068634033, "train/policy_loss": 0.049429889768362045, "train/value_loss": 0.0036884320434182882}}
+{"type": "step", "timestamp": "2026-03-09T23:15:42.971904", "num_timesteps": 446, "rewards": [0.17218059301376343], "actions": [[1, 11]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:43.275488", "num_timesteps": 447, "rewards": [0.16742609441280365], "actions": [[1, 6]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:43.779652", "num_timesteps": 448, "rewards": [0.391806423664093], "actions": [[0, 12]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:44.021859", "num_timesteps": 449, "rewards": [0.35505029559135437], "actions": [[0, 0]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:44.326089", "num_timesteps": 450, "rewards": [0.1270497888326645], "actions": [[1, 7]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:15:44.326810", "num_timesteps": 450, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 89, "train/explained_variance": 0.9810848236083984, "train/entropy_loss": -2.8076255321502686, "train/policy_loss": -0.17022846639156342, "train/value_loss": 0.0070593408308923244}}
+{"type": "step", "timestamp": "2026-03-09T23:15:44.633333", "num_timesteps": 451, "rewards": [0.4391411542892456], "actions": [[0, 4]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:44.938543", "num_timesteps": 452, "rewards": [0.17508894205093384], "actions": [[1, 13]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:45.251947", "num_timesteps": 453, "rewards": [0.3510536253452301], "actions": [[0, 9]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:45.556399", "num_timesteps": 454, "rewards": [0.3160262107849121], "actions": [[0, 3]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:45.870301", "num_timesteps": 455, "rewards": [0.4484706223011017], "actions": [[0, 6]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:15:45.871034", "num_timesteps": 455, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 90, "train/explained_variance": 0.8757304549217224, "train/entropy_loss": -3.170637845993042, "train/policy_loss": 0.6279047727584839, "train/value_loss": 0.2648097574710846}}
+{"type": "step", "timestamp": "2026-03-09T23:15:46.182299", "num_timesteps": 456, "rewards": [0.29655948281288147], "actions": [[0, 0]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:46.488391", "num_timesteps": 457, "rewards": [0.16814398765563965], "actions": [[1, 10]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:46.809429", "num_timesteps": 458, "rewards": [0.11462613195180893], "actions": [[1, 1]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:47.132114", "num_timesteps": 459, "rewards": [0.430690199136734], "actions": [[0, 6]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:47.438484", "num_timesteps": 460, "rewards": [0.3927444517612457], "actions": [[0, 3]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:15:47.439230", "num_timesteps": 460, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 91, "train/explained_variance": 0.7746296525001526, "train/entropy_loss": -2.9773669242858887, "train/policy_loss": 0.9628629684448242, "train/value_loss": 0.12322407215833664}}
+{"type": "step", "timestamp": "2026-03-09T23:15:47.750599", "num_timesteps": 461, "rewards": [0.4052804112434387], "actions": [[0, 4]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:48.261604", "num_timesteps": 462, "rewards": [0.13175947964191437], "actions": [[1, 1]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:48.505898", "num_timesteps": 463, "rewards": [0.41285136342048645], "actions": [[0, 8]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:48.754161", "num_timesteps": 464, "rewards": [0.3599964678287506], "actions": [[0, 8]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:48.998463", "num_timesteps": 465, "rewards": [0.45205068588256836], "actions": [[0, 8]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:15:48.999190", "num_timesteps": 465, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 92, "train/explained_variance": 0.9345226883888245, "train/entropy_loss": -3.1613376140594482, "train/policy_loss": 0.2566426396369934, "train/value_loss": 0.012770873494446278}}
+{"type": "step", "timestamp": "2026-03-09T23:15:49.310866", "num_timesteps": 466, "rewards": [0.15387862920761108], "actions": [[1, 2]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:49.619111", "num_timesteps": 467, "rewards": [0.2885039448738098], "actions": [[0, 12]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:49.924686", "num_timesteps": 468, "rewards": [0.13943208754062653], "actions": [[1, 7]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:50.232377", "num_timesteps": 469, "rewards": [0.4240167438983917], "actions": [[0, 10]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:50.539162", "num_timesteps": 470, "rewards": [0.15666520595550537], "actions": [[1, 13]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:15:50.539898", "num_timesteps": 470, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 93, "train/explained_variance": 0.7768087387084961, "train/entropy_loss": -3.0843913555145264, "train/policy_loss": 0.9316067695617676, "train/value_loss": 0.6741520762443542}}
+{"type": "step", "timestamp": "2026-03-09T23:15:50.848057", "num_timesteps": 471, "rewards": [0.37910357117652893], "actions": [[0, 3]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:51.157180", "num_timesteps": 472, "rewards": [0.12040884047746658], "actions": [[1, 3]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:51.466825", "num_timesteps": 473, "rewards": [0.4173249900341034], "actions": [[0, 10]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:51.770927", "num_timesteps": 474, "rewards": [0.19535258412361145], "actions": [[1, 8]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:52.075515", "num_timesteps": 475, "rewards": [0.344293475151062], "actions": [[0, 12]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:15:52.076473", "num_timesteps": 475, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 94, "train/explained_variance": 0.8973338603973389, "train/entropy_loss": -2.785043954849243, "train/policy_loss": -0.6701884269714355, "train/value_loss": 0.0774666890501976}}
+{"type": "step", "timestamp": "2026-03-09T23:15:52.590210", "num_timesteps": 476, "rewards": [0.09555201977491379], "actions": [[1, 1]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:52.833239", "num_timesteps": 477, "rewards": [0.41514289379119873], "actions": [[0, 6]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:53.137287", "num_timesteps": 478, "rewards": [0.04342828318476677], "actions": [[1, 1]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:53.434746", "num_timesteps": 479, "rewards": [0.4030225872993469], "actions": [[0, 0]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:53.733160", "num_timesteps": 480, "rewards": [0.17414461076259613], "actions": [[1, 13]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:15:53.733857", "num_timesteps": 480, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 95, "train/explained_variance": 0.9002285599708557, "train/entropy_loss": -3.077538013458252, "train/policy_loss": 0.6419594883918762, "train/value_loss": 0.06760817021131516}}
+{"type": "step", "timestamp": "2026-03-09T23:15:54.043764", "num_timesteps": 481, "rewards": [0.3410365581512451], "actions": [[0, 10]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:54.350994", "num_timesteps": 482, "rewards": [0.09199099987745285], "actions": [[1, 2]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:54.652967", "num_timesteps": 483, "rewards": [0.4384807348251343], "actions": [[0, 8]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:54.960984", "num_timesteps": 484, "rewards": [0.10889672487974167], "actions": [[1, 4]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:55.272395", "num_timesteps": 485, "rewards": [0.41323062777519226], "actions": [[0, 11]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:15:55.273122", "num_timesteps": 485, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 96, "train/explained_variance": 0.8055459856987, "train/entropy_loss": -2.9214627742767334, "train/policy_loss": -0.7576966285705566, "train/value_loss": 0.28844714164733887}}
+{"type": "step", "timestamp": "2026-03-09T23:15:55.581928", "num_timesteps": 486, "rewards": [0.11838632076978683], "actions": [[1, 2]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:55.886483", "num_timesteps": 487, "rewards": [0.3940795063972473], "actions": [[0, 4]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:56.198545", "num_timesteps": 488, "rewards": [0.4163326919078827], "actions": [[0, 4]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:56.507150", "num_timesteps": 489, "rewards": [0.15309982001781464], "actions": [[1, 5]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:57.011984", "num_timesteps": 490, "rewards": [0.1456187665462494], "actions": [[1, 12]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:15:57.012687", "num_timesteps": 490, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 97, "train/explained_variance": 0.9342905879020691, "train/entropy_loss": -2.7813286781311035, "train/policy_loss": 0.004509258549660444, "train/value_loss": 0.007291549351066351}}
+{"type": "step", "timestamp": "2026-03-09T23:15:57.258676", "num_timesteps": 491, "rewards": [0.40645381808280945], "actions": [[0, 9]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:57.560420", "num_timesteps": 492, "rewards": [0.04136424511671066], "actions": [[1, 0]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:57.868870", "num_timesteps": 493, "rewards": [0.4487968385219574], "actions": [[0, 6]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:58.174077", "num_timesteps": 494, "rewards": [0.1888573169708252], "actions": [[1, 8]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:58.476830", "num_timesteps": 495, "rewards": [0.3649696111679077], "actions": [[0, 4]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:15:58.477544", "num_timesteps": 495, "logger": {"train/learning_rate": 0.0007, "train/n_updates": 98, "train/explained_variance": 0.9233465194702148, "train/entropy_loss": -2.995518922805786, "train/policy_loss": -0.6991811394691467, "train/value_loss": 0.057916171848773956}}
+{"type": "step", "timestamp": "2026-03-09T23:15:58.788051", "num_timesteps": 496, "rewards": [0.10885608941316605], "actions": [[1, 4]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:59.095030", "num_timesteps": 497, "rewards": [0.4227043092250824], "actions": [[0, 10]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:59.409627", "num_timesteps": 498, "rewards": [0.09919053316116333], "actions": [[1, 5]]}
+{"type": "step", "timestamp": "2026-03-09T23:15:59.714393", "num_timesteps": 499, "rewards": [0.3451235890388489], "actions": [[0, 0]]}
+{"type": "step", "timestamp": "2026-03-09T23:18:13.720908", "num_timesteps": 500, "rewards": [0.12693828344345093], "actions": [[1, 4]]}
+{"type": "rollout", "timestamp": "2026-03-09T23:18:13.721494", "num_timesteps": 500, "logger": {}}
+{"type": "end", "timestamp": "2026-03-09T23:18:13.732130", "total_timesteps": 500}

@@ -21,17 +21,18 @@ Main scripts:
 
 ### PPO
 - on-policy actor-critic with clipped policy updates
-- default strongest option in current observed runs
-- stable for discrete and wrapped action spaces used here
+- strongest overall fertilization option across the completed matrix
+- also competitive in non-hierarchical crop planning
 
 ### A2C
 - on-policy actor-critic, simpler than PPO
-- lower implementation complexity, often less stable/performant in this setup
+- competitive in crop planning and one major fertilization pocket
+- less consistently strong than PPO across the full matrix
 
 ### DQN
 - value-based Q-learning for discrete actions
-- fertilization can use it directly
-- crop planning needs MultiDiscrete-to-Discrete wrapper (`MultiDiscreteToDiscreteActionWrapper`)
+- used here as an ablation, not the main thesis recommendation
+- crop planning needs `MultiDiscreteToDiscreteActionWrapper`
 
 ## Evaluation Design
 
@@ -42,34 +43,41 @@ Main scripts:
 
 ## Experiment Matrix Runners
 
-1. `run_all_experiments.py`  
-   mixed command list for baseline and algorithm variants
-2. `master_runner_run_all.2.py`  
-   runs fertilization variants not covered by run_all_experiments defaults
-3. `run_all_2.py`  
-   thesis-focused matrix builder with CSV summary output
+1. `run_experiments_7_3_2026.py`
+   defines the 113-case thesis matrix
+2. `10_3_2026_experiments.py`
+   executes the non-hierarchical tail of that matrix and the DQN reruns
+3. `10_3_2026_heira_exp.py`
+   executes the hierarchical branch in parallel
+4. legacy runners (`run_all_experiments.py`, `master_runner_run_all.2.py`, `run_all_2.py`)
+   remain useful as earlier experiment-history references
 
-## Evidence Snapshot from Existing Audit Docs
+## Completed Matrix Snapshot
 
-From `Experimentation and Results` markdown:
-- planned `run_all_2` matrix: 96 configurations
-- observed successful coverage in audit window: 34 configurations
-- audited run folders: 64 (44 ok, 16 failed traceback, 4 no-summary)
+From the March 11, 2026 export:
+- planned matrix: `113`
+- unique finished configs: `113/113`
+- total attempts: `117`
+- rerun-sensitive jobs: `4` DQN ablations
+- finished by domain: `75` fertilization, `26` crop planning, `12` hierarchical failed-ablation runs
 
-This supports directional conclusions, not full-matrix optimum claims.
+Result summary:
+- fertilization: PPO is strongest overall, but `A2C + nonadaptive + fixed_weather + 5000` is the top repeated group
+- crop planning: PPO and A2C are both competitive; `PPO + nonadaptive + fixed_weather` is the best repeated group
+- hierarchical: all runs finished, but the branch failed as an ablation and is excluded from the main comparison tables
+- hierarchical failure evidence: mean nutrient cost is about `8.6M`, only `38.3%` of yearly decisions had defined calendar windows, and the cost-vs-return correlation is `-0.85`
 
-## Known Failure Signatures (Observed)
+## Failure and Recovery Snapshot
 
-1. `subproc_eoferror` in vectorized subprocess rollouts
-2. weather shuffle empty-choice errors due invalid sampling windows
-3. DQN distribution-path compatibility issues in evaluation
-4. MultiDiscrete DQN incompatibility without wrapper
-5. year-key gaps in pricing for out-of-range years (partly mitigated by fallback lookup)
+1. all four failed attempts were DQN ablations and were rerun successfully
+2. crop-planning DQN still depends on the MultiDiscrete wrapper path
+3. hierarchical runs are computationally expensive and failed as an ablation because fertilizer cost overwhelms sparse crop reward while calendar coverage is incomplete
+4. post-processing still needs confidence intervals and effect-size reporting
 
 ## Reproducibility Checklist
 
-1. pin Python, NumPy, SB3 versions (see `environment.yml`)
+1. pin Python, NumPy, and SB3 versions (see `environment.yml`)
 2. save and reuse `VecNormalize` stats for inference
 3. keep weather year bounds consistent between training and evaluation
-4. run at least 3 seeds per major config before making strong claims
-5. export summary CSV after matrix execution (`run_all_2.py --summary-csv ...`)
+4. aggregate results over the available three-seed groups before claiming superiority
+5. export the final W&B CSV and keep it alongside generated summary tables

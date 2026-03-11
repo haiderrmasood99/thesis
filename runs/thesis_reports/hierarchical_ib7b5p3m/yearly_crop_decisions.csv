@@ -1,0 +1,12 @@
+num_timesteps,env_index,date,operation_year,crop_name,crop_index,plant_doy,plant_end_doy,plant_max_smc,window_start_doy,window_end_doy,window_compliant
+1,0,2005-01-01,1,SoybeanMG.3,1,181,216,0.3,,,
+54,0,2006-01-07,2,CornRM.100,0,191,194,1.0,166,196,True
+106,0,2007-01-06,3,SoybeanMG.3,1,111,125,0.9,,,
+158,0,2008-01-05,4,SoybeanMG.3,1,111,139,0.1,,,
+210,0,2009-01-03,5,SoybeanMG.3,1,132,153,0.1,,,
+262,0,2010-01-02,6,CornRM.100,0,173,188,0.9,166,196,True
+314,0,2011-01-01,7,SoybeanMG.3,1,167,188,0.3,,,
+367,0,2012-01-07,8,SoybeanMG.3,1,125,153,0.8,,,
+419,0,2013-01-05,9,SoybeanMG.3,1,181,244,0.3,,,
+471,0,2014-01-04,10,SoybeanMG.3,1,181,181,0.3,,,
+523,0,2015-01-03,11,CornRM.100,0,180,184,1.0,166,196,True

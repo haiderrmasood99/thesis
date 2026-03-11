@@ -1,0 +1,22 @@
+{
+  "timestamp": "2026-03-10T12:27:34.208192",
+  "run_id": "qkjzl6g4",
+  "domain": "crop_planning",
+  "method": "A2C",
+  "seed": 2,
+  "fixed_weather": false,
+  "non_adaptive": false,
+  "hierarchical": true,
+  "price_profile": "pakistan_baseline",
+  "metrics": {
+    "deterministic_return": -3148605.5,
+    "stochastic_return_mean": -10904359.0,
+    "stochastic_return_std": 260285.734375,
+    "baseline_returns": {
+      "baseline_no_fert_corn": 2376743.25,
+      "baseline_no_fert_soy": 719494.4375
+    },
+    "baseline_best_return": 2376743.25,
+    "uplift_vs_best_baseline_det": -5525348.75
+  }
+}

@@ -28,9 +28,11 @@ It is written for both:
    Defensible claims, evidence-backed findings, caveats, and answer patterns.
 9. `08_Gaps_and_Future_Work.md`  
    Prioritized technical, agricultural, and research gaps with concrete next steps.
-10. `09_Legacy_Markdown_Mapping.md`  
+10. `09_Legacy_Markdown_Mapping.md`
     Mapping of older markdown sources to new consolidated documents.
-11. `legacy_markdown_archive/`  
+11. `10_Hierarchical_Environment_Explained.md`
+    Plain-language deep dive on the hierarchical branch that is currently reported as a failed ablation, plus the guardrails added for targeted reruns.
+12. `legacy_markdown_archive/`  
     Archived legacy markdown trees moved from the repo root.
 
 ## Fast Paths
@@ -49,6 +51,10 @@ Not yet implemented as direct control decisions:
 - irrigation scheduling
 - full multi-nutrient optimization (P/K/S in active training flows)
 - multi-field land allocation
+
+Current thesis boundary:
+- the non-hierarchical fertilization and crop-planning results are the main evidence base
+- the hierarchical yearly-plus-weekly controller remains an experimental failed ablation, not a deployment recommendation
 
 ## Evidence Note
 

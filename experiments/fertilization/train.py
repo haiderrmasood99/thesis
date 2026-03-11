@@ -115,6 +115,63 @@ PAK_WEATHER_START_YEAR, PAK_WEATHER_END_YEAR = _weather_year_bounds(PAK_WEATHER_
 PAK_DEFAULT_SAMPLING_END_YEAR = max(PAK_WEATHER_START_YEAR, PAK_WEATHER_END_YEAR - 1)
 
 
+class MultiDiscreteToDiscreteActionWrapper(gym.ActionWrapper):
+    """Flatten MultiDiscrete actions so SB3 DQN can operate on the env."""
+
+    def __init__(self, env):
+        super().__init__(env)
+        if not isinstance(env.action_space, gym.spaces.MultiDiscrete):
+            raise TypeError(f"Expected MultiDiscrete action space, got {type(env.action_space)}")
+        self._nvec = np.asarray(env.action_space.nvec, dtype=np.int64)
+        self.action_space = gym.spaces.Discrete(int(np.prod(self._nvec)))
+
+    def flatten_action(self, action):
+        arr = np.asarray(action, dtype=np.int64).reshape(-1)
+        if arr.size != self._nvec.size:
+            raise ValueError(f"Expected {self._nvec.size} action dimensions, got {arr.size}")
+        if np.any(arr < 0) or np.any(arr >= self._nvec):
+            raise ValueError(f"Action {arr.tolist()} is outside bounds for {self._nvec.tolist()}")
+        flat = 0
+        for base, value in zip(self._nvec.tolist(), arr.tolist()):
+            flat = (flat * int(base)) + int(value)
+        return int(flat)
+
+    def unflatten_action(self, action):
+        flat = int(action)
+        if flat < 0 or flat >= self.action_space.n:
+            raise ValueError(f"Flat action {flat} is outside bounds for Discrete({self.action_space.n})")
+        out = np.zeros_like(self._nvec)
+        for i in range(self._nvec.size - 1, -1, -1):
+            base = int(self._nvec[i])
+            out[i] = flat % base
+            flat //= base
+        return out.astype(np.int64)
+
+    def action(self, action):
+        return self.unflatten_action(action)
+
+
+def _find_action_wrapper(env):
+    current = env
+    visited = set()
+    while current is not None and id(current) not in visited:
+        visited.add(id(current))
+        if isinstance(current, MultiDiscreteToDiscreteActionWrapper):
+            return current
+
+        envs = getattr(current, 'envs', None)
+        if envs:
+            current = envs[0]
+            continue
+
+        next_env = getattr(current, 'venv', None)
+        if next_env is None:
+            next_env = getattr(current, 'env', None)
+        current = next_env
+
+    return None
+
+
 class Train:
     """ Trainer object to wrap model training and handle environment creation, evaluation """
 
@@ -218,7 +275,9 @@ class Train:
                                        weather_generator_class=WeatherShuffler,
                                        weather_generator_kwargs=weather_generator_kwargs)
 
-                #env = Monitor(env, 'runs')
+                if str(self.config.get("method", "PPO")).upper() == "DQN" and isinstance(env.action_space, gym.spaces.MultiDiscrete):
+                    env = MultiDiscreteToDiscreteActionWrapper(env)
+
                 env = gym.wrappers.RecordEpisodeStatistics(env)
                 return env
             return _f
@@ -436,7 +495,7 @@ class Train:
             *list(f"det{i + 1}" for i in range(len(actions_det))),
             *list(f"stoc{i + 1}" for i in range(len(actions_stoc)))
         ]
-        episode_actions = [*actions_det, *actions_stoc]
+        episode_actions = self._decode_episode_actions([*actions_det, *actions_stoc], eval_env)
         if not episode_actions:
             return metrics
 
@@ -506,7 +565,7 @@ class Train:
         return metrics
 
     def eval_openloop(self, action_series, eval_env, name):
-        action_series_int = np.array(action_series, dtype=int)
+        action_series_int = self._encode_open_loop_actions(action_series, eval_env)
         expert_policy = OpenLoopPolicy(action_series_int)
         r, _ = evaluate_policy(expert_policy,
                                 eval_env,
@@ -630,6 +689,31 @@ class Train:
            deterministic=False)
         wandb.log({'pak_holdout_return': mean_r})
         return float(mean_r)
+
+    def _decode_episode_actions(self, episode_actions, env):
+        wrapper = _find_action_wrapper(env)
+        if wrapper is None:
+            return [np.asarray(actions) for actions in episode_actions]
+
+        decoded = []
+        for actions in episode_actions:
+            acts_arr = np.asarray(actions, dtype=np.int64)
+            if acts_arr.ndim != 1:
+                decoded.append(acts_arr)
+                continue
+            decoded.append(np.asarray([wrapper.unflatten_action(a) for a in acts_arr], dtype=np.int64))
+        return decoded
+
+    def _encode_open_loop_actions(self, action_series, env):
+        wrapper = _find_action_wrapper(env)
+        action_series_int = np.asarray(action_series, dtype=np.int64)
+        if wrapper is None:
+            return action_series_int
+        if action_series_int.ndim == 1 and action_series_int.size == wrapper._nvec.size:
+            return np.asarray([wrapper.flatten_action(action_series_int)], dtype=np.int64)
+        if action_series_int.ndim != 2:
+            return action_series_int
+        return np.asarray([wrapper.flatten_action(action) for action in action_series_int], dtype=np.int64)
 
 
 def make_multi_year(action_seq, n):

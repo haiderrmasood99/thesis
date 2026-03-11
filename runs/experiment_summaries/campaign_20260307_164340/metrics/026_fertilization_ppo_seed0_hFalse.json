@@ -1,0 +1,19 @@
+{
+  "timestamp": "2026-03-08T05:42:29.563170",
+  "run_id": "hucthmou",
+  "domain": "fertilization",
+  "method": "PPO",
+  "seed": 0,
+  "fixed_weather": true,
+  "nonadaptive": true,
+  "total_years": 5000,
+  "baseline": false,
+  "nutrient_action_mode": "NPK",
+  "price_profile": "pakistan_baseline",
+  "metrics": {
+    "deterministic_return": 791255.5,
+    "stochastic_return_mean": 783487.0625,
+    "stochastic_return_std": 11982.232421875,
+    "pak_holdout_return": 776776.0625
+  }
+}

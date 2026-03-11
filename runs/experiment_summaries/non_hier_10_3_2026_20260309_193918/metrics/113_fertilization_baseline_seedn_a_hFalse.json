@@ -1,0 +1,26 @@
+{
+  "timestamp": "2026-03-10T01:46:24.814572",
+  "run_id": "wuqacesw",
+  "domain": "fertilization",
+  "method": "PPO",
+  "seed": 0,
+  "fixed_weather": false,
+  "nonadaptive": false,
+  "total_years": 25,
+  "baseline": true,
+  "nutrient_action_mode": "NPK",
+  "price_profile": "pakistan_baseline",
+  "metrics": {
+    "baseline_returns": {
+      "organic_train": 65379.6640625,
+      "agro_train": 65584.8359375,
+      "cycles_train": 66970.9921875,
+      "nonsense_train": 63922.1015625,
+      "organic_test": 750198.0625,
+      "agro_test": 737721.8125,
+      "cycles_test": 737721.8125,
+      "nonsense_test": 733978.9375
+    },
+    "baseline_best_return": 750198.0625
+  }
+}

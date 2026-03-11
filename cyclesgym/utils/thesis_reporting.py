@@ -28,6 +28,9 @@ class HierarchicalThesisReportCallback(BaseCallback):
         'year',
         'doy',
         'operation_year',
+        'requested_n_kg',
+        'requested_p_kg',
+        'requested_k_kg',
         'n_kg',
         'p_kg',
         'k_kg',
@@ -37,7 +40,17 @@ class HierarchicalThesisReportCallback(BaseCallback):
         'cost_total',
         'reward',
         'planner_applied',
+        'crop_action_sanitized',
+        'requested_crop_name',
+        'active_crop_name',
         'window_compliant',
+        'fertilizer_window_open',
+        'fertilizer_gate_reason',
+        'fertilizer_budget_year',
+        'fertilizer_budget_clipped',
+        'remaining_n_budget',
+        'remaining_p_budget',
+        'remaining_k_budget',
         'crop_name',
         'action_raw',
     ]
@@ -47,7 +60,9 @@ class HierarchicalThesisReportCallback(BaseCallback):
         'env_index',
         'date',
         'operation_year',
+        'requested_crop_name',
         'crop_name',
+        'effective_crop_name',
         'crop_index',
         'plant_doy',
         'plant_end_doy',
@@ -55,6 +70,9 @@ class HierarchicalThesisReportCallback(BaseCallback):
         'window_start_doy',
         'window_end_doy',
         'window_compliant',
+        'crop_action_sanitized',
+        'crop_sanitization_reason',
+        'fallback_crop_name',
     ]
 
     def __init__(self, report_dir: str, verbose: int = 0):
@@ -79,6 +97,9 @@ class HierarchicalThesisReportCallback(BaseCallback):
         self._cost_p_total = 0.0
         self._cost_k_total = 0.0
         self._cost_total = 0.0
+        self._window_blocked_steps = 0
+        self._budget_clipped_steps = 0
+        self._sanitized_crop_decisions = 0
         self._compliance_by_operation_year: dict[int, dict[str, int]] = {}
 
     @staticmethod
@@ -142,6 +163,9 @@ class HierarchicalThesisReportCallback(BaseCallback):
                 'year': info.get('report_year'),
                 'doy': info.get('report_doy'),
                 'operation_year': info.get('report_operation_year'),
+                'requested_n_kg': info.get('report_requested_n_kg', 0.0),
+                'requested_p_kg': info.get('report_requested_p_kg', 0.0),
+                'requested_k_kg': info.get('report_requested_k_kg', 0.0),
                 'n_kg': info.get('report_n_kg', 0.0),
                 'p_kg': info.get('report_p_kg', 0.0),
                 'k_kg': info.get('report_k_kg', 0.0),
@@ -151,8 +175,18 @@ class HierarchicalThesisReportCallback(BaseCallback):
                 'cost_total': info.get('report_cost_total', 0.0),
                 'reward': reward_value,
                 'planner_applied': bool(info.get('planner_applied', False)),
+                'crop_action_sanitized': bool(info.get('report_crop_action_sanitized', False)),
+                'requested_crop_name': info.get('report_requested_crop_name'),
+                'active_crop_name': info.get('report_active_crop_name'),
                 'window_compliant': info.get('report_window_compliant'),
-                'crop_name': info.get('report_crop_name'),
+                'fertilizer_window_open': bool(info.get('report_fertilizer_window_open', True)),
+                'fertilizer_gate_reason': info.get('report_fertilizer_gate_reason'),
+                'fertilizer_budget_year': info.get('report_fertilizer_budget_year'),
+                'fertilizer_budget_clipped': bool(info.get('report_fertilizer_budget_clipped', False)),
+                'remaining_n_budget': info.get('report_remaining_n_budget'),
+                'remaining_p_budget': info.get('report_remaining_p_budget'),
+                'remaining_k_budget': info.get('report_remaining_k_budget'),
+                'crop_name': info.get('report_active_crop_name') or info.get('report_crop_name'),
                 'action_raw': action_raw_str,
             }
             self._weekly_writer.writerow(weekly_row)
@@ -165,6 +199,10 @@ class HierarchicalThesisReportCallback(BaseCallback):
             self._cost_p_total += float(info.get('report_cost_p', 0.0) or 0.0)
             self._cost_k_total += float(info.get('report_cost_k', 0.0) or 0.0)
             self._cost_total += float(info.get('report_cost_total', 0.0) or 0.0)
+            if not bool(info.get('report_fertilizer_window_open', True)):
+                self._window_blocked_steps += 1
+            if bool(info.get('report_fertilizer_budget_clipped', False)):
+                self._budget_clipped_steps += 1
 
             if bool(info.get('planner_applied', False)):
                 yearly_row = {
@@ -172,7 +210,9 @@ class HierarchicalThesisReportCallback(BaseCallback):
                     'env_index': int(env_index),
                     'date': info.get('report_date'),
                     'operation_year': info.get('report_operation_year'),
+                    'requested_crop_name': info.get('report_requested_crop_name'),
                     'crop_name': info.get('report_crop_name'),
+                    'effective_crop_name': info.get('report_effective_crop_name'),
                     'crop_index': info.get('report_crop_index'),
                     'plant_doy': info.get('report_plant_doy'),
                     'plant_end_doy': info.get('report_plant_end_doy'),
@@ -180,9 +220,14 @@ class HierarchicalThesisReportCallback(BaseCallback):
                     'window_start_doy': info.get('report_window_start_doy'),
                     'window_end_doy': info.get('report_window_end_doy'),
                     'window_compliant': info.get('report_window_compliant'),
+                    'crop_action_sanitized': bool(info.get('report_crop_action_sanitized', False)),
+                    'crop_sanitization_reason': info.get('report_crop_sanitization_reason'),
+                    'fallback_crop_name': info.get('report_fallback_crop_name'),
                 }
                 self._yearly_writer.writerow(yearly_row)
                 self._yearly_rows += 1
+                if bool(info.get('report_crop_action_sanitized', False)):
+                    self._sanitized_crop_decisions += 1
 
                 op_year = int(info.get('report_operation_year'))
                 op_stats = self._compliance_by_operation_year.setdefault(
@@ -235,6 +280,9 @@ class HierarchicalThesisReportCallback(BaseCallback):
             'total_yearly_decisions': total_decisions,
             'compliant_yearly_decisions': total_compliant,
             'overall_compliance_rate': (total_compliant / total_decisions) if total_decisions > 0 else None,
+            'window_blocked_steps': self._window_blocked_steps,
+            'budget_clipped_steps': self._budget_clipped_steps,
+            'sanitized_crop_decisions': self._sanitized_crop_decisions,
             'files': {
                 'weekly_npk_log_csv': str(self.weekly_csv_path),
                 'yearly_crop_decisions_csv': str(self.yearly_csv_path),

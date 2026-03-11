@@ -369,3 +369,38 @@ This follow-up closes the remaining caveat that fertilization wrappers were effe
 ### New Thread Prompt Seed (Current)
 
 > Read `Changes/THESIS_CONTEXT_HANDOFF.md`, `Changes/BUG_FIX_LOG.md`, `Changes/THESIS_IMPLEMENTATION_01_SEASON_ALIGNMENT.md`, `Changes/THESIS_IMPLEMENTATION_02_PAK_PRICE_LOCALIZATION_NPK_SCAFFOLD.md`, `Changes/THESIS_IMPLEMENTATION_03_HIERARCHICAL_INTEGRATION_AND_TEST_FIXES.md`, `Changes/THESIS_IMPLEMENTATION_04_REPORTING_DATA_HARDENING_AND_MATRIX_STANDARDIZATION.md`, and `Changes/THESIS_IMPLEMENTATION_05_FERTILIZATION_NPK_PAKISTAN_FINAL_RUN_READINESS.md`. Assume Steps 1-5 are integrated and tests are green (`59 passed`). Proceed with final experiment execution and thesis figure/statistics generation from standardized summary outputs.
+
+## 19. Final Experiment Matrix Completion (2026-03-11)
+
+This section supersedes older notes that still mention partial audit coverage such as `34/96` or "missing 62 runs."
+
+1. Final evidence source:
+   - `run_experiments_7_3_2026_RUNS/wandb_export_2026-03-11T01_53_38.382+05_00.csv`
+2. Planned matrix versus observed completion:
+   - `run_experiments_7_3_2026.py` defines `113` unique configurations
+   - the March 11 export contains `113/113` unique finished configurations
+   - comparison against the generator shows `0` missing and `0` extra
+3. Attempt accounting:
+   - total attempts in export: `117`
+   - finished: `113`
+   - failed first attempts: `4`
+   - all four failed attempts were DQN ablations that were rerun successfully later on March 10, 2026
+4. Finished domain split:
+   - fertilization: `75`
+   - crop planning (non-hierarchical): `26`
+   - crop planning (hierarchical): `12`
+5. Main thesis conclusions after matrix completion:
+   - fertilization: PPO is the strongest overall family, but `A2C + nonadaptive + fixed_weather + 5000` is the best repeated group; `11/74` fertilization RL runs beat the best baseline return (`750,198.06`)
+   - crop planning: `PPO + nonadaptive + fixed_weather` is the best repeated group, while `A2C + adaptive + fixed_weather + seed=2` is the best single run
+   - hierarchical: all `12` hierarchical runs finished but all were strongly negative, so this branch should be presented as a negative result / future work
+6. Active docs updated to reflect the final matrix:
+   - `Experimentation and Results/01_Plan_and_Feasibility.md`
+   - `Experimentation and Results/02_Experiment_Matrix_and_Execution_Audit.md`
+   - `Experimentation and Results/03_Results_and_Thesis_Story.md`
+   - `final_docs/05_Training_Algorithms_and_Experimentation.md`
+   - `final_docs/07_Thesis_Defense_Pack.md`
+   - `final_docs/08_Gaps_and_Future_Work.md`
+   - `final_docs/thesis_answer_pack/01_Defense_QA_and_Timelines.md`
+7. Guidance for any new thread:
+   - ignore older statements about incomplete matrix coverage
+   - use the March 11 export and the updated docs above as the current source of truth

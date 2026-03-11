@@ -248,3 +248,18 @@ experiments/fertilization/train.py   | 18 +++++++++++++-----
   - `pytest cyclesgym/tests -q` -> PASS (`59 passed, 8 warnings`)
   - `python run_all_2.py --dry-run --include-hierarchical --include-baseline` -> PASS
   - direct NPK wrapper smoke check (`CornSoilRefined`, reset + step) -> PASS (`MultiDiscrete([11 11 11])`)
+- 2026-03-11 ~local analysis pass: Hierarchical thesis hardening and rerun guardrails:
+  - Reframed hierarchical March runs as a failed ablation across thesis-facing docs and generated reports.
+  - Updated `cyclesgym/envs/hierarchical.py` to:
+    - sanitize yearly crop choices to crops with defined calendar windows,
+    - restrict fertilizer to the active crop-season window,
+    - cap yearly nutrient usage with annual N/P/K budgets,
+    - expose richer reporting fields for blocked/clipped actions.
+  - Updated `experiments/crop_planning/train.py` with hierarchical guardrail config knobs.
+  - Updated tests:
+    - `cyclesgym/tests/test_hierarchical_env.py`
+    - `cyclesgym/tests/test_thesis_reporting.py`
+  - Verification:
+    - `python -m pytest cyclesgym/tests/test_hierarchical_env.py -q` -> PASS (`4 passed`)
+    - `python -m pytest cyclesgym/tests/test_thesis_reporting.py -q` -> PASS (`1 passed`)
+    - `python -m compileall cyclesgym/envs/hierarchical.py cyclesgym/utils/thesis_reporting.py experiments/crop_planning/train.py` -> PASS

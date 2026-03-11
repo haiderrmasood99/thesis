@@ -1,0 +1,19 @@
+{
+  "timestamp": "2026-03-10T20:50:48.419491",
+  "run_id": "zk7g2z05",
+  "domain": "fertilization",
+  "method": "DQN",
+  "seed": 0,
+  "fixed_weather": true,
+  "nonadaptive": false,
+  "total_years": 5000,
+  "baseline": false,
+  "nutrient_action_mode": "NPK",
+  "price_profile": "pakistan_baseline",
+  "metrics": {
+    "deterministic_return": -174609.0,
+    "stochastic_return_mean": -291726.9375,
+    "stochastic_return_std": 71491.0859375,
+    "pak_holdout_return": -274788.6875
+  }
+}

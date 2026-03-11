@@ -57,6 +57,9 @@ flowchart TD
 
 Primary implementation: `cyclesgym/envs/crop_planning.py`
 
+For the detailed yearly-plus-weekly combined environment walkthrough, see:
+- `final_docs/10_Hierarchical_Environment_Explained.md`
+
 ### Action Design
 
 Variants:

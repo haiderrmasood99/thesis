@@ -1,0 +1,19 @@
+{
+  "timestamp": "2026-03-08T16:25:05.829865",
+  "run_id": "abab40vl",
+  "domain": "fertilization",
+  "method": "A2C",
+  "seed": 2,
+  "fixed_weather": false,
+  "nonadaptive": false,
+  "total_years": 1000,
+  "baseline": false,
+  "nutrient_action_mode": "NPK",
+  "price_profile": "pakistan_baseline",
+  "metrics": {
+    "deterministic_return": 49364.265625,
+    "stochastic_return_mean": -324521.9375,
+    "stochastic_return_std": 62852.06640625,
+    "pak_holdout_return": -341358.5625
+  }
+}

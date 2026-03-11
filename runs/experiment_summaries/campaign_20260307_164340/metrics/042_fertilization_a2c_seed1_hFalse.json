@@ -1,0 +1,19 @@
+{
+  "timestamp": "2026-03-08T14:22:08.313730",
+  "run_id": "jybgxsht",
+  "domain": "fertilization",
+  "method": "A2C",
+  "seed": 1,
+  "fixed_weather": true,
+  "nonadaptive": true,
+  "total_years": 1000,
+  "baseline": false,
+  "nutrient_action_mode": "NPK",
+  "price_profile": "pakistan_baseline",
+  "metrics": {
+    "deterministic_return": 3133.5625,
+    "stochastic_return_mean": -225497.828125,
+    "stochastic_return_std": 125291.0546875,
+    "pak_holdout_return": -198657.21875
+  }
+}

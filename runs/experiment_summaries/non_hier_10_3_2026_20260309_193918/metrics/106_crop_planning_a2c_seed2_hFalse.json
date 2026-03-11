@@ -1,0 +1,23 @@
+{
+  "timestamp": "2026-03-10T00:46:29.143787",
+  "run_id": "xas1194l",
+  "domain": "crop_planning",
+  "method": "A2C",
+  "seed": 2,
+  "fixed_weather": false,
+  "non_adaptive": false,
+  "hierarchical": false,
+  "price_profile": "pakistan_baseline",
+  "metrics": {
+    "deterministic_return": 22106.994140625,
+    "stochastic_return_mean": 20218.64453125,
+    "stochastic_return_std": 1068.801025390625,
+    "baseline_returns": {
+      "baseline_corn_only": 20615.443359375,
+      "baseline_soy_only": 6893.70458984375,
+      "baseline_alternate": 13770.0107421875
+    },
+    "baseline_best_return": 20615.443359375,
+    "uplift_vs_best_baseline_det": 1491.55078125
+  }
+}

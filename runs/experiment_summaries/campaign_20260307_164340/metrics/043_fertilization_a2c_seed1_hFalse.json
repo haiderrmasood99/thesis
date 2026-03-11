@@ -1,0 +1,19 @@
+{
+  "timestamp": "2026-03-08T14:45:27.192354",
+  "run_id": "lhscmvcd",
+  "domain": "fertilization",
+  "method": "A2C",
+  "seed": 1,
+  "fixed_weather": false,
+  "nonadaptive": false,
+  "total_years": 1000,
+  "baseline": false,
+  "nutrient_action_mode": "NPK",
+  "price_profile": "pakistan_baseline",
+  "metrics": {
+    "deterministic_return": 5813.375,
+    "stochastic_return_mean": -407298.34375,
+    "stochastic_return_std": 96607.4609375,
+    "pak_holdout_return": -398430.3125
+  }
+}

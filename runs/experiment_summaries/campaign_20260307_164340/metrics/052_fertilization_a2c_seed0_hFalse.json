@@ -1,0 +1,19 @@
+{
+  "timestamp": "2026-03-08T21:09:42.702747",
+  "run_id": "seskixy2",
+  "domain": "fertilization",
+  "method": "A2C",
+  "seed": 0,
+  "fixed_weather": false,
+  "nonadaptive": true,
+  "total_years": 3000,
+  "baseline": false,
+  "nutrient_action_mode": "NPK",
+  "price_profile": "pakistan_baseline",
+  "metrics": {
+    "deterministic_return": 387348.78125,
+    "stochastic_return_mean": 185996.875,
+    "stochastic_return_std": 34994.30859375,
+    "pak_holdout_return": 189817.71875
+  }
+}

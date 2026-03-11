@@ -1,0 +1,19 @@
+{
+  "timestamp": "2026-03-08T01:11:00.823218",
+  "run_id": "aiv18hus",
+  "domain": "fertilization",
+  "method": "PPO",
+  "seed": 1,
+  "fixed_weather": true,
+  "nonadaptive": false,
+  "total_years": 3000,
+  "baseline": false,
+  "nutrient_action_mode": "NPK",
+  "price_profile": "pakistan_baseline",
+  "metrics": {
+    "deterministic_return": 791255.5,
+    "stochastic_return_mean": 789005.4375,
+    "stochastic_return_std": 8317.544921875,
+    "pak_holdout_return": 786757.875
+  }
+}

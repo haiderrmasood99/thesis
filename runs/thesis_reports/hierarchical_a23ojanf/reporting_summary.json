@@ -1,0 +1,20 @@
+{
+  "generated_at": "2026-03-10T11:59:09.261457",
+  "weekly_rows": 560,
+  "yearly_rows": 11,
+  "total_n_kg": 42675.0,
+  "total_p_kg": 21888.0,
+  "total_k_kg": 16482.0,
+  "total_cost_n": 1959684.1265100022,
+  "total_cost_p": 5563227.197256004,
+  "total_cost_k": 2002865.1996420003,
+  "total_cost": 9525776.523408005,
+  "total_yearly_decisions": 11,
+  "compliant_yearly_decisions": 4,
+  "overall_compliance_rate": 0.36363636363636365,
+  "files": {
+    "weekly_npk_log_csv": "/workspace/thesis/runs/thesis_reports/hierarchical_a23ojanf/weekly_npk_log.csv",
+    "yearly_crop_decisions_csv": "/workspace/thesis/runs/thesis_reports/hierarchical_a23ojanf/yearly_crop_decisions.csv",
+    "season_window_compliance_csv": "/workspace/thesis/runs/thesis_reports/hierarchical_a23ojanf/season_window_compliance.csv"
+  }
+}

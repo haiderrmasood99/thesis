@@ -1,0 +1,19 @@
+{
+  "timestamp": "2026-03-10T20:41:33.911907",
+  "run_id": "s6td3gfc",
+  "domain": "crop_planning",
+  "method": "DQN",
+  "seed": 0,
+  "fixed_weather": false,
+  "non_adaptive": true,
+  "hierarchical": false,
+  "price_profile": "pakistan_baseline",
+  "metrics": {
+    "deterministic_return": 21904.56640625,
+    "stochastic_return_mean": 21214.8125,
+    "stochastic_return_std": 424.0162353515625,
+    "baseline_returns": {},
+    "baseline_best_return": null,
+    "uplift_vs_best_baseline_det": null
+  }
+}

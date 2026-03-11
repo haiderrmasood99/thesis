@@ -37,63 +37,73 @@ python experiments/fertilization/train.py --total-years 25 --n-process 1 --eval-
 python experiments/crop_planning/train.py --method PPO --fixed_weather True --non_adaptive False --seed 0
 ```
 
-### Phase 4: Full Core Matrix (thesis baseline matrix)
+### Phase 4: Full Thesis Matrix Dry Run
 
 ```powershell
-python run_all_2.py --dry-run
-python run_all_2.py
+python run_experiments_7_3_2026.py --dry-run
 ```
 
-### Phase 5: Algorithm/Baseline Extensions
+### Phase 5: Full Thesis Matrix Execution
 
 ```powershell
-python run_all_2.py --include-dqn --include-baseline
+python run_experiments_7_3_2026.py
 ```
 
-### Phase 6: Post-Run Diagnostics
+### Phase 6: Optional Split Execution / Reruns
+
+```powershell
+python 10_3_2026_heira_exp.py
+python 10_3_2026_experiments.py --start-index 75
+```
+
+### Phase 7: Post-Run Diagnostics
 
 ```powershell
 python experiments/fertilization/analyze_logs.py
 python plot_thesis_figures.py
 ```
 
-### Phase 7: Economics Data Refresh (optional, if you want latest reconstructed series)
+### Phase 8: Economics Data Refresh (optional, if you want latest reconstructed series)
 
 ```powershell
 python scripts/build_pakistan_price_series.py
 ```
 
-## B. Time Estimates from Old Runs
+## B. Time Estimates From the Final March 2026 Campaign
 
 ### Evidence window
 
-- Audited run window: `2026-02-23` to `2026-02-25`
-- Total run folders: `64`
-- Successful: `44`
-- Failed traceback: `16`
-- No-summary: `4`
+- Final campaign window in export: `2026-03-07 21:43 PKT` to `2026-03-11 01:20 PKT`
+- Planned matrix: `113`
+- Finished unique configs: `113/113`
+- Total attempts: `117`
+- Initial failed attempts: `4` (all DQN), later rerun successfully
 
-### Runtime medians from successful runs (`runtime_sec`)
+### Runtime medians from final successful runs (`Runtime`, seconds)
 
-- Crop planning PPO: `~930.5s` (about `15.5m`)
-- Crop planning A2C: `~943.5s` (about `15.7m`)
-- Crop planning DQN: `~890s` (about `14.8m`) with very small sample
+- Crop planning PPO: `~873s` (about `14.6m`)
+- Crop planning A2C: `~869s` (about `14.5m`)
+- Crop planning DQN: `~1232.5s` (about `20.5m`)
+- Hierarchical PPO: `~62,819.5s` (about `17.4h`)
+- Hierarchical A2C: `~60,832s` (about `16.9h`)
 - Fertilization PPO:
-  - `1000 years`: `~1509s` (about `25.2m`)
-  - `3000 years`: `~2450.5s` (about `40.8m`)
-  - `5000 years`: `~3351s` (about `55.9m`)
-- Fertilization A2C (`5000 years`): `~3064s` (about `51.1m`) tiny sample
-- Fertilization DQN (`5000 years`): `~4494s` (about `74.9m`) tiny sample
+  - `1000 years`: `~1855.5s` (about `30.9m`)
+  - `3000 years`: `~1645s` (about `27.4m`)
+  - `5000 years`: `~2187s` (about `36.5m`)
+- Fertilization A2C:
+  - `1000 years`: `~1311s` (about `21.9m`)
+  - `3000 years`: `~4273.5s` (about `71.2m`)
+  - `5000 years`: `~2176.5s` (about `36.3m`)
+- Fertilization DQN (`5000 years`): `~6152.5s` (about `102.5m`)
 
 ### Total timeline estimate (sequential execution on one machine)
 
 1. Setup + verification: `0.5 to 1.5 hours`
-2. Full `run_all_2` default 96 planned configs: `~61.3 hours`
-3. Remaining uncovered configs only (62): `~39.1 hours`
-4. DQN + baseline add-on matrix: `~3.4 hours` extra
-5. Plots/tables/report writing pass: `8 to 16 hours` (manual effort)
+2. Full finished matrix runtime sum: `~262.1 hours` (`~10.9 days`) if run fully sequentially
+3. The actual March campaign was shorter because hierarchical cases were parallelized and reruns affected only four DQN jobs
+4. Plots/tables/report writing pass: `8 to 16 hours` (manual effort)
 
-Practical full rerun + reporting estimate: `~3.5 to 4.5 days` wall time if run continuously.
+Practical takeaway: the matrix is already complete; the next time cost is post-processing and any targeted reruns for redesigned hierarchical experiments.
 
 ## C. Direct Answers to Questions 0 to 9
 
@@ -117,15 +127,15 @@ It contains:
 3. Fertilization variants can include richer soil/crop/weather observations (`CornSoilRefined`).
 4. There is no completed multi-soil ablation in audited runs, so quantified soil sensitivity is still pending.
 
-### Weather effect in current evidence
+### Weather effect in the final March 2026 matrix
 
-Observed weather regime changes performance materially:
+Observed weather regime changes performance materially, but the completed matrix does not support the earlier claim that random-weather PPO is best overall.
 
-1. Fertilization PPO (5000 years): random-weather grouped means are often higher than fixed-weather grouped means in this audit snapshot.
-2. Crop planning PPO adaptive: fixed-weather (`21683.79`) vs random-weather (`17403.996`) shows about `+24.6%` for fixed-weather in current observed runs.
+1. Fertilization: the strongest mean deterministic and holdout results come from high-budget fixed-weather PPO/A2C groups. Example: `PPO + nonadaptive + fixed_weather + 3000` averages `765,191.6` deterministic return and `747,825.4` holdout.
+2. Crop planning: fixed-weather remains competitive, but the adaptive toggle is not consistently superior. The best repeated group is `PPO + nonadaptive + fixed_weather` with mean `eval_det/mean_reward = 21,230.9`, while the best single run is `A2C + adaptive + fixed_weather` at `23,601.6`.
 3. Interpretation:
-   - fixed-weather can optimize in-distribution performance
-   - random-weather is typically better for robustness/generalization claims
+   - fixed-weather gives the strongest in-distribution performance in this final matrix
+   - random-weather is still useful as a stress test, but it is not the top thesis claim after the full 113-case campaign
 
 ## 2) Train/test mean rewards, avg returns, and related RL values
 
@@ -142,20 +152,31 @@ Observed weather regime changes performance materially:
 5. `mean_ep_length`:
    mean episode length during callback evaluation.
 
-### Aggregated values from old successful runs
+### Aggregated values from final successful runs
 
-Fertilization (n=32 where metric available):
+Fertilization RL (n=74, baseline excluded):
 
-1. `fert_eval_test_det_mean_reward`: mean `1116.927`, median `1186.085`, min `787.842`, max `1387.053`
-2. `fert_eval_test_sto_mean_reward`: mean `1079.488`, median `1100.525`
-3. `fert_deterministic_return`: mean `1016.931`, median `1186.085`
-4. `fert_stochastic_return_mean`: mean `1000.771`, median `1095.317`
-5. `fert_pak_holdout_return`: mean `938.114`, median `1061.673`
+1. `fert_eval_test_det_mean_reward`: mean `403,908.3`, median `439,500.6`, min `-689,305.3`, max `791,255.5`
+2. `fert_eval_test_sto_mean_reward`: mean `211,396.3`, median `287,210.2`
+3. `fert_deterministic_return`: mean `473,763.0`, median `568,774.9`
+4. `fert_stochastic_return_mean`: mean `321,136.4`, median `352,764.9`
+5. `fert_pak_holdout_return`: mean `326,427.4`, median `346,988.7`
+6. `fert_baseline_best_return`: `750,198.1`
 
-Crop planning (n=11):
+Crop planning, non-hierarchical (n=26):
 
-1. `crop_eval_det_mean_reward`: mean `19540.85`, median `18848.514`, max `21683.79`
-2. `crop_eval_sto_mean_reward`: mean `18200.29`, median `18872.559`
+1. `crop_eval_det_mean_reward`: mean `19,955.4`, median `20,718.4`, max `23,601.6`
+2. `crop_eval_sto_mean_reward`: mean `17,226.7`, median `16,993.3`
+3. `crop_deterministic_return`: mean `17,023.8`, median `16,473.4`
+4. `crop_stochastic_return_mean`: mean `17,021.5`, median `16,555.1`
+
+Hierarchical crop planning failed ablation (n=12):
+
+1. `hier_eval_det_mean_reward`: mean `-8,880,765.2`
+2. `hier_deterministic_return`: mean `-6,225,397.6`
+3. Mean nutrient cost across the run-level thesis reports is about `8.6M`
+4. Only `38.3%` of yearly decisions had a defined crop-calendar window in the report files
+5. Interpretation: the current hierarchical formulation should be reported as a failed ablation caused by nutrient-cost blow-up and incomplete crop-calendar coverage, not as a competitive benchmark
 
 ## 3) Fertilizers used and what changed after updates
 
@@ -237,40 +258,39 @@ Current anti-overfitting mechanisms already present:
 What to add for stronger defense:
 
 1. Enforce minimum 3 seeds for every main config before claims.
-2. Prefer random-weather training for deployment robustness.
-3. Add early-stop selection based on holdout curves.
+2. Compare fixed and random weather explicitly; do not assume random-weather is automatically better.
+3. Add early-stop selection based on holdout curves where available.
 4. Add statistical confidence intervals and significance tests.
 5. Add soil/weather OOD stress tests.
 
 ## 7) Config summary of all training runs
 
-### Planned matrix (`run_all_2` default)
+### Planned matrix (`run_experiments_7_3_2026.py`)
 
-1. Planned configs: `96`
-2. Successful covered configs in audited evidence: `34`
-3. Missing configs: `62`
+1. Planned configs: `113`
+2. Finished unique configs: `113`
+3. Missing configs: `0`
+4. Extra configs versus the generator: `0`
 
-### Missing by domain/method
+### Final run status summary (March 11 export)
 
-1. Fertilization A2C: `35` missing
-2. Fertilization PPO: `8` missing
-3. Crop planning A2C: `11` missing
-4. Crop planning PPO: `8` missing
+1. `117` total attempts
+2. `113` finished
+3. `4` failed first attempts
+4. all `4` failed attempts were rerun successfully, so final coverage is complete
 
-### Run status summary (audited folders)
+### Finished by domain
 
-1. `64` total
-2. `44` ok
-3. `16` failed tracebacks
-4. `4` no-summary
+1. Fertilization: `75`
+2. Crop planning (non-hierarchical): `26`
+3. Crop planning (hierarchical): `12`
 
-### Most frequent failures
+### Rerun-sensitive cases
 
-1. `subproc_eoferror` (8)
-2. `weather_shuffle_empty_choice` (4)
-3. `dqn_eval_get_distribution_missing` (2)
-4. `reward_price_missing_year_2020` (1)
-5. `dqn_unsupported_multidiscrete` (1)
+1. Fertilization DQN fixed-weather seed `0`
+2. Fertilization DQN random-weather seed `0`
+3. Crop-planning DQN fixed-weather seed `0`
+4. Crop-planning DQN random-weather seed `0`
 
 ## 8) Fertilizer costs and economic impact
 
@@ -295,45 +315,48 @@ Economic implication:
 
 ## 9) PPO vs DQN vs other algorithms
 
-Current observed evidence (not full matrix complete):
+Current final evidence from the completed matrix:
 
 1. Fertilization:
-   - PPO has the strongest and most repeated successful results.
-   - DQN has fewer stable successful runs and lower top observed score.
-   - A2C has very limited successful coverage in audited set.
+   - PPO has the strongest overall portfolio and the best average performance across the largest number of successful runs.
+   - A2C is competitive in one major pocket: `A2C + nonadaptive + fixed_weather + 5000` has the best mean group return (`779,267.4`).
+   - DQN is not recommendation-grade: random-weather DQN is positive, fixed-weather DQN is negative, and both required reruns.
 2. Crop planning:
-   - PPO adaptive fixed-weather has best observed score.
-   - DQN required MultiDiscrete wrapper support path.
-   - A2C performed competitively in a small number of runs.
+   - `PPO + nonadaptive + fixed_weather` has the best repeated-group mean (`21,230.9`).
+   - `A2C + adaptive + fixed_weather` has the best single run (`23,601.6`) and is a credible challenger.
+   - DQN random-weather seed `0` is competitive (`21,185.6`) but is still only a single-seed ablation.
+3. Hierarchical:
+   - PPO and A2C both perform very poorly; all 12 hierarchical runs are strongly negative.
+   - Treat this branch as a failed ablation. The March analysis links the collapse to dense weekly nutrient cost, sparse harvest reward, and incomplete calendar coverage for soybean in the tested rotation.
 
 Defense-safe statement:
 
-PPO is best supported by current evidence volume and consistency, while DQN/A2C conclusions remain weaker due sparse coverage and failure concentration.
+Within the completed 113-case matrix, PPO is the safest overall recommendation for fertilization, PPO/A2C are both defensible for non-hierarchical crop planning, and the hierarchical branch should be presented only as a failed ablation rather than as a success claim.
 
 ## D. What Is Still Left (High Priority)
 
-1. Complete missing `62` planned configs.
-2. Expand crop-planning multi-seed robustness (>=3 seeds per key config).
-3. Standardize baseline-vs-RL metric schema for cleaner uplift claims.
+1. Add confidence intervals, effect sizes, and hypothesis tests on the completed matrix.
+2. Standardize crop-planning baseline-vs-RL metric schema for cleaner uplift claims.
+3. Redesign the hierarchical controller and rerun its 12-case branch.
 4. Strengthen economics beyond crop value minus fertilizer cost.
 5. Add broader resource controls (irrigation and multi-nutrient constraints).
-6. Hardening for known failure signatures in large sweeps.
+6. Make the DQN ablations one-pass stable without manual reruns.
 
 ## E. What You Can Do for Legit Master's Contributions
 
-1. Complete matrix + statistics package:
-   deliver full 96+ configs, CI/error bars, hypothesis tests.
+1. Statistics package on top of the completed matrix:
+   deliver CI/error bars, effect sizes, and hypothesis tests for the 113 finished configs.
 2. Reliability engineering:
-   fix the top 3 crash signatures and prove lower failure rate.
+   make the DQN ablations one-pass stable without manual reruns.
 3. Soil/weather generalization thesis chapter:
    run explicit soil-file and weather-window ablations.
 4. Economics research contribution:
    add risk-aware objective terms and sensitivity analysis.
 5. Algorithmic contribution:
-   benchmark PPO/A2C/DQN with consistent seeds and budgets, include tuning protocol.
-6. Hierarchical policy extension:
-   improve and evaluate yearly crop + weekly fertilization coupling.
+   benchmark PPO/A2C/DQN with consistent seeds and budgets in the stabilized matrix.
+6. Hierarchical redesign contribution:
+   fix reward decomposition and credit assignment, enforce valid crop windows and annual nutrient caps, then rerun the 12-case hierarchical branch.
 7. Reproducibility package:
-   one-command pipeline producing report tables/figures from raw runs.
+   one-command pipeline producing report tables/figures from the final export.
 8. Domain validation:
    define expert-reviewed scenario tests and compare policy decisions qualitatively.
