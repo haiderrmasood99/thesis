@@ -1,0 +1,107 @@
+\chapter{Implementation, Reproducibility, and Evaluation Setup}
+
+\section{Software and Repository Stack}
+
+The current thesis stack is implemented inside a single repository that contains the CYCLES simulator interface, CyclesGym environments, experiments, demo applications, documentation, and the new thesis workspace. This co-location is useful because it keeps code, generated summaries, and writing artifacts in one versioned project. The active training flows are implemented in \texttt{experiments/fertilization/train.py} and \texttt{experiments/crop\_planning/train.py}, while the unified experiment matrix is orchestrated through \texttt{run\_experiments\_7\_3\_2026.py}.
+
+The repo has also been hardened with tests and bug fixes before the fresh campaign. This is important because reproducibility is not only about saving a seed. It is also about ensuring that the environment logic, evaluator code paths, and reporting callbacks behave consistently.
+
+\section{Data Inputs and Provenance}
+
+The thesis uses three categories of inputs. The first is environmental input: the Pakistan weather file and Pakistan soil file wired into the current training and evaluation defaults. The second is economic input: yearly crop and nutrient price series generated from official-source-derived pipelines. The third is operational input: runner configurations, experiment budgets, and reporting destinations.
+
+The localized price series is especially important because it converts the cost-aware framing from a narrative claim into an executable one. Reward terms that depend on nutrient cost are no longer interpreted through a generic legacy profile alone; they can now be linked to yearly Pakistan-oriented series assembled from FAOSTAT and NFDC-linked sources \citep{faostatprices2026,nfdcprices2026}.
+
+\input{tables/generated/artifact_inventory.tex}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.92\textwidth]{data_provenance_diagram.pdf}
+    \caption{Data provenance flow from official sources to local thesis artifacts. The figure clarifies how source documents become executable weather, calendar, and pricing inputs.}
+    \label{fig:data-provenance}
+\end{figure}
+
+\input{tables/generated/data_source_provenance.tex}
+
+\section{Training and Evaluation Pipeline}
+
+The training pipeline used by the thesis stack is summarized in Figure~\ref{fig:training-pipeline}. The command-line configuration determines which environment is built, how the vectorized wrapper is applied, which algorithm is trained, and where evaluation and logging artifacts are written.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.90\textwidth]{training_pipeline_diagram.pdf}
+    \caption{Training and evaluation pipeline used by the thesis experiments. The same pipeline is also responsible for the summary JSON outputs consumed by the writing workflow.}
+    \label{fig:training-pipeline}
+\end{figure}
+
+The use of standardized per-run summary JSON files is a major improvement over ad hoc logging because it provides a single machine-readable record of the quantities that the thesis actually cares about. This includes deterministic and stochastic returns, uplift against baseline where available, holdout-style returns for fertilization, and run metadata required to rebuild tables.
+
+\input{tables/generated/summary_output_schema.tex}
+
+\section{Reporting Pipeline}
+
+The reporting pipeline is equally important because the thesis does not rely only on aggregate returns. Hierarchical environments can now write weekly NPK logs, yearly crop decisions, season-window compliance outputs, and summary JSON files. These artifacts are the bridge between the software system and the writing process.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.90\textwidth]{reporting_pipeline_diagram.pdf}
+    \caption{Reporting and thesis-asset generation workflow. This pipeline makes the final document reproducible from experiment outputs rather than manual transcription.}
+    \label{fig:reporting-pipeline}
+\end{figure}
+
+The present LaTeX workspace takes that principle seriously. Figures and tables are not manually painted in office software. They are generated from repository artifacts and written into versioned folders under \texttt{figures/generated} and \texttt{tables/generated}. This is a deliberate design choice because it reduces transcription error and makes the thesis easier to update when the fresh latest-NPK matrix completes.
+
+\subsection{Smoke-Run Design}
+
+Before the full latest-NPK campaign is executed, the repository includes a smoke-run stage whose purpose is operational rather than comparative. The smoke stage verifies that the training entrypoints launch correctly, summary JSONs are written, reporting callbacks emit their expected files, and the thesis asset pipeline can consume those files without manual intervention. This is the correct place to catch environment-construction bugs, missing paths, and reporting-schema regressions before committing to the 113-job campaign.
+
+\section{Historical Runtime Budget and Campaign Planning}
+
+The repository already contains a historical audit of earlier experiments, and these records are useful for estimating the expected cost of the fresh campaign. Figure~\ref{fig:historical-runtime} and Table~\ref{tab:runtime-summary} summarize the historical runtime profile that underpins the estimate of roughly 70--80 sequential wall-clock hours for the full broad matrix.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.78\textwidth]{historical_runtime_profile.pdf}
+    \caption{Historical runtime profile derived from earlier audited runs. This figure is used for campaign planning rather than for the main results claim.}
+    \label{fig:historical-runtime}
+\end{figure}
+
+\input{tables/generated/runtime_summary.tex}
+
+The thesis deliberately separates runtime planning from empirical interpretation. Historical runtime is used to plan the campaign and schedule the work. It is not treated as performance evidence for the new NPK stack.
+
+\section{Reproducibility Controls}
+
+The repository includes several reproducibility controls that are important for thesis quality.
+\begin{itemize}[leftmargin=1.2cm]
+    \item Standardized runner summaries write one JSON file per run and one aggregated CSV for the matrix.
+    \item Offline or tracking-free execution is supported through the \texttt{--without-tracking} option.
+    \item The codebase has already been regression-tested after the latest engineering phases.
+    \item The thesis workspace rebuilds figures and tables directly from source artifacts.
+    \item Administrative thesis metadata has been isolated in one file so that changes to names or forms do not propagate unpredictably through the document.
+\end{itemize}
+
+These controls do not guarantee perfect scientific reproducibility, but they significantly improve engineering reproducibility and reduce the risk of thesis-writing drift.
+
+\input{tables/generated/verification_checks.tex}
+
+Table~\ref{tab:verification-checks} is intentionally concrete. It records the validation commands that were actually executed during the construction of the thesis workspace. The goal is not to claim full formal verification. The goal is to demonstrate that the most thesis-critical pathways, namely pricing, reporting, crop-planning semantics, hierarchical semantics, and document rebuildability, were all checked directly.
+
+\section{Current Build-Time Status}
+
+At the time this draft was built, the latest broad NPK matrix had been fully materialized in runner form and dry-run summary form, but not executed end-to-end. This status is shown in Figure~\ref{fig:latest-matrix-status} and Table~\ref{tab:current-results-status}. The thesis therefore uses a staged writing strategy: Chapters~1--5 and Chapter~7 are built around implemented scope and reproducibility, while Chapter~6 is explicitly framed as provisional until the campaign is completed.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.70\textwidth]{latest_matrix_status.pdf}
+    \caption{Current status of the latest broad NPK matrix at the time of this build.}
+    \label{fig:latest-matrix-status}
+\end{figure}
+
+\input{tables/generated/current_results_status.tex}
+
+The current implementation status should therefore be read as \emph{run-ready but results-incomplete}. That distinction matters. It means the stack is mature enough to justify a large campaign, yet the thesis still refuses to over-claim final comparative findings before the campaign artifacts exist.
+
+\section{Why This Chapter Matters for the Final Thesis}
+
+A thesis with strong motivation and attractive figures can still fail on committee scrutiny if the software pipeline is not reproducible. This chapter exists to prevent that weakness. It explains how the localized data, runner, reporting outputs, and rebuildable LaTeX assets fit together into a pipeline that can eventually support a final results chapter without manual patchwork.

@@ -1,0 +1,72 @@
+\chapter{Current Results Status and Historical Benchmark Context}
+
+\section{A Necessary Note on the State of the Main Results Chapter}
+
+The results chapter is intentionally written in a constrained form at this stage. The thesis plan locks the main empirical evidence to the latest broad Pakistan NPK matrix defined in \texttt{run\_experiments\_7\_3\_2026.py}. That matrix is already fixed, standardized, and fully enumerated, but it has not yet been executed end-to-end at the time of the current draft build. Accordingly, this chapter does not present fabricated or placeholder final comparisons. Instead, it reports three factual elements: the status of the fresh broad matrix, historical benchmark context from earlier audited runs, and the interpretation boundaries that follow from those facts.
+
+\section{Status of the Fresh Broad NPK Matrix}
+
+The latest broad matrix defines 113 jobs across fertilization, crop planning, hierarchical crop planning, DQN ablations, and baseline comparison paths. As of this build, the matrix exists in dry-run form and is ready to execute with standardized summary outputs.
+
+\input{tables/generated/current_results_status.tex}
+
+The significance of Table~\ref{tab:current-results-status} is methodological. It prevents the thesis from quietly mixing old completed runs with a new unexecuted design while presenting both as one coherent empirical dataset. Instead, the chapter makes the distinction explicit.
+
+\section{Historical Benchmark Context from the February 2026 Audit}
+
+Although the older February 2026 audited runs are not the main evidence base for the final thesis, they still provide useful historical benchmark context. They show what the repository could already achieve before the latest NPK and hierarchical engineering stack was made the primary target of the thesis campaign.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.92\textwidth]{historical_fertilization_scores.pdf}
+    \caption{Historical fertilization benchmark context from earlier audited runs. These scores are retained only as context and should not be confused with the pending fresh broad NPK campaign.}
+    \label{fig:historical-fert-fig}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\textwidth]{historical_crop_scores.pdf}
+    \caption{Historical crop-planning benchmark context from earlier audited runs. As above, the figure is contextual rather than final evidence for the latest stack.}
+    \label{fig:historical-crop-fig}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\textwidth]{historical_failure_signatures.pdf}
+    \caption{Failure signatures observed during the earlier audited experiment window. These signatures are useful for campaign planning and risk management during the fresh run phase.}
+    \label{fig:historical-failure-fig}
+\end{figure}
+
+\input{tables/generated/historical_fertilization_table.tex}
+\input{tables/generated/historical_crop_table.tex}
+\input{tables/generated/historical_failure_table.tex}
+
+The historical results support two limited but still useful observations. First, PPO historically appeared to be the strongest general-purpose algorithm in the repository. Second, operational failure modes such as subprocess interruptions and weather-window issues were not trivial and had to be addressed before treating a broad matrix as reliable. These observations helped shape the engineering priorities documented in earlier chapters.
+
+\section{Interpretation of Historical Trends}
+
+The historical benchmark context suggests that the repository was already capable of learning meaningful policies before the latest broad NPK campaign was defined. However, those historical runs were not produced under the full current thesis stack. They predate the final Pakistan-default NPK run-readiness phase and therefore cannot serve as the final evidence for claims about the new matrix.
+
+This distinction is particularly important because the latest thesis framing emphasizes localized economics, NPK-aware fertilization, and hierarchical reporting. A return obtained before those features were locked in may still be informative, but it cannot be presented as if it emerged from the final target system.
+
+\section{What the Fresh Campaign Must Still Deliver}
+
+For the final version of this chapter, the fresh broad campaign must deliver at least four categories of output.
+\begin{enumerate}[leftmargin=1.2cm]
+    \item Completed per-run summary JSON files for all or clearly documented subsets of the 113 planned jobs.
+    \item Comparative tables for PPO, A2C, DQN, baseline, and hierarchical variants under the latest Pakistan NPK defaults.
+    \item Interpretable reporting outputs, including NPK cost decomposition and yearly crop-decision traces.
+    \item A final claims section that is statistically and narratively consistent with the completed run coverage.
+\end{enumerate}
+
+Without those outputs, the thesis can describe the system and its readiness, but it cannot legitimately present the full comparative story envisioned in the plan.
+
+\section{Threats to Validity at Build Time}
+
+There are three main threats to validity at the current draft stage. The first is scope drift: it would be easy to accidentally write the thesis as if irrigation or rice-wheat results were already implemented. The second is evidence drift: it would be tempting to reuse older benchmark results as if they were the latest broad NPK evidence. The third is reporting drift: it would be possible to describe the system more cleanly in prose than it actually behaves in code.
+
+The thesis addresses these threats by keeping the scope boundaries explicit, by isolating historical benchmark context from future main evidence, and by generating tables and figures from repository artifacts rather than manual restatement.
+
+\section{Conclusion of the Provisional Results Chapter}
+
+The present chapter should therefore be read as a disciplined staging chapter rather than as a finished empirical endpoint. It documents where the thesis currently stands, what historical evidence exists, and what still needs to happen before the final comparative narrative can be written without over-claiming. In that sense, the chapter is part of the thesis methodology as much as it is part of the results section.

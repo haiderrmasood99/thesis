@@ -1,0 +1,136 @@
+\chapter{Methodology and Experimental Protocol}
+
+\section{Problem Formulation}
+
+The thesis models crop-management decisions as sequential decision problems on top of the CYCLES simulator. The environments expose observations derived from simulator outputs and local configuration files, accept actions that modify management operations, and return scalar rewards together with richer reporting fields. In the simplest formulation, the agent seeks a policy $\pi$ that maximizes expected discounted return
+\begin{equation}
+J(\pi) = \mathbb{E}_{\pi}\left[\sum_{t=0}^{T} \gamma^t r_t\right],
+\end{equation}
+where $r_t$ is a task-specific reward composed from crop revenue, input costs, and selected penalties or reporting-side constraints. This framing follows standard RL practice \citep{sutton2018rl}, but the thesis adds two important refinements. First, the reward is explicitly cost-aware rather than purely yield-based. Second, several agronomic and reporting signals are preserved outside the scalar reward so that the thesis can interpret behavior beyond aggregate return.
+
+In practical terms, the problem is closer to a partially observed and weakly constrained MDP than to a perfectly observed one. The agent observes simulator-derived features rather than a complete agronomic state, and the thesis keeps some agronomic signals as side metrics instead of embedding all of them into the scalar reward. This choice is deliberate. It keeps the learning objective tractable while preserving the information required for later scientific interpretation.
+
+\section{Fertilization Environment}
+
+The fertilization environment operates at a weekly decision frequency. In its current thesis-ready form, the environment can operate in a single-nutrient nitrogen mode or in a multi-nutrient NPK mode, with the latter now serving as the localized default for the planned fresh campaign. The observation design combines weather information, crop-progress information, and cumulative nutrient-use information. The action design maps the policy output into a discrete control over nutrient mass per hectare.
+
+At a conceptual level, the weekly reward can be written as
+\begin{equation}
+    r_t = \text{Revenue}_t - \text{Cost}_{N,t} - \text{Cost}_{P,t} - \text{Cost}_{K,t} - \text{Penalty}_t,
+\end{equation}
+where the penalty term may include environmental or operational considerations depending on the environment configuration. The thesis does not claim that this reward fully captures all real-world farm costs. Instead, it claims that the reward is more localized and interpretable than the earlier legacy assumptions because it is tied to Pakistan-oriented yearly price series and can be decomposed by nutrient channel.
+
+The code implements this structure through a compound rewarder. Harvest revenue is produced by \texttt{CropRewarder} when a harvest event occurs between successive dates. Nutrient cost is produced by \texttt{NProfitabilityRewarder} or \texttt{NPKProfitabilityRewarder}, depending on whether the environment is in scalar-N or full-NPK mode. The total step reward is the sum of these components. This means the thesis can describe the reward function without inventing a separate mathematical object that does not exist in code.
+
+\section{Crop-Planning Environment}
+
+The crop-planning environment operates at a slower timescale than fertilization. It selects yearly or seasonal crop-management actions, with the active working configuration focused on the current maize-soy rotation already wired into the repository. This crop choice is not presented as the final agronomic target for all Pakistan settings. Rather, it is presented as the working configuration for which the current code, tests, and latest matrix are aligned.
+
+The crop-planning state abstracts longer-horizon information than the weekly fertilization state. It focuses on the information required to compare crop choices and planting-window decisions across seasons. Because the environment is already integrated with Pakistan crop-calendar logic, it can also surface whether a chosen action respects the configured seasonal windows.
+
+The active flat training setup uses \texttt{CropPlanningFixedPlanting}, which reduces the action to crop choice plus a planting-week index. This design is important for experimental stability. It preserves the strategic nature of the planning problem while avoiding unnecessary expansion of the action space before the main broad matrix has been completed.
+
+\section{Hierarchical Formulation}
+
+The hierarchical environment combines yearly crop-planning actions with within-season fertilization actions. This yields a two-scale decision structure in which strategic and tactical choices are represented explicitly rather than being flattened into one uniform action channel.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.88\textwidth]{hierarchical_decision_diagram.pdf}
+    \caption{Hierarchical decision flow implemented in the current repo. Annual crop-planning actions configure the season, while weekly fertilization actions operate within that season.}
+    \label{fig:hierarchical-flow}
+\end{figure}
+
+The hierarchical structure is important for two reasons. First, it better matches the semantics of real management decisions. Second, it enables more interpretable reporting. A thesis reader can separately inspect yearly crop decisions, weekly nutrient actions, and their cost decomposition. That is an advantage over flatter designs in which the learning objective may remain valid but the resulting policy is harder to explain.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.90\textwidth]{decision_timescales_diagram.pdf}
+    \caption{Decision timescales represented by the active thesis environments. The figure shows why yearly planning and weekly fertilization are modeled separately rather than forced into one homogeneous decision layer.}
+    \label{fig:decision-timescales}
+\end{figure}
+
+\section{Observation, Action, and Reporting Design}
+
+The repository exposes different observation and action choices depending on the environment variant. Nevertheless, the thesis uses a consistent reporting vocabulary across environments:
+\begin{itemize}[leftmargin=1.2cm]
+    \item observations summarize relevant weather, crop, and nutrient information;
+    \item actions encode either yearly planning choices or weekly fertilization choices;
+    \item rewards quantify cost-aware performance;
+    \item side metrics record nutrient-wise cost, crop decisions, and season-window compliance.
+\end{itemize}
+
+This design choice is methodologically useful because it avoids a common failure mode in RL theses: reducing all analysis to the final return metric even when the system already emits richer decision traces.
+
+\input{tables/generated/environment_design_summary.tex}
+
+Table~\ref{tab:environment-design} summarizes the active environment designs in the same vocabulary used by the code. This is useful because the thesis needs to distinguish between the general environment family and the exact variants used in the current runner defaults.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.86\textwidth]{reward_decomposition_diagram.pdf}
+    \caption{Reward decomposition used by the thesis environments. Harvest revenue and nutrient costs are computed by separate rewarder components and then combined.}
+    \label{fig:reward-decomposition}
+\end{figure}
+
+The reporting design deserves separate emphasis. In the hierarchical environment, the \texttt{info} dictionary records whether the planner acted in the current step, what crop and planting window were selected, the amount of each nutrient applied, and the resulting cost breakdown. These fields are later streamed into CSV and JSON artifacts. The thesis therefore treats reporting fields as part of the experimental design rather than as a convenience afterthought.
+
+\section{Algorithms}
+
+The latest unified experiment matrix focuses primarily on PPO and A2C, with smaller DQN ablations and a baseline comparison path. PPO is treated as the main candidate because it has historically performed strongly in the repository's earlier audited runs and is widely used for stable on-policy optimization in discrete or mixed decision settings \citep{sutton2018rl}. A2C is retained as a simpler actor-critic baseline. DQN is included only as a narrower ablation because its compatibility with the crop-planning action structure requires additional wrapping and has historically shown more brittle behavior in the repo.
+
+The thesis therefore uses algorithms not as an exhaustive zoo, but as a structured comparison between one primary method, one simpler actor-critic alternative, one narrower value-based ablation, and explicit open-loop or baseline-style references where available.
+
+\input{tables/generated/algorithm_roles.tex}
+
+This limited algorithm set is a methodological strength. It avoids dispersing experimental effort across many methods while the more important variables of this thesis are localization, reporting, and cross-environment comparability.
+
+\section{Latest Broad NPK Matrix}
+
+The main experiment campaign for the thesis is the unified runner encoded in \texttt{run\_experiments\_7\_3\_2026.py}. This matrix is treated as authoritative because it standardizes budgets, algorithm families, hierarchical variants, baseline inclusion, and summary-JSON generation. The runner defines 113 jobs in total: 75 fertilization jobs and 38 crop-planning jobs.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.90\textwidth]{experiment_matrix_counts.pdf}
+    \caption{Composition of the latest broad NPK matrix by domain and algorithm family.}
+    \label{fig:matrix-counts}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.90\textwidth]{experiment_budget_counts.pdf}
+    \caption{Budget distribution of the latest broad NPK matrix. Fertilization budgets are expressed in total-years, while crop-planning jobs retain the current default timestep configuration.}
+    \label{fig:matrix-budgets}
+\end{figure}
+
+\input{tables/generated/experiment_matrix.tex}
+
+The matrix is large enough that it cannot be treated casually. It is the core empirical commitment of the thesis, and it is also the reason Chapter~6 remains provisional at build time. The full matrix must be executed before the final comparative claims are frozen.
+
+The matrix also acts as a forcing function on the rest of the methodology. Because the runner produces one summary artifact per job and one aggregated CSV, each later table in the thesis can be tied back to an explicit set of matrix rows. This is a better design than ad hoc experiment accumulation because it keeps the final narrative synchronized with one authoritative campaign definition.
+
+\section{Hypotheses}
+
+The thesis uses the following working hypotheses.
+\begin{enumerate}[leftmargin=1.2cm]
+    \item PPO will remain the strongest general-purpose method for the current stack, particularly under localized NPK settings.
+    \item Random-weather settings will be harder to optimize but will provide more defensible generalization evidence than fixed-weather settings.
+    \item Hierarchical runs will improve interpretability and may improve performance where yearly crop choices materially condition weekly nutrient allocation.
+    \item Cost decomposition and window-compliance reporting will make the final results chapter more defensible even when aggregate returns are similar across multiple settings.
+\end{enumerate}
+
+These are not treated as proven statements in the current draft. They are hypotheses encoded into the final experiment plan.
+
+\section{Metrics}
+
+The thesis relies on multiple metric families rather than a single score. The primary family includes deterministic and stochastic returns. The second family includes holdout-style evaluation for fertilization, where available. The third family includes reporting-derived metrics such as nutrient-wise cost totals, yearly crop decisions, and season-window compliance. The fourth family includes runner-level operational metrics such as runtime and failure signatures.
+
+When the fresh campaign completes, these metrics should be interpreted in layers. Aggregate return answers whether one method outperformed another under the encoded reward. Nutrient-cost totals answer \emph{how} the method achieved that performance. Yearly crop decisions answer whether strategic choices changed across algorithms or weather regimes. Compliance metrics answer whether improved reward came at the expense of violating encoded agronomic timing guidance. This layered interpretation is necessary for a thesis defense because no single metric adequately captures the behavior of the implemented system.
+
+This multi-metric design is consistent with the thesis goal of writing a results chapter that is analytically useful rather than merely leaderboard-oriented. A policy that attains a strong scalar reward but violates seasonal windows or relies on implausible cost behavior would not be persuasive in a thesis defense.
+
+\section{Claims Policy and Statistical Discipline}
+
+The thesis enforces a claims policy that is stricter than the raw availability of scores. The following claims are allowed once the broad fresh campaign completes: comparative performance between algorithms, weather modes, adaptive vs. nonadaptive settings, and hierarchical vs. non-hierarchical variants under the current Pakistan NPK stack. The following claims remain disallowed without additional work: irrigation optimization, rice-wheat empirical conclusions, field validation, and any statement that implies a global optimum over all possible agronomic policies.
+
+This policy is a methodological choice, not an afterthought. It ensures that the thesis remains coherent across the abstract, methods, results, and limitations chapters.

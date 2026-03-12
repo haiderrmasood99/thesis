@@ -1,0 +1,79 @@
+\chapter{Background and Literature Review}
+
+\section{Crop-Growth Models and Long-Horizon Management}
+
+Agricultural decision-making is fundamentally sequential. A fertilizer decision made today affects not only near-term crop response but also subsequent nutrient availability, residual soil conditions, and risk exposure under weather uncertainty. This is one reason crop-growth models (CGMs) remain attractive in agricultural decision support. They provide a process-aware simulator in which weather, soil, crop physiology, and management interact over time. For RL researchers, CGMs are valuable because they make it possible to generate many simulated episodes without incurring the full cost of field experimentation \citep{gautron2022review,turchetta2022cyclesgym}.
+
+Yet not all CGM-based RL environments support the same research questions. Some are geared toward single-season nitrogen scheduling, others toward daily control, and others toward multi-year management with soil carry-over effects. This distinction matters for the present thesis because the long-horizon and rotation-aware behavior of CyclesGym is one of the reasons it was chosen as the thesis base.
+
+\section{RL Foundations Relevant to the Thesis}
+
+In the standard RL formulation, an agent observes a state or observation, selects an action, and receives a reward signal that reflects the quality of that action in context \citep{sutton2018rl}. For agricultural management, this formulation is compelling because actions must often be chosen before the final effect of those actions is fully known. Fertilizer applied early in a season may increase yield, waste cost, or contribute to environmental losses depending on subsequent weather. Likewise, crop choice affects not only one season's return but also the future soil and nutrient environment available to later crops.
+
+Formally, the thesis uses the language of Markov decision processes (MDPs), and in some places the broader vocabulary of constrained or partially observed settings is more appropriate. The repository's environments expose observations rather than complete physical states, and some important agronomic objectives such as nutrient losses or compliance with seasonal windows are more naturally modeled as constraints or side metrics than as a single scalar reward. This is why constrained and safe RL literature is relevant even though the current training entrypoints mainly optimize scalar reward functions rather than a full CMDP objective \citep{huang2022cmorl,zhao2023safesurvey}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.88\textwidth]{rl_loop_diagram.pdf}
+    \caption{RL interaction loop as instantiated by the thesis stack. The loop is generic in theory but concrete in implementation: actions are mapped into simulator operations and observations are reconstructed from generated output files.}
+    \label{fig:rl-loop}
+\end{figure}
+
+Figure~\ref{fig:rl-loop} emphasizes a point that is easy to miss in high-level RL descriptions. In this repository, the transition dynamics are not an abstract simulator hidden behind a clean API. They are realized through file creation, CYCLES execution, output parsing, normalization, and callback-based logging. This makes agricultural RL both richer and harder than many benchmark-control tasks. The consequence for the thesis is that algorithm selection cannot be discussed independently of engineering reliability.
+
+\subsection{Partial Observability and Delayed Credit}
+
+Agricultural RL contains two difficulties that deserve explicit mention. The first is partial observability. The agent does not directly observe the full biophysical state of the soil-plant-atmosphere system. It receives a subset of features reconstructed from weather, crop, and soil output files. The second is delayed credit assignment. A fertilizer action taken early in a season may not be reflected in realized harvest revenue until much later, and even then its effect is entangled with weather and other management decisions. These properties help explain why stable policy-gradient methods remain attractive in the literature even when the action spaces are discrete.
+
+\section{Cost-Aware and Constraint-Aware RL in Agriculture}
+
+A common simplification in early agricultural RL work is to optimize productivity without fully localizing costs or explicitly tracking environmental side effects. That simplification may be useful for proof-of-concept work, but it becomes problematic for a thesis that claims cost-driven decision support. The present work therefore emphasizes cost-aware design in two ways. First, reward design is explicitly discussed as a revenue-minus-cost formulation rather than as a pure yield target. Second, the reporting layer preserves side metrics that are not collapsed into a single reward number, including nutrient-wise cost decomposition and season-window compliance.
+
+This framing is consistent with broader constrained RL literature, which argues that practical decision systems often need to preserve auxiliary performance signals rather than bury them entirely inside one scalar target \citep{huang2022cmorl,zhao2023safesurvey}. In the agricultural domain, this need is even sharper because agronomic plausibility, environmental impact, and economic return are often coupled but not identical.
+
+\subsection{Why Cost Awareness Is Central in the Pakistan Setting}
+
+For the present thesis, cost awareness is not a generic design preference. It is part of the research claim implied by the title itself. A yield-only optimization would answer a different question from the one posed here. Once Pakistan-specific crop and nutrient prices are introduced, the reward becomes sensitive not only to agronomic productivity but also to the economic burden of nutrient application and the relative profitability of alternative crop decisions. This is especially important in a thesis framed around resource allocation rather than around maximum biological yield alone.
+
+\section{Agricultural RL Environments Relevant to This Thesis}
+
+The literature most directly relevant to this thesis includes three environment families. CropGym focuses on nitrogen management with crop-growth models and provides a clean benchmark for single-season scheduling \citep{kallenberg2023cropgym}. gym-DSSAT turns DSSAT into an RL environment and demonstrates a different pathway for coupling agronomic simulation with agent learning \citep{gautron2022gymdssat}. CyclesGym, which is the foundation of this thesis, explicitly emphasizes long-term crop management strategies with support for multi-year dynamics and richer management structure \citep{turchetta2022cyclesgym}.
+
+The present thesis is not a direct reproduction of the original CyclesGym paper. Rather, it starts from the publicly available CyclesGym implementation and engineers a Pakistan-adapted, thesis-oriented stack around it. That engineering layer is what differentiates this work from a straightforward reimplementation. It is also the reason that the literature review must go beyond algorithm names and address environment fit, localization burden, and reporting needs.
+
+\input{tables/generated/environment_comparison.tex}
+
+Table~\ref{tab:environment-comparison} shows why CyclesGym was the most suitable base for this thesis. CropGym is strong for nitrogen scheduling, and gym-DSSAT is important as a DSSAT-based benchmark, but CyclesGym better matches the long-horizon, rotation-aware, and system-engineering needs of this project. The table also makes an important thesis point: even after choosing the right base environment, a large amount of local engineering is still required before the repository becomes a defensible thesis artifact.
+
+\subsection{Why CyclesGym Was a Better Base Than Rebuilding from Scratch}
+
+An alternative design path would have been to rebuild a Pakistan-specific environment from scratch on top of a crop model or a custom simulator wrapper. The thesis did not take that route because the research bottleneck was not the absence of any RL environment. The bottleneck was the absence of a localized, traceable, thesis-ready extension of an environment already suited to long-horizon crop management. Starting from CyclesGym preserved valuable prior structure such as multi-year simulation semantics, input-manager abstractions, and environment wrappers. The actual thesis contribution therefore lies in targeted adaptation rather than in unnecessary reinvention.
+
+\section{Data Localization as a Research Requirement}
+
+Localization in this thesis is not a cosmetic change. It is a research requirement. The moment the thesis title commits to Pakistan, the data sources and price assumptions become part of the scientific validity of the work. That is why the repository's current implementation uses a Pakistan weather file, Pakistan soil profile, and yearly price series derived from FAOSTAT and NFDC-linked data. The weather file is the actual input used by training and evaluation flows, while the price series is loaded by the pricing utilities that underlie the current reward configuration.
+
+The provenance of those inputs also matters. NASA POWER and ISRIC SoilGrids are cited because they represent standard, well-documented sources for weather and soil information in data-constrained settings \citep{nasapowerdocs,soilgridsdocs}. PBS crop calendars and Khyber Pakhtunkhwa maize guidance are cited because the current Pakistan crop-calendar utility in the repository depends on those official or semi-official references for sowing-window alignment \citep{pbskharifcalendar,pbsrabicalendar,kpmaizeguide}. The thesis does not treat these data products as perfect proxies for local agronomy; rather, it treats them as transparent and documentable sources that materially improve the realism of the training environment.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.88\textwidth]{pakistan_crop_calendar_windows.pdf}
+    \caption{Pakistan crop-calendar windows currently encoded in the repository. This is an example of how localized agronomic priors enter the engineering stack without being overstated as full agronomic validation.}
+    \label{fig:pk-crop-calendar}
+\end{figure}
+
+\section{Why the Thesis Uses a Hybrid Scope}
+
+The synopsis used an intentionally broad framing that included irrigation, rice-wheat rotation, and broader Pakistan smallholder narratives. Such breadth is understandable at the proposal stage because the proposal must motivate a program of work rather than only the final implemented artifact. The thesis, however, must narrow its claims to what was actually built. This is why the literature review is organized around a hybrid scope. It preserves the broader background on agricultural RL and Pakistan-specific need, but it narrows the implementation and empirical interpretation to the controls that exist in the repository: crop planning, NPK-aware fertilization, and hierarchical integration.
+
+This hybrid scope is academically preferable to two flawed alternatives. One flawed alternative would be to write only about the fully implemented repo and ignore the proposal context that motivated it. The other flawed alternative would be to write the thesis as if all proposal ambitions had been completed. The present thesis avoids both extremes by using the synopsis as the planning baseline and the repository as the claims boundary.
+
+\section{What the Literature Implies for Algorithm Choice}
+
+The literature does not dictate one universally best RL algorithm for agricultural management, but it does suggest a useful discipline for method selection. Methods should be chosen based on compatibility with the decision horizon, action structure, and available reporting, not only on popularity. In the current thesis stack, PPO is retained as the primary method because it historically behaved robustly in the repository and fits well with normalized, vectorized environments. A2C remains useful as a leaner actor-critic comparison. DQN is included only as a constrained ablation because the planning tasks require an action-space wrapper that changes the structure the value learner actually sees. This method selection logic is therefore an outcome of both literature and code reality.
+
+\section{Synthesis of the Literature for the Present Work}
+
+The literature suggests three conclusions that shape the rest of the thesis. First, RL is a credible approach to crop management when paired with a process-aware simulator and a carefully designed reward function \citep{sutton2018rl,gautron2022review}. Second, the choice of simulator-wrapper environment materially changes what questions can be studied, and CyclesGym is the most appropriate base for the long-horizon thesis goals pursued here \citep{turchetta2022cyclesgym,kallenberg2023cropgym,gautron2022gymdssat}. Third, localization and reporting are not optional add-ons in a thesis framed around Pakistan and cost-aware optimization; they are central research requirements.
+
+These conclusions motivate the architecture and methodology presented in the next two chapters. Chapter~3 turns from external literature to the internal evolution of the repository, while Chapter~4 formalizes the resulting experimental design.
