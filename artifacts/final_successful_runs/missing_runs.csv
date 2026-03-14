@@ -1,0 +1,5 @@
+index,label,reason,details
+109,Fertilization | DQN ablation | adaptive | fixed_weather | years=5000 | seed=0,planned matrix row failed in actual completion summary,status=FAILED; exit_code=1
+110,Fertilization | DQN ablation | adaptive | random_weather | years=5000 | seed=0,planned matrix row failed in actual completion summary,status=FAILED; exit_code=1
+111,Crop planning | DQN ablation | nonadaptive | fixed_weather | seed=0,planned matrix row failed in actual completion summary,status=FAILED; exit_code=1
+112,Crop planning | DQN ablation | nonadaptive | random_weather | seed=0,planned matrix row failed in actual completion summary,status=FAILED; exit_code=1

@@ -17,6 +17,8 @@ wandb/
 # Python cache & build
 ############################
 __pycache__/
+.pytest_cache/
+node_modules/
 *.py[cod]
 *$py.class
 
@@ -53,6 +55,18 @@ notebooks/.ipynb_checkpoints/
 *.out
 *.err
 
+# Runtime experiment outputs
+runs/*
+!runs/.gitkeep
+!runs/experiment_summaries/
+!runs/experiment_summaries/.gitkeep
+!runs/train_logs/
+!runs/train_logs/.gitkeep
+!runs/thesis_reports/
+!runs/thesis_reports/.gitkeep
+!runs/offline/
+!runs/offline/.gitkeep
+
 ############################
 # OS files
 ############################
@@ -76,11 +90,23 @@ Thumbs.db
 results/
 checkpoints/
 models/
+artifacts/final_successful_runs/bundles/
+!artifacts/final_successful_runs/README.md
+!artifacts/final_successful_runs/manifest.csv
+!artifacts/final_successful_runs/missing_runs.csv
+artifacts/final_successful_runs/final_113/bundles/
+!artifacts/final_successful_runs/final_113/README.md
+!artifacts/final_successful_runs/final_113/manifest.csv
+!artifacts/final_successful_runs/final_113/replacement_map.csv
 
 ############################
 # Optional: data (if large)
 ############################
 data/
+Local Files and Folders/
+artifacts/final_successful_runs/Recovered/
 
 # Ignore temporary simulation directories
+cycles/input/[0-9][0-9][0-9][0-9]_*/
+cycles/output/[0-9][0-9][0-9][0-9]_*/
 cycles/input/weather_*
