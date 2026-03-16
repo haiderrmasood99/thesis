@@ -55,6 +55,8 @@ class HierarchicalCropPlanningFertilization(CyclesEnv):
                  p_actions=None,
                  k_actions=None,
                  n_nh4_rate=0.75,
+                 nutrient_cost_weight=1.0,
+                 blocked_nutrient_penalty_per_kg=0.0,
                  price_profile='pakistan_baseline',
                  use_pakistan_crop_calendar=True,
                  enforce_calendar_windows=True,
@@ -83,6 +85,8 @@ class HierarchicalCropPlanningFertilization(CyclesEnv):
         self.p_actions = int(p_actions) if p_actions is not None else int(n_actions)
         self.k_actions = int(k_actions) if k_actions is not None else int(n_actions)
         self.n_nh4_rate = float(n_nh4_rate)
+        self.nutrient_cost_weight = float(nutrient_cost_weight)
+        self.blocked_nutrient_penalty_per_kg = max(0.0, float(blocked_nutrient_penalty_per_kg))
         self.price_profile = price_profile
         self.nutrient_prices = get_nutrient_prices(self.price_profile)
         self.use_pakistan_crop_calendar = bool(use_pakistan_crop_calendar)
@@ -298,9 +302,15 @@ class HierarchicalCropPlanningFertilization(CyclesEnv):
             for name in self.rotation_crops
         ]
         if self.nutrient_action_mode == 'NPK':
-            fertilizer_rewarder = NPKProfitabilityRewarder(price_profile=self.price_profile)
+            fertilizer_rewarder = NPKProfitabilityRewarder(
+                price_profile=self.price_profile,
+                cost_weight=self.nutrient_cost_weight,
+            )
         else:
-            fertilizer_rewarder = NProfitabilityRewarder(price_profile=self.price_profile)
+            fertilizer_rewarder = NProfitabilityRewarder(
+                price_profile=self.price_profile,
+                cost_weight=self.nutrient_cost_weight,
+            )
         self.rewarder = compound_rewarder([*crop_rewarders, fertilizer_rewarder])
 
     def _init_implementer(self, *args, **kwargs):
@@ -522,6 +532,10 @@ class HierarchicalCropPlanningFertilization(CyclesEnv):
             operation_year=operation_year,
             doy=doy,
         )
+        requested_total_npk_kg = float(sum(float(requested_nutrient_action[n]) for n in ['N', 'P', 'K']))
+        applied_total_npk_kg = float(sum(float(nutrient_action[n]) for n in ['N', 'P', 'K']))
+        blocked_npk_kg = max(0.0, requested_total_npk_kg - applied_total_npk_kg)
+        shaping_blocked_penalty = -self.blocked_nutrient_penalty_per_kg * blocked_npk_kg
         cost_breakdown = self._nutrient_cost_breakdown(year=year, nutrient_action=nutrient_action)
 
         rerun_fertilizer = False
@@ -538,7 +552,8 @@ class HierarchicalCropPlanningFertilization(CyclesEnv):
         self._update_output_managers()
 
         done = self.date.year > self.ctrl_base_manager.ctrl_dict['SIMULATION_END_YEAR']
-        reward = self.rewarder.compute_reward(date=self.date, delta=self.delta, action=nutrient_action)
+        reward_base = self.rewarder.compute_reward(date=self.date, delta=self.delta, action=nutrient_action)
+        reward = reward_base + shaping_blocked_penalty
 
         info = {
             'planner_applied': planner_applied,
@@ -550,13 +565,20 @@ class HierarchicalCropPlanningFertilization(CyclesEnv):
             'report_requested_n_kg': float(requested_nutrient_action['N']),
             'report_requested_p_kg': float(requested_nutrient_action['P']),
             'report_requested_k_kg': float(requested_nutrient_action['K']),
+            'report_requested_total_npk_kg': requested_total_npk_kg,
             'report_n_kg': float(nutrient_action['N']),
             'report_p_kg': float(nutrient_action['P']),
             'report_k_kg': float(nutrient_action['K']),
+            'report_applied_total_npk_kg': applied_total_npk_kg,
+            'report_blocked_npk_kg': blocked_npk_kg,
             'report_cost_n': float(cost_breakdown['N']),
             'report_cost_p': float(cost_breakdown['P']),
             'report_cost_k': float(cost_breakdown['K']),
             'report_cost_total': float(cost_breakdown['total']),
+            'report_reward_base': float(reward_base),
+            'report_reward_shaping_blocked_penalty': float(shaping_blocked_penalty),
+            'report_blocked_nutrient_penalty_per_kg': float(self.blocked_nutrient_penalty_per_kg),
+            'report_reward_total': float(reward),
             'report_requested_crop_index': int(crop_action_meta['requested_crop_index']),
             'report_requested_crop_name': crop_action_meta['requested_crop_name'],
             'report_crop_index': int(crop_action_meta['effective_crop_index']),

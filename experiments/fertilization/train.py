@@ -211,6 +211,7 @@ class Train:
                 p_actions = int(self.config.get('p_actions', self.config.get('n_actions', 11)))
                 k_actions = int(self.config.get('k_actions', self.config.get('n_actions', 11)))
                 n_nh4_rate = float(self.config.get('n_nh4_rate', 0.75))
+                nutrient_cost_weight = float(self.config.get('nutrient_cost_weight', 1.0))
                 price_profile = str(self.config.get('price_profile', 'pakistan_baseline'))
 
                 if nonadaptive:
@@ -227,6 +228,7 @@ class Train:
                             p_actions=p_actions,
                             k_actions=k_actions,
                             n_nh4_rate=n_nh4_rate,
+                            nutrient_cost_weight=nutrient_cost_weight,
                             price_profile=price_profile)
                 else:
                     if soil_env:
@@ -243,6 +245,7 @@ class Train:
                             p_actions=p_actions,
                             k_actions=k_actions,
                             n_nh4_rate=n_nh4_rate,
+                            nutrient_cost_weight=nutrient_cost_weight,
                             price_profile=price_profile)
                     else:
                         if fixed_weather:
@@ -253,6 +256,7 @@ class Train:
                                 p_actions=p_actions,
                                 k_actions=k_actions,
                                 n_nh4_rate=n_nh4_rate,
+                                nutrient_cost_weight=nutrient_cost_weight,
                                 price_profile=price_profile,
                                 start_year = start_year, end_year = end_year)
                         else:
@@ -270,6 +274,7 @@ class Train:
                                        p_actions=p_actions,
                                        k_actions=k_actions,
                                        n_nh4_rate=n_nh4_rate,
+                                       nutrient_cost_weight=nutrient_cost_weight,
                                        price_profile=price_profile,
                                        start_year=start_year, end_year=end_year,
                                        weather_generator_class=WeatherShuffler,
@@ -667,6 +672,7 @@ class Train:
             'total_years': int(self.config.get('total_years', 0)),
             'baseline': bool(self.config.get('baseline', False)),
             'nutrient_action_mode': self._nutrient_mode(),
+            'nutrient_cost_weight': float(self.config.get('nutrient_cost_weight', 1.0)),
             'price_profile': str(self.config.get('price_profile', 'pakistan_baseline')),
             'metrics': metrics,
         }
@@ -750,6 +756,7 @@ if __name__ == '__main__':
                   p_actions = 11,
                   k_actions = 11,
                   n_nh4_rate = 0.75,
+                  nutrient_cost_weight = 1.0,
                   soil_env=True, 
                   start_year = PAK_WEATHER_START_YEAR,
                   sampling_start_year=PAK_WEATHER_START_YEAR, 
@@ -815,6 +822,8 @@ if __name__ == '__main__':
                         help='Number of discrete bins for K channel (NPK mode)')
     parser.add_argument('--n-nh4-rate', type=float, default=0.75,
                         help='Fraction of N allocated to NH4 when applying N')
+    parser.add_argument('--nutrient-cost-weight', type=float, default=1.0,
+                        help='Weight multiplier for nutrient-cost penalty in reward')
     parser.add_argument('--without-tracking', action='store_true', default=False,
                         help='Disable W&B tracking and run with local no-op logger')
     parser.add_argument('--summary-json', default='',
@@ -859,6 +868,7 @@ if __name__ == '__main__':
     config['maxP'] = max(0.0, float(config.get('maxP', 80.0)))
     config['maxK'] = max(0.0, float(config.get('maxK', 60.0)))
     config['n_nh4_rate'] = float(np.clip(float(config.get('n_nh4_rate', 0.75)), 0.0, 1.0))
+    config['nutrient_cost_weight'] = max(0.0, float(config.get('nutrient_cost_weight', 1.0)))
 
     set_random_seed(config['seed'])
     np.random.seed(config['seed'])

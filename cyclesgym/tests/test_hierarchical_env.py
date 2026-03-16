@@ -103,6 +103,35 @@ class TestHierarchicalEnv(unittest.TestCase):
         assert step_info['report_remaining_p_budget'] == 0.0
         assert step_info['report_remaining_k_budget'] == 0.0
 
+    def test_blocked_nutrient_penalty_is_applied_and_reported(self):
+        env = HierarchicalCropPlanningFertilization(
+            start_year=2005,
+            end_year=2005,
+            rotation_crops=['CornRM.100', 'SoybeanMG.3'],
+            nutrient_action_mode='NPK',
+            use_pakistan_crop_calendar=True,
+            price_profile='pakistan_baseline',
+            blocked_nutrient_penalty_per_kg=2.0,
+        )
+        env.reset()
+
+        # Day-1 is outside active crop window, so requested nutrients are blocked.
+        action = np.array([0, 0, 0, 0, 10, 10, 10], dtype=np.int64)
+        step_out = env.step(action)
+        reward = float(step_out[1])
+        step_info = step_out[-1]
+
+        assert step_info['report_requested_total_npk_kg'] > 0.0
+        assert step_info['report_applied_total_npk_kg'] == 0.0
+        assert step_info['report_blocked_npk_kg'] == step_info['report_requested_total_npk_kg']
+        assert step_info['report_reward_shaping_blocked_penalty'] < 0.0
+        assert step_info['report_blocked_nutrient_penalty_per_kg'] == 2.0
+        assert np.isclose(
+            step_info['report_reward_total'],
+            step_info['report_reward_base'] + step_info['report_reward_shaping_blocked_penalty'],
+        )
+        assert np.isclose(reward, step_info['report_reward_total'])
+
 
 if __name__ == '__main__':
     unittest.main()

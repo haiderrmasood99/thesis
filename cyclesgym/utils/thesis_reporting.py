@@ -31,13 +31,18 @@ class HierarchicalThesisReportCallback(BaseCallback):
         'requested_n_kg',
         'requested_p_kg',
         'requested_k_kg',
+        'requested_total_npk_kg',
         'n_kg',
         'p_kg',
         'k_kg',
+        'applied_total_npk_kg',
+        'blocked_npk_kg',
         'cost_n',
         'cost_p',
         'cost_k',
         'cost_total',
+        'reward_base',
+        'reward_shaping_blocked_penalty',
         'reward',
         'planner_applied',
         'crop_action_sanitized',
@@ -100,6 +105,8 @@ class HierarchicalThesisReportCallback(BaseCallback):
         self._window_blocked_steps = 0
         self._budget_clipped_steps = 0
         self._sanitized_crop_decisions = 0
+        self._blocked_npk_total = 0.0
+        self._reward_shaping_blocked_penalty_total = 0.0
         self._compliance_by_operation_year: dict[int, dict[str, int]] = {}
 
     @staticmethod
@@ -166,13 +173,18 @@ class HierarchicalThesisReportCallback(BaseCallback):
                 'requested_n_kg': info.get('report_requested_n_kg', 0.0),
                 'requested_p_kg': info.get('report_requested_p_kg', 0.0),
                 'requested_k_kg': info.get('report_requested_k_kg', 0.0),
+                'requested_total_npk_kg': info.get('report_requested_total_npk_kg', 0.0),
                 'n_kg': info.get('report_n_kg', 0.0),
                 'p_kg': info.get('report_p_kg', 0.0),
                 'k_kg': info.get('report_k_kg', 0.0),
+                'applied_total_npk_kg': info.get('report_applied_total_npk_kg', 0.0),
+                'blocked_npk_kg': info.get('report_blocked_npk_kg', 0.0),
                 'cost_n': info.get('report_cost_n', 0.0),
                 'cost_p': info.get('report_cost_p', 0.0),
                 'cost_k': info.get('report_cost_k', 0.0),
                 'cost_total': info.get('report_cost_total', 0.0),
+                'reward_base': info.get('report_reward_base', reward_value),
+                'reward_shaping_blocked_penalty': info.get('report_reward_shaping_blocked_penalty', 0.0),
                 'reward': reward_value,
                 'planner_applied': bool(info.get('planner_applied', False)),
                 'crop_action_sanitized': bool(info.get('report_crop_action_sanitized', False)),
@@ -199,6 +211,10 @@ class HierarchicalThesisReportCallback(BaseCallback):
             self._cost_p_total += float(info.get('report_cost_p', 0.0) or 0.0)
             self._cost_k_total += float(info.get('report_cost_k', 0.0) or 0.0)
             self._cost_total += float(info.get('report_cost_total', 0.0) or 0.0)
+            self._blocked_npk_total += float(info.get('report_blocked_npk_kg', 0.0) or 0.0)
+            self._reward_shaping_blocked_penalty_total += float(
+                info.get('report_reward_shaping_blocked_penalty', 0.0) or 0.0
+            )
             if not bool(info.get('report_fertilizer_window_open', True)):
                 self._window_blocked_steps += 1
             if bool(info.get('report_fertilizer_budget_clipped', False)):
@@ -277,6 +293,8 @@ class HierarchicalThesisReportCallback(BaseCallback):
             'total_cost_p': self._cost_p_total,
             'total_cost_k': self._cost_k_total,
             'total_cost': self._cost_total,
+            'blocked_npk_kg_total': self._blocked_npk_total,
+            'reward_shaping_blocked_penalty_total': self._reward_shaping_blocked_penalty_total,
             'total_yearly_decisions': total_decisions,
             'compliant_yearly_decisions': total_compliant,
             'overall_compliance_rate': (total_compliant / total_decisions) if total_decisions > 0 else None,

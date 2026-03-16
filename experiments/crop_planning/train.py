@@ -245,6 +245,10 @@ class Train:
                         p_actions=int(self.config.get('p_actions', 11)),
                         k_actions=int(self.config.get('k_actions', 11)),
                         price_profile=str(self.config.get('price_profile', 'pakistan_baseline')),
+                        nutrient_cost_weight=float(self.config.get('nutrient_cost_weight', 1.0)),
+                        blocked_nutrient_penalty_per_kg=float(
+                            self.config.get('blocked_nutrient_penalty_per_kg', 0.0)
+                        ),
                         use_pakistan_crop_calendar=_as_bool(self.config.get('use_pakistan_crop_calendar', True), default=True),
                         enforce_calendar_windows=_as_bool(self.config.get('enforce_calendar_windows', True), default=True),
                         limit_fertilizer_to_season=_as_bool(self.config.get('limit_fertilizer_to_season', True), default=True),
@@ -487,6 +491,10 @@ class Train:
             'non_adaptive': _as_bool(self.config.get('non_adaptive', False), default=False),
             'hierarchical': _as_bool(self.config.get('hierarchical', False), default=False),
             'price_profile': str(self.config.get('price_profile', 'us_legacy')),
+            'nutrient_cost_weight': float(self.config.get('nutrient_cost_weight', 1.0)),
+            'blocked_nutrient_penalty_per_kg': float(
+                self.config.get('blocked_nutrient_penalty_per_kg', 0.0)
+            ),
             'metrics': metrics,
         }
         path.write_text(json.dumps(payload, indent=2), encoding='utf-8')
@@ -507,6 +515,10 @@ if __name__ == '__main__':
                         help='Enable Pakistan crop-calendar windows')
     parser.add_argument('--price_profile', default='pakistan_baseline',
                         help='Economics profile to use (e.g. us_legacy, pakistan_baseline)')
+    parser.add_argument('--nutrient-cost-weight', default=1.0, type=float,
+                        help='Weight multiplier for nutrient-cost penalty in hierarchical reward')
+    parser.add_argument('--blocked-nutrient-penalty-per-kg', default=0.0, type=float,
+                        help='Extra hierarchical shaping penalty per kg requested but blocked nutrient')
     parser.add_argument('--enforce_calendar_windows', default='True',
                         help='Sanitize hierarchical crop choices to crops with defined calendar windows')
     parser.add_argument('--limit_fertilizer_to_season', default='True',
@@ -580,6 +592,8 @@ if __name__ == '__main__':
                   use_pakistan_crop_calendar='False',
                   nutrient_action_mode='NPK',
                   price_profile='pakistan_baseline',
+                  nutrient_cost_weight=1.0,
+                  blocked_nutrient_penalty_per_kg=0.0,
                   enforce_calendar_windows='True',
                   limit_fertilizer_to_season='True',
                   maxN=150,
@@ -602,6 +616,10 @@ if __name__ == '__main__':
                   summary_json='')
 
     config.update(args)
+    config['nutrient_cost_weight'] = max(0.0, float(config.get('nutrient_cost_weight', 1.0)))
+    config['blocked_nutrient_penalty_per_kg'] = max(
+        0.0, float(config.get('blocked_nutrient_penalty_per_kg', 0.0))
+    )
 
     if args.get('without_tracking', False):
         wandb = _NoOpWandb()

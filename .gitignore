@@ -141,3 +141,7 @@ artifacts/final_successful_runs/Recovered/
 cycles/input/[0-9][0-9][0-9][0-9]_*/
 cycles/output/[0-9][0-9][0-9][0-9]_*/
 cycles/input/weather_*
+
+# External/local repo snapshots (do not track)
+original_cycles_gym/
+Local Files and Folders/

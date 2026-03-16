@@ -40,6 +40,18 @@ class TestRewarders(unittest.TestCase):
                                     action={'N_NH4': 3.0, 'N_NO3': 2.0})
         assert r == -10.0
 
+    def test_n_rewarder_cost_weight_scales_penalty(self):
+        rewarder = NProfitabilityRewarder(
+            n_price_per_kg={1980: 2.0},
+            cost_weight=0.5,
+        )
+        r = rewarder.compute_reward(
+            date=datetime.date(1980, 1, 1),
+            delta=1,
+            action={'N_NH4': 3.0, 'N_NO3': 2.0},
+        )
+        assert r == -5.0
+
     def test_npk_rewarder_supports_dict_action(self):
         rewarder = NPKProfitabilityRewarder(
             nutrient_price_per_kg={
@@ -65,6 +77,22 @@ class TestRewarders(unittest.TestCase):
                                     delta=1,
                                     action=[1.0, 2.0, 3.0])
         assert r == -14.0
+
+    def test_npk_rewarder_cost_weight_scales_penalty(self):
+        rewarder = NPKProfitabilityRewarder(
+            nutrient_price_per_kg={
+                'N': {1980: 1.0},
+                'P': {1980: 2.0},
+                'K': {1980: 3.0},
+            },
+            cost_weight=0.25,
+        )
+        r = rewarder.compute_reward(
+            date=datetime.date(1980, 1, 1),
+            delta=1,
+            action={'N': 1.0, 'P': 2.0, 'K': 3.0},
+        )
+        assert r == -3.5
 
 
 if __name__ == '__main__':

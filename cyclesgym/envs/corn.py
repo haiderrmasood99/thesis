@@ -34,6 +34,7 @@ class Corn(CyclesEnv):
                  p_actions=None,
                  k_actions=None,
                  n_nh4_rate=0.75,
+                 nutrient_cost_weight=1.0,
                  price_profile='us_legacy',
                  crop_file='GenericCrops_final.crop',
                  operation_file='Pakistan_Corn_final.operation',
@@ -55,6 +56,7 @@ class Corn(CyclesEnv):
         self.p_actions = int(p_actions) if p_actions is not None else int(n_actions)
         self.k_actions = int(k_actions) if k_actions is not None else int(n_actions)
         self.n_nh4_rate = float(n_nh4_rate)
+        self.nutrient_cost_weight = float(nutrient_cost_weight)
         self.rotation_size = end_year - start_year + 1
         self.use_reinit = use_reinit
         super().__init__(SIMULATION_START_YEAR=start_year,
@@ -145,9 +147,15 @@ class Corn(CyclesEnv):
         crop_rewarder = CropRewarder(self.season_manager, 'CornRM.90',
                                      price_profile=self.price_profile)
         if self.nutrient_action_mode == 'NPK':
-            nutrient_rewarder = NPKProfitabilityRewarder(price_profile=self.price_profile)
+            nutrient_rewarder = NPKProfitabilityRewarder(
+                price_profile=self.price_profile,
+                cost_weight=self.nutrient_cost_weight,
+            )
         else:
-            nutrient_rewarder = NProfitabilityRewarder(price_profile=self.price_profile)
+            nutrient_rewarder = NProfitabilityRewarder(
+                price_profile=self.price_profile,
+                cost_weight=self.nutrient_cost_weight,
+            )
         self.rewarder = compound_rewarder([crop_rewarder, nutrient_rewarder])
 
     def _init_implementer(self, *args, **kwargs):

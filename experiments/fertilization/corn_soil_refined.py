@@ -21,6 +21,7 @@ class CornSoilCropWeatherObs(Corn):
                  p_actions=None,
                  k_actions=None,
                  n_nh4_rate=0.75,
+                 nutrient_cost_weight=1.0,
                  price_profile='pakistan_baseline',
                  operation_file='Pakistan_Corn_final.operation',
                  soil_file='Pakistan_Soil_final.soil',
@@ -40,6 +41,7 @@ class CornSoilCropWeatherObs(Corn):
         self.p_actions = int(p_actions) if p_actions is not None else int(n_actions)
         self.k_actions = int(k_actions) if k_actions is not None else int(n_actions)
         self.n_nh4_rate = float(n_nh4_rate)
+        self.nutrient_cost_weight = float(nutrient_cost_weight)
         self.rotation_size = end_year - start_year + 1
         self.use_reinit = use_reinit
 
@@ -105,7 +107,7 @@ class CornSoilCropWeatherObs(Corn):
 def CornSoilRefined(delta, n_actions, maxN, start_year, end_year, sampling_start_year, sampling_end_year,
      n_weather_samples, fixed_weather, with_obs_year,
      nutrient_action_mode='N', maxP=0.0, maxK=0.0, p_actions=None, k_actions=None,
-     n_nh4_rate=0.75, price_profile='pakistan_baseline'):
+     n_nh4_rate=0.75, nutrient_cost_weight=1.0, price_profile='pakistan_baseline'):
     target_obs = ['PP', # Precipitation
                   'TX', # Max temperature
                   'TN', # Min temperature
@@ -128,13 +130,15 @@ def CornSoilRefined(delta, n_actions, maxN, start_year, end_year, sampling_start
                                              sampling_end_year, n_weather_samples, fixed_weather, with_obs_year,
                                              nutrient_action_mode=nutrient_action_mode,
                                              maxP=maxP, maxK=maxK, p_actions=p_actions, k_actions=k_actions,
-                                             n_nh4_rate=n_nh4_rate, price_profile=price_profile)
+                                             n_nh4_rate=n_nh4_rate,
+                                             nutrient_cost_weight=nutrient_cost_weight,
+                                             price_profile=price_profile)
 
 
 def NonAdaptiveCorn(delta, n_actions, maxN, start_year, end_year, sampling_start_year, sampling_end_year,
      n_weather_samples, fixed_weather, with_obs_year,
      nutrient_action_mode='N', maxP=0.0, maxK=0.0, p_actions=None, k_actions=None,
-     n_nh4_rate=0.75, price_profile='pakistan_baseline'):
+     n_nh4_rate=0.75, nutrient_cost_weight=1.0, price_profile='pakistan_baseline'):
     target_obs = ['Y', # Years left
                   'DOY', # Day of the year
                   'N TO DATE'
@@ -143,13 +147,16 @@ def NonAdaptiveCorn(delta, n_actions, maxN, start_year, end_year, sampling_start
                                       sampling_end_year, n_weather_samples, fixed_weather, with_obs_year,
                                       nutrient_action_mode=nutrient_action_mode,
                                       maxP=maxP, maxK=maxK, p_actions=p_actions, k_actions=k_actions,
-                                      n_nh4_rate=n_nh4_rate, price_profile=price_profile)
+                                      n_nh4_rate=n_nh4_rate,
+                                      nutrient_cost_weight=nutrient_cost_weight,
+                                      price_profile=price_profile)
 
 
 def generate_partially_observable_env(target_obs, delta, n_actions, maxN, start_year, end_year, sampling_start_year,
                                       sampling_end_year, n_weather_samples, fixed_weather, with_obs_year,
                                       nutrient_action_mode='N', maxP=0.0, maxK=0.0, p_actions=None, k_actions=None,
-                                      n_nh4_rate=0.75, price_profile='pakistan_baseline',
+                                      n_nh4_rate=0.75, nutrient_cost_weight=1.0,
+                                      price_profile='pakistan_baseline',
                                       ):
     # Weather generator
     if fixed_weather:
@@ -174,6 +181,7 @@ def generate_partially_observable_env(target_obs, delta, n_actions, maxN, start_
                                                   p_actions=p_actions,
                                                   k_actions=k_actions,
                                                   n_nh4_rate=n_nh4_rate,
+                                                  nutrient_cost_weight=nutrient_cost_weight,
                                                   price_profile=price_profile,
                                                   start_year=start_year,
                                                   end_year=end_year,
@@ -186,6 +194,7 @@ def generate_partially_observable_env(target_obs, delta, n_actions, maxN, start_
                         sampling_end_year, n_weather_samples, fixed_weather, with_obs_year,
                         nutrient_action_mode=nutrient_action_mode, maxP=maxP, maxK=maxK,
                         p_actions=p_actions, k_actions=k_actions, n_nh4_rate=n_nh4_rate,
+                        nutrient_cost_weight=nutrient_cost_weight,
                         price_profile=price_profile)
     partially_observable_env = PartialObsEnv(fully_observable_env, mask=mask)
     partially_observable_env.reset()
@@ -209,6 +218,7 @@ def compute_mask(target_obs,
                  p_actions=None,
                  k_actions=None,
                  n_nh4_rate=0.75,
+                 nutrient_cost_weight=1.0,
                  price_profile='pakistan_baseline'):
 
     # Initialize environment
@@ -222,6 +232,7 @@ def compute_mask(target_obs,
                                                     p_actions=p_actions,
                                                     k_actions=k_actions,
                                                     n_nh4_rate=n_nh4_rate,
+                                                    nutrient_cost_weight=nutrient_cost_weight,
                                                     price_profile=price_profile,
                                                     start_year=start_year,
                                                     end_year=end_year,
@@ -242,6 +253,7 @@ def compute_mask(target_obs,
                                                     p_actions=p_actions,
                                                     k_actions=k_actions,
                                                     n_nh4_rate=n_nh4_rate,
+                                                    nutrient_cost_weight=nutrient_cost_weight,
                                                     price_profile=price_profile,
                                                     start_year=start_year,
                                                     end_year=end_year,
@@ -256,4 +268,3 @@ def compute_mask(target_obs,
     # Compute mask for partially observable environment
     mask = np.isin(np.asarray(large_obs_corn_env.observer.obs_names), target_obs)
     return mask
-

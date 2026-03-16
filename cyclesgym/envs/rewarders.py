@@ -107,7 +107,8 @@ class CropRewarder(object):
 
 
 class NProfitabilityRewarder(object):
-    def __init__(self, n_price_per_kg: dict = None, price_profile: str = 'us_legacy'):
+    def __init__(self, n_price_per_kg: dict = None, price_profile: str = 'us_legacy',
+                 cost_weight: float = 1.0):
         if n_price_per_kg is None:
             if price_profile == 'us_legacy':
                 n_price_per_kg = legacy_n_price_dollars_per_kg
@@ -115,6 +116,7 @@ class NProfitabilityRewarder(object):
                 profile = get_price_profile(price_profile)
                 n_price_per_kg = profile['nutrient_prices']['N']
         self.n_price_per_kg = n_price_per_kg
+        self.cost_weight = float(cost_weight)
 
     def compute_reward(self, date, delta, action=None):
         del delta
@@ -123,11 +125,12 @@ class NProfitabilityRewarder(object):
         y, doy = date2ydoy(date)
         del doy
         N_dollars_per_hectare = Nkg_per_heactare * _lookup_year_value(self.n_price_per_kg, y)
-        return -N_dollars_per_hectare
+        return -self.cost_weight * N_dollars_per_hectare
 
 
 class NPKProfitabilityRewarder(object):
-    def __init__(self, nutrient_price_per_kg: dict = None, price_profile: str = 'us_legacy'):
+    def __init__(self, nutrient_price_per_kg: dict = None, price_profile: str = 'us_legacy',
+                 cost_weight: float = 1.0):
         if nutrient_price_per_kg is None:
             nutrient_price_per_kg = get_price_profile(price_profile)['nutrient_prices']
 
@@ -136,6 +139,7 @@ class NPKProfitabilityRewarder(object):
             'P': nutrient_price_per_kg.get('P', {}),
             'K': nutrient_price_per_kg.get('K', {}),
         }
+        self.cost_weight = float(cost_weight)
 
     def compute_reward(self, date, delta, action=None):
         del delta
@@ -152,7 +156,7 @@ class NPKProfitabilityRewarder(object):
             if not price_series:
                 continue
             total_cost += mass * _lookup_year_value(price_series, y)
-        return -total_cost
+        return -self.cost_weight * total_cost
 
 
 def compound_rewarder(rewarder_list: list):
