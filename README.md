@@ -1,22 +1,35 @@
 # CyclesGym Thesis Repo
 
-This repository contains the runtime code for the Cycles-based reinforcement learning experiments.
-The root has been cleaned to keep only the files needed to install, train, evaluate, and rerun the core experiments.
+This repository contains the runtime code, frozen artifacts, and thesis workspace for the Pakistan-focused CyclesGym thesis experiments.
 
-Start with [`docs/README.md`](docs/README.md) for the push-ready documentation set.
+Start with [`docs/README.md`](docs/README.md) for the active documentation set.
 
-Historical thesis drafts, notebooks, exports, demo assets, and old local outputs were moved into
-[`Local Files and Folders/`](Local%20Files%20and%20Folders/).
+## Canonical Final Reporting
+
+The authoritative final evidence set is:
+
+- `artifacts/final_successful_runs/final_113/`
+- `artifacts/final_successful_runs/final_113/reporting/`
+
+That reporting directory is the single source of truth for:
+
+- `run_level_metrics.csv`
+- `grouped_metrics.csv`
+- `statistical_tests.csv`
+- `artifact_completeness_audit.csv`
+- `final_reporting_summary.json`
+
+Use those outputs for final reporting, thesis tables, and defense preparation. Do not treat `runs/experiment_summaries/` as the authoritative final benchmark surface.
 
 ## Core Layout
 
-- `cycles/`: Cycles simulator binaries and input files
+- `cycles/`: CYCLES simulator binaries and localized input files
 - `cyclesgym/`: Python package code
 - `experiments/`: training and inference entrypoints
-- `scripts/build_pakistan_price_series.py`: retained data-prep utility
+- `scripts/build_final_reports.py`: canonical final report builder
 - `run_experiments_7_3_2026.py`: main consolidated experiment runner
-- `run_hierarchical_guarded_parallel.py`: hierarchical rerun launcher
-- `run_all_2.py`, `run_all_experiments.py`: compatibility wrappers
+- `run_hierarchical_guarded_parallel.py`: guarded hierarchical rerun launcher
+- `Local Files and Folders/Thesis Main Working/`: LaTeX thesis workspace
 
 ## Installation
 
@@ -29,14 +42,16 @@ pip install -e .[SOLVERS]
 
 ## Runtime Outputs
 
-New local artifacts are written to:
+Active local runtime outputs still appear under:
 
-- `wandb/`: W&B local run folders and checkpoint artifacts
-- `runs/experiment_summaries/`: aggregated CSV/JSON summaries
-- `runs/train_logs/`: JSONL step and rollout logs
-- `runs/thesis_reports/`: hierarchical reporting artifacts
-- `runs/vec_normalize_*.pkl`: normalization statistics for reload/evaluation
+- `wandb/`
+- `runs/experiment_summaries/`
+- `runs/train_logs/`
+- `runs/thesis_reports/`
+- `runs/vec_normalize_*.pkl`
+
+Those folders are useful for execution and debugging. They are not the canonical final reporting layer.
 
 ## Archived Material
 
-Use [`Local Files and Folders/README.md`](Local%20Files%20and%20Folders/README.md) for the archived thesis and local-output inventory.
+Historical thesis drafts, notebooks, exports, demo assets, and older local outputs are kept under [`Local Files and Folders/`](Local%20Files%20and%20Folders/).

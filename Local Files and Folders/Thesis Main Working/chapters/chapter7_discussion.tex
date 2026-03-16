@@ -1,0 +1,59 @@
+\chapter{Discussion, Contribution Positioning, Synopsis Gap Closure, and Extension Paths}
+
+\section{What the Thesis Has Actually Achieved}
+
+Relative to the original CyclesGym baseline, the thesis has transformed the repository into a localized and reportable agricultural RL stack. It now supports Pakistan-adapted weather and soil inputs, Pakistan-oriented yearly crop and nutrient prices, NPK-aware fertilization logic, a hierarchical planning branch, and a canonical reporting pipeline that rebuilds the thesis from frozen evidence instead of from manually copied summaries.
+
+That combination matters because the contribution is not only a set of returns. It is a software-and-evidence system. The final repository now contains one canonical empirical surface, one rebuildable reporting workflow, and one consistent thesis narrative. For committee scrutiny, that is a significant advance over a technically interesting but document-fragmented project.
+
+\section{Why Scope Control Remains a Scientific Strength}
+
+The thesis does not claim completion of everything originally imagined in the synopsis, and that is scientific discipline rather than overreach. Irrigation as a learned action is not implemented. Rice-specific localization is not implemented. The crop-planning evidence base still centers on the working maize-soy configuration. Those boundaries narrow the external scope of the thesis, but they also protect it from making claims that the code and artifacts cannot support.
+
+\input{tables/generated/synopsis_closure_matrix.tex}
+
+Scope control also strengthens the defense posture. Difficult questions can be answered directly. If a committee asks whether the thesis optimizes irrigation, the answer is no. If it asks whether the thesis completed a rice-wheat Pakistan evaluation, the answer is no. If it asks whether the thesis nevertheless built a localized, cost-aware, statistically summarized, and reproducibly reported RL platform for fertilizer and crop-planning experiments, the answer is yes.
+
+\section{Claim Boundaries}
+
+The thesis still has several technical and scientific claim boundaries.
+\begin{itemize}[leftmargin=1.2cm]
+    \item The results are simulation-based and not field validated.
+    \item Irrigation is not exposed as a learned control variable in the active training flows.
+    \item The crop-planning and hierarchical branches remain tied to the working maize-soy configuration.
+    \item Recovered guarded hierarchical reruns do not include the original thesis-report directories, so provenance is lighter there than for the summary-level metrics.
+    \item Recovered replacements are explicit and auditable, but they still remind us that parts of the final bundle set are reconstructed from recovered metadata rather than preserved as first-pass originals.
+    \item Inferential statistics are restricted to repeated three-seed groups; DQN reruns and the baseline row remain descriptive only.
+\end{itemize}
+
+\input{tables/generated/limitations_matrix.tex}
+
+These claim boundaries do not diminish the completed work, but they define the boundary of what the thesis can responsibly claim. In particular, they explain why the strongest empirical claims belong to the fertilization branch and why the hierarchical branch should be presented as a corrected guarded rerun branch with dedicated interpretation rather than as a deployment-ready solution.
+
+\section{Implications for a Thesis Defense}
+
+From a defense perspective, the thesis is strongest when it is presented as a system-construction and evidence-control contribution grounded in agricultural RL. The committee can be shown a localized stack, a frozen empirical dataset, a statistical reporting layer, and a clear distinction between completed branches, descriptive ablations, and future work.
+
+The most defensible posture is therefore straightforward. Demonstrate mastery of the implemented system: environments, rewarders, pricing utilities, recovery provenance, canonical reporting, and LaTeX rebuilds. Then keep claims bounded. Fertilization is the strongest positive empirical branch. Crop planning is completed and comparatively close across the top repeated groups. Hierarchical work is completed and corrected, and should be presented as its own guarded branch.
+
+\section{Extension Paths}
+
+Extension paths now follow from the completed campaign rather than from an unfinished one.
+\begin{enumerate}[leftmargin=1.2cm]
+    \item Add a stronger heuristic or rule-based crop-planning comparator so that uplift claims are not limited to RL-vs-RL comparisons.
+    \item Add irrigation as a learned action so that the control space better matches the original ambition of the thesis topic.
+    \item Extend the crop-planning stack beyond the current maize-soy configuration if stable agronomic data and simulator support are available.
+    \item Strengthen external validity through expert review, field-adjacent checks, or downstream agronomic plausibility studies.
+    \item Expand economic realism beyond crop and nutrient prices to include broader farm-level frictions and operational constraints.
+ \end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.90\textwidth]{future_work_roadmap.pdf}
+    \caption{Extension roadmap implied by the final thesis scope boundaries. The emphasis now shifts from campaign completion to stronger baselines, richer controls, and external validation.}
+    \label{fig:future-work-roadmap}
+\end{figure}
+
+\section{Final Reflection}
+
+The central message of the thesis is not that agricultural RL is solved. It is that a vague idea of cost-aware crop management has been converted into a localized, testable, statistically summarized, and reproducibly reported software stack. The final contribution is therefore twofold: a working research platform and a frozen empirical story that can survive scrutiny because its claim boundaries are stated explicitly instead of being hidden behind inconsistent documents.

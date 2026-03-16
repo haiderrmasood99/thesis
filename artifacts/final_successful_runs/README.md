@@ -1,21 +1,21 @@
 # Final Successful Runs
 
-This folder contains the curated artifact bundles promoted out of `Local Files and Folders/`.
+This folder contains the promoted and frozen artifact bundles used for final reporting.
 
-- successful matrix bundles promoted: `109`
-- bundles with checkpoint files moved: `108`
-- bundles with `vec_normalize` files moved: `72`
-- bundles with hierarchical report folders moved: `12`
-- planned matrix rows left out: `4`
+## Active Canonical Set
 
-## Layout
+Use:
 
-- `bundles/`: one folder per successful final-matrix run
-- `manifest.csv`: promoted bundle inventory
-- `missing_runs.csv`: planned rows left out of promotion and why
+- `final_113/`
+- `final_113/reporting/`
 
-## Notes
+as the authoritative final evidence source.
 
-- The baseline-only run is included as a successful bundle even though it has no model checkpoint by design.
-- Crop-planning bundles do not include `vec_normalize` files because those files were not produced for those runs in the archive.
-- The four left-out rows are the failed DQN ablation slots from the actual matrix completion summary.
+## Older Curated Stage
+
+The older `bundles/` set in this folder is still useful as provenance context, but it is no longer the canonical final reporting surface because the final thesis freeze required recovered replacements and guarded hierarchical reruns.
+
+## Practical Rule
+
+- use `final_113/` for final thesis, defense, and public benchmark reporting
+- use older curated material only when tracing how the final freeze was assembled

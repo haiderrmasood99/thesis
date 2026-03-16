@@ -12,8 +12,10 @@ It explains the project scope, setup, training workflow, reporting workflow, mod
 3. [Architecture and Workflows](03_architecture_and_workflows.md)
 4. [Reporting and Artifacts](04_reporting_and_artifacts.md)
 5. [Model Management](05_model_management.md)
-6. [Results Summary and Limitations](06_results_summary_and_limitations.md)
+6. [Results Summary and Evidence Positioning](06_results_summary_and_limitations.md)
 7. [Release Checklist](07_release_checklist.md)
+8. [Defense Q&A and Evidence Guide](08_defense_qna.md)
+9. [Contributions vs Original CyclesGym](09_contributions_vs_original_cyclesgym.md)
 
 ## Audience
 

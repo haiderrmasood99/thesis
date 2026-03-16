@@ -33,13 +33,13 @@ Keep the following together:
 ## Recommended Promotion Workflow
 
 Raw run folders are noisy.
-This repo now defines a curated promotion target at:
+This repo defines two promotion stages:
 
 ```text
 artifacts/final_successful_runs/bundles/
 ```
 
-The corrected frozen final matrix set now also has a dedicated output path:
+The corrected frozen final matrix set has its dedicated output path at:
 
 ```text
 artifacts/final_successful_runs/final_113/bundles/
@@ -61,7 +61,8 @@ The promotion paths are code-defined in `cyclesgym/utils/paths.py`.
 Use:
 
 - `scripts/promote_final_matrix_runs.py` for the first-pass curated archive
-- `scripts/build_final_113_runs.py` to assemble the corrected final 113 bundle set from the curated archive plus recovered reruns
+- the recovered rerun bundle assembly already frozen in `artifacts/final_successful_runs/final_113/`
+- `scripts/build_final_reports.py` to build the canonical final reporting layer from that frozen set
 
 ## Naming Convention
 
@@ -83,9 +84,13 @@ W&B is not the only experiment trace.
 The repo also writes local artifacts:
 
 - `runs/train_logs/*.jsonl`: step and rollout logs
-- `runs/experiment_summaries/*.csv` and `*.json`: reporting layer
+- `runs/experiment_summaries/*.csv` and `*.json`: local execution summaries
 - `runs/thesis_reports/`: hierarchical-specific details
 - `runs/vec_normalize_*.pkl`: normalization state
+
+For final reporting, the authoritative layer is:
+
+- `artifacts/final_successful_runs/final_113/reporting/`
 
 ## Retention Policy
 

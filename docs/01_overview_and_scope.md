@@ -49,7 +49,8 @@ flowchart LR
 2. [Architecture and Workflows](03_architecture_and_workflows.md)
 3. [Reporting and Artifacts](04_reporting_and_artifacts.md)
 4. [Model Management](05_model_management.md)
-5. [Results Summary and Limitations](06_results_summary_and_limitations.md)
+5. [Results Summary and Evidence Positioning](06_results_summary_and_limitations.md)
+6. [Contributions vs Original CyclesGym](09_contributions_vs_original_cyclesgym.md)
 
 ## Repository Boundary
 

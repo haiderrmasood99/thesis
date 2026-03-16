@@ -103,8 +103,39 @@ artifacts/final_successful_runs/final_113/bundles/
 # Optional: data (if large)
 ############################
 data/
-Local Files and Folders/
+Local Files and Folders/*
+!Local Files and Folders/Thesis Main Working/
+Local Files and Folders/Thesis Main Working/*
+!Local Files and Folders/Thesis Main Working/README.md
+!Local Files and Folders/Thesis Main Working/build.ps1
+!Local Files and Folders/Thesis Main Working/main.tex
+!Local Files and Folders/Thesis Main Working/frontmatter/
+Local Files and Folders/Thesis Main Working/frontmatter/*
+!Local Files and Folders/Thesis Main Working/frontmatter/abstract.tex
+!Local Files and Folders/Thesis Main Working/chapters/
+Local Files and Folders/Thesis Main Working/chapters/*
+!Local Files and Folders/Thesis Main Working/chapters/chapter5_implementation.tex
+!Local Files and Folders/Thesis Main Working/chapters/chapter6_results_status.tex
+!Local Files and Folders/Thesis Main Working/chapters/chapter7_discussion.tex
+!Local Files and Folders/Thesis Main Working/appendices/
+Local Files and Folders/Thesis Main Working/appendices/*
+!Local Files and Folders/Thesis Main Working/appendices/appendix_matrix.tex
+!Local Files and Folders/Thesis Main Working/appendices/appendix_reproducibility.tex
+!Local Files and Folders/Thesis Main Working/appendices/appendix_verification.tex
+!Local Files and Folders/Thesis Main Working/scripts/
+Local Files and Folders/Thesis Main Working/scripts/*
+!Local Files and Folders/Thesis Main Working/scripts/build_assets.py
+Local Files and Folders/Thesis Main Working/build/
+Local Files and Folders/Thesis Main Working/figures/generated/
+Local Files and Folders/Thesis Main Working/tables/generated/
+!Local Files and Folders/final_docs/
+Local Files and Folders/final_docs/*
+!Local Files and Folders/final_docs/README.md
+!Local Files and Folders/Experimentation and Results/
+Local Files and Folders/Experimentation and Results/*
+!Local Files and Folders/Experimentation and Results/README.md
 artifacts/final_successful_runs/Recovered/
+.tools/tectonic/
 
 # Ignore temporary simulation directories
 cycles/input/[0-9][0-9][0-9][0-9]_*/
