@@ -186,7 +186,7 @@ def build_crop_planning_core(
                             adaptive="False" if nonadaptive else "True",
                             fixed_weather=str(fixed_weather),
                             seed=str(seed),
-                            budget="total_timesteps=500(default)",
+                            budget="total_timesteps=3000(default)",
                             cmd=cmd,
                         )
                     )
@@ -224,7 +224,7 @@ def build_crop_planning_core(
                             adaptive="hierarchical",
                             fixed_weather=str(fixed_weather),
                             seed=str(seed),
-                            budget="total_timesteps=500(default)",
+                            budget="total_timesteps=3000(default)",
                             cmd=h_cmd,
                             hierarchical="True",
                         )
@@ -330,7 +330,7 @@ def build_dqn_ablations(
                 adaptive="False",
                 fixed_weather=str(fixed_weather),
                 seed=str(dqn_seed),
-                budget="total_timesteps=500(default)",
+                budget="total_timesteps=3000(default)",
                 cmd=cmd,
             )
         )

@@ -584,7 +584,7 @@ if __name__ == '__main__':
                                         target_year_range=np.arange(train_start_year, train_end_year + 1))
 
     config = dict(train_start_year=train_start_year, train_end_year=train_end_year, eval_start_year=eval_start_year, eval_end_year=eval_end_year,
-                  total_timesteps=500, eval_freq=100, n_steps=80, batch_size=64, n_epochs=10, run_id=0,
+                  total_timesteps=3000, eval_freq=100, n_steps=80, batch_size=64, n_epochs=10, run_id=0,
                   norm_reward=True, method="PPO", verbose=1, n_process=1, device='auto',
                   env_class=env_class, eval_env_class=eval_env_class, weather_generator_class=weather_generator_class,
                   weather_generator_kwargs=weather_generator_kwargs,
