@@ -1,16 +1,16 @@
-# Architecture and Workflows
+﻿# Architecture and Workflows
 
 ## End-to-End Runtime Architecture
 
 ```mermaid
 flowchart LR
-    Agent["SB3 policy"] --> Env["cyclesgym.envs.*"]
-    Env --> Impl["Implementer / operation updates"]
-    Env --> Cycles["Cycles.exe"]
-    Cycles --> Out["cycles/output/<sim_id>/..."]
-    Out --> Managers["managers/*.py parsers"]
-    Managers --> Obs["Observation builders"]
-    Managers --> Rew["Reward logic"]
+    Agent[SB3 policy] --> Env[cyclesgym.envs.*]
+    Env --> Impl[Implementer / operation updates]
+    Env --> Cycles[Cycles.exe]
+    Cycles --> Out[cycles/output/<sim_id>/...]
+    Out --> Managers[managers/*.py parsers]
+    Managers --> Obs[Observation builders]
+    Managers --> Rew[Reward logic]
     Obs --> Env
     Rew --> Env
 ```
@@ -20,12 +20,12 @@ flowchart LR
 | Area | Key Files | Responsibility |
 |---|---|---|
 | simulator paths | `cyclesgym/utils/paths.py` | project-root and simulator path resolution |
-| fertilization env | `cyclesgym/envs/corn.py` | weekly fertilization decision environment |
-| crop-planning env | `cyclesgym/envs/crop_planning.py` | yearly crop decision environment |
-| hierarchical env | `cyclesgym/envs/hierarchical.py` | yearly crop plus weekly fertilizer joint control |
-| weather generation | `cyclesgym/envs/weather_generator.py` | fixed and shuffled weather modes |
-| train scripts | `experiments/fertilization/train.py`, `experiments/crop_planning/train.py` | SB3 training, logging, summaries, checkpointing |
-| runners | `run_experiments_7_3_2026.py`, `run_hierarchical_guarded_parallel.py` | experiment orchestration |
+| fertilization env | `cyclesgym/envs/corn.py` | weekly fertilization decisions |
+| crop-planning env | `cyclesgym/envs/crop_planning.py` | yearly crop decisions |
+| hierarchical env | `cyclesgym/envs/hierarchical.py` | yearly planning + weekly fertilization |
+| weather generation | `cyclesgym/envs/weather_generator.py` | fixed/random weather modes |
+| training scripts | `experiments/fertilization/train.py`, `experiments/crop_planning/train.py` | SB3 train/eval workflow |
+| matrix runners | `run_experiments_7_3_2026.py`, `run_hierarchical_guarded_parallel.py` | orchestration |
 
 ## Simulation Lifecycle
 
@@ -50,28 +50,21 @@ sequenceDiagram
     E-->>A: obs, reward, done, info
 ```
 
-## Training Workflow
+## Reporting-Critical Design
 
-```mermaid
-flowchart TD
-    A["Runner args"] --> B["Train config"]
-    B --> C["Build envs"]
-    C --> D["VecMonitor + VecNormalize"]
-    D --> E["SB3 model"]
-    E --> F["Callbacks"]
-    F --> G["Model checkpoints"]
-    F --> H["JSONL logs"]
-    F --> I["Summary JSON/CSV"]
-```
+The thesis stack deliberately preserves more than scalar reward:
 
-## Active Entry Points
+- nutrient-wise costs (`N`, `P`, `K`)
+- yearly crop decision traces
+- compliance/report fields in `info`
+- per-run summary JSON outputs
 
-- `run_experiments_7_3_2026.py`: consolidated thesis matrix runner
-- `run_hierarchical_guarded_parallel.py`: guarded hierarchical reruns
-- `run_all_2.py`: compatibility wrapper with older defaults
-- `run_all_experiments.py`: thin compatibility wrapper
+This is essential for defense interpretability.
 
 ## Geographic Defaults
 
-The current code defaults to Pakistan weather and soil inputs.
-That makes the repo coherent for the current thesis framing, but it also means claims should stay scoped to the simulator configuration that is actually encoded in the training and environment setup.
+Current defaults are Pakistan-oriented (weather, soil, price profiles). Claims should remain scoped to this configured simulation context.
+
+## Current Methodological Position
+
+Architecture is implementation-complete for the targeted thesis scope, and final comparative claims are backed by completed frozen runs (`final_113` and `final_42_ablation`).

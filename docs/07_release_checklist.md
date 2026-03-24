@@ -1,42 +1,38 @@
-# Release Checklist
+﻿# Release Checklist
 
-## Goal
+Use this checklist before publishing a new thesis-facing update.
 
-Use this checklist before pushing a public repo update that changes experiment code, reporting logic, or docs.
+## Code and Runtime
 
-## Code And Runtime
+1. Confirm main runners still execute dry-run correctly.
+2. If hierarchical logic changed, dry-run guarded hierarchical runner.
+3. Ensure no accidental hardcoded output paths outside intended runtime folders.
 
-1. Confirm the cleaned root still contains the canonical runners.
-2. Run at least one dry-run command for the main matrix.
-3. If hierarchical code changed, run a dry-run for `run_hierarchical_guarded_parallel.py`.
-4. Confirm no new local output paths were hardcoded outside `runs/` or `wandb/`.
+## Evidence Integrity
 
-## Artifacts
-
-1. Do not commit raw `wandb/` output.
-2. Do not commit raw `runs/` outputs except intentional placeholders.
-3. Keep only lightweight static docs assets under `docs/assets/`.
-4. If a model is worth preserving, promote it outside raw run folders first.
+1. Distinguish matrix definition from completed execution.
+2. Update status counts with explicit numbers and date.
+3. Label historical runs as context if fresh campaign is incomplete.
+4. Ensure claimed results map to real completed summaries.
 
 ## Documentation
 
-1. Update the relevant page under `docs/`.
-2. Keep image links relative and GitHub-renderable.
-3. Keep command examples aligned with the current root layout.
-4. Keep scope statements honest when results are based on archived data.
+1. Update `README.md` and affected `docs/*.md` pages.
+2. Keep thesis status consistent with `Refrence Material/Latex/extracted_latex/` chapters and generated tables.
+3. Keep scope boundaries explicit (implemented vs deferred).
+
+## Presentation Assets
+
+1. Regenerate or update defense deck if thesis status changed.
+2. Do not overwrite baseline proposal deck.
+3. Keep generated slide source script alongside final pptx.
 
 ## Final Review
 
-1. Read `docs/README.md` as if you were a new maintainer.
-2. Confirm the root `README.md` points to `docs/`.
-3. Confirm the repo no longer depends on archived folders for basic understanding.
-4. Check `git status` and make sure the diff looks intentional.
+1. Read docs as a new reader and check for contradictory claims.
+2. Confirm no document claims fresh campaign completion unless true.
+3. Verify `git status` contains intentional changes only.
 
-## Definition Of Done
+## Definition of Done
 
-The repo is ready to push when:
-
-- the root tells a clean runtime story
-- `docs/` explains setup, usage, reporting, and artifact management
-- generated results are treated as outputs, not as permanent source files
-- the current limitations are documented instead of hidden
+A release is ready when implementation claims, run status, docs, and presentation all tell the same story.

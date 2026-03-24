@@ -1,72 +1,33 @@
-# Model Management
+﻿# Model Management
 
-## Where Saved Models Live
+## Where Models Are Saved
 
-### When W&B Tracking Is Enabled
-
-Checkpoints are written inside the local W&B run folder:
+### With W&B tracking
 
 - `wandb/run-.../files/model.zip`
 - `wandb/run-.../files/models/.../best_model.zip`
 
-This is the default tracked workflow.
-
-### When `--without-tracking` Is Used
-
-The code falls back to a local offline run folder:
+### With `--without-tracking`
 
 - `runs/offline/<run-id>/models/...`
 
-This keeps the run usable even without a W&B session.
+## Minimum Bundle Needed For Any Defensible Result
 
-## Other Required Artifacts
+A model checkpoint must be paired with:
 
-A saved model is not enough by itself.
-Keep the following together:
+- matching normalization stats (`runs/vec_normalize_*.pkl` if used)
+- summary JSON/CSV evidence
+- command/config details
+- seed and weather mode
+- timestamped run identity
 
-- the checkpoint file
-- the matching `runs/vec_normalize_*.pkl`
-- the corresponding summary JSON
-- the runner command or config
-- the seed and weather mode
+## Promotion Rule
 
-## Recommended Promotion Workflow
-
-Raw run folders are noisy.
-This repo defines two promotion stages:
-
-```text
-artifacts/final_successful_runs/bundles/
-```
-
-The corrected frozen final matrix set has its dedicated output path at:
-
-```text
-artifacts/final_successful_runs/final_113/bundles/
-```
-
-For any model you want to preserve long-term, promote it into one bundle per successful run:
-
-```text
-artifacts/final_successful_runs/bundles/
-  001_fertilization_ppo_adaptive_fixed_weather_years_1000_seed_0/
-    bundle_metadata.json
-    models/
-    runtime/
-    summary/
-    wandb/
-```
-
-The promotion paths are code-defined in `cyclesgym/utils/paths.py`.
-Use:
-
-- `scripts/promote_final_matrix_runs.py` for the first-pass curated archive
-- the recovered rerun bundle assembly already frozen in `artifacts/final_successful_runs/final_113/`
-- `scripts/build_final_reports.py` to build the canonical final reporting layer from that frozen set
+Do not keep only raw run folders as long-term evidence. Promote meaningful runs into structured artifact folders with metadata and summaries.
 
 ## Naming Convention
 
-Use names that encode the minimum decision context:
+Use names that encode context:
 
 ```text
 <date>_<domain>_<method>_<seed>_<weather>_<runid>
@@ -78,38 +39,16 @@ Example:
 2026-03-14_fertilization_ppo_seed1_random_zyo19dh1
 ```
 
-## Tracking: W&B Versus Local Logs
+## Thesis-Evidence Boundary
 
-W&B is not the only experiment trace.
-The repo also writes local artifacts:
-
-- `runs/train_logs/*.jsonl`: step and rollout logs
-- `runs/experiment_summaries/*.csv` and `*.json`: local execution summaries
-- `runs/thesis_reports/`: hierarchical-specific details
-- `runs/vec_normalize_*.pkl`: normalization state
-
-For final reporting, the authoritative layer is:
-
-- `artifacts/final_successful_runs/final_113/reporting/`
+For current thesis writing, model files alone are insufficient. Claims must reference both model artifacts and corresponding completed summary outputs.
 
 ## Retention Policy
 
-- keep every summary CSV and summary JSON until the reporting cycle is finished
-- keep only promoted checkpoints long-term
-- treat raw `wandb/` and `runs/offline/` folders as working storage, not curated archives
-- never cite a model in docs unless you can point to its checkpoint, normalization file, and summary JSON together
+Keep:
 
-## Push Hygiene
-
-The public repo should contain:
-
-- source code
+- code
 - docs
-- lightweight static figures
+- curated promoted artifacts with metadata
 
-The public repo should not contain:
-
-- raw training dumps
-- raw W&B run trees
-- large local log folders
-- temporary experiment copies
+Avoid treating raw run dumps as canonical long-term evidence.

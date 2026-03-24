@@ -1,27 +1,27 @@
-# Farmer-First Pakistan Demo
+﻿# Farmer-First Pakistan Demo
 
-This folder contains the new local MVP app for the thesis demo. It is separate from the archived `Local Files and Folders/demo` prototype and uses audited bundles from `artifacts/final_successful_runs`.
+This folder contains the local thesis MVP demo app.
+
+## Thesis Alignment Note
+
+The demo showcases how audited/saved RL artifacts can be turned into a farmer-facing interface with guardrails. It does **not** change the main thesis evidence boundary:
+
+- simulation-based only
+- final frozen evidence uses completed `113` + `42` runs
 
 ## What It Does
 
-- farmer-first guided assistant for maize
-- soybean seasonal reference mode with lighter-support wording
-- FastAPI backend with local RL bundle inference and budget/moisture guardrails
+- guided local assistant for maize and soybean reference flows
+- FastAPI backend with local bundle inference + budget/moisture guardrails
 - React + Vite frontend with English UI and Urdu hints
 
 ## Folder Layout
 
-- `demo/backend/`: FastAPI app, bundle registry, runtime adapter, tests
-- `demo/frontend/`: React + Vite SPA, Vitest tests
-- `demo/docs/`: user, architecture, API, limitations, and thesis demo notes
-- `demo/docs/demo-explained.md`: full technical and user-flow deep dive, combo logic, and guardrails
-- `demo/start_demo.ps1`: Windows launcher for backend and frontend
+- `demo/backend/`: FastAPI app, adapter, tests
+- `demo/frontend/`: React/Vite app
+- `demo/docs/`: user and technical notes
 
-## Windows Local Setup
-
-This repo's shared `cyclesgym` environment uses Python 3.8.20, so the backend requirements are pinned to Python 3.8 compatible versions.
-
-From the repo root:
+## Quick Setup
 
 ```powershell
 python -m pip install -r demo/backend/requirements.txt
@@ -30,7 +30,7 @@ npm install
 cd ../..
 ```
 
-## Run Manually
+## Run
 
 Backend:
 
@@ -45,45 +45,6 @@ cd demo/frontend
 npm run dev -- --host 127.0.0.1 --port 5173
 ```
 
-Open [http://127.0.0.1:5173](http://127.0.0.1:5173).
+## Scope Reminder
 
-## Run With Launcher
-
-```powershell
-.\demo\start_demo.ps1
-```
-
-This opens two PowerShell windows, one for the backend and one for the frontend.
-
-## Alternative Backend Run
-
-If you are already inside `demo/backend`, use:
-
-```powershell
-python run_local.py
-```
-
-This avoids the `ModuleNotFoundError: No module named 'demo'` issue that happens when `uvicorn demo.backend.app:app` is started from inside the backend folder.
-
-## Test Commands
-
-Backend:
-
-```powershell
-python -m pytest demo/backend/tests -q
-```
-
-Frontend:
-
-```powershell
-cd demo/frontend
-npm run test
-npm run build
-```
-
-## Notes
-
-- The maize daily flow uses the audited adaptive PPO fertilization bundle from the final manifest.
-- The soybean flow uses the audited hierarchical PPO report bundle and is intentionally reference-only.
-- Cost display uses Pakistan baseline nutrient prices with the latest available display year from repo pricing data.
-- If you are inside the conda `cyclesgym` environment, prefer `python -m pip ...` over bare `pip ...` so installs use the active interpreter.
+Treat demo output as decision-support UX over simulation artifacts, not field-validated agronomy guidance.

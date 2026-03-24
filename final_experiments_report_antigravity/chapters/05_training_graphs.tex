@@ -1,0 +1,50 @@
+\chapter{Detailed Per-Run Training Graphics}
+\label{chap:training}
+
+Extracting summarized means inherently compresses the behavioral nuances observed during multi-million step rollouts. To contextualize the summary metrics, the per-run diagnostics were generated, capturing learning curves, discrete point-evaluations, and application behaviors over global steps.
+
+\section{Diagnostic Panels and Evaluation Trajectories}
+
+Every execution in the 42-run study dumped an immensely rich set of diagnostic panels mapping the core training flow: the primary episode length scaling, dynamic primary metric convergence, and normalized training rewards.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/001_p1_ppo_adaptive_fixed_weather_seed0_ent0__diagnostics_panel.png}
+    \caption{Typical diagnostics panel extracted from a Point 1 Entropy ablation run (Seed 0, ent=0.0). Notice the aggressive early convergence enabled by clipping entropy.}
+    \label{fig:per_run_diag}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/013_p2_a2c_fixed_weather_seed0_blockpen0__checkpoint_eval_curves.png}
+    \caption{Checkpoint Evaluation Curves from Point 2 (A2C). This illustrates the extreme volatility of A2C's non-clipped updates recovering dynamically over a strict evaluation cycle.}
+    \label{fig:per_run_eval}
+\end{figure}
+
+\section{Behavioral Observations in Fertilization}
+
+Specifically, in runs targeting blocked penalties (Point 2) or fertilization targets, detailed application curves mapped exactly \textit{when} the agent elected to deploy compounds. A hallmark of sophisticated policy convergence was the agent learning not only the quantity but the precise temporal distribution mapped directly to crop-stage logic.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/013_p2_a2c_fixed_weather_seed0_blockpen0__weekly_npk_behavior.png}
+    \caption{Detailed Weekly NPK Application Behavior traced against specific calendar milestones across the episode.}
+    \label{fig:per_run_npk}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/013_p2_a2c_fixed_weather_seed0_blockpen0__crop_decision_timeline.png}
+    \caption{The hierarchical crop decision timeline demonstrating sequential transitions deployed over the evaluated episode.}
+    \label{fig:per_run_crops}
+\end{figure}
+
+\section{Key Takeaways from the Diagnostics}
+The per-run artifacts fundamentally validate the grouped summary metrics:
+\begin{enumerate}
+    \item PPO generated smoother, monotonically increasing check-point evaluation curves than A2C. 
+    \item Total episode lengths routinely saturated early in fixed-weather sequences, denoting successful structural survival policies. Random weather introduced mid-training "crashes", visible as drops in the \texttt{episode\_length\_vs\_global\_step} plots, corresponding precisely with injected deep drought states.
+    \item Agents operating with \texttt{cost\_weight=0.8} (Point 3) visibly sprayed NPK aggressively across timelines, resulting in dense activation graphs on the weekly NPK timelines but lower final episodic yields. 
+\end{enumerate}
+
+\input{chapters/05_generated_plots}

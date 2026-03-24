@@ -36,6 +36,9 @@ env/
 venv/
 .venv/
 
+wandb_full_backup/
+artifacts/final_successful_runs/
+*.zip
 ############################
 # Jupyter
 ############################

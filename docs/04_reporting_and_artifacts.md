@@ -1,56 +1,38 @@
-# Reporting and Artifacts
+﻿# Reporting and Artifacts
 
 ## Purpose
 
-This repository produces two distinct output layers:
+This repo has:
 
-- runtime artifacts needed to resume, inspect, or debug experiments
-- canonical reporting artifacts used for final thesis reporting and public result summaries
+1. runtime/debug outputs (`runs/`, `wandb/`)
+2. completed frozen final evidence packs (`artifacts/final_successful_runs/`)
 
-The final reporting process now reduces frozen bundles into one authoritative reporting directory before anything is cited in docs or thesis chapters.
+## Canonical Completed Packs
+
+- `artifacts/final_successful_runs/final_113/`
+- `artifacts/final_successful_runs/final_113/reporting/`
+- `artifacts/final_successful_runs/final_42_ablation/`
+- `artifacts/final_successful_runs/final_42_ablation/reporting/low_hanging_ablation/`
 
 ## Artifact Map
 
-| Path | What It Contains | When To Use It |
+| Path | What it contains | Use |
 |---|---|---|
-| `wandb/` | local tracking folders, metadata, and checkpoints | use for run-level debugging and recovery |
-| `runs/offline/` | local fallback run folders when `--without-tracking` is used | use for no-W&B runs |
-| `runs/experiment_summaries/` | ad hoc local batch CSVs and per-run summaries | use for local execution checks, not as final public source of truth |
-| `runs/train_logs/` | JSONL step and rollout logs | debugging and timeline reconstruction |
-| `runs/thesis_reports/` | hierarchical per-run report bundles when present | only for hierarchical fine-grained inspection |
-| `artifacts/final_successful_runs/final_113/` | frozen final 113-run bundle set | canonical final artifact source |
-| `artifacts/final_successful_runs/final_113/reporting/` | canonical run-level, grouped, statistical, and audit outputs | primary reporting source |
+| `runs/experiment_summaries/` | local batch summaries | execution checks |
+| `runs/train_logs/` | JSONL runtime logs | debugging |
+| `wandb/` | tracked run artifacts | provenance/debugging |
+| `artifacts/final_successful_runs/final_113/reporting/` | final matrix run-level/grouped/statistical outputs | primary final matrix citation |
+| `artifacts/final_successful_runs/final_42_ablation/reporting/low_hanging_ablation/` | ablation reporting outputs | primary ablation citation |
 
-## Final Reporting Workflow
+## Final Reporting Rule
 
-```mermaid
-flowchart LR
-    A["Freeze bundle set in final_113"] --> B["Run build_final_reports.py"]
-    B --> C["Produce canonical reporting CSV/JSON files"]
-    C --> D["Run thesis asset generator"]
-    D --> E["Rebuild thesis and docs"]
-```
+For thesis-final claims, cite reporting outputs from completed frozen packs.
 
-## Source-Of-Truth Priority
+If older extracted LaTeX status tables disagree, treat those tables as older snapshots and use frozen completed packs as canonical.
 
-1. `artifacts/final_successful_runs/final_113/reporting/`
-2. `artifacts/final_successful_runs/final_113/`
-3. `wandb/` metadata and recovered exports for provenance checks
-4. `runs/train_logs/*.jsonl` and `runs/thesis_reports/` for debugging details
+## Practical Priority
 
-Do not build final tables directly from raw checkpoint folders or provisional runner summary CSVs when the canonical reporting outputs already exist.
-
-## Reporting Checklist For A Frozen Release
-
-1. Rebuild `final_113/reporting/` with `python scripts/build_final_reports.py`.
-2. Verify the canonical counts: 113 rows, 16 replacements, 12 guarded hierarchical reruns, and 4 DQN reruns.
-3. Confirm that every cited result resolves to a frozen bundle and canonical reporting row.
-4. Keep DQN reruns and the baseline row descriptive only.
-5. Report guarded hierarchical reruns as their own corrected branch.
-6. Surface artifact caveats instead of hiding them.
-7. Update thesis/docs only after the previous steps are done.
-
-## Public Repo Rule
-
-Commit the code, the docs, lightweight generated figures, and the canonical reporting summaries you intentionally publish.
-Do not treat large raw local runtime trees as the authoritative final reporting layer when a frozen canonical artifact set already exists.
+1. final_113 reporting outputs
+2. final_42 ablation reporting outputs
+3. manifest and replacement maps
+4. runtime folders for debugging/provenance detail

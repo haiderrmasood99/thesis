@@ -1,35 +1,37 @@
-# CyclesGym Thesis Repo
+﻿# CyclesGym Thesis Repo
 
-This repository contains the runtime code, frozen artifacts, and thesis workspace for the Pakistan-focused CyclesGym thesis experiments.
+This repository contains the runtime code, frozen final evidence packs, and thesis workspace for the Pakistan-focused CyclesGym thesis experiments.
 
-Start with [`docs/README.md`](docs/README.md) for the active documentation set.
+Start with [docs/README.md](docs/README.md).
 
-## Canonical Final Reporting
+## Canonical Final Evidence (Use This)
 
-The authoritative final evidence set is:
+The authoritative completed evidence sets are:
 
 - `artifacts/final_successful_runs/final_113/`
 - `artifacts/final_successful_runs/final_113/reporting/`
+- `artifacts/final_successful_runs/final_42_ablation/`
+- `artifacts/final_successful_runs/final_42_ablation/reporting/low_hanging_ablation/`
 
-That reporting directory is the single source of truth for:
+Current canonical counts:
 
-- `run_level_metrics.csv`
-- `grouped_metrics.csv`
-- `statistical_tests.csv`
-- `artifact_completeness_audit.csv`
-- `final_reporting_summary.json`
+- final matrix rows: `113`
+- ablation rows: `42`
 
-Use those outputs for final reporting, thesis tables, and defense preparation. Do not treat `runs/experiment_summaries/` as the authoritative final benchmark surface.
+## Important Note About Older LaTeX Status Snapshot
+
+Some extracted LaTeX status tables under `Refrence Material/Latex/extracted_latex/` still reflect an older provisional snapshot.
+For final thesis reporting and defense claims, use the completed frozen `final_113` and `final_42_ablation` packs above.
 
 ## Core Layout
 
 - `cycles/`: CYCLES simulator binaries and localized input files
 - `cyclesgym/`: Python package code
 - `experiments/`: training and inference entrypoints
-- `scripts/build_final_reports.py`: canonical final report builder
-- `run_experiments_7_3_2026.py`: main consolidated experiment runner
-- `run_hierarchical_guarded_parallel.py`: guarded hierarchical rerun launcher
-- `Local Files and Folders/Thesis Main Working/`: LaTeX thesis workspace
+- `run_experiments_7_3_2026.py`: consolidated experiment runner
+- `docs/`: active project documentation
+- `Refrence Material/`: reference PDFs/PPTX and LaTeX source exports
+- `artifacts/final_successful_runs/`: frozen completed evidence packs
 
 ## Installation
 
@@ -42,7 +44,7 @@ pip install -e .[SOLVERS]
 
 ## Runtime Outputs
 
-Active local runtime outputs still appear under:
+Active local runtime outputs appear under:
 
 - `wandb/`
 - `runs/experiment_summaries/`
@@ -50,8 +52,4 @@ Active local runtime outputs still appear under:
 - `runs/thesis_reports/`
 - `runs/vec_normalize_*.pkl`
 
-Those folders are useful for execution and debugging. They are not the canonical final reporting layer.
-
-## Archived Material
-
-Historical thesis drafts, notebooks, exports, demo assets, and older local outputs are kept under [`Local Files and Folders/`](Local%20Files%20and%20Folders/).
+These are useful for execution/debugging. Final thesis claims should cite frozen completed packs under `artifacts/final_successful_runs/`.

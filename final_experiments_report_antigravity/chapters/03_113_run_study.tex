@@ -1,0 +1,58 @@
+\chapter{The 133-Run Core Matrix Study}
+\label{chap:133_results}
+
+The 113-Run canonical study plus the 20 descriptive baseline derivations forms the exhaustive backbone of the agricultural decision optimization framework. This section summarizes the statistical derivations separating the best-in-class performing implementations from underperforming strategies.
+
+\section{Overall Leaderboard and Grouped Rankings}
+
+The statistical clustering of the experimental data pinpointed explicit topological ''winners'' within the policy landscape. Figures generated from the canonical \texttt{final\_113} exports heavily indicate that structural choices vastly outplay pure random seed variations.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/final_113__leaderboard_primary_metric.png}
+    \caption{The Leaderboard showcasing the ranking of primary metrics across the 133 main experiments.}
+    \label{fig:113_leaderboard}
+\end{figure}
+
+\subsection{Fertilization Results}
+In the fertilization framework, the grouped data revealed the \textbf{A2C | nonadaptive | fixed\_weather | years=5000} setting as the paramount grouping. This model secured a mean deterministic return of \textbf{779,267.35} with a 95\% confidence interval of \([727686.53, 830848.18]\). 
+
+Interestingly, at the grouped level, A2C operated most efficiently on long-budget horizons under fixed climate modes. For absolute single-seed peak performance, however, the crown was taken by \textbf{Fertilization | PPO | adaptive | fixed\_weather | years=3000 | seed=1}, hitting a single-run deterministic return of \textbf{791,255.50}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/final_113__grouped_comparison.png}
+    \caption{A grouped comparison illustrating variance and mean returns localized by algorithm and weather setup.}
+    \label{fig:113_grouped_comp}
+\end{figure}
+
+\subsection{Crop-Planning Outcomes}
+For standard, non-hierarchical crop planning, \textbf{PPO | nonadaptive | fixed\_weather} triumphed as the best grouped class, recording an unmatched mean evaluation reward of \textbf{21,230.912}.
+Conversely, the absolute best single agent iteration occurred with \textbf{A2C | adaptive | fixed\_weather | seed=2}, attaining a peak score of \textbf{23,601.588}. 
+The disparity between grouped means and absolute single-run maximums indicates that while PPO presents a much lower variance, high-integrity baseline (making it preferable for deployment), A2C occasionally catches highly optimistic exploitation paths in specific seeds.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/final_113__runtime_comparison.png}
+    \caption{Runtime Comparison distributions marking the computational efficiency between architectures.}
+    \label{fig:113_runtime}
+\end{figure}
+
+\section{Hierarchical and Guarded Reruns}
+
+The introduction of \textit{Guarded Hierarchical Reruns} aggressively fundamentally changed the interaction landscape. Due to external constraints, these outcomes demand isolated interpretation. The premier hierarchical group was \textbf{PPO | fixed\_weather | guarded\_rerun}, delivering an astounding mean deterministic return of \textbf{1,861,223.08}.
+The single top-performing run across the entire thesis, \textbf{Crop planning hierarchical | PPO | fixed\_weather | seed=1 | profile=pakistan\_baseline}, logged \textbf{1,971,988.25}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/final_113__uplift_vs_baseline.png}
+    \caption{Uplift versus Descriptive Baselines: Measuring the net value provided by Deep RL relative to rigid, programmatic agricultural conventions.}
+    \label{fig:113_uplift}
+\end{figure}
+
+\section{Summary of Core Interpretations}
+\begin{enumerate}
+    \item The fertilization matrix explicitly favored A2C over the extended 5000-year fixed weather regimes, reinforcing A2C's capacity to maintain stable gradients when environmental noise is artificially bounded.
+    \item PPO generated far more consistent behavior across different seeds in typical crop planning, overcoming the brittleness usually associated with generic Actor-Critic gradients.
+    \item DQN iterations were empirically relegated to a descriptive baseline tier, routinely outpaced by bounded policy implementations.
+\end{enumerate}

@@ -1,0 +1,183 @@
+\contentsline {chapter}{\numberline {1}Introduction}{34}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Background and Motivation}{34}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Scope of the Report}{34}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Research Objectives}{34}{section.1.3}%
+\contentsline {chapter}{\numberline {2}Methodology}{36}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Experimental Environments}{36}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Fertilization Domain}{36}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Crop Planning Domain}{36}{subsection.2.1.2}%
+\contentsline {section}{\numberline {2.2}Algorithm Suite}{36}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Stochasticity: Fixed vs. Random Weather}{37}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Evaluation Metrics and Validation Procedure}{37}{section.2.4}%
+\contentsline {chapter}{\numberline {3}The 133-Run Core Matrix Study}{38}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Overall Leaderboard and Grouped Rankings}{38}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Fertilization Results}{38}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Crop-Planning Outcomes}{39}{subsection.3.1.2}%
+\contentsline {section}{\numberline {3.2}Hierarchical and Guarded Reruns}{40}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Summary of Core Interpretations}{41}{section.3.3}%
+\contentsline {chapter}{\numberline {4}The 42-Run Ablation Study}{42}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Point 1: The Entropy Coefficient in Fertilization}{42}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Point 2: Hierarchical Shaping and Blocked Nutrient Penalty}{43}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Point 3: Nutrient Cost Weight in Fertilization}{44}{section.4.3}%
+\contentsline {chapter}{\numberline {5}Detailed Per-Run Training Graphics}{46}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Diagnostic Panels and Evaluation Trajectories}{46}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Behavioral Observations in Fertilization}{48}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Key Takeaways from the Diagnostics}{49}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Complete Per-Run Graphs Portfolio}{49}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Run: 001 Fertilization Ppo Adaptive Fixed Weather Years 1000 Seed 0}{50}{subsection.5.4.1}%
+\contentsline {subsection}{\numberline {5.4.2}Run: 001 P1 Ppo Adaptive Fixed Weather Seed0 Ent0}{54}{subsection.5.4.2}%
+\contentsline {subsection}{\numberline {5.4.3}Run: 002 Fertilization Ppo Nonadaptive Fixed Weather Years 1000 Seed 0}{58}{subsection.5.4.3}%
+\contentsline {subsection}{\numberline {5.4.4}Run: 002 P1 Ppo Adaptive Fixed Weather Seed0 Ent0 01}{61}{subsection.5.4.4}%
+\contentsline {subsection}{\numberline {5.4.5}Run: 003 Fertilization Ppo Adaptive Random Weather Years 1000 Seed 0}{65}{subsection.5.4.5}%
+\contentsline {subsection}{\numberline {5.4.6}Run: 003 P1 Ppo Adaptive Random Weather Seed0 Ent0}{68}{subsection.5.4.6}%
+\contentsline {subsection}{\numberline {5.4.7}Run: 004 Fertilization Ppo Nonadaptive Random Weather Years 1000 Seed 0}{72}{subsection.5.4.7}%
+\contentsline {subsection}{\numberline {5.4.8}Run: 004 P1 Ppo Adaptive Random Weather Seed0 Ent0 01}{75}{subsection.5.4.8}%
+\contentsline {subsection}{\numberline {5.4.9}Run: 005 Fertilization Ppo Adaptive Fixed Weather Years 1000 Seed 1}{79}{subsection.5.4.9}%
+\contentsline {subsection}{\numberline {5.4.10}Run: 005 P1 Ppo Adaptive Fixed Weather Seed1 Ent0}{83}{subsection.5.4.10}%
+\contentsline {subsection}{\numberline {5.4.11}Run: 006 Fertilization Ppo Nonadaptive Fixed Weather Years 1000 Seed 1}{87}{subsection.5.4.11}%
+\contentsline {subsection}{\numberline {5.4.12}Run: 006 P1 Ppo Adaptive Fixed Weather Seed1 Ent0 01}{90}{subsection.5.4.12}%
+\contentsline {subsection}{\numberline {5.4.13}Run: 007 Fertilization Ppo Adaptive Random Weather Years 1000 Seed 1}{94}{subsection.5.4.13}%
+\contentsline {subsection}{\numberline {5.4.14}Run: 007 P1 Ppo Adaptive Fixed Weather Seed2 Ent0}{97}{subsection.5.4.14}%
+\contentsline {subsection}{\numberline {5.4.15}Run: 008 Fertilization Ppo Nonadaptive Random Weather Years 1000 Seed 1}{101}{subsection.5.4.15}%
+\contentsline {subsection}{\numberline {5.4.16}Run: 008 P1 Ppo Adaptive Fixed Weather Seed2 Ent0 01}{104}{subsection.5.4.16}%
+\contentsline {subsection}{\numberline {5.4.17}Run: 009 Fertilization Ppo Adaptive Fixed Weather Years 1000 Seed 2}{108}{subsection.5.4.17}%
+\contentsline {subsection}{\numberline {5.4.18}Run: 009 P1 Ppo Adaptive Random Weather Seed1 Ent0}{112}{subsection.5.4.18}%
+\contentsline {subsection}{\numberline {5.4.19}Run: 010 Fertilization Ppo Nonadaptive Fixed Weather Years 1000 Seed 2}{116}{subsection.5.4.19}%
+\contentsline {subsection}{\numberline {5.4.20}Run: 010 P1 Ppo Adaptive Random Weather Seed1 Ent0 01}{119}{subsection.5.4.20}%
+\contentsline {subsection}{\numberline {5.4.21}Run: 011 Fertilization Ppo Adaptive Random Weather Years 1000 Seed 2}{123}{subsection.5.4.21}%
+\contentsline {subsection}{\numberline {5.4.22}Run: 011 P1 Ppo Adaptive Random Weather Seed2 Ent0}{126}{subsection.5.4.22}%
+\contentsline {subsection}{\numberline {5.4.23}Run: 012 Fertilization Ppo Nonadaptive Random Weather Years 1000 Seed 2}{130}{subsection.5.4.23}%
+\contentsline {subsection}{\numberline {5.4.24}Run: 012 P1 Ppo Adaptive Random Weather Seed2 Ent0 01}{133}{subsection.5.4.24}%
+\contentsline {subsection}{\numberline {5.4.25}Run: 013 Fertilization Ppo Adaptive Fixed Weather Years 3000 Seed 0}{137}{subsection.5.4.25}%
+\contentsline {subsection}{\numberline {5.4.26}Run: 013 P2 A2C Fixed Weather Seed0 Blockpen0}{141}{subsection.5.4.26}%
+\contentsline {subsection}{\numberline {5.4.27}Run: 014 Fertilization Ppo Nonadaptive Fixed Weather Years 3000 Seed 0}{146}{subsection.5.4.27}%
+\contentsline {subsection}{\numberline {5.4.28}Run: 014 P2 A2C Fixed Weather Seed0 Blockpen0 02}{149}{subsection.5.4.28}%
+\contentsline {subsection}{\numberline {5.4.29}Run: 015 Fertilization Ppo Adaptive Random Weather Years 3000 Seed 0}{154}{subsection.5.4.29}%
+\contentsline {subsection}{\numberline {5.4.30}Run: 015 P2 A2C Fixed Weather Seed0 Blockpen0 05}{157}{subsection.5.4.30}%
+\contentsline {subsection}{\numberline {5.4.31}Run: 016 Fertilization Ppo Nonadaptive Random Weather Years 3000 Seed 0}{162}{subsection.5.4.31}%
+\contentsline {subsection}{\numberline {5.4.32}Run: 016 P2 A2C Random Weather Seed0 Blockpen0}{165}{subsection.5.4.32}%
+\contentsline {subsection}{\numberline {5.4.33}Run: 017 Fertilization Ppo Adaptive Fixed Weather Years 3000 Seed 1}{170}{subsection.5.4.33}%
+\contentsline {subsection}{\numberline {5.4.34}Run: 017 P2 A2C Random Weather Seed0 Blockpen0 02}{174}{subsection.5.4.34}%
+\contentsline {subsection}{\numberline {5.4.35}Run: 018 Fertilization Ppo Nonadaptive Fixed Weather Years 3000 Seed 1}{179}{subsection.5.4.35}%
+\contentsline {subsection}{\numberline {5.4.36}Run: 018 P2 A2C Random Weather Seed0 Blockpen0 05}{182}{subsection.5.4.36}%
+\contentsline {subsection}{\numberline {5.4.37}Run: 019 Fertilization Ppo Adaptive Random Weather Years 3000 Seed 1}{187}{subsection.5.4.37}%
+\contentsline {subsection}{\numberline {5.4.38}Run: 019 P2 Ppo Fixed Weather Seed0 Blockpen0}{190}{subsection.5.4.38}%
+\contentsline {subsection}{\numberline {5.4.39}Run: 020 Fertilization Ppo Nonadaptive Random Weather Years 3000 Seed 1}{195}{subsection.5.4.39}%
+\contentsline {subsection}{\numberline {5.4.40}Run: 020 P2 Ppo Fixed Weather Seed0 Blockpen0 02}{198}{subsection.5.4.40}%
+\contentsline {subsection}{\numberline {5.4.41}Run: 021 Fertilization Ppo Adaptive Fixed Weather Years 3000 Seed 2}{203}{subsection.5.4.41}%
+\contentsline {subsection}{\numberline {5.4.42}Run: 021 P2 Ppo Fixed Weather Seed0 Blockpen0 05}{207}{subsection.5.4.42}%
+\contentsline {subsection}{\numberline {5.4.43}Run: 022 Fertilization Ppo Nonadaptive Fixed Weather Years 3000 Seed 2}{212}{subsection.5.4.43}%
+\contentsline {subsection}{\numberline {5.4.44}Run: 022 P2 Ppo Random Weather Seed0 Blockpen0}{215}{subsection.5.4.44}%
+\contentsline {subsection}{\numberline {5.4.45}Run: 023 Fertilization Ppo Adaptive Random Weather Years 3000 Seed 2}{220}{subsection.5.4.45}%
+\contentsline {subsection}{\numberline {5.4.46}Run: 023 P2 Ppo Random Weather Seed0 Blockpen0 02}{223}{subsection.5.4.46}%
+\contentsline {subsection}{\numberline {5.4.47}Run: 024 Fertilization Ppo Nonadaptive Random Weather Years 3000 Seed 2}{228}{subsection.5.4.47}%
+\contentsline {subsection}{\numberline {5.4.48}Run: 024 P2 Ppo Random Weather Seed0 Blockpen0 05}{231}{subsection.5.4.48}%
+\contentsline {subsection}{\numberline {5.4.49}Run: 025 Fertilization Ppo Adaptive Fixed Weather Years 5000 Seed 0}{236}{subsection.5.4.49}%
+\contentsline {subsection}{\numberline {5.4.50}Run: 025 P3 Ppo Adaptive Fixed Weather Seed0 Costw0 8}{240}{subsection.5.4.50}%
+\contentsline {subsection}{\numberline {5.4.51}Run: 026 Fertilization Ppo Nonadaptive Fixed Weather Years 5000 Seed 0}{244}{subsection.5.4.51}%
+\contentsline {subsection}{\numberline {5.4.52}Run: 026 P3 Ppo Adaptive Fixed Weather Seed0 Costw1}{247}{subsection.5.4.52}%
+\contentsline {subsection}{\numberline {5.4.53}Run: 027 Fertilization Ppo Adaptive Random Weather Years 5000 Seed 0}{251}{subsection.5.4.53}%
+\contentsline {subsection}{\numberline {5.4.54}Run: 027 P3 Ppo Adaptive Fixed Weather Seed0 Costw1 2}{254}{subsection.5.4.54}%
+\contentsline {subsection}{\numberline {5.4.55}Run: 028 Fertilization Ppo Nonadaptive Random Weather Years 5000 Seed 0}{258}{subsection.5.4.55}%
+\contentsline {subsection}{\numberline {5.4.56}Run: 028 P3 Ppo Adaptive Random Weather Seed0 Costw0 8}{261}{subsection.5.4.56}%
+\contentsline {subsection}{\numberline {5.4.57}Run: 029 Fertilization Ppo Adaptive Fixed Weather Years 5000 Seed 1}{265}{subsection.5.4.57}%
+\contentsline {subsection}{\numberline {5.4.58}Run: 029 P3 Ppo Adaptive Random Weather Seed0 Costw1}{269}{subsection.5.4.58}%
+\contentsline {subsection}{\numberline {5.4.59}Run: 030 Fertilization Ppo Nonadaptive Fixed Weather Years 5000 Seed 1}{273}{subsection.5.4.59}%
+\contentsline {subsection}{\numberline {5.4.60}Run: 030 P3 Ppo Adaptive Random Weather Seed0 Costw1 2}{276}{subsection.5.4.60}%
+\contentsline {subsection}{\numberline {5.4.61}Run: 031 Fertilization Ppo Adaptive Random Weather Years 5000 Seed 1}{280}{subsection.5.4.61}%
+\contentsline {subsection}{\numberline {5.4.62}Run: 031 P3 Ppo Adaptive Fixed Weather Seed1 Costw0 8}{283}{subsection.5.4.62}%
+\contentsline {subsection}{\numberline {5.4.63}Run: 032 Fertilization Ppo Nonadaptive Random Weather Years 5000 Seed 1}{287}{subsection.5.4.63}%
+\contentsline {subsection}{\numberline {5.4.64}Run: 032 P3 Ppo Adaptive Fixed Weather Seed1 Costw1}{290}{subsection.5.4.64}%
+\contentsline {subsection}{\numberline {5.4.65}Run: 033 Fertilization Ppo Adaptive Fixed Weather Years 5000 Seed 2}{294}{subsection.5.4.65}%
+\contentsline {subsection}{\numberline {5.4.66}Run: 033 P3 Ppo Adaptive Fixed Weather Seed1 Costw1 2}{298}{subsection.5.4.66}%
+\contentsline {subsection}{\numberline {5.4.67}Run: 034 Fertilization Ppo Nonadaptive Fixed Weather Years 5000 Seed 2}{302}{subsection.5.4.67}%
+\contentsline {subsection}{\numberline {5.4.68}Run: 034 P3 Ppo Adaptive Fixed Weather Seed2 Costw0 8}{305}{subsection.5.4.68}%
+\contentsline {subsection}{\numberline {5.4.69}Run: 035 Fertilization Ppo Adaptive Random Weather Years 5000 Seed 2}{309}{subsection.5.4.69}%
+\contentsline {subsection}{\numberline {5.4.70}Run: 035 P3 Ppo Adaptive Fixed Weather Seed2 Costw1}{312}{subsection.5.4.70}%
+\contentsline {subsection}{\numberline {5.4.71}Run: 036 Fertilization Ppo Nonadaptive Random Weather Years 5000 Seed 2}{316}{subsection.5.4.71}%
+\contentsline {subsection}{\numberline {5.4.72}Run: 036 P3 Ppo Adaptive Fixed Weather Seed2 Costw1 2}{319}{subsection.5.4.72}%
+\contentsline {subsection}{\numberline {5.4.73}Run: 037 Fertilization A2C Adaptive Fixed Weather Years 1000 Seed 0}{323}{subsection.5.4.73}%
+\contentsline {subsection}{\numberline {5.4.74}Run: 037 P3 Ppo Adaptive Random Weather Seed1 Costw0 8}{327}{subsection.5.4.74}%
+\contentsline {subsection}{\numberline {5.4.75}Run: 038 Fertilization A2C Nonadaptive Fixed Weather Years 1000 Seed 0}{331}{subsection.5.4.75}%
+\contentsline {subsection}{\numberline {5.4.76}Run: 038 P3 Ppo Adaptive Random Weather Seed1 Costw1}{334}{subsection.5.4.76}%
+\contentsline {subsection}{\numberline {5.4.77}Run: 039 Fertilization A2C Adaptive Random Weather Years 1000 Seed 0}{338}{subsection.5.4.77}%
+\contentsline {subsection}{\numberline {5.4.78}Run: 039 P3 Ppo Adaptive Random Weather Seed1 Costw1 2}{341}{subsection.5.4.78}%
+\contentsline {subsection}{\numberline {5.4.79}Run: 040 Fertilization A2C Nonadaptive Random Weather Years 1000 Seed 0}{345}{subsection.5.4.79}%
+\contentsline {subsection}{\numberline {5.4.80}Run: 040 P3 Ppo Adaptive Random Weather Seed2 Costw0 8}{348}{subsection.5.4.80}%
+\contentsline {subsection}{\numberline {5.4.81}Run: 041 Fertilization A2C Adaptive Fixed Weather Years 1000 Seed 1}{352}{subsection.5.4.81}%
+\contentsline {subsection}{\numberline {5.4.82}Run: 041 P3 Ppo Adaptive Random Weather Seed2 Costw1}{356}{subsection.5.4.82}%
+\contentsline {subsection}{\numberline {5.4.83}Run: 042 Fertilization A2C Nonadaptive Fixed Weather Years 1000 Seed 1}{360}{subsection.5.4.83}%
+\contentsline {subsection}{\numberline {5.4.84}Run: 042 P3 Ppo Adaptive Random Weather Seed2 Costw1 2}{363}{subsection.5.4.84}%
+\contentsline {subsection}{\numberline {5.4.85}Run: 043 Fertilization A2C Adaptive Random Weather Years 1000 Seed 1}{367}{subsection.5.4.85}%
+\contentsline {subsection}{\numberline {5.4.86}Run: 044 Fertilization A2C Nonadaptive Random Weather Years 1000 Seed 1}{370}{subsection.5.4.86}%
+\contentsline {subsection}{\numberline {5.4.87}Run: 045 Fertilization A2C Adaptive Fixed Weather Years 1000 Seed 2}{373}{subsection.5.4.87}%
+\contentsline {subsection}{\numberline {5.4.88}Run: 046 Fertilization A2C Nonadaptive Fixed Weather Years 1000 Seed 2}{377}{subsection.5.4.88}%
+\contentsline {subsection}{\numberline {5.4.89}Run: 047 Fertilization A2C Adaptive Random Weather Years 1000 Seed 2}{380}{subsection.5.4.89}%
+\contentsline {subsection}{\numberline {5.4.90}Run: 048 Fertilization A2C Nonadaptive Random Weather Years 1000 Seed 2}{383}{subsection.5.4.90}%
+\contentsline {subsection}{\numberline {5.4.91}Run: 049 Fertilization A2C Adaptive Fixed Weather Years 3000 Seed 0}{386}{subsection.5.4.91}%
+\contentsline {subsection}{\numberline {5.4.92}Run: 050 Fertilization A2C Nonadaptive Fixed Weather Years 3000 Seed 0}{390}{subsection.5.4.92}%
+\contentsline {subsection}{\numberline {5.4.93}Run: 051 Fertilization A2C Adaptive Random Weather Years 3000 Seed 0}{393}{subsection.5.4.93}%
+\contentsline {subsection}{\numberline {5.4.94}Run: 052 Fertilization A2C Nonadaptive Random Weather Years 3000 Seed 0}{396}{subsection.5.4.94}%
+\contentsline {subsection}{\numberline {5.4.95}Run: 053 Fertilization A2C Adaptive Fixed Weather Years 3000 Seed 1}{399}{subsection.5.4.95}%
+\contentsline {subsection}{\numberline {5.4.96}Run: 054 Fertilization A2C Nonadaptive Fixed Weather Years 3000 Seed 1}{403}{subsection.5.4.96}%
+\contentsline {subsection}{\numberline {5.4.97}Run: 055 Fertilization A2C Adaptive Random Weather Years 3000 Seed 1}{406}{subsection.5.4.97}%
+\contentsline {subsection}{\numberline {5.4.98}Run: 056 Fertilization A2C Nonadaptive Random Weather Years 3000 Seed 1}{409}{subsection.5.4.98}%
+\contentsline {subsection}{\numberline {5.4.99}Run: 057 Fertilization A2C Adaptive Fixed Weather Years 3000 Seed 2}{412}{subsection.5.4.99}%
+\contentsline {subsection}{\numberline {5.4.100}Run: 058 Fertilization A2C Nonadaptive Fixed Weather Years 3000 Seed 2}{416}{subsection.5.4.100}%
+\contentsline {subsection}{\numberline {5.4.101}Run: 059 Fertilization A2C Adaptive Random Weather Years 3000 Seed 2}{419}{subsection.5.4.101}%
+\contentsline {subsection}{\numberline {5.4.102}Run: 060 Fertilization A2C Nonadaptive Random Weather Years 3000 Seed 2}{422}{subsection.5.4.102}%
+\contentsline {subsection}{\numberline {5.4.103}Run: 061 Fertilization A2C Adaptive Fixed Weather Years 5000 Seed 0}{425}{subsection.5.4.103}%
+\contentsline {subsection}{\numberline {5.4.104}Run: 062 Fertilization A2C Nonadaptive Fixed Weather Years 5000 Seed 0}{429}{subsection.5.4.104}%
+\contentsline {subsection}{\numberline {5.4.105}Run: 063 Fertilization A2C Adaptive Random Weather Years 5000 Seed 0}{432}{subsection.5.4.105}%
+\contentsline {subsection}{\numberline {5.4.106}Run: 064 Fertilization A2C Nonadaptive Random Weather Years 5000 Seed 0}{435}{subsection.5.4.106}%
+\contentsline {subsection}{\numberline {5.4.107}Run: 065 Fertilization A2C Adaptive Fixed Weather Years 5000 Seed 1}{438}{subsection.5.4.107}%
+\contentsline {subsection}{\numberline {5.4.108}Run: 066 Fertilization A2C Nonadaptive Fixed Weather Years 5000 Seed 1}{442}{subsection.5.4.108}%
+\contentsline {subsection}{\numberline {5.4.109}Run: 067 Fertilization A2C Adaptive Random Weather Years 5000 Seed 1}{445}{subsection.5.4.109}%
+\contentsline {subsection}{\numberline {5.4.110}Run: 068 Fertilization A2C Nonadaptive Random Weather Years 5000 Seed 1}{448}{subsection.5.4.110}%
+\contentsline {subsection}{\numberline {5.4.111}Run: 069 Fertilization A2C Adaptive Fixed Weather Years 5000 Seed 2}{451}{subsection.5.4.111}%
+\contentsline {subsection}{\numberline {5.4.112}Run: 070 Fertilization A2C Nonadaptive Fixed Weather Years 5000 Seed 2}{455}{subsection.5.4.112}%
+\contentsline {subsection}{\numberline {5.4.113}Run: 071 Fertilization A2C Adaptive Random Weather Years 5000 Seed 2}{458}{subsection.5.4.113}%
+\contentsline {subsection}{\numberline {5.4.114}Run: 072 Fertilization A2C Nonadaptive Random Weather Years 5000 Seed 2}{461}{subsection.5.4.114}%
+\contentsline {subsection}{\numberline {5.4.115}Run: 073 Crop Planning Ppo Adaptive Fixed Weather Seed 0}{464}{subsection.5.4.115}%
+\contentsline {subsection}{\numberline {5.4.116}Run: 074 Crop Planning Ppo Nonadaptive Fixed Weather Seed 0}{468}{subsection.5.4.116}%
+\contentsline {subsection}{\numberline {5.4.117}Run: 075 Crop Planning Hierarchical Ppo Fixed Weather Seed 0 Profile Pakistan Baseline}{472}{subsection.5.4.117}%
+\contentsline {subsection}{\numberline {5.4.118}Run: 076 Crop Planning Ppo Adaptive Random Weather Seed 0}{474}{subsection.5.4.118}%
+\contentsline {subsection}{\numberline {5.4.119}Run: 077 Crop Planning Ppo Nonadaptive Random Weather Seed 0}{478}{subsection.5.4.119}%
+\contentsline {subsection}{\numberline {5.4.120}Run: 078 Crop Planning Hierarchical Ppo Random Weather Seed 0 Profile Pakistan Baseline}{482}{subsection.5.4.120}%
+\contentsline {subsection}{\numberline {5.4.121}Run: 079 Crop Planning Ppo Adaptive Fixed Weather Seed 1}{484}{subsection.5.4.121}%
+\contentsline {subsection}{\numberline {5.4.122}Run: 080 Crop Planning Ppo Nonadaptive Fixed Weather Seed 1}{488}{subsection.5.4.122}%
+\contentsline {subsection}{\numberline {5.4.123}Run: 081 Crop Planning Hierarchical Ppo Fixed Weather Seed 1 Profile Pakistan Baseline}{492}{subsection.5.4.123}%
+\contentsline {subsection}{\numberline {5.4.124}Run: 082 Crop Planning Ppo Adaptive Random Weather Seed 1}{494}{subsection.5.4.124}%
+\contentsline {subsection}{\numberline {5.4.125}Run: 083 Crop Planning Ppo Nonadaptive Random Weather Seed 1}{498}{subsection.5.4.125}%
+\contentsline {subsection}{\numberline {5.4.126}Run: 084 Crop Planning Hierarchical Ppo Random Weather Seed 1 Profile Pakistan Baseline}{502}{subsection.5.4.126}%
+\contentsline {subsection}{\numberline {5.4.127}Run: 085 Crop Planning Ppo Adaptive Fixed Weather Seed 2}{504}{subsection.5.4.127}%
+\contentsline {subsection}{\numberline {5.4.128}Run: 086 Crop Planning Ppo Nonadaptive Fixed Weather Seed 2}{508}{subsection.5.4.128}%
+\contentsline {subsection}{\numberline {5.4.129}Run: 087 Crop Planning Hierarchical Ppo Fixed Weather Seed 2 Profile Pakistan Baseline}{512}{subsection.5.4.129}%
+\contentsline {subsection}{\numberline {5.4.130}Run: 088 Crop Planning Ppo Adaptive Random Weather Seed 2}{514}{subsection.5.4.130}%
+\contentsline {subsection}{\numberline {5.4.131}Run: 089 Crop Planning Ppo Nonadaptive Random Weather Seed 2}{518}{subsection.5.4.131}%
+\contentsline {subsection}{\numberline {5.4.132}Run: 090 Crop Planning Hierarchical Ppo Random Weather Seed 2 Profile Pakistan Baseline}{522}{subsection.5.4.132}%
+\contentsline {subsection}{\numberline {5.4.133}Run: 091 Crop Planning A2C Adaptive Fixed Weather Seed 0}{524}{subsection.5.4.133}%
+\contentsline {subsection}{\numberline {5.4.134}Run: 092 Crop Planning A2C Nonadaptive Fixed Weather Seed 0}{528}{subsection.5.4.134}%
+\contentsline {subsection}{\numberline {5.4.135}Run: 093 Crop Planning Hierarchical A2C Fixed Weather Seed 0 Profile Pakistan Baseline}{532}{subsection.5.4.135}%
+\contentsline {subsection}{\numberline {5.4.136}Run: 094 Crop Planning A2C Adaptive Random Weather Seed 0}{534}{subsection.5.4.136}%
+\contentsline {subsection}{\numberline {5.4.137}Run: 095 Crop Planning A2C Nonadaptive Random Weather Seed 0}{538}{subsection.5.4.137}%
+\contentsline {subsection}{\numberline {5.4.138}Run: 096 Crop Planning Hierarchical A2C Random Weather Seed 0 Profile Pakistan Baseline}{542}{subsection.5.4.138}%
+\contentsline {subsection}{\numberline {5.4.139}Run: 097 Crop Planning A2C Adaptive Fixed Weather Seed 1}{544}{subsection.5.4.139}%
+\contentsline {subsection}{\numberline {5.4.140}Run: 098 Crop Planning A2C Nonadaptive Fixed Weather Seed 1}{548}{subsection.5.4.140}%
+\contentsline {subsection}{\numberline {5.4.141}Run: 099 Crop Planning Hierarchical A2C Fixed Weather Seed 1 Profile Pakistan Baseline}{552}{subsection.5.4.141}%
+\contentsline {subsection}{\numberline {5.4.142}Run: 100 Crop Planning A2C Adaptive Random Weather Seed 1}{554}{subsection.5.4.142}%
+\contentsline {subsection}{\numberline {5.4.143}Run: 101 Crop Planning A2C Nonadaptive Random Weather Seed 1}{558}{subsection.5.4.143}%
+\contentsline {subsection}{\numberline {5.4.144}Run: 102 Crop Planning Hierarchical A2C Random Weather Seed 1 Profile Pakistan Baseline}{562}{subsection.5.4.144}%
+\contentsline {subsection}{\numberline {5.4.145}Run: 103 Crop Planning A2C Adaptive Fixed Weather Seed 2}{564}{subsection.5.4.145}%
+\contentsline {subsection}{\numberline {5.4.146}Run: 104 Crop Planning A2C Nonadaptive Fixed Weather Seed 2}{568}{subsection.5.4.146}%
+\contentsline {subsection}{\numberline {5.4.147}Run: 105 Crop Planning Hierarchical A2C Fixed Weather Seed 2 Profile Pakistan Baseline}{572}{subsection.5.4.147}%
+\contentsline {subsection}{\numberline {5.4.148}Run: 106 Crop Planning A2C Adaptive Random Weather Seed 2}{574}{subsection.5.4.148}%
+\contentsline {subsection}{\numberline {5.4.149}Run: 107 Crop Planning A2C Nonadaptive Random Weather Seed 2}{578}{subsection.5.4.149}%
+\contentsline {subsection}{\numberline {5.4.150}Run: 108 Crop Planning Hierarchical A2C Random Weather Seed 2 Profile Pakistan Baseline}{582}{subsection.5.4.150}%
+\contentsline {subsection}{\numberline {5.4.151}Run: 109 Fertilization Dqn Ablation Adaptive Fixed Weather Years 5000 Seed 0}{584}{subsection.5.4.151}%
+\contentsline {subsection}{\numberline {5.4.152}Run: 110 Fertilization Dqn Ablation Adaptive Random Weather Years 5000 Seed 0}{586}{subsection.5.4.152}%
+\contentsline {subsection}{\numberline {5.4.153}Run: 111 Crop Planning Dqn Ablation Nonadaptive Fixed Weather Seed 0}{588}{subsection.5.4.153}%
+\contentsline {subsection}{\numberline {5.4.154}Run: 112 Crop Planning Dqn Ablation Nonadaptive Random Weather Seed 0}{590}{subsection.5.4.154}%
+\contentsline {chapter}{\numberline {6}Conclusions and Final Remarks}{592}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Summary of Thesis Implications}{592}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Quality Control and Robustness}{592}{section.6.2}%

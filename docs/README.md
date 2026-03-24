@@ -1,39 +1,33 @@
-# Final Documentation
+﻿# Documentation Index
 
-This is the push-ready documentation set for the cleaned repository.
-It explains the project scope, setup, training workflow, reporting workflow, model management, and the current evidence snapshot without requiring the archived thesis folders.
+This is the active documentation surface for the thesis repository.
 
-![Reporting pipeline](assets/reporting_pipeline.png)
-
-## Start Here
+## Read This First
 
 1. [Overview and Scope](01_overview_and_scope.md)
 2. [Setup and Usage](02_setup_and_usage.md)
 3. [Architecture and Workflows](03_architecture_and_workflows.md)
 4. [Reporting and Artifacts](04_reporting_and_artifacts.md)
 5. [Model Management](05_model_management.md)
-6. [Results Summary and Evidence Positioning](06_results_summary_and_limitations.md)
+6. [Results Summary and Limitations](06_results_summary_and_limitations.md)
 7. [Release Checklist](07_release_checklist.md)
-8. [Defense Q&A and Evidence Guide](08_defense_qna.md)
+8. [Defense Q&A](08_defense_qna.md)
 9. [Contributions vs Original CyclesGym](09_contributions_vs_original_cyclesgym.md)
 
-## Audience
+## Canonical Completed Evidence
 
-- engineers who need to run or extend the repo
-- reviewers who need a concise description of the experiment and reporting flow
-- future maintainers who need to know where outputs, models, and logs live
+Use these completed frozen packs as final source of truth:
 
-## Canonical Runtime Surface
+- `artifacts/final_successful_runs/final_113/`
+- `artifacts/final_successful_runs/final_113/reporting/`
+- `artifacts/final_successful_runs/final_42_ablation/`
+- `artifacts/final_successful_runs/final_42_ablation/reporting/low_hanging_ablation/`
 
-- `cycles/`: simulator binaries and input data
-- `cyclesgym/`: package code
-- `experiments/`: train and evaluation entrypoints
-- `scripts/build_pakistan_price_series.py`: retained utility
-- `run_experiments_7_3_2026.py`: main experiment matrix runner
-- `run_hierarchical_guarded_parallel.py`: hierarchical rerun runner
-- `run_all_2.py`, `run_all_experiments.py`: compatibility wrappers
+Key row counts:
 
-## Notes
+- final matrix: `113`
+- low-hanging ablation: `42`
 
-- `docs/` is the public documentation surface intended for GitHub.
-- `Local Files and Folders/` contains archived thesis notes, historical reports, demo files, and old local outputs. It is useful for provenance, but it is not required to understand the active repo layout.
+## Snapshot Consistency Rule
+
+If any older extracted LaTeX status table conflicts with the completed frozen packs, prioritize the completed frozen packs for final reporting and defense.

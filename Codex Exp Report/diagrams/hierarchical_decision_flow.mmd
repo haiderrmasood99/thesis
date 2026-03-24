@@ -1,0 +1,9 @@
+flowchart LR
+    A["Start of agricultural year"] --> B["Select crop and planting window"]
+    B --> C["Configure seasonal context"]
+    C --> D["Take weekly NPK actions"]
+    D --> E["Run CYCLES and parse outputs"]
+    E --> F{"Season complete?"}
+    F -- "No" --> D
+    F -- "Yes" --> G["Aggregate return, cost, and compliance traces"]
+    G --> H["Advance to next year"]
