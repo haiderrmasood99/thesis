@@ -1,16 +1,58 @@
-# React + Vite
+# Thesis Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React/Vite dashboard prototype for exploring thesis experiment outputs.
 
-Currently, two official plugins are available:
+The app is designed to read generated JSON and CSV payloads from `public/data/`, then display run-level and grouped thesis metrics through interactive charts.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Run Locally
 
-## React Compiler
+```bash
+npm install
+npm run dev
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Build the production bundle:
 
-## Expanding the ESLint configuration
+```bash
+npm run build
+npm run preview
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Data
+
+Generate dashboard data from the repository root:
+
+```bash
+python build_dashboard_data.py
+```
+
+By default the script expects a local reporting pack under:
+
+```text
+artifacts/final_successful_runs/thesis_reporting_pack/
+```
+
+You can override paths with environment variables:
+
+```bash
+THESIS_REPO_ROOT=/path/to/thesis THESIS_REPORTING_ROOT=/path/to/thesis_reporting_pack python build_dashboard_data.py
+```
+
+On Windows PowerShell:
+
+```powershell
+$env:THESIS_REPO_ROOT = "D:\path\to\thesis"
+$env:THESIS_REPORTING_ROOT = "D:\path\to\thesis_reporting_pack"
+python build_dashboard_data.py
+```
+
+Generated files are written to:
+
+```text
+thesis_dashboard/public/data/
+```
+
+## Notes
+
+- Keep generated dashboard data out of git unless it is intentionally curated for a public demo.
+- The dashboard is a thesis visualization surface, not the source of record for final experiment claims.

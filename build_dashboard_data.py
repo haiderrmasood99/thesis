@@ -4,14 +4,30 @@ import json
 import pandas as pd
 from pathlib import Path
 
-BASE_DIR = Path(r"D:\THESIS FINAL EXPERIMENTS\thesis_backup\thesis")
-REPORTING_ROOT = BASE_DIR / "artifacts" / "final_successful_runs" / "thesis_reporting_pack"
-PUBLIC_DATA_DIR = BASE_DIR / "thesis_dashboard" / "public" / "data"
+BASE_DIR = Path(os.environ.get("THESIS_REPO_ROOT", Path(__file__).resolve().parent))
+REPORTING_ROOT = Path(
+    os.environ.get(
+        "THESIS_REPORTING_ROOT",
+        BASE_DIR / "artifacts" / "final_successful_runs" / "thesis_reporting_pack",
+    )
+)
+PUBLIC_DATA_DIR = Path(
+    os.environ.get(
+        "THESIS_DASHBOARD_DATA_DIR",
+        BASE_DIR / "thesis_dashboard" / "public" / "data",
+    )
+)
 
 DATASETS = ["final_113", "final_42_ablation"]
 
 def main():
     os.makedirs(PUBLIC_DATA_DIR, exist_ok=True)
+
+    if not REPORTING_ROOT.exists():
+        raise SystemExit(
+            "Reporting pack not found at "
+            f"{REPORTING_ROOT}. Set THESIS_REPORTING_ROOT to the local thesis_reporting_pack path."
+        )
     
     runs_index = []
 
